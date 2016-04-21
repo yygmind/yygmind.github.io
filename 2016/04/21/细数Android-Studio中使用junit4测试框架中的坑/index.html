@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Android junit4," />
 
 
 
@@ -80,16 +80,40 @@
 
 
 
-<meta name="description" content="To obsess or to die">
+<meta name="description" content="build.gradle中添加依赖
+dependencies {
+    compile &amp;apos;com.android.support:appcompat-v7:23.2.1&amp;apos;
+    testCompile &amp;apos;junit:junit:4.12&amp;apos;
+}
+
+添加以下，使用模拟环境代替真实环境
+android {
+    testOptions {">
 <meta property="og:type" content="article">
-<meta property="og:title" content="12345">
-<meta property="og:url" content="http://yangyuanguang.com/2016/04/21/12345/index.html">
+<meta property="og:title" content="细数Android Studio中使用junit4测试框架中的坑">
+<meta property="og:url" content="http://yangyuanguang.com/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/index.html">
 <meta property="og:site_name" content="Cody Yang">
-<meta property="og:description" content="To obsess or to die">
-<meta property="og:updated_time" content="2016-04-21T02:47:40.373Z">
+<meta property="og:description" content="build.gradle中添加依赖
+dependencies {
+    compile &amp;apos;com.android.support:appcompat-v7:23.2.1&amp;apos;
+    testCompile &amp;apos;junit:junit:4.12&amp;apos;
+}
+
+添加以下，使用模拟环境代替真实环境
+android {
+    testOptions {">
+<meta property="og:updated_time" content="2016-04-21T12:08:53.334Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="12345">
-<meta name="twitter:description" content="To obsess or to die">
+<meta name="twitter:title" content="细数Android Studio中使用junit4测试框架中的坑">
+<meta name="twitter:description" content="build.gradle中添加依赖
+dependencies {
+    compile &amp;apos;com.android.support:appcompat-v7:23.2.1&amp;apos;
+    testCompile &amp;apos;junit:junit:4.12&amp;apos;
+}
+
+添加以下，使用模拟环境代替真实环境
+android {
+    testOptions {">
 
 
 
@@ -107,7 +131,7 @@
   };
 </script>
 
-  <title> 12345 | Cody Yang </title>
+  <title> 细数Android Studio中使用junit4测试框架中的坑 | Cody Yang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -287,7 +311,7 @@
             
             
               
-                12345
+                细数Android Studio中使用junit4测试框架中的坑
               
             
           </h1>
@@ -299,19 +323,38 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-21T10:47:40+08:00" content="2016-04-21">
+            <time itemprop="dateCreated" datetime="2016-04-21T20:02:28+08:00" content="2016-04-21">
               2016-04-21
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/21/12345/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/12345/" itemprop="commentsCount"></span>
+                <a href="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -321,7 +364,7 @@
 
           
           
-             <span id="/2016/04/21/12345/" class="leancloud_visitors" data-flag-title="12345">
+             <span id="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/" class="leancloud_visitors" data-flag-title="细数Android Studio中使用junit4测试框架中的坑">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -343,7 +386,77 @@
       
 
       
-        
+        <ul>
+<li><p>build.gradle中添加依赖</p>
+<pre><code>dependencies {
+    compile &apos;com.android.support:appcompat-v7:23.2.1&apos;
+    testCompile &apos;junit:junit:4.12&apos;
+}
+</code></pre></li>
+<li><p>添加以下，使用模拟环境代替真实环境</p>
+<pre><code>android {
+    testOptions { 
+        unitTests {
+            returnDefaultValues = true
+        }
+    }
+}
+</code></pre></li>
+<li><p>不需要在清单文件中配置 instrumentation 和 uses-library   </p>
+</li>
+<li><p>测试代码主体部分（此方法也是趴Stack Overflow之中N久才得到的，感谢感谢）</p>
+<pre><code>public class TestBlackNumberDao extends ActivityTestCase{
+
+    public void testAdd() {
+        BlackNumberDAO dao = new BlackNumberDAO(getInstrumentation().getContext() );
+        boolean result = dao.insertDao(&quot;1888&quot;, &quot;2&quot;);
+        assertEquals(true, result);
+    }
+}
+</code></pre><p>注意上面代码继承的是 ActivityTestCase ，获取上下文使用的是 getInstrumentation().getContext() ，使用这个方法完全可以获得测试结果。</p>
+</li>
+<li><p>这里介绍坑之所在（调试好久才得到结果，惭愧惭愧）</p>
+<pre><code>public class TestBlackNumberDao extends AndroidTestCase{
+
+    public void testAdd() {
+        BlackNumberDAO dao = new BlackNumberDAO(getContext() );
+        boolean result = dao.insertDao(&quot;1888&quot;, &quot;2&quot;);
+        assertEquals(true, result);
+    }
+}
+</code></pre><p>  上面代码是很多资料上写的方式，eclipse中完全可以使用上面所用得到测试结果，不过在Android Studio中会出现一个问题，那就是getContext()方法会返回null，即根本得不到上下文context，结果就是报出空指针异常bug。</p>
+</li>
+</ul>
+<hr>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><ul>
+<li><p>先介绍坑，即 AndroidTestCase 的 getContext()</p>
+<pre><code>public void setContext(Context context) {
+    mContext = context;
+}
+
+public Context getContext() {
+    return mContext;
+}
+</code></pre><p>查看源码可以得到上述部分，得知mContext由setContext方法进行赋值，但是没有一个地方有调用setContext方法，所以getContext方法的返回值自然就是null了。</p>
+</li>
+<li><p>成功方法，即ActivityTestCase 的 getInstrumentation().getContext()</p>
+<pre><code>public Context getContext() {
+    return mInstrContext;
+}
+                                        //初始化时获得了Context
+   final void init(ActivityThread thread, Context instrContext, Context appContext, ComponentName component, IInstrumentationWatcher watcher, IUiAutomationConnection uiAutomationConnection) {
+        mThread = thread;
+        mMessageQueue = mThread.getLooper().myQueue();
+        mInstrContext = instrContext;   //here is context
+        mAppContext = appContext;
+        mComponent = component;
+        mWatcher = watcher;
+        mUiAutomationConnection = uiAutomationConnection;
+    }
+</code></pre><p>上述源码清晰的说明了context赋值的过程，所以这种方式可以获得context值        </p>
+</li>
+</ul>
+
       
     </div>
     
@@ -361,21 +474,27 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Android-junit4/" rel="tag">#Android junit4</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/20/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/04/21/test/" rel="next" title="test">
+                <i class="fa fa-chevron-left"></i> test
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/04/21/test/" rel="prev" title="test">
-                test <i class="fa fa-chevron-right"></i>
+              <a href="/2016/04/21/Toast和TextView可能会出现的问题/" rel="prev" title="Toast和TextView可能会出现的问题">
+                Toast和TextView可能会出现的问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -391,10 +510,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/04/21/12345/"
-     data-title="12345"
+        <div class="ds-share flat" data-thread-key="2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/"
+     data-title="细数Android Studio中使用junit4测试框架中的坑"
      data-content=""
-     data-url="http://yangyuanguang.com/2016/04/21/12345/">
+     data-url="http://yangyuanguang.com/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -424,8 +543,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/21/12345/"
-           data-title="12345" data-url="http://yangyuanguang.com/2016/04/21/12345/">
+      <div class="ds-thread" data-thread-key="2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/"
+           data-title="细数Android Studio中使用junit4测试框架中的坑" data-url="http://yangyuanguang.com/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/">
       </div>
     
   </div>
@@ -516,7 +635,7 @@
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析"><span class="nav-number">1.</span> <span class="nav-text">源码分析</span></a></li></ol></div>
             
           </div>
         </section>

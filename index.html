@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -80,36 +80,36 @@
 
 
 
-<meta name="description" content="不疯狂不成魔">
+<meta name="description" content="To obsess or to die">
 <meta property="og:type" content="website">
-<meta property="og:title" content="杨元光的小站">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="杨元光的小站">
-<meta property="og:description" content="不疯狂不成魔">
+<meta property="og:title" content="Cody Yang">
+<meta property="og:url" content="http://yangyuanguang.com/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="To obsess or to die">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="杨元光的小站">
-<meta name="twitter:description" content="不疯狂不成魔">
+<meta name="twitter:title" content="Cody Yang">
+<meta name="twitter:description" content="To obsess or to die">
 
 
 
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Pisces',
+    scheme: 'Muse',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: 0,
-      author: '博主'
+      author: 'Author'
     }
   };
 </script>
 
-  <title> 杨元光的小站 </title>
+  <title> Cody Yang - To obsess or to die </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -149,7 +149,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">杨元光的小站</span>
+      <span class="site-title">Cody Yang</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -176,7 +176,7 @@
             
               <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
-            首页
+            Home
           </a>
         </li>
       
@@ -186,7 +186,7 @@
             
               <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
-            分类
+            Categories
           </a>
         </li>
       
@@ -196,7 +196,7 @@
             
               <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
-            归档
+            Archives
           </a>
         </li>
       
@@ -206,7 +206,17 @@
             
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
-            标签
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
+            
+            guestbook
           </a>
         </li>
       
@@ -219,7 +229,7 @@
             
               <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
             
-            搜索
+            Search
           </a>
         </li>
       
@@ -279,6 +289,350 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/21/Toast和TextView可能会出现的问题/" itemprop="url">
+                  Toast和TextView可能会出现的问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-21T20:06:17+08:00" content="2016-04-21">
+              2016-04-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/21/Toast和TextView可能会出现的问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/Toast和TextView可能会出现的问题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/21/Toast和TextView可能会出现的问题/" class="leancloud_visitors" data-flag-title="Toast和TextView可能会出现的问题">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>##Toast对象可能抛出的Bug</p>
+<ul>
+<li><p>Toast对象提供了两个makeText方法，如下</p>
+<pre><code>//此方法传入的是字符串序列
+Toast.makeText(Context context, CharSequence text, int duration);
+
+//此方法传入的是资源id
+Toast.makeText(Context context, int resId, int duration);
+</code></pre></li>
+<li><p>有一种特殊情况情况，即要传入的值是int型的，而直接传入系统默认当做是资源id来使用，则会报出如下Bug</p>
+<pre><code>Caused by: android.content.res.Resources$NotFoundException: String resource ID #0x8
+</code></pre></li>
+<li><p>正确解决方式是在所需传入的int型参数后加入空字符串” “,或者前面加入字符串如”传入的值为：”</p>
+</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/21/Toast和TextView可能会出现的问题/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/" itemprop="url">
+                  细数Android Studio中使用junit4测试框架中的坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-21T20:02:28+08:00" content="2016-04-21">
+              2016-04-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/" class="leancloud_visitors" data-flag-title="细数Android Studio中使用junit4测试框架中的坑">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>build.gradle中添加依赖</p>
+<pre><code>dependencies {
+    compile &apos;com.android.support:appcompat-v7:23.2.1&apos;
+    testCompile &apos;junit:junit:4.12&apos;
+}
+</code></pre></li>
+<li><p>添加以下，使用模拟环境代替真实环境</p>
+<pre><code>android {
+    testOptions { 
+        unitTests {
+            returnDefaultValues = true
+        }
+    }
+}
+</code></pre></li>
+<li><p>不需要在清单文件中配置 instrumentation 和 uses-library   </p>
+</li>
+<li><p>测试代码主体部分（此方法也是趴Stack Overflow之中N久才得到的，感谢感谢）</p>
+<pre><code>public class TestBlackNumberDao extends ActivityTestCase{
+
+    public void testAdd() {
+        BlackNumberDAO dao = new BlackNumberDAO(getInstrumentation().getContext() );
+        boolean result = dao.insertDao(&quot;1888&quot;, &quot;2&quot;);
+        assertEquals(true, result);
+    }
+}
+</code></pre><p>注意上面代码继承的是 ActivityTestCase ，获取上下文使用的是 getInstrumentation().getContext() ，使用这个方法完全可以获得测试结果。</p>
+</li>
+<li><p>这里介绍坑之所在（调试好久才得到结果，惭愧惭愧）</p>
+<pre><code>public class TestBlackNumberDao extends AndroidTestCase{
+
+    public void testAdd() {
+        BlackNumberDAO dao = new BlackNumberDAO(getContext() );
+        boolean result = dao.insertDao(&quot;1888&quot;, &quot;2&quot;);
+        assertEquals(true, result);
+    }
+}
+</code></pre><p>  上面代码是很多资料上写的方式，eclipse中完全可以使用上面所用得到测试结果，不过在Android Studio中会出现一个问题，那就是getContext()方法会返回null，即根本得不到上下文context，结果就是报出空指针异常bug。</p>
+</li>
+</ul>
+<hr>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><ul>
+<li><p>先介绍坑，即 AndroidTestCase 的 getContext()</p>
+<pre><code>public void setContext(Context context) {
+    mContext = context;
+}
+
+public Context getContext() {
+    return mContext;
+}
+</code></pre><p>查看源码可以得到上述部分，得知mContext由setContext方法进行赋值，但是没有一个地方有调用setContext方法，所以getContext方法的返回值自然就是null了。</p>
+</li>
+<li><p>成功方法，即ActivityTestCase 的 getInstrumentation().getContext()</p>
+<pre><code>public Context getContext() {
+    return mInstrContext;
+}
+                                        //初始化时获得了Context
+   final void init(ActivityThread thread, Context instrContext, Context appContext, ComponentName component, IInstrumentationWatcher watcher, IUiAutomationConnection uiAutomationConnection) {
+        mThread = thread;
+        mMessageQueue = mThread.getLooper().myQueue();
+        mInstrContext = instrContext;   //here is context
+        mAppContext = appContext;
+        mComponent = component;
+        mWatcher = watcher;
+        mUiAutomationConnection = uiAutomationConnection;
+    }
+</code></pre><p>上述源码清晰的说明了context赋值的过程，所以这种方式可以获得context值        </p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/21/test/" itemprop="url">
                   test
                 </a>
@@ -292,7 +646,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">发表于</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-04-21T16:59:47+08:00" content="2016-04-21">
               2016-04-21
             </time>
@@ -320,7 +674,7 @@
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
                </span>
-               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="post-meta-item-text">visitors </span>
                <span class="leancloud-visitors-count"></span>
               </span>
           
@@ -401,7 +755,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">发表于</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-04-21T10:47:40+08:00" content="2016-04-21">
               2016-04-21
             </time>
@@ -429,7 +783,7 @@
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
                </span>
-               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="post-meta-item-text">visitors </span>
                <span class="leancloud-visitors-count"></span>
               </span>
           
@@ -510,7 +864,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">发表于</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-04-20T22:25:34+08:00" content="2016-04-20">
               2016-04-20
             </time>
@@ -538,7 +892,7 @@
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
                </span>
-               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="post-meta-item-text">visitors </span>
                <span class="leancloud-visitors-count"></span>
               </span>
           
@@ -628,20 +982,34 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
-               alt="杨元光" />
-          <p class="site-author-name" itemprop="name">杨元光</p>
-          <p class="site-description motion-element" itemprop="description">不疯狂不成魔</p>
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
-              <span class="site-state-item-name">日志</span>
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
           
 
         </nav>
@@ -679,17 +1047,17 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">杨元光</span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  主题 -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
+    NexT.Muse
   </a>
 </div>
 
@@ -754,13 +1122,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
 
   
 
