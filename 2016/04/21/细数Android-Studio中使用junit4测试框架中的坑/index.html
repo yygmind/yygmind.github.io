@@ -104,7 +104,7 @@ dependencies {
 添加以下，使用模拟环境代替真实环境
 android {
     testOption">
-<meta property="og:updated_time" content="2016-04-21T12:18:34.778Z">
+<meta property="og:updated_time" content="2016-04-21T12:22:45.574Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="细数Android Studio中使用junit4测试框架中的坑">
 <meta name="twitter:description" content="配置junit4测试框架
@@ -128,7 +128,7 @@ android {
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: 6275932990145037000,
       author: 'Author'
     }
   };
@@ -233,6 +233,16 @@ android {
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
+            
+            guestbook
           </a>
         </li>
       
@@ -421,7 +431,6 @@ android {
 </code></pre><p>  上面代码是很多资料上写的方式，eclipse中完全可以使用上面所用得到测试结果，不过在Android Studio中会出现一个问题，那就是getContext()方法会返回null，即根本得不到上下文context，结果就是报出空指针异常bug。</p>
 </li>
 </ul>
-<hr>
 <h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><ul>
 <li><p>先介绍坑，即 AndroidTestCase 的 getContext()</p>
 <pre><code>public void setContext(Context context) {
@@ -608,6 +617,35 @@ public Context getContext() {
 
         <div class="links-of-author motion-element">
           
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
         </div>
 
         
@@ -757,6 +795,10 @@ public Context getContext() {
   </script>
 
   
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
     
   
 
