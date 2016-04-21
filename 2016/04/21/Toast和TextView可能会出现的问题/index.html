@@ -80,37 +80,40 @@
 
 
 
-<meta name="description" content="##Toast对象可能抛出的Bug
-
+<meta name="description" content="Toast对象可能抛出的Bug
 Toast对象提供了两个makeText方法，如下
 //此方法传入的是字符串序列
 Toast.makeText(Context context, CharSequence text, int duration);
 
 //此方法传入的是资源id
-Toast.makeText(Context context, int resId, int duration);">
+Toast.makeText(Context context, int resId, int duration);
+
+有一种">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Toast和TextView可能会出现的问题">
 <meta property="og:url" content="http://yangyuanguang.com/2016/04/21/Toast和TextView可能会出现的问题/index.html">
 <meta property="og:site_name" content="Cody Yang">
-<meta property="og:description" content="##Toast对象可能抛出的Bug
-
+<meta property="og:description" content="Toast对象可能抛出的Bug
 Toast对象提供了两个makeText方法，如下
 //此方法传入的是字符串序列
 Toast.makeText(Context context, CharSequence text, int duration);
 
 //此方法传入的是资源id
-Toast.makeText(Context context, int resId, int duration);">
-<meta property="og:updated_time" content="2016-04-21T12:08:29.563Z">
+Toast.makeText(Context context, int resId, int duration);
+
+有一种">
+<meta property="og:updated_time" content="2016-04-21T12:19:19.788Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Toast和TextView可能会出现的问题">
-<meta name="twitter:description" content="##Toast对象可能抛出的Bug
-
+<meta name="twitter:description" content="Toast对象可能抛出的Bug
 Toast对象提供了两个makeText方法，如下
 //此方法传入的是字符串序列
 Toast.makeText(Context context, CharSequence text, int duration);
 
 //此方法传入的是资源id
-Toast.makeText(Context context, int resId, int duration);">
+Toast.makeText(Context context, int resId, int duration);
+
+有一种">
 
 
 
@@ -227,16 +230,6 @@ Toast.makeText(Context context, int resId, int duration);">
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-guestbook">
-          <a href="/guestbook" rel="section">
-            
-              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
-            
-            guestbook
           </a>
         </li>
       
@@ -383,8 +376,7 @@ Toast.makeText(Context context, int resId, int duration);">
       
 
       
-        <p>##Toast对象可能抛出的Bug</p>
-<ul>
+        <h2 id="Toast对象可能抛出的Bug"><a href="#Toast对象可能抛出的Bug" class="headerlink" title="Toast对象可能抛出的Bug"></a>Toast对象可能抛出的Bug</h2><ul>
 <li><p>Toast对象提供了两个makeText方法，如下</p>
 <pre><code>//此方法传入的是字符串序列
 Toast.makeText(Context context, CharSequence text, int duration);
@@ -398,8 +390,7 @@ Toast.makeText(Context context, int resId, int duration);
 <li><p>正确解决方式是在所需传入的int型参数后加入空字符串” “,或者前面加入字符串如”传入的值为：”</p>
 </li>
 </ul>
-<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><p>##TextView对象可能抛出的Bug</p>
-<ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h2 id="TextView对象可能抛出的Bug"><a href="#TextView对象可能抛出的Bug" class="headerlink" title="TextView对象可能抛出的Bug"></a>TextView对象可能抛出的Bug</h2><ul>
 <li><p>TextView对象也会出现上面的那种情况</p>
 <pre><code>TextView tv = findViewById(R.id.tv);
 
@@ -541,7 +532,7 @@ tv.setText(int resId)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -587,7 +578,7 @@ tv.setText(int resId)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Toast对象可能抛出的Bug"><span class="nav-number">1.</span> <span class="nav-text">Toast对象可能抛出的Bug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TextView对象可能抛出的Bug"><span class="nav-number">3.</span> <span class="nav-text">TextView对象可能抛出的Bug</span></a></li></ol></div>
             
           </div>
         </section>

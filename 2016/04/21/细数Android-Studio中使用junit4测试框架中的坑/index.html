@@ -80,7 +80,8 @@
 
 
 
-<meta name="description" content="build.gradle中添加依赖
+<meta name="description" content="配置junit4测试框架
+build.gradle中添加依赖
 dependencies {
     compile &amp;apos;com.android.support:appcompat-v7:23.2.1&amp;apos;
     testCompile &amp;apos;junit:junit:4.12&amp;apos;
@@ -88,12 +89,13 @@ dependencies {
 
 添加以下，使用模拟环境代替真实环境
 android {
-    testOptions {">
+    testOption">
 <meta property="og:type" content="article">
 <meta property="og:title" content="细数Android Studio中使用junit4测试框架中的坑">
 <meta property="og:url" content="http://yangyuanguang.com/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/index.html">
 <meta property="og:site_name" content="Cody Yang">
-<meta property="og:description" content="build.gradle中添加依赖
+<meta property="og:description" content="配置junit4测试框架
+build.gradle中添加依赖
 dependencies {
     compile &amp;apos;com.android.support:appcompat-v7:23.2.1&amp;apos;
     testCompile &amp;apos;junit:junit:4.12&amp;apos;
@@ -101,11 +103,12 @@ dependencies {
 
 添加以下，使用模拟环境代替真实环境
 android {
-    testOptions {">
-<meta property="og:updated_time" content="2016-04-21T12:08:53.334Z">
+    testOption">
+<meta property="og:updated_time" content="2016-04-21T12:18:34.778Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="细数Android Studio中使用junit4测试框架中的坑">
-<meta name="twitter:description" content="build.gradle中添加依赖
+<meta name="twitter:description" content="配置junit4测试框架
+build.gradle中添加依赖
 dependencies {
     compile &amp;apos;com.android.support:appcompat-v7:23.2.1&amp;apos;
     testCompile &amp;apos;junit:junit:4.12&amp;apos;
@@ -113,7 +116,7 @@ dependencies {
 
 添加以下，使用模拟环境代替真实环境
 android {
-    testOptions {">
+    testOption">
 
 
 
@@ -230,16 +233,6 @@ android {
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-guestbook">
-          <a href="/guestbook" rel="section">
-            
-              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
-            
-            guestbook
           </a>
         </li>
       
@@ -386,7 +379,7 @@ android {
       
 
       
-        <ul>
+        <h2 id="配置junit4测试框架"><a href="#配置junit4测试框架" class="headerlink" title="配置junit4测试框架"></a>配置junit4测试框架</h2><ul>
 <li><p>build.gradle中添加依赖</p>
 <pre><code>dependencies {
     compile &apos;com.android.support:appcompat-v7:23.2.1&apos;
@@ -414,7 +407,8 @@ android {
     }
 }
 </code></pre><p>注意上面代码继承的是 ActivityTestCase ，获取上下文使用的是 getInstrumentation().getContext() ，使用这个方法完全可以获得测试结果。</p>
-</li>
+<a id="more"></a>
+<h2 id="坑之所在"><a href="#坑之所在" class="headerlink" title="坑之所在"></a>坑之所在</h2></li>
 <li><p>这里介绍坑之所在（调试好久才得到结果，惭愧惭愧）</p>
 <pre><code>public class TestBlackNumberDao extends AndroidTestCase{
 
@@ -484,10 +478,6 @@ public Context getContext() {
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/04/21/test/" rel="next" title="test">
-                <i class="fa fa-chevron-left"></i> test
-              </a>
             
           </div>
 
@@ -589,7 +579,7 @@ public Context getContext() {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -635,7 +625,7 @@ public Context getContext() {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析"><span class="nav-number">1.</span> <span class="nav-text">源码分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置junit4测试框架"><span class="nav-number">1.</span> <span class="nav-text">配置junit4测试框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坑之所在"><span class="nav-number">2.</span> <span class="nav-text">坑之所在</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析"><span class="nav-number">3.</span> <span class="nav-text">源码分析</span></a></li></ol></div>
             
           </div>
         </section>
