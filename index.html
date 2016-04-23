@@ -279,6 +279,137 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/23/JNI之C语言多级指针剖析/" itemprop="url">
+                  JNI之C语言多级指针剖析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-23T16:32:15+08:00" content="2016-04-23">
+              2016-04-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JNI/" itemprop="url" rel="index">
+                    <span itemprop="name">JNI</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/23/JNI之C语言多级指针剖析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/23/JNI之C语言多级指针剖析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/23/JNI之C语言多级指针剖析/" class="leancloud_visitors" data-flag-title="JNI之C语言多级指针剖析">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="一级指针"><a href="#一级指针" class="headerlink" title="一级指针"></a>一级指针</h1><p>假设在内存中定义一个一级指针<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"> main() &#123;</span><br><span class="line">      </span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">3</span>; </span><br><span class="line">        <span class="keyword">int</span> * j;    <span class="comment">//定义一级指针j</span></span><br><span class="line">        j = &amp;i;     <span class="comment">//把i的地址赋给指针j</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, i);      <span class="comment">//打印整形变量i,即i的内容        </span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;i);    <span class="comment">//打印整形变量i的地址</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, j);     <span class="comment">//打印指针j，即j中的内容（内容是地址），即i的地址（&amp;i）</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;j);    <span class="comment">//打印指针j定义时系统所分配的地址（j的地址）</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *j);     <span class="comment">//打印指针j所指向（j中的内容所存地址）i的地址上的内容（i的内容） </span></span><br><span class="line">        system(<span class="string">"pause"</span>);        <span class="comment">//让运行窗口暂停</span></span><br><span class="line">        </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/23/JNI之C语言多级指针剖析/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/23/使用ViewPager和Fragment实现底部导航滑动Demo/" itemprop="url">
                   使用ViewPager和Fragment实现底部导航滑动Demo
                 </a>
@@ -844,7 +975,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -852,7 +983,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -861,7 +992,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

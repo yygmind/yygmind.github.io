@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,junit4," />
+  <meta name="keywords" content="JNI,C语言,指针," />
 
 
 
@@ -80,28 +80,16 @@
 
 
 
-<meta name="description" content="build.gradle中添加依赖
-1234dependencies &amp;#123;    compile &apos;com.android.support:appcompat-v7:23.2.1&apos;    testCompile &apos;junit:junit:4.12&apos;&amp;#125;
-
-添加以下，使用模拟环境代替真实环境
-1234567android &amp;#123;    testOptions &amp;#123;">
+<meta name="description" content="一级指针假设在内存中定义一个一级指针12345678910111213141516#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt; main() &amp;#123;              int i = 3;         int * j;    //定义一级指针j        j = &amp;amp;i;     //把i的地址赋给指针j">
 <meta property="og:type" content="article">
-<meta property="og:title" content="细数Android Studio中使用junit4测试框架中的坑">
-<meta property="og:url" content="http://yangyuanguang.com/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/index.html">
+<meta property="og:title" content="JNI之C语言多级指针剖析">
+<meta property="og:url" content="http://yangyuanguang.com/2016/04/23/JNI之C语言多级指针剖析/index.html">
 <meta property="og:site_name" content="Cody Yang">
-<meta property="og:description" content="build.gradle中添加依赖
-1234dependencies &amp;#123;    compile &apos;com.android.support:appcompat-v7:23.2.1&apos;    testCompile &apos;junit:junit:4.12&apos;&amp;#125;
-
-添加以下，使用模拟环境代替真实环境
-1234567android &amp;#123;    testOptions &amp;#123;">
-<meta property="og:updated_time" content="2016-04-23T05:45:04.009Z">
+<meta property="og:description" content="一级指针假设在内存中定义一个一级指针12345678910111213141516#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt; main() &amp;#123;              int i = 3;         int * j;    //定义一级指针j        j = &amp;amp;i;     //把i的地址赋给指针j">
+<meta property="og:updated_time" content="2016-04-23T08:34:04.871Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="细数Android Studio中使用junit4测试框架中的坑">
-<meta name="twitter:description" content="build.gradle中添加依赖
-1234dependencies &amp;#123;    compile &apos;com.android.support:appcompat-v7:23.2.1&apos;    testCompile &apos;junit:junit:4.12&apos;&amp;#125;
-
-添加以下，使用模拟环境代替真实环境
-1234567android &amp;#123;    testOptions &amp;#123;">
+<meta name="twitter:title" content="JNI之C语言多级指针剖析">
+<meta name="twitter:description" content="一级指针假设在内存中定义一个一级指针12345678910111213141516#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt; main() &amp;#123;              int i = 3;         int * j;    //定义一级指针j        j = &amp;amp;i;     //把i的地址赋给指针j">
 
 
 
@@ -119,7 +107,7 @@
   };
 </script>
 
-  <title> 细数Android Studio中使用junit4测试框架中的坑 | Cody Yang </title>
+  <title> JNI之C语言多级指针剖析 | Cody Yang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -289,7 +277,7 @@
             
             
               
-                细数Android Studio中使用junit4测试框架中的坑
+                JNI之C语言多级指针剖析
               
             
           </h1>
@@ -301,8 +289,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-21T20:02:28+08:00" content="2016-04-21">
-              2016-04-21
+            <time itemprop="dateCreated" datetime="2016-04-23T16:32:15+08:00" content="2016-04-23">
+              2016-04-23
             </time>
           </span>
 
@@ -315,8 +303,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/JNI/" itemprop="url" rel="index">
+                    <span itemprop="name">JNI</span>
                   </a>
                 </span>
 
@@ -331,8 +319,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/" itemprop="commentsCount"></span>
+                <a href="/2016/04/23/JNI之C语言多级指针剖析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/23/JNI之C语言多级指针剖析/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -342,7 +330,7 @@
 
           
           
-             <span id="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/" class="leancloud_visitors" data-flag-title="细数Android Studio中使用junit4测试框架中的坑">
+             <span id="/2016/04/23/JNI之C语言多级指针剖析/" class="leancloud_visitors" data-flag-title="JNI之C语言多级指针剖析">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -364,37 +352,29 @@
       
 
       
-        <ul>
-<li><p>build.gradle中添加依赖</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">    <span class="keyword">compile</span> <span class="string">'com.android.support:appcompat-v7:23.2.1'</span></span><br><span class="line">    testCompile <span class="string">'junit:junit:4.12'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加以下，使用模拟环境代替真实环境</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">android</span> &#123;</span><br><span class="line">    <span class="section">testOptions</span> &#123; </span><br><span class="line">        <span class="section">unitTests</span> &#123;</span><br><span class="line">            <span class="attribute">returnDefaultValues</span> = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<a id="more"></a>       
+        <h1 id="一级指针"><a href="#一级指针" class="headerlink" title="一级指针"></a>一级指针</h1><p>假设在内存中定义一个一级指针<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"> main() &#123;</span><br><span class="line">      </span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">3</span>; </span><br><span class="line">        <span class="keyword">int</span> * j;    <span class="comment">//定义一级指针j</span></span><br><span class="line">        j = &amp;i;     <span class="comment">//把i的地址赋给指针j</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, i);      <span class="comment">//打印整形变量i,即i的内容        </span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;i);    <span class="comment">//打印整形变量i的地址</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, j);     <span class="comment">//打印指针j，即j中的内容（内容是地址），即i的地址（&amp;i）</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;j);    <span class="comment">//打印指针j定义时系统所分配的地址（j的地址）</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *j);     <span class="comment">//打印指针j所指向（j中的内容所存地址）i的地址上的内容（i的内容） </span></span><br><span class="line">        system(<span class="string">"pause"</span>);        <span class="comment">//让运行窗口暂停</span></span><br><span class="line">        </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>总结如下（理解就收获了）：</p>
 <ul>
-<li>Android Studio中不需要在清单文件中配置 instrumentation 和 uses-library   </li>
-<li>测试代码主体部分（此方法也是趴Stack Overflow之中N久才得到的，感谢感谢）<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">TestBlackNumberDao</span> <span class="keyword">extends</span> <span class="title">ActivityTestCase</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    public void testAdd() &#123;</span><br><span class="line">        <span class="type">BlackNumberDAO</span> dao = <span class="keyword">new</span> <span class="type">BlackNumberDAO</span>(getInstrumentation().getContext() );</span><br><span class="line">        boolean result = dao.insertDao(<span class="string">"1888"</span>, <span class="string">"2"</span>);</span><br><span class="line">        assertEquals(<span class="literal">true</span>, result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>在定义指针（int * j）还未代码赋值之前，系统做了2件事<ul>
+<li>一是系统为这个一级指针分配了一个地址，这就是这个指针的地址。</li>
+<li>二是系统为这个一级指针赋了初值，这就是这个指针的内容。这个初值是相对固定了，即他与系统以及配置相关，同一台电脑每次赋的初值都是一样的，不同电脑值就不一样了（涉及到算法问题）</li>
+</ul>
 </li>
+<li>j是指针，所存只能是地址，他的内容就是传给他的地址</li>
+<li>&amp;j是指针自身的地址，即定义时系统所分配给他的地址</li>
+<li>*j是指针j内容里所存地址（i的地址）–&gt;原本位置里的内容（i的内容）</li>
 </ul>
-<p>注意上面代码继承的是 ActivityTestCase ，获取上下文使用的是 getInstrumentation().getContext() ，使用这个方法完全可以获得测试结果。</p>
+<h1 id="二级指针"><a href="#二级指针" class="headerlink" title="二级指针"></a>二级指针</h1><p>在上面的基础之上定义一个二级指针<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ** k;   <span class="comment">//定义二级指针k，到这一步止电脑同样做了上述的2件事</span></span><br><span class="line">k = &amp;j;     <span class="comment">//给二级指针赋值，内容是一级指针自身的地址</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;j);    <span class="comment">//一级指针的j的地址</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, k);     <span class="comment">//二级指针k的内容</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;k);    <span class="comment">//二级指针k的地址</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, *k);    <span class="comment">//二级指针内容所对应地址上的内容（一级指针内容，即整形变量i的地址）</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, **k);    <span class="comment">//二级指针内容所对应地址上的内容（一级指针内容），再其内容所对应地址上的内容（整形变量i的内容）</span></span><br></pre></td></tr></table></figure></p>
+<p>这里比较重要的就是最后2点，理解 <em>k， *</em>k 非常重要</p>
+<h1 id="三级指针"><a href="#三级指针" class="headerlink" title="三级指针"></a>三级指针</h1><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int *** <span class="keyword">m</span>;  <span class="comment">//定义三级指针m</span></span><br><span class="line"><span class="keyword">m</span> = &amp;k;     <span class="comment">//给三级指针赋值</span></span><br></pre></td></tr></table></figure>
+<p>可总结得到（注：指针的内容都是地址）</p>
 <ul>
-<li>这里介绍坑之所在（调试好久才得到结果，惭愧惭愧）<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">TestBlackNumberDao</span> <span class="keyword">extends</span> <span class="title">AndroidTestCase</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    public void testAdd() &#123;</span><br><span class="line">        <span class="type">BlackNumberDAO</span> dao = <span class="keyword">new</span> <span class="type">BlackNumberDAO</span>(getContext() );</span><br><span class="line">        boolean result = dao.insertDao(<span class="string">"1888"</span>, <span class="string">"2"</span>);</span><br><span class="line">        assertEquals(<span class="literal">true</span>, result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>m 是三级指针m的内容</li>
+<li>*m 是二级指针k的内容</li>
+<li>**m 是一级指针j的内容</li>
+<li><em>*</em>m 是整形变量i的内容</li>
 </ul>
-<p>上面代码是很多资料上写的方式，eclipse中完全可以使用上面所用得到测试结果，不过在Android Studio中会出现一个问题，那就是getContext()方法会返回null，即根本得不到上下文context，结果就是报出空指针异常bug。</p>
-<hr>
-<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><ul>
-<li>先介绍坑，即 AndroidTestCase 的 getContext()</li>
-</ul>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setContext</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    mContext = context;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function">Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mContext;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>查看源码可以得到上述部分，得知mContext由setContext方法进行赋值，但是没有一个地方有调用setContext方法，所以getContext方法的返回值自然就是null了。</p>
-<ul>
-<li>成功方法，即ActivityTestCase 的 getInstrumentation().getContext()</li>
-</ul>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function">Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mInstrContext;</span><br><span class="line">&#125;       </span><br><span class="line">                                <span class="comment">//初始化时获得了Context</span></span><br><span class="line"><span class="keyword">final</span> <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(ActivityThread thread, Context instrContext, Context appContext, ComponentName component, IInstrumentationWatcher watcher, IUiAutomationConnection uiAutomationConnection)</span> </span>&#123;</span><br><span class="line">     mThread = thread;</span><br><span class="line">     mMessageQueue = mThread.getLooper().myQueue();</span><br><span class="line">     mInstrContext = instrContext;   <span class="comment">//here is context</span></span><br><span class="line">     mAppContext = appContext;</span><br><span class="line">     mComponent = component;</span><br><span class="line">     mWatcher = watcher;</span><br><span class="line">     mUiAutomationConnection = uiAutomationConnection;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>上述源码清晰的说明了context赋值的过程，所以这种方式可以获得context值        </p>
 
       
     </div>
@@ -415,9 +395,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag">#Android</a>
+            <a href="/tags/JNI/" rel="tag">#JNI</a>
           
-            <a href="/tags/junit4/" rel="tag">#junit4</a>
+            <a href="/tags/C语言/" rel="tag">#C语言</a>
+          
+            <a href="/tags/指针/" rel="tag">#指针</a>
           
         </div>
       
@@ -426,13 +408,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/04/23/使用ViewPager和Fragment实现底部导航滑动Demo/" rel="next" title="使用ViewPager和Fragment实现底部导航滑动Demo">
+                <i class="fa fa-chevron-left"></i> 使用ViewPager和Fragment实现底部导航滑动Demo
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/21/Toast和TextView可能会出现的问题/" rel="prev" title="Toast和TextView可能会出现的问题">
-                Toast和TextView可能会出现的问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -447,10 +429,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/"
-     data-title="细数Android Studio中使用junit4测试框架中的坑"
+        <div class="ds-share flat" data-thread-key="2016/04/23/JNI之C语言多级指针剖析/"
+     data-title="JNI之C语言多级指针剖析"
      data-content=""
-     data-url="http://yangyuanguang.com/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/">
+     data-url="http://yangyuanguang.com/2016/04/23/JNI之C语言多级指针剖析/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -477,8 +459,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/"
-           data-title="细数Android Studio中使用junit4测试框架中的坑" data-url="http://yangyuanguang.com/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/">
+      <div class="ds-thread" data-thread-key="2016/04/23/JNI之C语言多级指针剖析/"
+           data-title="JNI之C语言多级指针剖析" data-url="http://yangyuanguang.com/2016/04/23/JNI之C语言多级指针剖析/">
       </div>
     
   </div>
@@ -598,7 +580,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析"><span class="nav-number">1.</span> <span class="nav-text">源码分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一级指针"><span class="nav-number">1.</span> <span class="nav-text">一级指针</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二级指针"><span class="nav-number">2.</span> <span class="nav-text">二级指针</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三级指针"><span class="nav-number">3.</span> <span class="nav-text">三级指针</span></a></li></ol></div>
             
           </div>
         </section>
