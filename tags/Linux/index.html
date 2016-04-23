@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,Toast,TextView," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -80,34 +80,15 @@
 
 
 
-<meta name="description" content="Toast对象可能抛出的BugToast对象提供了两个makeText方法，如下
-//此方法传入的是字符串序列
-Toast.makeText(Context context, CharSequence text, int duration);
-
-//此方法传入的是资源id
-Toast.makeText(Context context, int resId, int duration);
-有一种特殊">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Toast和TextView可能会出现的问题">
-<meta property="og:url" content="http://yangyuanguang.com/2016/04/21/Toast和TextView可能会出现的问题/index.html">
+<meta name="description" content="To obsess or to die">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cody Yang">
+<meta property="og:url" content="http://yangyuanguang.com/tags/Linux/index.html">
 <meta property="og:site_name" content="Cody Yang">
-<meta property="og:description" content="Toast对象可能抛出的BugToast对象提供了两个makeText方法，如下
-//此方法传入的是字符串序列
-Toast.makeText(Context context, CharSequence text, int duration);
-
-//此方法传入的是资源id
-Toast.makeText(Context context, int resId, int duration);
-有一种特殊">
-<meta property="og:updated_time" content="2016-04-21T13:10:00.000Z">
+<meta property="og:description" content="To obsess or to die">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Toast和TextView可能会出现的问题">
-<meta name="twitter:description" content="Toast对象可能抛出的BugToast对象提供了两个makeText方法，如下
-//此方法传入的是字符串序列
-Toast.makeText(Context context, CharSequence text, int duration);
-
-//此方法传入的是资源id
-Toast.makeText(Context context, int resId, int duration);
-有一种特殊">
+<meta name="twitter:title" content="Cody Yang">
+<meta name="twitter:description" content="To obsess or to die">
 
 
 
@@ -125,7 +106,7 @@ Toast.makeText(Context context, int resId, int duration);
   };
 </script>
 
-  <title> Toast和TextView可能会出现的问题 | Cody Yang </title>
+  <title> Tag: Linux | Cody Yang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -156,7 +137,7 @@ Toast.makeText(Context context, int resId, int duration);
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -274,200 +255,46 @@ Toast.makeText(Context context, int resId, int duration);
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Toast和TextView可能会出现的问题
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-21T20:06:17+08:00" content="2016-04-21">
-              2016-04-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/21/Toast和TextView可能会出现的问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/Toast和TextView可能会出现的问题/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/21/Toast和TextView可能会出现的问题/" class="leancloud_visitors" data-flag-title="Toast和TextView可能会出现的问题">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h1 id="Toast对象可能抛出的Bug"><a href="#Toast对象可能抛出的Bug" class="headerlink" title="Toast对象可能抛出的Bug"></a>Toast对象可能抛出的Bug</h1><p>Toast对象提供了两个makeText方法，如下</p>
-<pre><code>//此方法传入的是字符串序列
-Toast.makeText(Context context, CharSequence text, int duration);
-
-//此方法传入的是资源id
-Toast.makeText(Context context, int resId, int duration);
-</code></pre><p>有一种特殊情况情况，即要传入的值是int型的，而直接传入系统默认当做是资源id来使用，则会报出如下Bug</p>
-<pre><code>Caused by: android.content.res.Resources$NotFoundException: String resource ID #0x8
-</code></pre><p>正确解决方式是在所需传入的int型参数后加入空字符串” “,或者前面加入字符串如”传入的值为：”</p>
-<a id="more"></a>
-<h1 id="TextView对象可能抛出的Bug"><a href="#TextView对象可能抛出的Bug" class="headerlink" title="TextView对象可能抛出的Bug"></a>TextView对象可能抛出的Bug</h1><p>TextView对象也会出现上面的那种情况</p>
-<pre><code>TextView tv = findViewById(R.id.tv);
-
-//此方法传入的是字符串序列
-tv.setText(CharSequence text);
-
-//此方法传入的是资源id
-tv.setText(int resId)
-</code></pre><p>解决方式和上面一样，传入int型参数时加入字符串即可</p>
-
-      
-    </div>
-    
-    <div>
-      
-        
-      
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        Linux
+        <small>Tag</small>
+      </h2>
     </div>
 
-    <div>
+    
       
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-      
-    </div>
+            <a class="post-title-link" href="/2016/04/22/Linux基础入门（1）：用户及文件权限管理/" itemprop="url">
+              
+                <span itemprop="name">Linux基础入门（1）：用户及文件权限管理</span>
+              
+            </a>
+        
+      </h1>
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag">#Android</a>
-          
-            <a href="/tags/Toast/" rel="tag">#Toast</a>
-          
-            <a href="/tags/TextView/" rel="tag">#TextView</a>
-          
-        </div>
-      
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-04-22T10:44:56+08:00"
+              content="2016-04-22" >
+          04-22
+        </time>
+      </div>
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/" rel="next" title="细数Android Studio中使用junit4测试框架中的坑">
-                <i class="fa fa-chevron-left"></i> 细数Android Studio中使用junit4测试框架中的坑
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/22/Linux基础入门（1）：用户及文件权限管理/" rel="prev" title="Linux基础入门（1）：用户及文件权限管理">
-                Linux基础入门（1）：用户及文件权限管理 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-        <div class="ds-share flat" data-thread-key="2016/04/21/Toast和TextView可能会出现的问题/"
-     data-title="Toast和TextView可能会出现的问题"
-     data-content=""
-     data-url="http://yangyuanguang.com/2016/04/21/Toast和TextView可能会出现的问题/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
+    
   </div>
-</div>
-      
-    </div>
-  </div>
+
+  
 
 
           </div>
@@ -475,14 +302,6 @@ tv.setText(int resId)
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2016/04/21/Toast和TextView可能会出现的问题/"
-           data-title="Toast和TextView可能会出现的问题" data-url="http://yangyuanguang.com/2016/04/21/Toast和TextView可能会出现的问题/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -502,17 +321,8 @@ tv.setText(int resId)
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -591,17 +401,6 @@ tv.setText(int resId)
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Toast对象可能抛出的Bug"><span class="nav-number">1.</span> <span class="nav-text">Toast对象可能抛出的Bug</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TextView对象可能抛出的Bug"><span class="nav-number">2.</span> <span class="nav-text">TextView对象可能抛出的Bug</span></a></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -698,10 +497,6 @@ tv.setText(int resId)
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
 
   
 

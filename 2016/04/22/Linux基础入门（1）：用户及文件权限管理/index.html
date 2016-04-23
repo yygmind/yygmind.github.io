@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,Toast,TextView," />
+  <meta name="keywords" content="Linux,文件权限," />
 
 
 
@@ -80,34 +80,41 @@
 
 
 
-<meta name="description" content="Toast对象可能抛出的BugToast对象提供了两个makeText方法，如下
-//此方法传入的是字符串序列
-Toast.makeText(Context context, CharSequence text, int duration);
+<meta name="description" content="Linux 用户管理查看用户$ who am i
+或者
+$ who mom likes
+输出内容如下
+yyg      pts/0        2016-04-21 08:28 (:0)
 
-//此方法传入的是资源id
-Toast.makeText(Context context, int resId, int duration);
-有一种特殊">
+其中第一列表示打开当前伪终端的用户的用户名（可直接使用whoami）
+第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言，即使用 [Ctrl]+[Alt]+[F1]～[F">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Toast和TextView可能会出现的问题">
-<meta property="og:url" content="http://yangyuanguang.com/2016/04/21/Toast和TextView可能会出现的问题/index.html">
+<meta property="og:title" content="Linux基础入门（1）：用户及文件权限管理">
+<meta property="og:url" content="http://yangyuanguang.com/2016/04/22/Linux基础入门（1）：用户及文件权限管理/index.html">
 <meta property="og:site_name" content="Cody Yang">
-<meta property="og:description" content="Toast对象可能抛出的BugToast对象提供了两个makeText方法，如下
-//此方法传入的是字符串序列
-Toast.makeText(Context context, CharSequence text, int duration);
+<meta property="og:description" content="Linux 用户管理查看用户$ who am i
+或者
+$ who mom likes
+输出内容如下
+yyg      pts/0        2016-04-21 08:28 (:0)
 
-//此方法传入的是资源id
-Toast.makeText(Context context, int resId, int duration);
-有一种特殊">
-<meta property="og:updated_time" content="2016-04-21T13:10:00.000Z">
+其中第一列表示打开当前伪终端的用户的用户名（可直接使用whoami）
+第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言，即使用 [Ctrl]+[Alt]+[F1]～[F">
+<meta property="og:image" content="https://dn-anything-about-doc.qbox.me/linux_base/3-9.png/logoblackfont">
+<meta property="og:image" content="https://dn-anything-about-doc.qbox.me/linux_base/3-10.png/logoblackfont">
+<meta property="og:image" content="https://dn-anything-about-doc.qbox.me/linux_base/3-14.png/logoblackfont">
+<meta property="og:updated_time" content="2016-04-22T02:52:49.296Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Toast和TextView可能会出现的问题">
-<meta name="twitter:description" content="Toast对象可能抛出的BugToast对象提供了两个makeText方法，如下
-//此方法传入的是字符串序列
-Toast.makeText(Context context, CharSequence text, int duration);
+<meta name="twitter:title" content="Linux基础入门（1）：用户及文件权限管理">
+<meta name="twitter:description" content="Linux 用户管理查看用户$ who am i
+或者
+$ who mom likes
+输出内容如下
+yyg      pts/0        2016-04-21 08:28 (:0)
 
-//此方法传入的是资源id
-Toast.makeText(Context context, int resId, int duration);
-有一种特殊">
+其中第一列表示打开当前伪终端的用户的用户名（可直接使用whoami）
+第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言，即使用 [Ctrl]+[Alt]+[F1]～[F">
+<meta name="twitter:image" content="https://dn-anything-about-doc.qbox.me/linux_base/3-9.png/logoblackfont">
 
 
 
@@ -125,7 +132,7 @@ Toast.makeText(Context context, int resId, int duration);
   };
 </script>
 
-  <title> Toast和TextView可能会出现的问题 | Cody Yang </title>
+  <title> Linux基础入门（1）：用户及文件权限管理 | Cody Yang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -295,7 +302,7 @@ Toast.makeText(Context context, int resId, int duration);
             
             
               
-                Toast和TextView可能会出现的问题
+                Linux基础入门（1）：用户及文件权限管理
               
             
           </h1>
@@ -307,8 +314,8 @@ Toast.makeText(Context context, int resId, int duration);
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-21T20:06:17+08:00" content="2016-04-21">
-              2016-04-21
+            <time itemprop="dateCreated" datetime="2016-04-22T10:44:56+08:00" content="2016-04-22">
+              2016-04-22
             </time>
           </span>
 
@@ -321,8 +328,8 @@ Toast.makeText(Context context, int resId, int duration);
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -337,8 +344,8 @@ Toast.makeText(Context context, int resId, int duration);
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/21/Toast和TextView可能会出现的问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/Toast和TextView可能会出现的问题/" itemprop="commentsCount"></span>
+                <a href="/2016/04/22/Linux基础入门（1）：用户及文件权限管理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/22/Linux基础入门（1）：用户及文件权限管理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -348,7 +355,7 @@ Toast.makeText(Context context, int resId, int duration);
 
           
           
-             <span id="/2016/04/21/Toast和TextView可能会出现的问题/" class="leancloud_visitors" data-flag-title="Toast和TextView可能会出现的问题">
+             <span id="/2016/04/22/Linux基础入门（1）：用户及文件权限管理/" class="leancloud_visitors" data-flag-title="Linux基础入门（1）：用户及文件权限管理">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -370,25 +377,120 @@ Toast.makeText(Context context, int resId, int duration);
       
 
       
-        <h1 id="Toast对象可能抛出的Bug"><a href="#Toast对象可能抛出的Bug" class="headerlink" title="Toast对象可能抛出的Bug"></a>Toast对象可能抛出的Bug</h1><p>Toast对象提供了两个makeText方法，如下</p>
-<pre><code>//此方法传入的是字符串序列
-Toast.makeText(Context context, CharSequence text, int duration);
+        <h1 id="Linux-用户管理"><a href="#Linux-用户管理" class="headerlink" title="Linux 用户管理"></a>Linux 用户管理</h1><h2 id="查看用户"><a href="#查看用户" class="headerlink" title="查看用户"></a>查看用户</h2><pre><code>$ who am i
+</code></pre><p>或者</p>
+<pre><code>$ who mom likes
+</code></pre><p>输出内容如下</p>
+<pre><code>yyg      pts/0        2016-04-21 08:28 (:0)
+</code></pre><ul>
+<li>其中第一列表示打开当前伪终端的用户的用户名（可直接使用whoami）</li>
+<li>第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言，即使用 [Ctrl]+[Alt]+[F1]～[F7] 进行切换的 /dev/tty 设备（“真终端”）</li>
+<li><p>pts/0后面的0表示伪终端序号，再开一个终端即为1</p>
+<pre><code>who 命令其它常用参数
 
-//此方法传入的是资源id
-Toast.makeText(Context context, int resId, int duration);
-</code></pre><p>有一种特殊情况情况，即要传入的值是int型的，而直接传入系统默认当做是资源id来使用，则会报出如下Bug</p>
-<pre><code>Caused by: android.content.res.Resources$NotFoundException: String resource ID #0x8
-</code></pre><p>正确解决方式是在所需传入的int型参数后加入空字符串” “,或者前面加入字符串如”传入的值为：”</p>
-<a id="more"></a>
-<h1 id="TextView对象可能抛出的Bug"><a href="#TextView对象可能抛出的Bug" class="headerlink" title="TextView对象可能抛出的Bug"></a>TextView对象可能抛出的Bug</h1><p>TextView对象也会出现上面的那种情况</p>
-<pre><code>TextView tv = findViewById(R.id.tv);
-
-//此方法传入的是字符串序列
-tv.setText(CharSequence text);
-
-//此方法传入的是资源id
-tv.setText(int resId)
-</code></pre><p>解决方式和上面一样，传入int型参数时加入字符串即可</p>
+参数    说明
+-a    打印能打印的全部
+-d    打印死掉的进程
+-m    同am i,mom likes
+-q    打印当前登录用户数及用户名
+-u    打印当前登录用户登录信息
+-r    打印运行等级
+</code></pre><a id="more"></a>
+<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><blockquote>
+<p>root是 Linux 和 UNIX 系统中的超级管理员用户帐户，拥有至高无上的权利，比如新建/添加用户</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="su，su-与sudo"><a href="#su，su-与sudo" class="headerlink" title="su，su-与sudo"></a>su，su-与sudo</h3><ul>
+<li><p>su <user>可以切换到用户user，密码</user></p>
+<pre><code>$ su yyg
+</code></pre></li>
+<li><p>su - &lt;user&gt;命令也是切换用户，同时环境变量也会跟着改变成目标用户的环境变量。</p>
+<pre><code>$ su - cody
+</code></pre></li>
+<li><p>sudo &lt;cmd&gt;可以以特权级别运行cmd命令，需要当前用户属于sudo组，且需要密码。(此处cmd不是win下的cmd，指的是命令)</p>
+<pre><code>$ sudo install
+</code></pre></li>
+</ul>
+<p>登陆时是以普通账户登陆，如果要创建用户需要root权限，需要用到sudo命令，使用有以下两个前提</p>
+<ul>
+<li>知道当前登陆用户的密码</li>
+<li>当前用户必须在sudo用户组里</li>
+</ul>
+<h3 id="新建用户"><a href="#新建用户" class="headerlink" title="新建用户"></a>新建用户</h3><p>这个命令不但可以添加用户到系统，同时也会默认为新用户创建 home 目录</p>
+<pre><code>$ sudo adduser cody
+</code></pre><p>切换登陆用户，可以发现从yyg@ubuntu变成了cody@ubuntu</p>
+<pre><code>$ su - cody
+</code></pre><h2 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h2><h3 id="使用groups命令"><a href="#使用groups命令" class="headerlink" title="使用groups命令"></a>使用groups命令</h3><pre><code>$ groups - cody
+</code></pre><p>输出的冒号之前表示用户，后面表示该用户所属的用户组。默认会创建一个和用户名相同的用户组。</p>
+<h3 id="查看-etc-group文件"><a href="#查看-etc-group文件" class="headerlink" title="查看/etc/group文件"></a>查看/etc/group文件</h3><pre><code>$ cat /etc/group | sort
+</code></pre><p> 可以使用过滤，grep -E 将范本样式为延伸的普通表示法来使用，意味着使用能使用扩展正则表达式。</p>
+<pre><code>$ cat /etc/group | grep -E &quot;yyg&quot;
+</code></pre><p>/etc/group 的内容包括用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User），每个用户组一条记录。格式如下：</p>
+<pre><code>group_name:password:GID:user_list    
+</code></pre><p>其中password字段’x’表示密码不可见</p>
+<h3 id="将其它用户加入-sudo-用户组"><a href="#将其它用户加入-sudo-用户组" class="headerlink" title="将其它用户加入 sudo 用户组"></a>将其它用户加入 sudo 用户组</h3><pre><code>$ sudo usermod -G sudo cody
+$ groups cody
+</code></pre><p>usermod -G&lt;群组&gt;；修改用户所属的附加群组。<br>默认添加的用户是不在sudo用户组的，使用usermod添加用户组</p>
+<ul>
+<li>必须有root权限，可以直接使用 root 用户为其它用户添加用户组</li>
+<li>或者是已经在 sudo 用户组的用户使用 sudo 命令获取权限来执行该命令</li>
+</ul>
+<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><pre><code>$ sudo deluser cody --remove-home
+</code></pre><p>–remove-home，移除home目录</p>
+<h1 id="Linux文件权限"><a href="#Linux文件权限" class="headerlink" title="Linux文件权限"></a>Linux文件权限</h1><h2 id="查看文件权限"><a href="#查看文件权限" class="headerlink" title="查看文件权限"></a>查看文件权限</h2><p><img src="https://dn-anything-about-doc.qbox.me/linux_base/3-9.png/logoblackfont" alt="此处输入图片的描述"><br><img src="https://dn-anything-about-doc.qbox.me/linux_base/3-10.png/logoblackfont" alt="此处输入图片的描述"></p>
+<blockquote>
+<p>文件类型</p>
+</blockquote>
+<p>Linux 里面一切皆文件，其中软链接等同于 Windows 上的快捷方式</p>
+<blockquote>
+<p>文件权限</p>
+</blockquote>
+<p>一个目录要同时具有读权限和执行权限才可以打开，而一个目录要有写权限才允许在其中创建其它文件，这是因为目录文件实际保存着该目录里面的文件的列表等信息，不过 Linux 上不是通过文件后缀名来区分文件的类型。</p>
+<blockquote>
+<p>链接数</p>
+</blockquote>
+<p>链接到该文件所在的 inode 结点的文件名数目</p>
+<blockquote>
+<p>文件大小</p>
+</blockquote>
+<p>以 inode 结点大小为单位来表示的文件大小，你可以给 ls 加上 -lh 参数来更直观的查看文件的大小(h以k作为单位显示大小)。</p>
+<blockquote>
+<p>显示除了 ‘.’(当前目录)，’..’ 上一级目录之外的所有包含隐藏文件（Linux 下以 ‘.’ 开头的文件为隐藏文件）</p>
+</blockquote>
+<pre><code>$ ls -A
+</code></pre><blockquote>
+<p>显示所有文件（包含‘.’和‘..’）</p>
+</blockquote>
+<pre><code>$ ls -a
+</code></pre><blockquote>
+<p>查看某一个目录的完整属性，而不是显示目录里面的文件属性：</p>
+</blockquote>
+<pre><code>$ ls -dl &lt;目录名&gt;
+</code></pre><blockquote>
+<p>按时间排序</p>
+</blockquote>
+<pre><code>$ ls -t
+</code></pre><blockquote>
+<p>显示所有文件大小，并以普通人类能看懂的方式呈现：</p>
+</blockquote>
+<pre><code>$ ls -AsSh
+</code></pre><p>其中A显示除’.’’..’的所有文件，小 s 为显示文件大小，大 S 为按文件大小排序，h以k作为单位显示大小。</p>
+<h2 id="变更文件所有着"><a href="#变更文件所有着" class="headerlink" title="变更文件所有着"></a>变更文件所有着</h2><pre><code>$ sudo chown &lt;用户&gt; &lt;文件名&gt;
+$ sudo chown yyg iphones
+</code></pre><h2 id="修改文件权限"><a href="#修改文件权限" class="headerlink" title="修改文件权限"></a>修改文件权限</h2><blockquote>
+<p>方式一：二进制数字表示</p>
+</blockquote>
+<p><img src="https://dn-anything-about-doc.qbox.me/linux_base/3-14.png/logoblackfont" alt="此处输入图片的描述"><br>每个文件的三组权限（拥有者，所属用户组，其他用户,记住这个顺序是一定的）就对应这一个 “rwx”，也就是一个 ‘7’ 。<br>往文件里加点内容：</p>
+<pre><code>$ echo &quot;echo \&quot;Hello World\&quot;&quot; &gt; iphones
+</code></pre><p> 修改权限</p>
+<pre><code>$ chmod 700 iphones
+</code></pre><p>想在只有拥有者有读写权利，其他用户都不可以了。     </p>
+<blockquote>
+<p>方式二：加减赋值操作 </p>
+</blockquote>
+<pre><code>$ chmod go-rw iphone
+</code></pre><p>‘g’’o’还有’u’，分别表示group，others，user，’+’，’-‘ 就分别表示增加和去掉相应的权限。</p>
 
       
     </div>
@@ -409,11 +511,9 @@ tv.setText(int resId)
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag">#Android</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
-            <a href="/tags/Toast/" rel="tag">#Toast</a>
-          
-            <a href="/tags/TextView/" rel="tag">#TextView</a>
+            <a href="/tags/文件权限/" rel="tag">#文件权限</a>
           
         </div>
       
@@ -422,16 +522,16 @@ tv.setText(int resId)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/" rel="next" title="细数Android Studio中使用junit4测试框架中的坑">
-                <i class="fa fa-chevron-left"></i> 细数Android Studio中使用junit4测试框架中的坑
+              <a href="/2016/04/21/Toast和TextView可能会出现的问题/" rel="next" title="Toast和TextView可能会出现的问题">
+                <i class="fa fa-chevron-left"></i> Toast和TextView可能会出现的问题
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/04/22/Linux基础入门（1）：用户及文件权限管理/" rel="prev" title="Linux基础入门（1）：用户及文件权限管理">
-                Linux基础入门（1）：用户及文件权限管理 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/04/23/使用ViewPager和Fragment实现底部导航滑动Demo/" rel="prev" title="使用ViewPager和Fragment实现底部导航滑动Demo">
+                使用ViewPager和Fragment实现底部导航滑动Demo <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -447,10 +547,10 @@ tv.setText(int resId)
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/04/21/Toast和TextView可能会出现的问题/"
-     data-title="Toast和TextView可能会出现的问题"
+        <div class="ds-share flat" data-thread-key="2016/04/22/Linux基础入门（1）：用户及文件权限管理/"
+     data-title="Linux基础入门（1）：用户及文件权限管理"
      data-content=""
-     data-url="http://yangyuanguang.com/2016/04/21/Toast和TextView可能会出现的问题/">
+     data-url="http://yangyuanguang.com/2016/04/22/Linux基础入门（1）：用户及文件权限管理/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -477,8 +577,8 @@ tv.setText(int resId)
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/21/Toast和TextView可能会出现的问题/"
-           data-title="Toast和TextView可能会出现的问题" data-url="http://yangyuanguang.com/2016/04/21/Toast和TextView可能会出现的问题/">
+      <div class="ds-thread" data-thread-key="2016/04/22/Linux基础入门（1）：用户及文件权限管理/"
+           data-title="Linux基础入门（1）：用户及文件权限管理" data-url="http://yangyuanguang.com/2016/04/22/Linux基础入门（1）：用户及文件权限管理/">
       </div>
     
   </div>
@@ -598,7 +698,7 @@ tv.setText(int resId)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Toast对象可能抛出的Bug"><span class="nav-number">1.</span> <span class="nav-text">Toast对象可能抛出的Bug</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TextView对象可能抛出的Bug"><span class="nav-number">2.</span> <span class="nav-text">TextView对象可能抛出的Bug</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-用户管理"><span class="nav-number">1.</span> <span class="nav-text">Linux 用户管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看用户"><span class="nav-number">1.1.</span> <span class="nav-text">查看用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建用户"><span class="nav-number">1.2.</span> <span class="nav-text">创建用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#su，su-与sudo"><span class="nav-number">1.2.1.</span> <span class="nav-text">su，su-与sudo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建用户"><span class="nav-number">1.2.2.</span> <span class="nav-text">新建用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户组"><span class="nav-number">1.3.</span> <span class="nav-text">用户组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用groups命令"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用groups命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看-etc-group文件"><span class="nav-number">1.3.2.</span> <span class="nav-text">查看/etc/group文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将其它用户加入-sudo-用户组"><span class="nav-number">1.3.3.</span> <span class="nav-text">将其它用户加入 sudo 用户组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除用户"><span class="nav-number">1.4.</span> <span class="nav-text">删除用户</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux文件权限"><span class="nav-number">2.</span> <span class="nav-text">Linux文件权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件权限"><span class="nav-number">2.1.</span> <span class="nav-text">查看文件权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变更文件所有着"><span class="nav-number">2.2.</span> <span class="nav-text">变更文件所有着</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改文件权限"><span class="nav-number">2.3.</span> <span class="nav-text">修改文件权限</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
