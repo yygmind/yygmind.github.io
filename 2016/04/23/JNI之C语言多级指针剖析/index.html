@@ -80,16 +80,19 @@
 
 
 
-<meta name="description" content="一级指针假设在内存中定义一个一级指针12345678910111213141516#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt; main() &amp;#123;              int i = 3;         int * j;    //定义一级指针j        j = &amp;amp;i;     //把i的地址赋给指针j">
+<meta name="description" content="一级指针假设在内存中定义一个一级指针。
+12345678910111213141516#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt; main() &amp;#123;              int i = 3;         int * j;    //定义一级指针j        j = &amp;amp;i;     //把i的地址赋给指针j">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JNI之C语言多级指针剖析">
 <meta property="og:url" content="http://yangyuanguang.com/2016/04/23/JNI之C语言多级指针剖析/index.html">
 <meta property="og:site_name" content="Cody Yang">
-<meta property="og:description" content="一级指针假设在内存中定义一个一级指针12345678910111213141516#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt; main() &amp;#123;              int i = 3;         int * j;    //定义一级指针j        j = &amp;amp;i;     //把i的地址赋给指针j">
-<meta property="og:updated_time" content="2016-04-23T08:34:04.871Z">
+<meta property="og:description" content="一级指针假设在内存中定义一个一级指针。
+12345678910111213141516#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt; main() &amp;#123;              int i = 3;         int * j;    //定义一级指针j        j = &amp;amp;i;     //把i的地址赋给指针j">
+<meta property="og:updated_time" content="2016-04-23T09:19:31.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JNI之C语言多级指针剖析">
-<meta name="twitter:description" content="一级指针假设在内存中定义一个一级指针12345678910111213141516#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt; main() &amp;#123;              int i = 3;         int * j;    //定义一级指针j        j = &amp;amp;i;     //把i的地址赋给指针j">
+<meta name="twitter:description" content="一级指针假设在内存中定义一个一级指针。
+12345678910111213141516#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt; main() &amp;#123;              int i = 3;         int * j;    //定义一级指针j        j = &amp;amp;i;     //把i的地址赋给指针j">
 
 
 
@@ -352,28 +355,31 @@
       
 
       
-        <h1 id="一级指针"><a href="#一级指针" class="headerlink" title="一级指针"></a>一级指针</h1><p>假设在内存中定义一个一级指针<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"> main() &#123;</span><br><span class="line">      </span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">3</span>; </span><br><span class="line">        <span class="keyword">int</span> * j;    <span class="comment">//定义一级指针j</span></span><br><span class="line">        j = &amp;i;     <span class="comment">//把i的地址赋给指针j</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, i);      <span class="comment">//打印整形变量i,即i的内容        </span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;i);    <span class="comment">//打印整形变量i的地址</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, j);     <span class="comment">//打印指针j，即j中的内容（内容是地址），即i的地址（&amp;i）</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;j);    <span class="comment">//打印指针j定义时系统所分配的地址（j的地址）</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *j);     <span class="comment">//打印指针j所指向（j中的内容所存地址）i的地址上的内容（i的内容） </span></span><br><span class="line">        system(<span class="string">"pause"</span>);        <span class="comment">//让运行窗口暂停</span></span><br><span class="line">        </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+        <h1 id="一级指针"><a href="#一级指针" class="headerlink" title="一级指针"></a>一级指针</h1><p>假设在内存中定义一个一级指针。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"> main() &#123;</span><br><span class="line">      </span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">3</span>; </span><br><span class="line">        <span class="keyword">int</span> * j;    <span class="comment">//定义一级指针j</span></span><br><span class="line">        j = &amp;i;     <span class="comment">//把i的地址赋给指针j</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, i);      <span class="comment">//打印整形变量i的值       </span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;i);    <span class="comment">//打印整形变量i的地址</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, j);     <span class="comment">//打印指针j的值，即变量i的地址（&amp;i）</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;j);    <span class="comment">//打印指针j定义时系统所分配的地址（指针j的地址）</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *j);     <span class="comment">//打印指针j的值所对应地址上的值（i的值） </span></span><br><span class="line">        system(<span class="string">"pause"</span>);        <span class="comment">//让运行窗口暂停</span></span><br><span class="line">        </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>总结如下（理解就收获了）：</p>
 <ul>
+<li>指针的值存放的都是地址。</li>
+<li>指针即地址，这个地址是指的是系统分配给他的地址</li>
 <li>在定义指针（int * j）还未代码赋值之前，系统做了2件事<ul>
 <li>一是系统为这个一级指针分配了一个地址，这就是这个指针的地址。</li>
-<li>二是系统为这个一级指针赋了初值，这就是这个指针的内容。这个初值是相对固定了，即他与系统以及配置相关，同一台电脑每次赋的初值都是一样的，不同电脑值就不一样了（涉及到算法问题）</li>
+<li>二是系统为这个一级指针赋了初值，这就是指针的值。这个初值是相对固定的，即他与系统以及配置相关，同一台电脑每次赋的初值都是一样的，不同电脑值就不一样了（涉及到算法问题）</li>
 </ul>
 </li>
-<li>j是指针，所存只能是地址，他的内容就是传给他的地址</li>
-<li>&amp;j是指针自身的地址，即定义时系统所分配给他的地址</li>
-<li>*j是指针j内容里所存地址（i的地址）–&gt;原本位置里的内容（i的内容）</li>
+<li>j是一级指针，他的值就是赋值给他的地址</li>
+<li>&amp;j是一级指针自身的地址，即定义时系统所分配给他的地址</li>
+<li>*j是一级指针j的值所对应地址上的值（i的值）</li>
 </ul>
-<h1 id="二级指针"><a href="#二级指针" class="headerlink" title="二级指针"></a>二级指针</h1><p>在上面的基础之上定义一个二级指针<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ** k;   <span class="comment">//定义二级指针k，到这一步止电脑同样做了上述的2件事</span></span><br><span class="line">k = &amp;j;     <span class="comment">//给二级指针赋值，内容是一级指针自身的地址</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;j);    <span class="comment">//一级指针的j的地址</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, k);     <span class="comment">//二级指针k的内容</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;k);    <span class="comment">//二级指针k的地址</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, *k);    <span class="comment">//二级指针内容所对应地址上的内容（一级指针内容，即整形变量i的地址）</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, **k);    <span class="comment">//二级指针内容所对应地址上的内容（一级指针内容），再其内容所对应地址上的内容（整形变量i的内容）</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="二级指针"><a href="#二级指针" class="headerlink" title="二级指针"></a>二级指针</h1><p>在上面的基础之上定义一个二级指针<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ** k;   <span class="comment">//定义二级指针k，到这一步止电脑同样做了上述的2件事</span></span><br><span class="line">k = &amp;j;     <span class="comment">//给二级指针赋值，值是一级指针的地址</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;j);    <span class="comment">//一级指针j的地址</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, k);     <span class="comment">//二级指针k的值</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, &amp;k);    <span class="comment">//二级指针k的地址</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%#x\n"</span>, *k);    <span class="comment">//二级指针k的值所对应地址上的值（一级指针的值，即整形变量i的地址）</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, **k);    <span class="comment">//二级指针k的值所对应地址上的值（一级指针的值），再一级指针的值所对应地址上的值（整形变量i的值）</span></span><br></pre></td></tr></table></figure></p>
 <p>这里比较重要的就是最后2点，理解 <em>k， *</em>k 非常重要</p>
 <h1 id="三级指针"><a href="#三级指针" class="headerlink" title="三级指针"></a>三级指针</h1><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int *** <span class="keyword">m</span>;  <span class="comment">//定义三级指针m</span></span><br><span class="line"><span class="keyword">m</span> = &amp;k;     <span class="comment">//给三级指针赋值</span></span><br></pre></td></tr></table></figure>
-<p>可总结得到（注：指针的内容都是地址）</p>
+<p>可总结得到（注：指针的值存放的都是地址）</p>
 <ul>
-<li>m 是三级指针m的内容</li>
-<li>*m 是二级指针k的内容</li>
-<li>**m 是一级指针j的内容</li>
-<li><em>*</em>m 是整形变量i的内容</li>
+<li>m –&gt; 是三级指针m的值</li>
+<li>*m –&gt; 是二级指针k的值</li>
+<li>**m –&gt; 是一级指针j的值</li>
+<li><em>*</em>m –&gt; 是整形变量i的值</li>
 </ul>
 
       
