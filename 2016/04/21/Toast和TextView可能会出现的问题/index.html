@@ -83,9 +83,7 @@
 <meta name="description" content="Toast对象可能抛出的Bug
 Toast对象提供了两个makeText方法，如下
 
-12345//此方法传入的是字符串序列Toast.makeText(Context context, CharSequence text, int duration);//此方法传入的是资源idToast.makeText(Context context, int resId, int duration);
-
-有">
+12345//此方法传入的是字符串序列Toast.makeText(Context context, CharSequence text, int duration);//此方法传入的是资源idToast.makeText(Context context, int resId, int duration);">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Toast和TextView可能会出现的问题">
 <meta property="og:url" content="http://yangyuanguang.com/2016/04/21/Toast和TextView可能会出现的问题/index.html">
@@ -93,18 +91,14 @@ Toast对象提供了两个makeText方法，如下
 <meta property="og:description" content="Toast对象可能抛出的Bug
 Toast对象提供了两个makeText方法，如下
 
-12345//此方法传入的是字符串序列Toast.makeText(Context context, CharSequence text, int duration);//此方法传入的是资源idToast.makeText(Context context, int resId, int duration);
-
-有">
-<meta property="og:updated_time" content="2016-04-23T05:22:55.536Z">
+12345//此方法传入的是字符串序列Toast.makeText(Context context, CharSequence text, int duration);//此方法传入的是资源idToast.makeText(Context context, int resId, int duration);">
+<meta property="og:updated_time" content="2016-04-23T05:39:36.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Toast和TextView可能会出现的问题">
 <meta name="twitter:description" content="Toast对象可能抛出的Bug
 Toast对象提供了两个makeText方法，如下
 
-12345//此方法传入的是字符串序列Toast.makeText(Context context, CharSequence text, int duration);//此方法传入的是资源idToast.makeText(Context context, int resId, int duration);
-
-有">
+12345//此方法传入的是字符串序列Toast.makeText(Context context, CharSequence text, int duration);//此方法传入的是资源idToast.makeText(Context context, int resId, int duration);">
 
 
 
@@ -371,6 +365,7 @@ Toast对象提供了两个makeText方法，如下
 <li>Toast对象提供了两个makeText方法，如下</li>
 </ul>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//此方法传入的是字符串序列</span></span><br><span class="line">Toast.makeText(Context context, CharSequence <span class="built_in">text</span>, <span class="keyword">int</span> duration);</span><br><span class="line"></span><br><span class="line"><span class="comment">//此方法传入的是资源id</span></span><br><span class="line">Toast.makeText(Context context, <span class="keyword">int</span> resId, <span class="keyword">int</span> duration);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <ul>
 <li>有一种特殊情况情况，即要传入的值是int型的，而直接传入系统默认当做是资源id来使用，则会报出如下Bug</li>
 </ul>
