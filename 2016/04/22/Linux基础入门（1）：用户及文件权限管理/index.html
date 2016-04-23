@@ -80,40 +80,40 @@
 
 
 
-<meta name="description" content="Linux 用户管理查看用户$ who am i
+<meta name="description" content="一、Linux 用户管理1、查看用户1$ who am i
 或者
-$ who mom likes
+1$ who mom likes
 输出内容如下
-yyg      pts/0        2016-04-21 08:28 (:0)
+1yyg      pts/0        2016-04-21 08:28 (:0)
 
 其中第一列表示打开当前伪终端的用户的用户名（可直接使用whoami）
-第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言，即使用 [Ctrl]+[Alt]+[F1]～[F">
+第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言，即使用 [Ctrl]+[Alt]+">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux基础入门（1）：用户及文件权限管理">
 <meta property="og:url" content="http://yangyuanguang.com/2016/04/22/Linux基础入门（1）：用户及文件权限管理/index.html">
 <meta property="og:site_name" content="Cody Yang">
-<meta property="og:description" content="Linux 用户管理查看用户$ who am i
+<meta property="og:description" content="一、Linux 用户管理1、查看用户1$ who am i
 或者
-$ who mom likes
+1$ who mom likes
 输出内容如下
-yyg      pts/0        2016-04-21 08:28 (:0)
+1yyg      pts/0        2016-04-21 08:28 (:0)
 
 其中第一列表示打开当前伪终端的用户的用户名（可直接使用whoami）
-第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言，即使用 [Ctrl]+[Alt]+[F1]～[F">
+第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言，即使用 [Ctrl]+[Alt]+">
 <meta property="og:image" content="https://dn-anything-about-doc.qbox.me/linux_base/3-9.png/logoblackfont">
 <meta property="og:image" content="https://dn-anything-about-doc.qbox.me/linux_base/3-10.png/logoblackfont">
 <meta property="og:image" content="https://dn-anything-about-doc.qbox.me/linux_base/3-14.png/logoblackfont">
-<meta property="og:updated_time" content="2016-04-22T02:52:49.296Z">
+<meta property="og:updated_time" content="2016-04-23T05:22:27.393Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux基础入门（1）：用户及文件权限管理">
-<meta name="twitter:description" content="Linux 用户管理查看用户$ who am i
+<meta name="twitter:description" content="一、Linux 用户管理1、查看用户1$ who am i
 或者
-$ who mom likes
+1$ who mom likes
 输出内容如下
-yyg      pts/0        2016-04-21 08:28 (:0)
+1yyg      pts/0        2016-04-21 08:28 (:0)
 
 其中第一列表示打开当前伪终端的用户的用户名（可直接使用whoami）
-第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言，即使用 [Ctrl]+[Alt]+[F1]～[F">
+第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言，即使用 [Ctrl]+[Alt]+">
 <meta name="twitter:image" content="https://dn-anything-about-doc.qbox.me/linux_base/3-9.png/logoblackfont">
 
 
@@ -377,68 +377,59 @@ yyg      pts/0        2016-04-21 08:28 (:0)
       
 
       
-        <h1 id="Linux-用户管理"><a href="#Linux-用户管理" class="headerlink" title="Linux 用户管理"></a>Linux 用户管理</h1><h2 id="查看用户"><a href="#查看用户" class="headerlink" title="查看用户"></a>查看用户</h2><pre><code>$ who am i
-</code></pre><p>或者</p>
-<pre><code>$ who mom likes
-</code></pre><p>输出内容如下</p>
-<pre><code>yyg      pts/0        2016-04-21 08:28 (:0)
-</code></pre><ul>
+        <h1 id="一、Linux-用户管理"><a href="#一、Linux-用户管理" class="headerlink" title="一、Linux 用户管理"></a>一、Linux 用户管理</h1><h2 id="1、查看用户"><a href="#1、查看用户" class="headerlink" title="1、查看用户"></a>1、查看用户</h2><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>who am i</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>who mom likes</span><br></pre></td></tr></table></figure>
+<p>输出内容如下</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yyg      pts/<span class="number">0</span>        <span class="number">2016-04-21</span> <span class="number">08</span>:<span class="number">28</span> (:<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<ul>
 <li>其中第一列表示打开当前伪终端的用户的用户名（可直接使用whoami）</li>
 <li>第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言，即使用 [Ctrl]+[Alt]+[F1]～[F7] 进行切换的 /dev/tty 设备（“真终端”）</li>
-<li><p>pts/0后面的0表示伪终端序号，再开一个终端即为1</p>
-<pre><code>who 命令其它常用参数
-
-参数    说明
--a    打印能打印的全部
--d    打印死掉的进程
--m    同am i,mom likes
--q    打印当前登录用户数及用户名
--u    打印当前登录用户登录信息
--r    打印运行等级
-</code></pre><a id="more"></a>
-<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><blockquote>
+<li>pts/0后面的0表示伪终端序号，再开一个终端即为1</li>
+</ul>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">who 命令其它常用参数</span><br><span class="line"></span><br><span class="line">参数	说明</span><br><span class="line">-<span class="ruby">a	打印能打印的全部</span><br><span class="line"></span>-<span class="ruby">d	打印死掉的进程</span><br><span class="line"></span>-<span class="ruby">m	同am i,mom likes</span><br><span class="line"></span>-<span class="ruby">q	打印当前登录用户数及用户名</span><br><span class="line"></span>-<span class="ruby">u	打印当前登录用户登录信息</span><br><span class="line"></span>-<span class="ruby">r	打印运行等级</span></span><br></pre></td></tr></table></figure>
+<h2 id="2、创建用户"><a href="#2、创建用户" class="headerlink" title="2、创建用户"></a>2、创建用户</h2><blockquote>
 <p>root是 Linux 和 UNIX 系统中的超级管理员用户帐户，拥有至高无上的权利，比如新建/添加用户</p>
 </blockquote>
-</li>
-</ul>
 <h3 id="su，su-与sudo"><a href="#su，su-与sudo" class="headerlink" title="su，su-与sudo"></a>su，su-与sudo</h3><ul>
-<li><p>su <user>可以切换到用户user，密码</user></p>
-<pre><code>$ su yyg
-</code></pre></li>
-<li><p>su - &lt;user&gt;命令也是切换用户，同时环境变量也会跟着改变成目标用户的环境变量。</p>
-<pre><code>$ su - cody
-</code></pre></li>
-<li><p>sudo &lt;cmd&gt;可以以特权级别运行cmd命令，需要当前用户属于sudo组，且需要密码。(此处cmd不是win下的cmd，指的是命令)</p>
-<pre><code>$ sudo install
-</code></pre></li>
+<li>su <user>可以切换到用户user，密码</user></li>
 </ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>su yyg</span><br></pre></td></tr></table></figure>
+<ul>
+<li>su - &lt;user&gt;命令也是切换用户，同时环境变量也会跟着改变成目标用户的环境变量。</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>su - cody</span><br></pre></td></tr></table></figure>
+<ul>
+<li>sudo &lt;cmd&gt;可以以特权级别运行cmd命令，需要当前用户属于sudo组，且需要密码。(此处cmd不是win下的cmd，指的是命令)</li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
 <p>登陆时是以普通账户登陆，如果要创建用户需要root权限，需要用到sudo命令，使用有以下两个前提</p>
 <ul>
 <li>知道当前登陆用户的密码</li>
 <li>当前用户必须在sudo用户组里</li>
 </ul>
 <h3 id="新建用户"><a href="#新建用户" class="headerlink" title="新建用户"></a>新建用户</h3><p>这个命令不但可以添加用户到系统，同时也会默认为新用户创建 home 目录</p>
-<pre><code>$ sudo adduser cody
-</code></pre><p>切换登陆用户，可以发现从yyg@ubuntu变成了cody@ubuntu</p>
-<pre><code>$ su - cody
-</code></pre><h2 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h2><h3 id="使用groups命令"><a href="#使用groups命令" class="headerlink" title="使用groups命令"></a>使用groups命令</h3><pre><code>$ groups - cody
-</code></pre><p>输出的冒号之前表示用户，后面表示该用户所属的用户组。默认会创建一个和用户名相同的用户组。</p>
-<h3 id="查看-etc-group文件"><a href="#查看-etc-group文件" class="headerlink" title="查看/etc/group文件"></a>查看/etc/group文件</h3><pre><code>$ cat /etc/group | sort
-</code></pre><p> 可以使用过滤，grep -E 将范本样式为延伸的普通表示法来使用，意味着使用能使用扩展正则表达式。</p>
-<pre><code>$ cat /etc/group | grep -E &quot;yyg&quot;
-</code></pre><p>/etc/group 的内容包括用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User），每个用户组一条记录。格式如下：</p>
-<pre><code>group_name:password:GID:user_list    
-</code></pre><p>其中password字段’x’表示密码不可见</p>
-<h3 id="将其它用户加入-sudo-用户组"><a href="#将其它用户加入-sudo-用户组" class="headerlink" title="将其它用户加入 sudo 用户组"></a>将其它用户加入 sudo 用户组</h3><pre><code>$ sudo usermod -G sudo cody
-$ groups cody
-</code></pre><p>usermod -G&lt;群组&gt;；修改用户所属的附加群组。<br>默认添加的用户是不在sudo用户组的，使用usermod添加用户组</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="keyword">adduser </span>cody</span><br></pre></td></tr></table></figure>
+<p>切换登陆用户，可以发现从yyg@ubuntu变成了cody@ubuntu</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>su - cody</span><br></pre></td></tr></table></figure>
+<h2 id="3、用户组"><a href="#3、用户组" class="headerlink" title="3、用户组"></a>3、用户组</h2><h3 id="使用groups命令"><a href="#使用groups命令" class="headerlink" title="使用groups命令"></a>使用groups命令</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>groups - cody</span><br></pre></td></tr></table></figure>
+<p>输出的冒号之前表示用户，后面表示该用户所属的用户组。默认会创建一个和用户名相同的用户组。</p>
+<h3 id="查看-etc-group文件"><a href="#查看-etc-group文件" class="headerlink" title="查看/etc/group文件"></a>查看/etc/group文件</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/<span class="keyword">group</span> <span class="title">| sort</span></span><br></pre></td></tr></table></figure>
+<p> 可以使用过滤，grep -E 将范本样式为延伸的普通表示法来使用，意味着使用能使用扩展正则表达式。</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/<span class="keyword">group</span> <span class="title">| grep</span> -E <span class="string">"yyg"</span></span><br></pre></td></tr></table></figure>
+<p>/etc/group 的内容包括用户组（Group）、用户组口令、GID 及该用户组所包含的用户（User），每个用户组一条记录。格式如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">group_name</span><span class="selector-pseudo">:password</span><span class="selector-pseudo">:GID</span><span class="selector-pseudo">:user_list</span></span><br></pre></td></tr></table></figure>
+<p>其中password字段’x’表示密码不可见</p>
+<h3 id="将其它用户加入-sudo-用户组"><a href="#将其它用户加入-sudo-用户组" class="headerlink" title="将其它用户加入 sudo 用户组"></a>将其它用户加入 sudo 用户组</h3><p>默认添加的用户是不在sudo用户组的，使用usermod添加用户组</p>
 <ul>
 <li>必须有root权限，可以直接使用 root 用户为其它用户添加用户组</li>
 <li>或者是已经在 sudo 用户组的用户使用 sudo 命令获取权限来执行该命令</li>
 </ul>
-<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><pre><code>$ sudo deluser cody --remove-home
-</code></pre><p>–remove-home，移除home目录</p>
-<h1 id="Linux文件权限"><a href="#Linux文件权限" class="headerlink" title="Linux文件权限"></a>Linux文件权限</h1><h2 id="查看文件权限"><a href="#查看文件权限" class="headerlink" title="查看文件权限"></a>查看文件权限</h2><p><img src="https://dn-anything-about-doc.qbox.me/linux_base/3-9.png/logoblackfont" alt="此处输入图片的描述"><br><img src="https://dn-anything-about-doc.qbox.me/linux_base/3-10.png/logoblackfont" alt="此处输入图片的描述"></p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo usermod -G sudo cody</span><br><span class="line"><span class="variable">$ </span>groups cody</span><br></pre></td></tr></table></figure>
+<p>usermod -G&lt;群组&gt;；修改用户所属的附加群组</p>
+<h2 id="4、删除用户"><a href="#4、删除用户" class="headerlink" title="4、删除用户"></a>4、删除用户</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo deluser cody --<span class="built_in">remove</span>-<span class="built_in">home</span></span><br></pre></td></tr></table></figure>
+<p>–remove-home，移除home目录</p>
+<h1 id="二、Linux文件权限"><a href="#二、Linux文件权限" class="headerlink" title="二、Linux文件权限"></a>二、Linux文件权限</h1><h2 id="1、查看文件权限"><a href="#1、查看文件权限" class="headerlink" title="1、查看文件权限"></a>1、查看文件权限</h2><p><img src="https://dn-anything-about-doc.qbox.me/linux_base/3-9.png/logoblackfont" alt="此处输入图片的描述"><br><img src="https://dn-anything-about-doc.qbox.me/linux_base/3-10.png/logoblackfont" alt="此处输入图片的描述"></p>
 <blockquote>
 <p>文件类型</p>
 </blockquote>
@@ -458,39 +449,38 @@ $ groups cody
 <blockquote>
 <p>显示除了 ‘.’(当前目录)，’..’ 上一级目录之外的所有包含隐藏文件（Linux 下以 ‘.’ 开头的文件为隐藏文件）</p>
 </blockquote>
-<pre><code>$ ls -A
-</code></pre><blockquote>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls -<span class="keyword">A</span></span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>显示所有文件（包含‘.’和‘..’）</p>
 </blockquote>
-<pre><code>$ ls -a
-</code></pre><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="_">-a</span></span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>查看某一个目录的完整属性，而不是显示目录里面的文件属性：</p>
 </blockquote>
-<pre><code>$ ls -dl &lt;目录名&gt;
-</code></pre><blockquote>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls -<span class="selector-tag">dl</span> &lt;目录名&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>按时间排序</p>
 </blockquote>
-<pre><code>$ ls -t
-</code></pre><blockquote>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>ls -t</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>显示所有文件大小，并以普通人类能看懂的方式呈现：</p>
 </blockquote>
-<pre><code>$ ls -AsSh
-</code></pre><p>其中A显示除’.’’..’的所有文件，小 s 为显示文件大小，大 S 为按文件大小排序，h以k作为单位显示大小。</p>
-<h2 id="变更文件所有着"><a href="#变更文件所有着" class="headerlink" title="变更文件所有着"></a>变更文件所有着</h2><pre><code>$ sudo chown &lt;用户&gt; &lt;文件名&gt;
-$ sudo chown yyg iphones
-</code></pre><h2 id="修改文件权限"><a href="#修改文件权限" class="headerlink" title="修改文件权限"></a>修改文件权限</h2><blockquote>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>ls -AsSh</span><br></pre></td></tr></table></figure>
+<p>其中A显示除’.’’..’的所有文件，小 s 为显示文件大小，大 S 为按文件大小排序，h以k作为单位显示大小。</p>
+<h2 id="2、变更文件所有着"><a href="#2、变更文件所有着" class="headerlink" title="2、变更文件所有着"></a>2、变更文件所有着</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chown <span class="tag">&lt;<span class="name">用户</span>&gt;</span> <span class="tag">&lt;<span class="name">文件名</span>&gt;</span></span><br><span class="line">$ sudo chown yyg iphones</span><br></pre></td></tr></table></figure>
+<h2 id="3、修改文件权限"><a href="#3、修改文件权限" class="headerlink" title="3、修改文件权限"></a>3、修改文件权限</h2><blockquote>
 <p>方式一：二进制数字表示</p>
 </blockquote>
 <p><img src="https://dn-anything-about-doc.qbox.me/linux_base/3-14.png/logoblackfont" alt="此处输入图片的描述"><br>每个文件的三组权限（拥有者，所属用户组，其他用户,记住这个顺序是一定的）就对应这一个 “rwx”，也就是一个 ‘7’ 。<br>往文件里加点内容：</p>
-<pre><code>$ echo &quot;echo \&quot;Hello World\&quot;&quot; &gt; iphones
-</code></pre><p> 修改权限</p>
-<pre><code>$ chmod 700 iphones
-</code></pre><p>想在只有拥有者有读写权利，其他用户都不可以了。     </p>
+<figure class="highlight smalltalk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">$ </span>echo <span class="comment">"echo \"</span><span class="type">Hello</span> <span class="type">World</span>\<span class="comment">""</span> &gt; iphones</span><br></pre></td></tr></table></figure>
+<p> 修改权限</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>chmod <span class="number">700</span> iphones</span><br></pre></td></tr></table></figure>
+<p>想在只有拥有者有读写权利，其他用户都不可以了。     </p>
 <blockquote>
 <p>方式二：加减赋值操作 </p>
 </blockquote>
-<pre><code>$ chmod go-rw iphone
-</code></pre><p>‘g’’o’还有’u’，分别表示group，others，user，’+’，’-‘ 就分别表示增加和去掉相应的权限。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>chmod go-rw iphone</span><br></pre></td></tr></table></figure>
+<p>‘g’’o’还有’u’，分别表示group，others，user，’+’，’-‘ 就分别表示增加和去掉相应的权限。</p>
 
       
     </div>
@@ -698,7 +688,7 @@ $ sudo chown yyg iphones
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-用户管理"><span class="nav-number">1.</span> <span class="nav-text">Linux 用户管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看用户"><span class="nav-number">1.1.</span> <span class="nav-text">查看用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建用户"><span class="nav-number">1.2.</span> <span class="nav-text">创建用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#su，su-与sudo"><span class="nav-number">1.2.1.</span> <span class="nav-text">su，su-与sudo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建用户"><span class="nav-number">1.2.2.</span> <span class="nav-text">新建用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户组"><span class="nav-number">1.3.</span> <span class="nav-text">用户组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用groups命令"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用groups命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看-etc-group文件"><span class="nav-number">1.3.2.</span> <span class="nav-text">查看/etc/group文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将其它用户加入-sudo-用户组"><span class="nav-number">1.3.3.</span> <span class="nav-text">将其它用户加入 sudo 用户组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除用户"><span class="nav-number">1.4.</span> <span class="nav-text">删除用户</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux文件权限"><span class="nav-number">2.</span> <span class="nav-text">Linux文件权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件权限"><span class="nav-number">2.1.</span> <span class="nav-text">查看文件权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变更文件所有着"><span class="nav-number">2.2.</span> <span class="nav-text">变更文件所有着</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改文件权限"><span class="nav-number">2.3.</span> <span class="nav-text">修改文件权限</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、Linux-用户管理"><span class="nav-number">1.</span> <span class="nav-text">一、Linux 用户管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、查看用户"><span class="nav-number">1.1.</span> <span class="nav-text">1、查看用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、创建用户"><span class="nav-number">1.2.</span> <span class="nav-text">2、创建用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#su，su-与sudo"><span class="nav-number">1.2.1.</span> <span class="nav-text">su，su-与sudo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建用户"><span class="nav-number">1.2.2.</span> <span class="nav-text">新建用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、用户组"><span class="nav-number">1.3.</span> <span class="nav-text">3、用户组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用groups命令"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用groups命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看-etc-group文件"><span class="nav-number">1.3.2.</span> <span class="nav-text">查看/etc/group文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将其它用户加入-sudo-用户组"><span class="nav-number">1.3.3.</span> <span class="nav-text">将其它用户加入 sudo 用户组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、删除用户"><span class="nav-number">1.4.</span> <span class="nav-text">4、删除用户</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Linux文件权限"><span class="nav-number">2.</span> <span class="nav-text">二、Linux文件权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、查看文件权限"><span class="nav-number">2.1.</span> <span class="nav-text">1、查看文件权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、变更文件所有着"><span class="nav-number">2.2.</span> <span class="nav-text">2、变更文件所有着</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、修改文件权限"><span class="nav-number">2.3.</span> <span class="nav-text">3、修改文件权限</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

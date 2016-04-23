@@ -80,43 +80,34 @@
 
 
 
-<meta name="description" content="配置junit4测试框架
-build.gradle中添加依赖
-dependencies {
-    compile &amp;apos;com.android.support:appcompat-v7:23.2.1&amp;apos;
-    testCompile &amp;apos;junit:junit:4.12&amp;apos;
-}
+<meta name="description" content="build.gradle中添加依赖
+1234dependencies &amp;#123;    compile &apos;com.android.support:appcompat-v7:23.2.1&apos;    testCompile &apos;junit:junit:4.12&apos;&amp;#125;
 
 添加以下，使用模拟环境代替真实环境
-android {
-    testOption">
+
+
+1234567android &amp;#123;    testOptions &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="细数Android Studio中使用junit4测试框架中的坑">
 <meta property="og:url" content="http://yangyuanguang.com/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/index.html">
 <meta property="og:site_name" content="Cody Yang">
-<meta property="og:description" content="配置junit4测试框架
-build.gradle中添加依赖
-dependencies {
-    compile &amp;apos;com.android.support:appcompat-v7:23.2.1&amp;apos;
-    testCompile &amp;apos;junit:junit:4.12&amp;apos;
-}
+<meta property="og:description" content="build.gradle中添加依赖
+1234dependencies &amp;#123;    compile &apos;com.android.support:appcompat-v7:23.2.1&apos;    testCompile &apos;junit:junit:4.12&apos;&amp;#125;
 
 添加以下，使用模拟环境代替真实环境
-android {
-    testOption">
-<meta property="og:updated_time" content="2016-04-21T13:10:34.000Z">
+
+
+1234567android &amp;#123;    testOptions &amp;#123;">
+<meta property="og:updated_time" content="2016-04-23T05:23:25.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="细数Android Studio中使用junit4测试框架中的坑">
-<meta name="twitter:description" content="配置junit4测试框架
-build.gradle中添加依赖
-dependencies {
-    compile &amp;apos;com.android.support:appcompat-v7:23.2.1&amp;apos;
-    testCompile &amp;apos;junit:junit:4.12&amp;apos;
-}
+<meta name="twitter:description" content="build.gradle中添加依赖
+1234dependencies &amp;#123;    compile &apos;com.android.support:appcompat-v7:23.2.1&apos;    testCompile &apos;junit:junit:4.12&apos;&amp;#125;
 
 添加以下，使用模拟环境代替真实环境
-android {
-    testOption">
+
+
+1234567android &amp;#123;    testOptions &amp;#123;">
 
 
 
@@ -379,76 +370,36 @@ android {
       
 
       
-        <h2 id="配置junit4测试框架"><a href="#配置junit4测试框架" class="headerlink" title="配置junit4测试框架"></a>配置junit4测试框架</h2><ul>
+        <ul>
 <li><p>build.gradle中添加依赖</p>
-<pre><code>dependencies {
-    compile &apos;com.android.support:appcompat-v7:23.2.1&apos;
-    testCompile &apos;junit:junit:4.12&apos;
-}
-</code></pre></li>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">    <span class="keyword">compile</span> <span class="string">'com.android.support:appcompat-v7:23.2.1'</span></span><br><span class="line">    testCompile <span class="string">'junit:junit:4.12'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>添加以下，使用模拟环境代替真实环境</p>
-<pre><code>android {
-    testOptions { 
-        unitTests {
-            returnDefaultValues = true
-        }
-    }
-}
-</code></pre></li>
-<li><p>不需要在清单文件中配置 instrumentation 和 uses-library   </p>
-</li>
-<li><p>测试代码主体部分（此方法也是趴Stack Overflow之中N久才得到的，感谢感谢）</p>
-<pre><code>public class TestBlackNumberDao extends ActivityTestCase{
-
-    public void testAdd() {
-        BlackNumberDAO dao = new BlackNumberDAO(getInstrumentation().getContext() );
-        boolean result = dao.insertDao(&quot;1888&quot;, &quot;2&quot;);
-        assertEquals(true, result);
-    }
-}
-</code></pre><p>注意上面代码继承的是 ActivityTestCase ，获取上下文使用的是 getInstrumentation().getContext() ，使用这个方法完全可以获得测试结果。</p>
-<a id="more"></a>
-<h2 id="坑之所在"><a href="#坑之所在" class="headerlink" title="坑之所在"></a>坑之所在</h2></li>
-<li><p>这里介绍坑之所在（调试好久才得到结果，惭愧惭愧）</p>
-<pre><code>public class TestBlackNumberDao extends AndroidTestCase{
-
-    public void testAdd() {
-        BlackNumberDAO dao = new BlackNumberDAO(getContext() );
-        boolean result = dao.insertDao(&quot;1888&quot;, &quot;2&quot;);
-        assertEquals(true, result);
-    }
-}
-</code></pre><p>  上面代码是很多资料上写的方式，eclipse中完全可以使用上面所用得到测试结果，不过在Android Studio中会出现一个问题，那就是getContext()方法会返回null，即根本得不到上下文context，结果就是报出空指针异常bug。</p>
 </li>
 </ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">android</span> &#123;</span><br><span class="line">    <span class="section">testOptions</span> &#123; </span><br><span class="line">        <span class="section">unitTests</span> &#123;</span><br><span class="line">            <span class="attribute">returnDefaultValues</span> = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Android Studio中不需要在清单文件中配置 instrumentation 和 uses-library   </li>
+<li>测试代码主体部分（此方法也是趴Stack Overflow之中N久才得到的，感谢感谢）</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">TestBlackNumberDao</span> <span class="keyword">extends</span> <span class="title">ActivityTestCase</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    public void testAdd() &#123;</span><br><span class="line">        <span class="type">BlackNumberDAO</span> dao = <span class="keyword">new</span> <span class="type">BlackNumberDAO</span>(getInstrumentation().getContext() );</span><br><span class="line">        boolean result = dao.insertDao(<span class="string">"1888"</span>, <span class="string">"2"</span>);</span><br><span class="line">        assertEquals(<span class="literal">true</span>, result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意上面代码继承的是 ActivityTestCase ，获取上下文使用的是 getInstrumentation().getContext() ，使用这个方法完全可以获得测试结果。</p>
+<ul>
+<li>这里介绍坑之所在（调试好久才得到结果，惭愧惭愧）<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">TestBlackNumberDao</span> <span class="keyword">extends</span> <span class="title">AndroidTestCase</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    public void testAdd() &#123;</span><br><span class="line">        <span class="type">BlackNumberDAO</span> dao = <span class="keyword">new</span> <span class="type">BlackNumberDAO</span>(getContext() );</span><br><span class="line">        boolean result = dao.insertDao(<span class="string">"1888"</span>, <span class="string">"2"</span>);</span><br><span class="line">        assertEquals(<span class="literal">true</span>, result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面代码是很多资料上写的方式，eclipse中完全可以使用上面所用得到测试结果，不过在Android Studio中会出现一个问题，那就是getContext()方法会返回null，即根本得不到上下文context，结果就是报出空指针异常bug。</p>
+<hr>
 <h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><ul>
-<li><p>先介绍坑，即 AndroidTestCase 的 getContext()</p>
-<pre><code>public void setContext(Context context) {
-    mContext = context;
-}
-
-public Context getContext() {
-    return mContext;
-}
-</code></pre><p>查看源码可以得到上述部分，得知mContext由setContext方法进行赋值，但是没有一个地方有调用setContext方法，所以getContext方法的返回值自然就是null了。</p>
-</li>
-<li><p>成功方法，即ActivityTestCase 的 getInstrumentation().getContext()</p>
-<pre><code>public Context getContext() {
-    return mInstrContext;
-}
-                                        //初始化时获得了Context
-   final void init(ActivityThread thread, Context instrContext, Context appContext, ComponentName component, IInstrumentationWatcher watcher, IUiAutomationConnection uiAutomationConnection) {
-        mThread = thread;
-        mMessageQueue = mThread.getLooper().myQueue();
-        mInstrContext = instrContext;   //here is context
-        mAppContext = appContext;
-        mComponent = component;
-        mWatcher = watcher;
-        mUiAutomationConnection = uiAutomationConnection;
-    }
-</code></pre><p>上述源码清晰的说明了context赋值的过程，所以这种方式可以获得context值        </p>
-</li>
+<li>先介绍坑，即 AndroidTestCase 的 getContext()</li>
 </ul>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setContext</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    mContext = context;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function">Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mContext;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>查看源码可以得到上述部分，得知mContext由setContext方法进行赋值，但是没有一个地方有调用setContext方法，所以getContext方法的返回值自然就是null了。</p>
+<ul>
+<li>成功方法，即ActivityTestCase 的 getInstrumentation().getContext()</li>
+</ul>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function">Context <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mInstrContext;</span><br><span class="line">&#125;       </span><br><span class="line">                                <span class="comment">//初始化时获得了Context</span></span><br><span class="line"><span class="keyword">final</span> <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(ActivityThread thread, Context instrContext, Context appContext, ComponentName component, IInstrumentationWatcher watcher, IUiAutomationConnection uiAutomationConnection)</span> </span>&#123;</span><br><span class="line">     mThread = thread;</span><br><span class="line">     mMessageQueue = mThread.getLooper().myQueue();</span><br><span class="line">     mInstrContext = instrContext;   <span class="comment">//here is context</span></span><br><span class="line">     mAppContext = appContext;</span><br><span class="line">     mComponent = component;</span><br><span class="line">     mWatcher = watcher;</span><br><span class="line">     mUiAutomationConnection = uiAutomationConnection;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>上述源码清晰的说明了context赋值的过程，所以这种方式可以获得context值        </p>
 
       
     </div>
@@ -652,7 +603,7 @@ public Context getContext() {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置junit4测试框架"><span class="nav-number">1.</span> <span class="nav-text">配置junit4测试框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坑之所在"><span class="nav-number">2.</span> <span class="nav-text">坑之所在</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析"><span class="nav-number">3.</span> <span class="nav-text">源码分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析"><span class="nav-number">1.</span> <span class="nav-text">源码分析</span></a></li></ol></div>
             
           </div>
         </section>
