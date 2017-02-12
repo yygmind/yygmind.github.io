@@ -1,0 +1,1217 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1、 android比较好用的websocket三方库
+websocket老是会自动断
+socket.io
+采用轮询的方式，会定时发心跳包检测连接状态，基于事件通信。
+服务端nodejs，客服端java,ios都有支持库
+android端可以基于这个库封装你自己的推送和即时聊天框架
+包含有websocket的，底层基于okhttp-ws，支持http,https,websocket
+
+
+好像要用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="各大Android开发群问题总结及解决">
+<meta property="og:url" content="http://yygmind.github.io/2016/05/31/各大Android开发群问题总结及解决/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="1、 android比较好用的websocket三方库
+websocket老是会自动断
+socket.io
+采用轮询的方式，会定时发心跳包检测连接状态，基于事件通信。
+服务端nodejs，客服端java,ios都有支持库
+android端可以基于这个库封装你自己的推送和即时聊天框架
+包含有websocket的，底层基于okhttp-ws，支持http,https,websocket
+
+
+好像要用">
+<meta property="og:image" content="http://img.blog.csdn.net/20160531161638268">
+<meta property="og:image" content="http://img.blog.csdn.net/20160531160918150">
+<meta property="og:updated_time" content="2017-02-12T13:03:32.885Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="各大Android开发群问题总结及解决">
+<meta name="twitter:description" content="1、 android比较好用的websocket三方库
+websocket老是会自动断
+socket.io
+采用轮询的方式，会定时发心跳包检测连接状态，基于事件通信。
+服务端nodejs，客服端java,ios都有支持库
+android端可以基于这个库封装你自己的推送和即时聊天框架
+包含有websocket的，底层基于okhttp-ws，支持http,https,websocket
+
+
+好像要用">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160531161638268">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 各大Android开发群问题总结及解决 | Cody Yang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cody Yang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                各大Android开发群问题总结及解决
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-31T20:59:44+08:00" content="2016-05-31">
+              2016-05-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/31/各大Android开发群问题总结及解决/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/31/各大Android开发群问题总结及解决/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/31/各大Android开发群问题总结及解决/" class="leancloud_visitors" data-flag-title="各大Android开发群问题总结及解决">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>1、 android比较好用的websocket三方库<ul>
+<li>websocket老是会自动断</li>
+<li>socket.io<ul>
+<li>采用轮询的方式，会定时发心跳包检测连接状态，基于事件通信。</li>
+<li>服务端nodejs，客服端java,ios都有支持库</li>
+<li>android端可以基于这个库封装你自己的推送和即时聊天框架</li>
+<li>包含有websocket的，底层基于okhttp-ws，支持http,https,websocket</li>
+</ul>
+</li>
+<li>好像要用nio的socket，不然会有丢包现象</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>2 、retrofit如何设置cookiemanager<ul>
+<li>CookieManager 应该交给下面的 okhttp 做</li>
+<li>知道在OkhttpClient中设置  可是在okhttp3中  OkhttpClient没有设置cookieManager的方法</li>
+<li>那你搜搜 okhttp3 CookieManager 啊</li>
+</ul>
+</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><ul>
+<li>3、网易云音乐（Android）的超链接如何添加，那个歌曲名，点进去<ul>
+<li>使用spannable </li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>4、当后台服务器的数据发生增量变化时，我在本地的数据如何更新呢？<ul>
+<li>插入</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>5、加固服务<ul>
+<li>有兄弟用过爱加密的加固服务吗 ？</li>
+<li>百度和360的太特么不靠谱了，用了这个加固的一启动就挂了，做的兼容性不够、在考虑换个爱加密，兄弟们给点意见呗，我之前就是用360加固的</li>
+<li>加固完之后要再签一次名。。。它是要再签一次，不然启动就会挂了，加固完之后再签一次</li>
+<li>对呀。 现在用360也是这样，只不过用它的软件给你重新加了。不过爱加密的定制版貌似不用那么麻烦了。我也没体验到他们的收费版 只是听说是那样的</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>6、下拉列表<ul>
+<li>spinner</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>7、android:一个Open键引发的问题！！</p>
+<blockquote>
+<p>引用自<a href="http://blog.csdn.net/nupt123456789/article/details/34415849" target="_blank" rel="external">android:一个Open键引发的问题！！</a><br>引用自<a href="http://blog.csdn.net/lfdfhl/article/details/38070991" target="_blank" rel="external">Android安装应用后点击”打开”(Open)带来的问题及解决方式</a></p>
+</blockquote>
+<ul>
+<li>我直接在Android studio 把app安装到手机这时候我按home 键,再次打开 app 没有任何问题。这时候我打包,把app打包成apk ,然后这时候按 home 键,这时候再打开app,,发现app 重新启动了.</li>
+<li>在Android目前的系统下,点击Open键和点击图标启动时，Intent的参数传递的不一样，activity的启动方式不同，导致上述问题的产生。但是，由于启动参数由系统设定，我们不好改变。那我们的思路就有两个：<br>1.第二次启动的时候，把第一次启动的杀掉<br>2.第二次启动的时候，将第一次启动的Activity唤醒，第二次启动关闭。<br>一般我们选择第二种，因此，我们就有了如下思路：<br>1.在启动第一个Activity的时候，判断启动方式是不是从点击OPEN键启动的.<br>2.在需要唤醒的activity中注册BroadcastReceiver，接收到广播之后，调用自己的onResume方法。</li>
+<li><p>在你的 launch activity 的 onCreate 里加这一段代码:</p>
+<pre><code>@Override  
+protected void onCreate(Bundle savedInstanceState) {  
+    super.onCreate(savedInstanceState);  
+    if ((getIntent().getFlags() &amp; Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {  
+        // 在这里发送广播，唤醒之前启动的Activity  
+        finish();  
+        return;  
+    }  
+
+    // Regular activity creation code...  
+}  
+</code></pre></li>
+<li><p>更早之前的版本开始就有这个问题了，应该是使用 apk 安装完成之后用于启动 app 的 intent 携带的 flag 信息出现了奇奇怪怪的问题，另外你装完之后，打开再强杀一下，之后启动也不会有这个问题了       </p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>8、关于安卓沉浸式渲染的问题,设置系统栏和app颜色一致的</li>
+</ul>
+<blockquote>
+<p>Demo见GitHub—<a href="https://github.com/Ztiany/SystemBarTint" target="_blank" rel="external">SystemBarTint</a></p>
+</blockquote>
+<pre><code>- 那个systembar tintmanager设置系统栏和app颜色一致的,我那个布局文件每个都要进行设置,这样很麻烦。。
+- 解决见Demo，写个基类就好了，封装一下，整个app都被沉浸炫染
+</code></pre><ul>
+<li>9、app如何与网页进行交互呢，比如传输数据<ul>
+<li>Jsbridge  </li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>10、使用retrofit之前,参数本身需要一系列的转换,用Rx要怎么改造.</p>
+<ul>
+<li>例如getData(input2String(inputStrem)),这个input2String(inputStrem)这个方法耗时长,怎么把它转到Rx中</li>
+<li><p>转换方法如下：</p>
+<pre><code>InputStream ins;
+Observable.just(ins).map(new Func1&lt;InputStream, String&gt;() {
+    @Override
+    public String call(InputStream inputStream) {
+        return input2String(inputStrem);
+    }
+}).flatMap(new Func1&lt;String, Observable&lt;?&gt;&gt;() {
+    @Override
+    public Observable&lt;?&gt; call(String s) {
+        return getData(s);
+    }
+})
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>11、app初次安装时，会在cache目录里生成大量dex文件，在Android 6.0的机型上会复现</li>
+</ul>
+<blockquote>
+<p>解决方法<a href="http://stackoverflow.com/questions/7750448/dex-file-in-android" target="_blank" rel="external">.dex file in android</a></p>
+</blockquote>
+<hr>
+<ul>
+<li>12、把这两个menu item显示在toolbar </li>
+</ul>
+<blockquote>
+<p>参考 <a href="http://stackoverflow.com/questions/26778701/how-to-add-buttons-like-refresh-and-search-in-toolbar-in-android" target="_blank" rel="external">How to add buttons like refresh and search in ToolBar in Android?</a></p>
+</blockquote>
+<hr>
+<ul>
+<li>13、将一个bitmap如何实现马赛克效果</li>
+</ul>
+<blockquote>
+<p>参考<a href="http://blog.csdn.net/qq_26787115/article/details/50967896" target="_blank" rel="external">Android群英传笔记——第六章：Android绘图机制与处理技巧</a></p>
+</blockquote>
+<hr>
+<ul>
+<li><p>14、右下角的输入法,搜索二字怎么监听?</p>
+<ul>
+<li><p>给EditText设置一个属性就行了</p>
+<pre><code>editor.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+editor.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (EditorInfo.IME_ACTION_SEARCH == actionId) {
+            // todo
+            return true;
+        }
+        return false;
+    }
+});
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>15、怎么设置navigationitem 点击效果<ul>
+<li>itemBackground，试试这个，如果第三方的NavagationBar实现就另说</li>
+<li>这个字体颜色和图片的选中和未选中的效果咋搞啊？<ul>
+<li>用那个属性要看你选择器是用什么控件，颜色你就写一个颜色的选择器，图片也是相同的道理，color引用一个选择器就可以了，字体的选择器是在color那里写的</li>
+<li>itemTextColor，itemTextAppearance，设置字体颜色和字体样式</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>16、parameter must be a descendant of this view  大家见过这个问题吗<ul>
+<li>我发现是 listview 里 嵌套了 headerview ，item 里 有个button 点击弹出dialog 偶尔就报这个错误 。</li>
+<li>无解,这个在友盟后台能看到日志.至今不知道发生的原因</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>17、关于onmeasure  onlayout  onsizechanged这几个方法谁比较熟啊，能讲讲它在自定义view时有什么作用，并且怎么才能很好的去重写这几个方法呢<blockquote>
+<p>参考<a href="https://github.com/Ztiany/ProgrammingNotes" target="_blank" rel="external">ProgrammingNotes</a> </p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<ul>
+<li>18、有个 framelayout 里有个 view ，先渲染 framelayout 还是 先渲染 view 呢<ul>
+<li>frameLayout 吧！毕竟，这个view是依附于frameLayout存在的。。。 </li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>19、推荐的那个用来测试接口的工具叫啥来着？？？<blockquote>
+<p><a href="https://github.com/jarrodek/ChromeRestClient" target="_blank" rel="external">ChromeRestClient</a></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>20、AsyncTask的问题</p>
+<blockquote>
+<p>参考<a href="http://droidyue.com/blog/2014/11/08/bad-smell-of-asynctask-in-android/index.html" target="_blank" rel="external">译文：Android中糟糕的AsyncTask</a></p>
+</blockquote>
+<ul>
+<li>容易内存泄露，cancel()方法不管用，更别说asyncTask写在activity里边带来的代码格式问题了</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>21、使用过listView嵌套GridView ，怎么获取GridView里的内容？<blockquote>
+<p>参考<a href="http://blog.csdn.net/lyhhj/article/details/50002005" target="_blank" rel="external">Android 高仿微信发朋友圈浏览图片效果</a></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<ul>
+<li>22、Recyclerview嵌套recyclerview不更好？<blockquote>
+<p>参考<a href="http://blog.csdn.net/mr_wanggang/article/details/42343501" target="_blank" rel="external">RecyclerView–实现 ListView，GridView，瀑布流 效果</a></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<ul>
+<li>23、话说……并发和并行……区别是啥<ul>
+<li>并发就是一心二用(多用)，比如你一边听老师讲课，一边低头看课桌下韩寒的小说。这两件事你在同时做，而且这两件事并不一定需要相关。而并行就是兵分几路干同一个事情。比如别人看小说只能一行一行的看，而你能一目十行，这就是并行。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>24、有木有好的屏幕适配方案推荐？<blockquote>
+<p>参考<a href="http://www.jianshu.com/p/ec5a1a30694b?utm_campaign=haruki&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weixin&amp;from=groupmessage&amp;isappinstalled=0" target="_blank" rel="external">Android开发：最全面、最易懂的Android屏幕适配解决方案</a></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<ul>
+<li>25、下标线怎么添加<blockquote>
+<p>参考<a href="https://yq.aliyun.com/articles/10124" target="_blank" rel="external">android TextView设置删除线，超链接，颜色和字体等说介绍</a></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<ul>
+<li>26、请教个问题，假设图片每次加载的流程都是先到缓存里面去找，找不到再去服务器上取，这时候服务器的图片更新了，【可能名字不变，只是换了图片】，这种情况下要怎么取到最新的那张图片？<ul>
+<li>那你缓存可以设置一个有效时间</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>27、强烈建议发一篇XMPP篇，即时通讯</li>
+</ul>
+<hr>
+<ul>
+<li>28、IOS那种渐变阴影的折线图怎么做<ul>
+<li><a href="https://github.com/ArthurGuibert/FSLineChart" target="_blank" rel="external">https://github.com/ArthurGuibert/FSLineChart</a><br>这样满足需求么？    <ul>
+<li>好像不满足</li>
+</ul>
+</li>
+<li><a href="https://github.com/PhilJay/MPAndroidChart" target="_blank" rel="external">https://github.com/PhilJay/MPAndroidChart</a> 这个可以</li>
+<li>加了个shader就有效果了<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mShaderPaint</span><span class="selector-class">.setShader</span>(<span class="selector-tag">new</span> <span class="selector-tag">LinearGradient</span>(0, 0, 0, <span class="selector-tag">getHeight</span>(), 0<span class="selector-tag">xff000000</span>, 0<span class="selector-tag">x00000000</span>, <span class="selector-tag">Shader</span><span class="selector-class">.TileMode</span><span class="selector-class">.CLAMP</span>));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>29、像微信那样滑动关闭Activity<ul>
+<li><a href="http://gold.xitu.io/entry/5715f2111ea4930059d34d71" target="_blank" rel="external">http://gold.xitu.io/entry/5715f2111ea4930059d34d71</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>30、请问对Retrofit该怎么封装比较好？<ul>
+<li><a href="http://gank.io/post/56e80c2c677659311bed9841" target="_blank" rel="external">http://gank.io/post/56e80c2c677659311bed9841</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>31、rxandroid代码中怎么没有AndroidObservable这个类了呀？？<ul>
+<li>删除了，原来是分离出来了，非常感谢！</li>
+<li><a href="http://www.cnblogs.com/liulipeng/p/5046623.html" target="_blank" rel="external">http://www.cnblogs.com/liulipeng/p/5046623.html</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>32、请问谁有照片墙的demo，点击放大图片左右滑动切换的那种？<ul>
+<li><a href="https://github.com/debolee/demo6_PhotoRiver" target="_blank" rel="external">https://github.com/debolee/demo6_PhotoRiver</a></li>
+<li>这个效果好6，这部ios吗，好熟悉的UIViewControl</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>33、请教下旋转动画会出现锯齿应该咋解决啊</p>
+<ul>
+<li>设置反锯齿</li>
+</ul>
+</li>
+<li><p>34、谁有那种点击一个图片 显示为动画不断变小 然后加入购物车的demo吗</p>
+<ul>
+<li>做属性动画就行了</li>
+</ul>
+</li>
+<li><p>35、类变量和实例变量的区别是什么</p>
+<ul>
+<li>就是 有static和 没static的区别</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>36、对了大家 做过分屏程序吗，我们在聊天的功能 访qq 的那种 左侧是 聊天列表，右侧是聊天页面，那么我在 右侧 输入框 谈起键盘的时候 怎么不让左侧的fragment 也弹起来呢<ul>
+<li>可以看看telegram怎么处理的</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>37、这种布局应该如何实现<img src="http://img.blog.csdn.net/20160531161638268" alt="此处输入图片的描述"><ul>
+<li>卧槽了,又是这种布局.坑的要死.需要用那个CoordinatorLayout,和Behavior.本人愚钝,研究了好久没搞好</li>
+<li>网上说的是用一个listview，上面是header，下面一个listview切换数据，记录滚动的位置</li>
+<li>左右不可滑动，你看新浪微博都不可以，外面如果用scrollview，listview无法监听页面滑动到底部，都不能重用，势必消耗性能</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>38、右上角那个播放的要怎么办啊？<img src="http://img.blog.csdn.net/20160531160918150" alt="http://img.blog.csdn.net/20160531160918150"><ul>
+<li>那个播放的放toolbar上面啊，写一个BasePlayActivity，toolbar右上角布局一个imageview，在onresume和onpause里面控制</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>39、我有这样一个请求，如果首次请求结果过滤后没有自己想要的结果就重复请求原地址，重复请求结果如果有问题就按异常去处理，如果首次请求正常就直接处理，这种怎么写<ul>
+<li><a href="http://blog.danlew.net/2016/01/25/rxjavas-repeatwhen-and-retrywhen-explained/" target="_blank" rel="external">http://blog.danlew.net/2016/01/25/rxjavas-repeatwhen-and-retrywhen-explained/</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>40、求教一下大神们，使用dagger 怎么划分粒度<ul>
+<li><a href="http://blog.zhaiyifan.cn/2016/03/27/android-new-project-from-0-p4/" target="_blank" rel="external">http://blog.zhaiyifan.cn/2016/03/27/android-new-project-from-0-p4/</a></li>
+<li>另外 android-architecture 的 dagger 分支你也可以参考下</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>41、如果服务端的数据是不定期刷新的话 获取数据改怎么控制是获取缓存 还是网络获取<ul>
+<li>跟服务器约定请求头状态码304，来判断是否更新</li>
+<li>自从上次请求后，请求的网页未修改过。服务器返回此响应时，不会返回网页内容。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>42、你们的接口兼容都是怎么处理的？就是3.0版本的接口兼容2.0的版本，都是怎么处理的？<ul>
+<li>主要还是后台的工作吧，我之前/v2 /v3这样。</li>
+<li>后台自己会兼容呀.根据你传过去的版本号给你返回不同的东西.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>43、Retrofit 2.0使用详解，配合OkHttp、Gson，Android最强网络请求框架<ul>
+<li><a href="http://blog.csdn.net/u012301841/article/details/49685677" target="_blank" rel="external">http://blog.csdn.net/u012301841/article/details/49685677</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>44、微信抢红包神器的实现原理<ul>
+<li><a href="http://www.zhihu.com/question/28152693/answer/41597763" target="_blank" rel="external">http://www.zhihu.com/question/28152693/answer/41597763</a></li>
+<li><a href="http://www.wtoutiao.com/p/13fxYQX.html" target="_blank" rel="external">http://www.wtoutiao.com/p/13fxYQX.html</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/27/解决两个ViewPager的冲突事件/" rel="next" title="解决两个ViewPager的冲突事件">
+                <i class="fa fa-chevron-left"></i> 解决两个ViewPager的冲突事件
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/05/31/各大Android开发群问题总结及解决/"
+     data-title="各大Android开发群问题总结及解决"
+     data-content=""
+     data-url="http://yygmind.github.io/2016/05/31/各大Android开发群问题总结及解决/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/31/各大Android开发群问题总结及解决/"
+           data-title="各大Android开发群问题总结及解决" data-url="http://yygmind.github.io/2016/05/31/各大Android开发群问题总结及解决/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
