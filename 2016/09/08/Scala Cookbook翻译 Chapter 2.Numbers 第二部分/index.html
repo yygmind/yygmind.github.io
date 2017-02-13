@@ -1,0 +1,1272 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Cookbook,翻译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="2.4 代替++和–
+问题：你想要在其他语言用++和–操作符增长数值或减少数值，但是在Scala中没有这些运算符。2.4.1 解决方案
+因为val字段时不可改变的，他们不能增加或者减少，但是var整形字段可以通过+=和-=方法改变。
+scala&amp;gt; var a = 1
+a: Int = 1
+
+scala&amp;gt; a += 1
+
+scala&amp;gt; println(a)
+2
+
+scala&amp;gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala Cookbook翻译 Chapter 2.Numbers 第二部分">
+<meta property="og:url" content="http://yygmind.github.io/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="2.4 代替++和–
+问题：你想要在其他语言用++和–操作符增长数值或减少数值，但是在Scala中没有这些运算符。2.4.1 解决方案
+因为val字段时不可改变的，他们不能增加或者减少，但是var整形字段可以通过+=和-=方法改变。
+scala&amp;gt; var a = 1
+a: Int = 1
+
+scala&amp;gt; a += 1
+
+scala&amp;gt; println(a)
+2
+
+scala&amp;gt;">
+<meta property="og:updated_time" content="2017-02-13T12:39:08.649Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala Cookbook翻译 Chapter 2.Numbers 第二部分">
+<meta name="twitter:description" content="2.4 代替++和–
+问题：你想要在其他语言用++和–操作符增长数值或减少数值，但是在Scala中没有这些运算符。2.4.1 解决方案
+因为val字段时不可改变的，他们不能增加或者减少，但是var整形字段可以通过+=和-=方法改变。
+scala&amp;gt; var a = 1
+a: Int = 1
+
+scala&amp;gt; a += 1
+
+scala&amp;gt; println(a)
+2
+
+scala&amp;gt;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Scala Cookbook翻译 Chapter 2.Numbers 第二部分 | Cody Yang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cody Yang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Scala Cookbook翻译 Chapter 2.Numbers 第二部分
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-08T18:37:24+08:00" content="2016-09-08">
+              2016-09-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 2.Numbers 第二部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="2-4-代替-和–"><a href="#2-4-代替-和–" class="headerlink" title="2.4 代替++和–"></a>2.4 代替++和–</h2><ul>
+<li>问题：你想要在其他语言用++和–操作符增长数值或减少数值，但是在Scala中没有这些运算符。<h3 id="2-4-1-解决方案"><a href="#2-4-1-解决方案" class="headerlink" title="2.4.1 解决方案"></a>2.4.1 解决方案</h3></li>
+<li><p>因为val字段时不可改变的，他们不能增加或者减少，但是var整形字段可以通过+=和-=方法改变。</p>
+<pre><code>scala&gt; var a = 1
+a: Int = 1
+
+scala&gt; a += 1
+
+scala&gt; println(a)
+2
+
+scala&gt; a −= 1
+
+scala&gt; println(a)
+1
+</code></pre></li>
+</ul>
+<a id="more"></a> 
+<ul>
+<li><p>作为额外的好处，可以用同样的方法进行乘法和除法：</p>
+<pre><code>scala&gt; var i = 1
+i: Int = 1
+
+scala&gt; i *= 2
+
+scala&gt; println(i)
+2
+
+scala&gt; i *= 2
+
+scala&gt; println(i)
+4
+
+scala&gt; i /= 2
+
+scala&gt; println(i)
+2
+</code></pre></li>
+<li><p>注意这些符号不是操作符，它们是在声明为var后的Int字段里存在的方法。如果在val字段里使用就会报错编译时错误：</p>
+<pre><code>scala&gt; val x = 1
+x: Int = 1
+
+scala&gt; x += 1
+&lt;console&gt;:9: error: value += is not a member of Int
+        x += 1
+          ^
+</code></pre></li>
+<li>如前所述，+=，-+，*=，/=这些符号不是操作符，它们是方法。<h3 id="2-4-2-讨论"><a href="#2-4-2-讨论" class="headerlink" title="2.4.2 讨论"></a>2.4.2 讨论</h3></li>
+<li><p>另一个好处就是可以在除了Int之外的其他类型里调用同样的方法。举例使用Double和Float:</p>
+<pre><code>scala&gt; var x = 1d
+x: Double = 1.0
+
+scala&gt; x += 1
+
+scala&gt; println(x)
+2.0
+
+scala&gt; var x = 1f
+x: Float = 1.0
+
+scala&gt; x += 1
+
+scala&gt; println(x)
+2.0
+</code></pre></li>
+<li>查看更多<blockquote>
+<p>Martin Odersky 讨论Actors如何作为一个库添加到Scala中。<a href="http://www.drdobbs.com/architecture-and-design/interview-with-scalas-martin-odersky/231001802" target="_blank" rel="external">drdobbs.com</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="2-5-浮点数比较"><a href="#2-5-浮点数比较" class="headerlink" title="2.5 浮点数比较"></a>2.5 浮点数比较</h2><ul>
+<li>问题：需要比较两个浮点数，但是和在其他语言一样，本该相等的两个浮点数可能不一样。<h3 id="2-5-1-解决方案"><a href="#2-5-1-解决方案" class="headerlink" title="2.5.1 解决方案"></a>2.5.1 解决方案</h3></li>
+<li><p>就像在Java和其他语言一样，通过创建一个指定比较精度的方法来解决这个问题。下面的“约等于”方法进行演示：</p>
+<pre><code>def ~=(x: Double, y: Double, precision: Double) = {
+    if ((x - y).abs &lt; precision) true else false
+}
+
+scala&gt; val a = 0.3
+a: Double = 0.3
+
+scala&gt; val b = 0.1 + 0.2
+b: Double = 0.30000000000000004
+
+scala&gt; ~=(a, b, 0.0001)
+res0: Boolean = true
+
+scala&gt; ~=(b, a, 0.0001)
+res1: Boolean = true
+</code></pre></li>
+</ul>
+<h3 id="2-5-2-讨论"><a href="#2-5-2-讨论" class="headerlink" title="2.5.2 讨论"></a>2.5.2 讨论</h3><ul>
+<li><p>当你开始使用浮点数时，会学到0.1加0.1等于0.2:</p>
+<pre><code>scala&gt; 0.1 + 0.1
+res38: Double = 0.2
+</code></pre></li>
+<li><p>但是0.1加0.2并不精确等于0.3</p>
+<pre><code>scala&gt; 0.1 + 0.2
+res37: Double = 0.30000000000000004
+</code></pre></li>
+<li><p>这种微妙误差使得浮点数比较是一个真实的问题：</p>
+<pre><code>scala&gt; val a = 0.3
+a: Double = 0.3
+
+scala&gt; val b = 0.1 + 0.2
+b: Double = 0.30000000000000004
+
+scala&gt; a == b
+res0: Boolean = false
+</code></pre></li>
+<li>因此最终编写自己的函数使用精度（或公差）来比较浮点数。</li>
+<li><p>可以使用隐式转换在Double类里添加方法，这会使得下面的代码非常可读：</p>
+<pre><code>if (a ~= b) ...
+</code></pre></li>
+<li><p>或者可以使用相同的方法添加到公用程序对象</p>
+<pre><code>object MathUtils {
+    def ~=(x: Double, y: Double, precision: Double) = {
+        if ((x - y).abs &lt; precision) true else false
+    }
+}
+
+//调用
+println(MathUtils.~=(a, b, 0.000001))
+</code></pre></li>
+<li>在隐式转换中，~=名字非常可读。但是在共用程序对象中他看起来不太正确，所以叫做approximatelyEqual，equalWithinTolerance或者其他名字更加合适。</li>
+<li>查看更多：<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic" target="_blank" rel="external">Arbitrary-precision arithmetic</a><br><a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html" target="_blank" rel="external">What every computer scientist should know about floating-point arithmetic</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="2-6-处理非常大的数"><a href="#2-6-处理非常大的数" class="headerlink" title="2.6 处理非常大的数"></a>2.6 处理非常大的数</h2><ul>
+<li>问题：写一个程序需要处理非常大的整数或者小数。<h3 id="2-6-1-解决方案"><a href="#2-6-1-解决方案" class="headerlink" title="2.6.1 解决方案"></a>2.6.1 解决方案</h3></li>
+<li><p>使用Scala的BigInt和BigDecimal类。</p>
+<pre><code>scala&gt; var b = BigInt(1234567890)
+b: scala.math.BigInt = 1234567890
+
+scala&gt; var b = BigDecimal(123456.789)
+b: scala.math.BigDecimal = 123456.789
+</code></pre></li>
+<li><p>和Java中不同，这些类支持所使用的数值类型的所有操作。</p>
+<pre><code>scala&gt; b + b
+res0: scala.math.BigInt = 2469135780
+
+scala&gt; b * b
+res1: scala.math.BigInt = 1524157875019052100
+
+scala&gt; b += 1
+
+scala&gt; println(b)
+1234567891
+</code></pre></li>
+<li><p>数值类型转换：</p>
+<pre><code>scala&gt; b.toInt
+res2: Int = 1234567891
+
+scala&gt; b.toLong
+res3: Long = 1234567891
+
+scala&gt; b.toFloat
+res4: Float = 1.23456794E9
+
+scala&gt; b.toDouble
+res5: Double = 1.234567891E9
+</code></pre></li>
+<li><p>为避免发生错误，可先测试是否可以转换成其他类型</p>
+<pre><code>scala&gt; b.isValidByte
+res6: Boolean = false
+
+scala&gt; b.isValidChar
+res7: Boolean = false
+
+scala&gt; b.isValidShort
+res8: Boolean = false
+
+scala&gt; if (b.isValidInt) b.toInt
+res9: AnyVal = 1234567890
+</code></pre><h3 id="2-6-2-讨论"><a href="#2-6-2-讨论" class="headerlink" title="2.6.2 讨论"></a>2.6.2 讨论</h3><ul>
+<li>Scala的BigInt和BigDecimal比Java中的BigInteger和BigDecimal更容易使用，就像其他数值类型一样工作，并且是精确的，比Java改善很多。</li>
+<li><p>使用之前可以检查其他数值类型的最大值：</p>
+<pre><code>scala&gt; Byte.MaxValue
+res0: Byte = 127
+
+scala&gt; Short.MaxValue
+res1: Short = 32767
+
+scala&gt; Int.MaxValue
+res2: Int = 2147483647
+
+scala&gt; Long.MaxValue
+res3: Long = 9223372036854775807
+
+scala&gt; Double.MaxValue
+res4: Double = 1.7976931348623157E308
+</code></pre></li>
+</ul>
+</li>
+<li><p>在基本数值类型中使用无穷大（PositiveInfinity）和无穷小（NegativeInfinity）</p>
+<pre><code>scala&gt; Double.PositiveInfinity
+res0: Double = Infinity
+
+scala&gt; Double.NegativeInfinity
+res1: Double = -Infinity
+
+scala&gt; 1.7976931348623157E308 &gt; Double.PositiveInfinity
+res45: Boolean = false
+</code></pre></li>
+<li>查看更多<blockquote>
+<p><a href="http://www.scala-lang.org/api/current/index.html#scala.math.BigInt" target="_blank" rel="external">The Scala BigInt class</a><br><a href="http://www.scala-lang.org/api/current/index.html#scala.math.BigDecimal" target="_blank" rel="external">The Scala BigDecimal class</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="2-7-随机数生成"><a href="#2-7-随机数生成" class="headerlink" title="2.7 随机数生成"></a>2.7 随机数生成</h2><ul>
+<li>问题：需要创建随机数，比如当测试应用时进行模拟，或者其他的使用情况。<h3 id="2-7-1-解决方案"><a href="#2-7-1-解决方案" class="headerlink" title="2.7.1 解决方案"></a>2.7.1 解决方案</h3></li>
+<li><p>通过scala.util.Random类创建随机数：</p>
+<pre><code>scala&gt; val r = scala.util.Random
+r: scala.util.Random = scala.util.Random@13eb41e5
+
+scala&gt; r.nextInt
+res0: Int = −1323477914
+</code></pre></li>
+<li><p>限制随机数的最大值：</p>
+<pre><code>scala&gt; r.nextInt(100)
+res1: Int = 58
+</code></pre></li>
+<li>Int返回值在0（包括）和指定值（不包括）之前，所以指定100返回整形从0到99。</li>
+<li><p>创建Float随机数：</p>
+<pre><code>// returns a value between 0.0 and 1.0
+scala&gt; r.nextFloat
+res2: Float = 0.50317204
+</code></pre></li>
+<li><p>创建Double随机数：</p>
+<pre><code>// returns a value between 0.0 and 1.0
+scala&gt; r.nextDouble
+res3: Double = 0.6946000981900997
+</code></pre></li>
+<li><p>可以在创建随机数对象的时候指定最大的Int或Long:</p>
+<pre><code>scala&gt; val r = new scala.util.Random(100)
+r: scala.util.Random = scala.util.Random@bbf4061
+</code></pre></li>
+<li><p>也可以在随机数对象创建之后设置seed.</p>
+<pre><code>r.setSeed(1000L)
+</code></pre><h3 id="2-7-2-讨论"><a href="#2-7-2-讨论" class="headerlink" title="2.7.2 讨论"></a>2.7.2 讨论</h3></li>
+<li><p>除上述用法外，还可以生成随机字符：</p>
+<pre><code>// random characters
+scala&gt; r.nextPrintableChar
+res0: Char = H
+
+scala&gt; r.nextPrintableChar
+res1: Char = r
+</code></pre></li>
+<li><p>Scala可创建随机长度的数字，对于测试非常有用：</p>
+<pre><code>// create a random length range
+scala&gt; var range = 0 to r.nextInt(10)
+range: scala.collection.immutable.Range.Inclusive = Range(0, 1, 2, 3)
+
+scala&gt; range = 0 to r.nextInt(10)
+range: scala.collection.immutable.Range.Inclusive = Range(0, 1)
+</code></pre></li>
+<li><p>添加for/yield循环修改数值：</p>
+<pre><code>scala&gt; for (i &lt;- 0 to r.nextInt(10)) yield i * 2
+res0: scala.collection.immutable.IndexedSeq[Int] = Vector(0, 2, 4)
+</code></pre></li>
+<li><p>创建随机长度集合的其他类型，下面是Float型：</p>
+<pre><code>scala&gt; for (i &lt;- 0 to r.nextInt(10)) yield (i * r.nextFloat)
+res1: scala.collection.immutable.IndexedSeq[Float] =
+    Vector(0.0, 0.71370363, 1.0783684)
+</code></pre></li>
+<li><p>随机参数集合的可打印字符：</p>
+<pre><code>scala&gt; for (i &lt;- 0 to r.nextInt(10)) yield r.nextPrintableChar
+res2: scala.collection.immutable.IndexedSeq[Char] = Vector(x, K, ^, z, w)
+</code></pre></li>
+<li>使用nextPrintableChar方法需要注意，更好的方法是去控制使用的字符，查看更多“如何创建一个字母或字母数字字符的集合”</li>
+<li><p>相反，可以创建一个已知长度的序列，填满随机数:</p>
+<pre><code>scala&gt; for (i &lt;- 1 to 5) yield r.nextInt(100)
+res3: scala.collection.immutable.IndexedSeq[Int] = Vector(88, 94, 58, 96, 82)
+</code></pre></li>
+<li>查看更多：<blockquote>
+<p><a href="http://www.scala-lang.org/api/current/index.html#scala.util.Random" target="_blank" rel="external">The Scala Random class</a><br>11.29章 “Using a Range”<br><a href="http://alvinalexander.com/scala/create-list-alpha-alphanumeric-characters-in-scala" target="_blank" rel="external">Scala: How to create a list of alpha or alphanumeric characters</a><br><a href="http://alvinalexander.com/scala/creating-random-strings-in-scala" target="_blank" rel="external">Different ways to create random strings in Scala</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="2-8-创建数值范围，集合或者数组"><a href="#2-8-创建数值范围，集合或者数组" class="headerlink" title="2.8 创建数值范围，集合或者数组"></a>2.8 创建数值范围，集合或者数组</h2><ul>
+<li>问题：在一个for循环中或者因为测试目的，需要创建一个数值范围，集合或者数组。<h3 id="2-8-1-解决方案"><a href="#2-8-1-解决方案" class="headerlink" title="2.8.1 解决方案"></a>2.8.1 解决方案</h3></li>
+<li><p>使用Int类中的方法创建需要元素的范围：</p>
+<pre><code>scala&gt; val r = 1 to 10
+r: scala.collection.immutable.Range.Inclusive = Range(1, 2, 3, 4, 5,
+    6, 7, 8, 9, 10)
+</code></pre></li>
+<li><p>设置步长：</p>
+<pre><code>scala&gt; val r = 1 to 10 by 2
+r: scala.collection.immutable.Range = Range(1, 3, 5, 7, 9)
+
+scala&gt; val r = 1 to 10 by 3
+r: scala.collection.immutable.Range = Range(1, 4, 7, 10)
+</code></pre></li>
+<li><p>通常使用在for循环中：</p>
+<pre><code>scala&gt; for (i &lt;- 1 to 5) println(i)
+1 
+2 
+3
+4 
+5
+</code></pre></li>
+<li><p>创建范围的时候，可以用until代替to</p>
+<pre><code>scala&gt; for (i &lt;- 1 until 5) println(i)
+1 
+2 
+3 
+4
+</code></pre><h3 id="2-8-2-讨论"><a href="#2-8-2-讨论" class="headerlink" title="2.8.2 讨论"></a>2.8.2 讨论</h3></li>
+<li><p>转换Range成其他序列，比如Array或者List:</p>
+<pre><code>scala&gt; val x = 1 to 10 toArray
+x: Array[Int] = Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+scala&gt; val x = 1 to 10 toList
+x: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+</code></pre></li>
+<li><p>虽然中缀表达式语法在很多情况下是清晰的（比如for循环），但它最好使用下面这种方法：</p>
+<pre><code>scala&gt; val x = (1 to 10).toList
+x: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+scala&gt; val x = (1 to 10).toArray
+x: Array[Int] = Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+</code></pre></li>
+<li><p>使得其工作的主要是to和until方法，这个可在RichInt类找到。当键入以下代码时，其实是在调用RichInt类的方法：</p>
+<pre><code>1 to
+</code></pre></li>
+<li><p>在REPL通过在一个整型上使用这个语法证明to是一个方法：</p>
+<pre><code>1.to(10)
+</code></pre></li>
+<li><p>与上章结合，创建一个随机长度范围，对于测试非常有用。</p>
+<pre><code>scala&gt; var range = 0 to scala.util.Random.nextInt(10)
+range: scala.collection.immutable.Range.Inclusive = Range(0, 1, 2, 3)
+</code></pre></li>
+<li><p>在for/yield结构使用一个范围，你没必要限制你的范围到一个序列化数字：</p>
+<pre><code>scala&gt; for (i &lt;- 1 to 5) yield i * 2
+res0: scala.collection.immutable.IndexedSeq[Int] = Vector(2, 4, 6, 8, 10)
+</code></pre></li>
+<li><p>也不必限制你的范围只是整数：</p>
+<pre><code>scala&gt; for (i &lt;- 1 to 5) yield i.toDouble
+res1: scala.collection.immutable.IndexedSeq[Double] =
+    Vector(1.0, 2.0, 3.0, 4.0, 5.0)
+</code></pre></li>
+<li>查看更多<blockquote>
+<p><a href="http://www.scala-lang.org/api/current/index.html#scala.runtime.RichInt" target="_blank" rel="external">The Scala RichInt class</a><br><a href="http://stackoverflow.com/questions/10233227/scala-infix-vs-dot-notation" target="_blank" rel="external">Scala - infix vs dot notation</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="2-9-格式化数字和货币"><a href="#2-9-格式化数字和货币" class="headerlink" title="2.9 格式化数字和货币"></a>2.9 格式化数字和货币</h2><ul>
+<li>格式化数字控制小数位和逗号，尤其是在打印输出时。<h3 id="2-9-1-解决方案"><a href="#2-9-1-解决方案" class="headerlink" title="2.9.1 解决方案"></a>2.9.1 解决方案</h3></li>
+<li><p>对于基本数值转换，可用1.4章说的使用f插值器：</p>
+<pre><code>scala&gt; val pi = scala.math.Pi
+pi: Double = 3.141592653589793
+
+scala&gt; println(f&quot;$pi%1.5f&quot;)
+3.14159
+</code></pre></li>
+<li><p>更多例子：</p>
+<pre><code>scala&gt; f&quot;$pi%1.5f&quot;
+res0: String = 3.14159
+
+scala&gt; f&quot;$pi%1.2f&quot;
+res1: String = 3.14
+
+scala&gt; f&quot;$pi%06.2f&quot; //6表示6位，包括小数位和小数点，不足补0，和C不一样
+res2: String = 003.14
+</code></pre></li>
+<li><p>使用2.10之前的版本，或者更喜欢显式调用format方法,使用以下方法:</p>
+<pre><code>scala&gt; &quot;%06.2f&quot;.format(pi)
+res3: String = 003.14
+</code></pre></li>
+<li><p>通过使用java.text.NumberFormat类的getIntegerInstance方法添加逗号：</p>
+<pre><code>scala&gt; val formatter = java.text.NumberFormat.getIntegerInstance
+formatter: java.text.NumberFormat = java.text.DecimalFormat@674dc
+
+scala&gt; formatter.format(10000)
+res0: String = 10,000
+
+scala&gt; formatter.format(1000000)
+res1: String = 1,000,000
+</code></pre></li>
+<li><p>可以通过getIntegerInstance方法设置locale符号：</p>
+<pre><code>scala&gt; val locale = new java.util.Locale(&quot;de&quot;, &quot;DE&quot;)
+locale: java.util.Locale = de_DE
+
+scala&gt; val formatter = java.text.NumberFormat.getIntegerInstance(locale)
+formatter: java.text.NumberFormat = java.text.DecimalFormat@674dc
+
+scala&gt; formatter.format(1000000)
+res2: String = 1.000.000
+</code></pre></li>
+<li><p>通过getInstance格式化处理浮点数：</p>
+<pre><code>scala&gt; val formatter = java.text.NumberFormat.getInstance
+formatter: java.text.NumberFormat = java.text.DecimalFormat@674dc
+
+scala&gt; formatter.format(10000.33)
+res0: String = 10,000.33
+</code></pre></li>
+<li><p>使用getCurrencyInstance格式化输入货币：</p>
+<pre><code>scala&gt; val formatter = java.text.NumberFormat.getCurrencyInstance
+formatter: java.text.NumberFormat = java.text.DecimalFormat@67500
+
+scala&gt; println(formatter.format(123.456789))
+$123.46
+
+scala&gt; println(formatter.format(1234.56789))
+$1,234.57
+
+scala&gt; println(formatter.format(12345.6789))
+$12,345.68
+
+scala&gt; println(formatter.format(123456.789))
+$123,456.79
+</code></pre></li>
+<li><p>这种方法处理国际货币：</p>
+<pre><code>scala&gt; import java.util.{Currency, Locale}
+import java.util.{Currency, Locale}
+
+scala&gt; val de = Currency.getInstance(new Locale(&quot;de&quot;, &quot;DE&quot;))
+de: java.util.Currency = EUR
+
+scala&gt; formatter.setCurrency(de)
+
+scala&gt; println(formatter.format(123456.789))
+EUR123,456.79
+</code></pre></li>
+<li>查看更多<blockquote>
+<p><a href="http://alvinalexander.com/programming/printf-format-cheat-sheet" target="_blank" rel="external">My printf cheat sheet</a><br><a href="http://www.joda.org/joda-money/" target="_blank" rel="external">Joda Money library</a><br><a href="https://jcp.org/en/jsr/detail?id=354" target="_blank" rel="external">JSR 354: Money and Currency API</a></p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Cookbook/" rel="tag">#Cookbook</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/" rel="next" title="Scala Cookbook翻译 Chapter 2.Numbers 第一部分">
+                <i class="fa fa-chevron-left"></i> Scala Cookbook翻译 Chapter 2.Numbers 第一部分
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/" rel="prev" title="Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分">
+                Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/"
+     data-title="Scala Cookbook翻译 Chapter 2.Numbers 第二部分"
+     data-content=""
+     data-url="http://yygmind.github.io/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/"
+           data-title="Scala Cookbook翻译 Chapter 2.Numbers 第二部分" data-url="http://yygmind.github.io/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-代替-和–"><span class="nav-number">1.</span> <span class="nav-text">2.4 代替++和–</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-解决方案"><span class="nav-number">1.1.</span> <span class="nav-text">2.4.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-讨论"><span class="nav-number">1.2.</span> <span class="nav-text">2.4.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-浮点数比较"><span class="nav-number">2.</span> <span class="nav-text">2.5 浮点数比较</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-1-解决方案"><span class="nav-number">2.1.</span> <span class="nav-text">2.5.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-2-讨论"><span class="nav-number">2.2.</span> <span class="nav-text">2.5.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-处理非常大的数"><span class="nav-number">3.</span> <span class="nav-text">2.6 处理非常大的数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-1-解决方案"><span class="nav-number">3.1.</span> <span class="nav-text">2.6.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-2-讨论"><span class="nav-number">3.2.</span> <span class="nav-text">2.6.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-随机数生成"><span class="nav-number">4.</span> <span class="nav-text">2.7 随机数生成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-1-解决方案"><span class="nav-number">4.1.</span> <span class="nav-text">2.7.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-2-讨论"><span class="nav-number">4.2.</span> <span class="nav-text">2.7.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-创建数值范围，集合或者数组"><span class="nav-number">5.</span> <span class="nav-text">2.8 创建数值范围，集合或者数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-1-解决方案"><span class="nav-number">5.1.</span> <span class="nav-text">2.8.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-2-讨论"><span class="nav-number">5.2.</span> <span class="nav-text">2.8.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9-格式化数字和货币"><span class="nav-number">6.</span> <span class="nav-text">2.9 格式化数字和货币</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-1-解决方案"><span class="nav-number">6.1.</span> <span class="nav-text">2.9.1 解决方案</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

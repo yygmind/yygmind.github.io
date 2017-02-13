@@ -1,0 +1,1093 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,Android,每周TODO,总结,Java,计算机基础," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Java基础相关1、正则表达式里，字符串“*”写成“\\*”，“\”写成“\\\\”，为什么？
+注意以下两点：
+
+1.字符串里面表示斜杠就需要两个斜杠如“\\”
+2.正则表达式里的斜杠需要转意，是用“\”标示。
+
+
+所以对于“\\\\”，第一个斜杠是转义符，第二个斜杠是斜杠本身，第三个斜杠是转义符，第四个斜杠是斜杠本身。这样就成了4个斜杠在正则表达式里面表示一个斜杠。
+
+更多知识点：
+
+引用说明：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每周TODO知识点总结 第一期">
+<meta property="og:url" content="http://yygmind.github.io/2016/11/27/每周TODO知识点总结 第一期/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="Java基础相关1、正则表达式里，字符串“*”写成“\\*”，“\”写成“\\\\”，为什么？
+注意以下两点：
+
+1.字符串里面表示斜杠就需要两个斜杠如“\\”
+2.正则表达式里的斜杠需要转意，是用“\”标示。
+
+
+所以对于“\\\\”，第一个斜杠是转义符，第二个斜杠是斜杠本身，第三个斜杠是转义符，第四个斜杠是斜杠本身。这样就成了4个斜杠在正则表达式里面表示一个斜杠。
+
+更多知识点：
+
+引用说明：">
+<meta property="og:image" content="http://img.blog.csdn.net/20161029200752725">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/0/02/Cylinder_Head_Sector.svg">
+<meta property="og:image" content="http://plcdn.qiniudn.com/wp-content/uploads/2011/12/disk-sector-track-cylinder.jpg">
+<meta property="og:image" content="http://www.chinastor.com/uploads/allimg/151221/203FVR4-1.gif">
+<meta property="og:image" content="http://www.chinastor.com/uploads/allimg/151221/203FS3X-2.gif">
+<meta property="og:updated_time" content="2017-02-13T13:33:38.875Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="每周TODO知识点总结 第一期">
+<meta name="twitter:description" content="Java基础相关1、正则表达式里，字符串“*”写成“\\*”，“\”写成“\\\\”，为什么？
+注意以下两点：
+
+1.字符串里面表示斜杠就需要两个斜杠如“\\”
+2.正则表达式里的斜杠需要转意，是用“\”标示。
+
+
+所以对于“\\\\”，第一个斜杠是转义符，第二个斜杠是斜杠本身，第三个斜杠是转义符，第四个斜杠是斜杠本身。这样就成了4个斜杠在正则表达式里面表示一个斜杠。
+
+更多知识点：
+
+引用说明：">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161029200752725">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 每周TODO知识点总结 第一期 | Cody Yang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cody Yang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                每周TODO知识点总结 第一期
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-11-27T20:07:24+08:00" content="2016-11-27">
+              2016-11-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/每周TODO/" itemprop="url" rel="index">
+                    <span itemprop="name">每周TODO</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/27/每周TODO知识点总结 第一期/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/27/每周TODO知识点总结 第一期/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/11/27/每周TODO知识点总结 第一期/" class="leancloud_visitors" data-flag-title="每周TODO知识点总结 第一期">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Java基础相关"><a href="#Java基础相关" class="headerlink" title="Java基础相关"></a>Java基础相关</h2><h3 id="1、正则表达式里，字符串“-”写成“-”，“-”写成“-”，为什么？"><a href="#1、正则表达式里，字符串“-”写成“-”，“-”写成“-”，为什么？" class="headerlink" title="1、正则表达式里，字符串“*”写成“\\*”，“\”写成“\\\\”，为什么？"></a>1、正则表达式里，字符串“*”写成“\\*”，“\”写成“\\\\”，为什么？</h3><ul>
+<li><p>注意以下两点：</p>
+<ul>
+<li>1.字符串里面表示斜杠就需要两个斜杠如“\\”</li>
+<li>2.正则表达式里的斜杠需要转意，是用“\”标示。</li>
+</ul>
+</li>
+<li><p>所以对于“\\\\”，第一个斜杠是转义符，第二个斜杠是斜杠本身，第三个斜杠是转义符，第四个斜杠是斜杠本身。这样就成了4个斜杠在正则表达式里面表示一个斜杠。</p>
+</li>
+<li><p>更多知识点：</p>
+<ul>
+<li>引用说明：有正斜杠与反斜杠之分，正斜杠，一般就叫做斜杠，符号为“/”；反斜杠的符号为“\”。斜杠（/）在JAVA中没有什么特别的意义，就是代表一个字符‘/’; </li>
+<li>反斜杠（\）则不然，它和紧跟着它的那个字符构成转义字符，如“\n”（表示换行）、“\””（表示字符‘”’）等,所以在字符串中要表示字符’\’要用“\\”来表示，例：如果你这样定义一个字符串String s = “name\sex”是错误的，要这样定义String s = “name\\sex”; </li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<blockquote>
+<ul>
+<li><a href="https://my.oschina.net/airship/blog/411045" target="_blank" rel="external">正则表达式匹配反斜杠——匹配一个反斜杠要用四个反斜杠</a></li>
+<li><a href="http://blog.csdn.net/jiafu1115/article/details/6616165" target="_blank" rel="external">java 正斜杠与反斜杠之分</a></li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="2、Java中的String-replace-和String-replaceAll-的区别？"><a href="#2、Java中的String-replace-和String-replaceAll-的区别？" class="headerlink" title="2、Java中的String.replace()和String.replaceAll()的区别？"></a>2、Java中的String.replace()和String.replaceAll()的区别？</h3><ul>
+<li>如果获得一个Matcher，Matcher m = Pattern.compile(“\\”).matcher(“\\”)将会报错,你应当这样写Matcher m = Pattern.compile(“\\\\”).matcher(“\\”)才是正确且匹配的引用</li>
+<li><p>String类中replace(CharSequence target,CharSequence replacement)方法与replaceAll(String regex, String replacement)方法的区别如下：</p>
+<pre><code>public static void main(String[] arg) throws OgnlException {
+    String s =&quot;sdf\\a\\aa&quot;;
+
+    //把s中的反斜杠\ 替换为\\
+    System.out.println(s);
+    System.out.println(s.replaceAll(&quot;\\\\&quot;, &quot;\\\\\\\\&quot;));
+    System.out.println(s.replace(&quot;\\&quot;, &quot;\\\\&quot;));
+}
+</code></pre></li>
+<li>上面两种都返回相同的替换结果。这里的关键是String.replaceAll()是用regular expression 来作为参数的。但是java本身的字符串对于转义符\也有类似的处理。首先，java会把“\\\\”解释成一个字符串“\\”(其中包含两个char)。接下来，由于replaceAll是以正则表达式作为参数，所以“\\”被解释成一个regex。对于一个regex来说这就代表着一个字符，就是“\”。对后面的那个8个\来说，最终会被解释成“\\”。 </li>
+<li>所以假设 String.replaceAll()是以普通字符串，而不是regex作为参数，那么这样写代码: String target = source.replaceAll(‘\\’, ‘\\\\’); 就可以了。其实就是replace的写法。</li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="http://blog.csdn.net/jiafu1115/article/details/6616165" target="_blank" rel="external">java 正斜杠与反斜杠之分</a></li>
+<li><a href="https://docs.oracle.com/javase/7/docs/api/" target="_blank" rel="external">JAVA API</a></li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="3、什么是字典序，为什么字符串数组中最大的串是字典序排在最后的串？"><a href="#3、什么是字典序，为什么字符串数组中最大的串是字典序排在最后的串？" class="headerlink" title="3、什么是字典序，为什么字符串数组中最大的串是字典序排在最后的串？"></a>3、什么是字典序，为什么字符串数组中最大的串是字典序排在最后的串？</h3><ul>
+<li><p>根据ASCII排，具体如下：</p>
+<pre><code>0-9（对应数值48-59）；
+A-Z（对应数值65-90）；
+a-z（对应数值97-122）；
+</code></pre></li>
+<li><p>标准序: 短在前,长在后,等长的依次比字母</p>
+<pre><code>如to &lt; up &lt; cap &lt; cat &lt; too &lt; two &lt;boat &lt; boot &lt; card
+</code></pre></li>
+<li><p>字典序: 依次比字母(按字典里的顺序比较)</p>
+<pre><code>如boat &lt; boot &lt;cap &lt; card &lt; cat &lt; to &lt; too&lt; two &lt; up
+</code></pre></li>
+<li><p>字典序是不忽略字符的大小写的，大写字符排在小写字符前</p>
+<pre><code>如：“ZEBRA” &lt; &quot;alligator&quot;
+</code></pre></li>
+<li><p>Comparable接口的compareTo不忽略字符的大小写，按照字典排序</p>
+<pre><code>public int compareTo(String anotherString)  
+
+compareTo 按字典顺序比较两个字符串。该比较基于字符串中各个字符的 Unicode 值。将此 String 对象表示的字符序列与参数字符串所表示的字符序列进行比较。如果按字典顺序此 String 对象在参数字符串之前，则比较结果为一个负整数。如果按字典顺序此 String 对象位于参数字符串之后，则比较结果为一个正整数。如果这两个字符串相等，则结果为 0；compareTo 只有在方法 equals(Object) 返回 true 时才返回 0。 
+</code></pre></li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="http://www.cnblogs.com/BeginMan/p/3193081.html" target="_blank" rel="external">深入Python(1): 字典排序 关于sort()、reversed()、sorted()</a></li>
+<li><a href="http://blog.csdn.net/w627782664/article/details/7064422" target="_blank" rel="external">java排序接口–compareTo</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="Linux基础相关"><a href="#Linux基础相关" class="headerlink" title="Linux基础相关"></a>Linux基础相关</h2><h3 id="1、echo相关知识点："><a href="#1、echo相关知识点：" class="headerlink" title="1、echo相关知识点："></a>1、echo相关知识点：</h3><ul>
+<li><p>cat 和 echo 的区别：</p>
+<pre><code>cat：Concatenate FILE(s), or standard input, to standard output.
+echo： Echo the STRING(s) to standard output.
+</code></pre></li>
+<li><p>echo &gt; 和 ehco &gt;&gt; 的区别：&gt;&gt;是追加，&gt;是覆盖</p>
+<ul>
+<li>详细案例点击：<a href="http://jingyan.baidu.com/article/a501d80c0c9cbaec630f5e8d.html" target="_blank" rel="external">echo &gt; 和 echo &gt;&gt;的区别</a></li>
+</ul>
+</li>
+<li><p>shell中echo \$+变量与echo ${变量}的区别：</p>
+<pre><code>如变量ABC=123, echo $ABC 与 echo ${ABC} 在绝大多数情况下是一致的
+不过后者更好，因为没有歧义。
+如还存在一个变量AB=888
+那么$ABC是什么呢？
+1. $ABC = $AB + &quot;C&quot; = 888 + &quot;C&quot; = 888C
+2. $ABC = 123
+如果使用${ABC}就没有这样的疑惑，SHELL很容易确定你要的就是变量ABC 
+</code></pre></li>
+<li><p>echo 字符串 和 echo $字符串 的区别：</p>
+<pre><code>echo 字符串--------&gt;打印字符串
+echo $字符串-------&gt;此时的字符串就相当于一个变量，打印的是变量的值，比如 echo $PATH，这个命令就是在屏幕上输出环境变量
+</code></pre></li>
+<li><p>@echo off在bat文件中的作用：</p>
+<pre><code>echo [{on　off}] [message]
+Sample：@echo off / echo hello world
+
+echo off是关闭回显的功能。在没有关闭回显的情况下，每行命令都会在屏幕上显示一遍，而关闭回显后，屏幕就只显示命令的执行结果了。当再次出现echo on时下面的语句才为可见的（回显），echo通常和@一起使用，@放在echo的前面，即是@echo，作用是让@后面的句子不显示出来，而@本身也是不显示的，那么通过 @echo off 可达到不显示任何信息的效果。
+
+举个例子：
+@echo off
+echo 123
+显示的结果为：123
+而
+echo 123的结果为：
+echo 123
+123
+</code></pre></li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="http://jingyan.baidu.com/article/a501d80c0c9cbaec630f5e8d.html" target="_blank" rel="external">echo &gt; 和 echo &gt;&gt;的区别</a></li>
+<li><a href="http://bbs.csdn.net/topics/270053917" target="_blank" rel="external">inux里echo $与linux echo $[]有什么区别?</a></li>
+<li><a href="http://www.linuxdiyf.com/viewarticle.php?id=307314" target="_blank" rel="external">求问echo “字符串”和echo $”字符串”的区别</a></li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="2、什么是RAID中的chuck-size？"><a href="#2、什么是RAID中的chuck-size？" class="headerlink" title="2、什么是RAID中的chuck size？"></a>2、什么是RAID中的chuck size？</h3><ul>
+<li><p>RAID：（Redundant Array of indenpensive Disk） 独立磁盘冗余阵列: 磁盘阵列是把多个磁盘组成一个阵列,当作单一磁盘使用,它将数据以分段(striping)的方式储存在不同的磁盘中,存取数据时,阵列中的相关磁盘一起动作,大幅减低数据的存取时间,同时有更佳的空间利用率。磁盘阵列利用的不同的技术,称为RAID level,不同的level针对不同的系统及应用,以解决数据安全的问题。简单来说，RAID把多个硬盘组合成为一个逻辑扇区，因此，操作系统只会把它当作一个硬盘。</p>
+</li>
+<li><p>一般高性能的磁盘阵列都是以硬件的形式来达成,进一步的把磁盘存取控制及磁盘阵列结合在一个控制器(RAID controler)或控制卡上,针对不同的用户解决人们对磁盘输输入输出系统的四大要求: </p>
+<ul>
+<li>(1)增加存取速度, </li>
+<li>(2)容错(fault tolerance),即安全性 </li>
+<li>(3)有效的利用磁盘利用率; </li>
+<li>(4)尽量的平衡CPU,内存及磁盘的性能差异,提高主机的整体工作性能。</li>
+</ul>
+</li>
+<li><p>Chunk：可以理解为raid分储数据时每个数据段的大小（通常为32/64/128等这类数字大小）。合理的选择chunk大小非常重要，若chunk过大可能一块磁盘上的带区空间就可以满足大部分的I/O操作，使得数据的读写只局限于一块硬盘上，这便不能充分发挥RAID并发的优势；如果chunk设置过小，任何很小的I/O指令都可能引发大量的读写操作，不能良好发挥并发性能，占用过多的控制器总线带宽，也影响了阵列的整体性能。一般缺省为64字节。</p>
+</li>
+<li><p>详细信息请移步：<a href="http://molinux.blog.51cto.com/2536040/516008" target="_blank" rel="external">Linux阵列 RAID详解</a></p>
+</li>
+</ul>
+<hr>
+<h2 id="Android相关"><a href="#Android相关" class="headerlink" title="Android相关"></a>Android相关</h2><h3 id="1、如何自定义绘制圆形进度条？"><a href="#1、如何自定义绘制圆形进度条？" class="headerlink" title="1、如何自定义绘制圆形进度条？"></a>1、如何自定义绘制圆形进度条？</h3><ul>
+<li>效果图如下：</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20161029200752725" alt="此处输入图片的描述"></p>
+<ul>
+<li>详细步骤移步到：<a href="http://blog.csdn.net/yyg204731/article/details/52966331" target="_blank" rel="external">Android 动态绘制圆形进度条</a></li>
+</ul>
+<hr>
+<h2 id="计算机基础相关"><a href="#计算机基础相关" class="headerlink" title="计算机基础相关"></a>计算机基础相关</h2><h3 id="1、什么是海明码，为什么说海明码是具有纠错功能的校验码？"><a href="#1、什么是海明码，为什么说海明码是具有纠错功能的校验码？" class="headerlink" title="1、什么是海明码，为什么说海明码是具有纠错功能的校验码？"></a>1、什么是海明码，为什么说海明码是具有纠错功能的校验码？</h3><ul>
+<li><p>海明码（Hamming Code）是一个可以有多个校验位，具有检测并纠正一位错误代码的纠错码，所以它也仅用于信道特性比较好的环境中，如以太局域网中，因为如果信道特性不好的情况下，出现的错误通常不是一位。</p>
+</li>
+<li><p>海明码的检错、纠错基本思想是将有效信息按某种规律分成若干组，每组安排一个校验位进行奇偶性测试，然后产生多位检测信息，并从中得出具体的出错位置，最后通过对错误位取反（也是原来是1就变成0，原来是0就变成1）来将其纠正。</p>
+</li>
+<li><p>海明码纠错的详细步骤请移步：</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="http://winda.blog.51cto.com/55153/1068000" target="_blank" rel="external">你看得懂的海明码校验和纠错原理（一）</a></li>
+<li><a href="http://winda.blog.51cto.com/55153/1072629" target="_blank" rel="external">你看得懂的海明码校验和纠错原理（二）</a></li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="2、什么是逻辑异或运算？"><a href="#2、什么是逻辑异或运算？" class="headerlink" title="2、什么是逻辑异或运算？"></a>2、什么是逻辑异或运算？</h3><ul>
+<li><p>异或（xor）是一个数学运算符。它应用于逻辑运算。异或的数学符号为“⊕”，计算机符号为“xor”。其运算法则为：</p>
+<pre><code>a⊕b = (¬a ∧ b) ∨ (a ∧¬b)
+</code></pre></li>
+<li>如果a、b两个值不相同，则异或结果为1。如果a、b两个值相同，异或结果为0。</li>
+<li>异或也叫半加运算，其运算法则相当于不带进位的二进制加法：二进制下用1表示真，0表示假，则异或的运算法则为：0⊕0=0，1⊕0=1，0⊕1=1，1⊕1=0（同为0，异为1），这些法则与加法是相同的，只是不带进位。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>输入</th>
+<th>运算符</th>
+<th>输入</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>⊕</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>⊕</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>⊕</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>⊕</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="3、理解硬盘的CHS，即柱面（Cylinder），磁头（Heads），扇区（Sector）。"><a href="#3、理解硬盘的CHS，即柱面（Cylinder），磁头（Heads），扇区（Sector）。" class="headerlink" title="3、理解硬盘的CHS，即柱面（Cylinder），磁头（Heads），扇区（Sector）。"></a>3、理解硬盘的CHS，即柱面（Cylinder），磁头（Heads），扇区（Sector）。</h3><p><img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Cylinder_Head_Sector.svg" alt="此处输入图片的描述"><br><img src="http://plcdn.qiniudn.com/wp-content/uploads/2011/12/disk-sector-track-cylinder.jpg" alt="此处输入图片的描述"></p>
+<ul>
+<li><p>硬盘最基本的组成部分是由坚硬金属材料制成的涂以磁性介质的盘片，不同容量硬盘的盘片数不等。每个盘片有两面，都可记录信息。</p>
+</li>
+<li><p>磁道：Track，可以理解为一个圆形盘片由许许多多的同心圆组成，盘片表面上以盘片中心为圆心，不同半径的同心圆称为磁道。（硬盘是一个高速旋转的东西，当磁盘旋转时，磁头若保持在一个位置上不动，则磁头会在磁盘表面划出一个圆形轨迹，这些圆形轨迹就叫做磁道）</p>
+</li>
+<li><p>扇区：Sector，可以联想到“扇形区域”，磁盘上的每个磁道被等分为若干个弧段，这些弧段便是磁盘的扇区，每个扇区可存储128×2的N次方（N＝0.1.2.3）字节信息。在DOS中每扇区是128×2的2次方＝512字节，磁盘驱动器在向磁盘读取和写入数据时应该以扇区为单位。</p>
+</li>
+<li><p>柱面：Cylinder，硬盘通常由重叠的一组盘片构成，每个盘面都被划分为数目相等的磁道，并从外缘的0开始编号，具有相同编号的磁道形成一个圆柱，不同盘片相同半径的磁道所组成的圆柱称为柱面。磁道与柱面都是表示不同半径的圆，在许多场合，磁道和柱面可以互换使用。显然，磁盘的柱面数与一个盘面上的磁道数是相等的。</p>
+</li>
+<li><p>磁头：Heads，当然是读取信息用的了。每个盘面都有自己的磁头，如果盘面的双面都记录信息，那么双面都应该有磁头。所以，硬盘的容量计算公式如下：硬盘的容量=磁头数×磁道（柱面）数×每道扇区数×每扇区字节数(512)</p>
+</li>
+<li><p>SDK中定义了一个叫做DISK_GEOMETRY的结构体：</p>
+<pre><code>typedef struct _DISK_GEOMETRY
+{
+    LARGE_INTEGER Cylinders;
+    MEDIA_TYPE MediaType;
+    DWORD TracksPerCylinder;
+    DWORD SectorsPerTrack;
+    DWORD BytesPerSector;
+} DISK_GEOMETRY;
+</code></pre></li>
+</ul>
+<p><img src="http://www.chinastor.com/uploads/allimg/151221/203FVR4-1.gif" alt="此处输入图片的描述"></p>
+<ul>
+<li>对于不同的硬盘，固件区的物理位置是不同的，有的位于比“0”磁道更靠近磁盘片外缘的磁道上，即我们常说的“负磁道”。有的位于磁盘片的中部，所记录的程序的数量和功能也有差别。由于生产过程中不可能保证整个盘片完全一致，必然有少部分扇区无法稳定读写数据，这就是我们所说的坏道。</li>
+</ul>
+<p><img src="http://www.chinastor.com/uploads/allimg/151221/203FS3X-2.gif" alt="此处输入图片的描述"></p>
+<blockquote>
+<ul>
+<li><a href="http://www.chinastor.com/baike/disk/12211TK2015.html" target="_blank" rel="external">认识硬盘的磁道、扇区、柱面和磁头数</a></li>
+<li><a href="http://www.programlife.net/disk-struct.html" target="_blank" rel="external">扇区、磁道、柱面和簇的介绍</a></li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/每周TODO/" rel="tag">#每周TODO</a>
+          
+            <a href="/tags/总结/" rel="tag">#总结</a>
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/计算机基础/" rel="tag">#计算机基础</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/30/Android 动态绘制圆形进度条/" rel="next" title="Android 动态绘制圆形进度条">
+                <i class="fa fa-chevron-left"></i> Android 动态绘制圆形进度条
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/10/RecyclerView调节项目间间距大小/" rel="prev" title="RecyclerView调节项目间间距大小">
+                RecyclerView调节项目间间距大小 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/11/27/每周TODO知识点总结 第一期/"
+     data-title="每周TODO知识点总结 第一期"
+     data-content=""
+     data-url="http://yygmind.github.io/2016/11/27/每周TODO知识点总结 第一期/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/27/每周TODO知识点总结 第一期/"
+           data-title="每周TODO知识点总结 第一期" data-url="http://yygmind.github.io/2016/11/27/每周TODO知识点总结 第一期/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java基础相关"><span class="nav-number">1.</span> <span class="nav-text">Java基础相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、正则表达式里，字符串“-”写成“-”，“-”写成“-”，为什么？"><span class="nav-number">1.1.</span> <span class="nav-text">1、正则表达式里，字符串“*”写成“\\*”，“\”写成“\\\\”，为什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Java中的String-replace-和String-replaceAll-的区别？"><span class="nav-number">1.2.</span> <span class="nav-text">2、Java中的String.replace()和String.replaceAll()的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、什么是字典序，为什么字符串数组中最大的串是字典序排在最后的串？"><span class="nav-number">1.3.</span> <span class="nav-text">3、什么是字典序，为什么字符串数组中最大的串是字典序排在最后的串？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux基础相关"><span class="nav-number">2.</span> <span class="nav-text">Linux基础相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、echo相关知识点："><span class="nav-number">2.1.</span> <span class="nav-text">1、echo相关知识点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、什么是RAID中的chuck-size？"><span class="nav-number">2.2.</span> <span class="nav-text">2、什么是RAID中的chuck size？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android相关"><span class="nav-number">3.</span> <span class="nav-text">Android相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、如何自定义绘制圆形进度条？"><span class="nav-number">3.1.</span> <span class="nav-text">1、如何自定义绘制圆形进度条？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机基础相关"><span class="nav-number">4.</span> <span class="nav-text">计算机基础相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、什么是海明码，为什么说海明码是具有纠错功能的校验码？"><span class="nav-number">4.1.</span> <span class="nav-text">1、什么是海明码，为什么说海明码是具有纠错功能的校验码？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、什么是逻辑异或运算？"><span class="nav-number">4.2.</span> <span class="nav-text">2、什么是逻辑异或运算？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、理解硬盘的CHS，即柱面（Cylinder），磁头（Heads），扇区（Sector）。"><span class="nav-number">4.3.</span> <span class="nav-text">3、理解硬盘的CHS，即柱面（Cylinder），磁头（Heads），扇区（Sector）。</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

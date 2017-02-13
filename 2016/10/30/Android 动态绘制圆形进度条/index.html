@@ -1,0 +1,1093 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,自定义View," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="效果图
+实现思路
+在画布上直接绘制View，需要了解一下几点 
+1.需要画一个底层小圆和上层大圆 
+2.圆圈上有不同进度的颜色 
+3.颜色的变化规律是先慢慢变多再慢慢减少">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 动态绘制圆形进度条">
+<meta property="og:url" content="http://yygmind.github.io/2016/10/30/Android 动态绘制圆形进度条/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="效果图
+实现思路
+在画布上直接绘制View，需要了解一下几点 
+1.需要画一个底层小圆和上层大圆 
+2.圆圈上有不同进度的颜色 
+3.颜色的变化规律是先慢慢变多再慢慢减少">
+<meta property="og:image" content="http://img.blog.csdn.net/20161029200752725">
+<meta property="og:updated_time" content="2017-02-13T13:30:37.078Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 动态绘制圆形进度条">
+<meta name="twitter:description" content="效果图
+实现思路
+在画布上直接绘制View，需要了解一下几点 
+1.需要画一个底层小圆和上层大圆 
+2.圆圈上有不同进度的颜色 
+3.颜色的变化规律是先慢慢变多再慢慢减少">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161029200752725">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Android 动态绘制圆形进度条 | Cody Yang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cody Yang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android 动态绘制圆形进度条
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-30T22:37:24+08:00" content="2016-10-30">
+              2016-10-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/30/Android 动态绘制圆形进度条/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/30/Android 动态绘制圆形进度条/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/30/Android 动态绘制圆形进度条/" class="leancloud_visitors" data-flag-title="Android 动态绘制圆形进度条">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="http://img.blog.csdn.net/20161029200752725" alt="此处输入图片的描述"></p>
+<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><ul>
+<li>在画布上直接绘制View，需要了解一下几点 <ul>
+<li>1.需要画一个底层小圆和上层大圆 </li>
+<li>2.圆圈上有不同进度的颜色 </li>
+<li>3.颜色的变化规律是先慢慢变多再慢慢减少</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<p>###　一、画圆</p>
+<ul>
+<li><p>需要使用Canvas的该方法</p>
+<pre><code>public void drawArc(@NonNull RectF oval, float startAngle, float sweepAngle, boolean useCenter,
+           @NonNull Paint paint) {
+       drawArc(oval.left, oval.top, oval.right, oval.bottom, startAngle, sweepAngle, useCenter,
+               paint);
+   }
+</code></pre></li>
+<li><p>如下画出了默认的背景圆圈：</p>
+<pre><code>// 设置画笔相关属性
+mPaint.setAntiAlias(true);  //抗锯齿
+mPaint.setColor(Color.rgb(0x3a, 0x58, 0x5f));
+canvas.drawColor(Color.TRANSPARENT); //设置背景透明
+mPaint.setStrokeWidth(mCircleLineStrokeWidthBottom);
+mPaint.setStyle(Paint.Style.STROKE);
+
+ // 位置
+ mRectF.left = mCircleLineStrokeWidth / 2; // 左上角x
+ mRectF.top = mCircleLineStrokeWidth / 2; // 左上角y
+ mRectF.right = width - mCircleLineStrokeWidth / 2; // 左下角x
+ mRectF.bottom = height - mCircleLineStrokeWidth / 2; // 右下角y
+
+ // 绘制圆圈，进度条背景
+ canvas.drawArc(mRectF, -90, 360, false, mPaint); //顺时针为正，起始点-90是视图上最高的点
+</code></pre></li>
+</ul>
+<h3 id="二、画进度圆弧"><a href="#二、画进度圆弧" class="headerlink" title="二、画进度圆弧"></a>二、画进度圆弧</h3><ul>
+<li><p>其实实现很简单，换另外一种颜色同样在画布上画出即可，支持此时画的不是360°，而是通过进度计算出来的一个圆弧。</p>
+<pre><code>//绘制上面可变的进度条
+mPaint.setColor(Color.rgb(0x2f, 0xc2, 0xe6));
+mPaint.setStrokeWidth(mCircleLineStrokeWidthAbove);
+
+if (isOddNumber) { //奇数轮时
+    canvas.drawArc(mRectFAbove, -90, ((float) mProgress / mMaxProgress) * 360, false, mPaint);
+} else {          //偶数轮时，反方向绘制
+    canvas.drawArc(mRectFAbove, -90, (-(float) mProgress / mMaxProgress) * 360, false, mPaint);
+}
+</code></pre></li>
+</ul>
+<h3 id="三、定时器调用"><a href="#三、定时器调用" class="headerlink" title="三、定时器调用"></a>三、定时器调用</h3><ul>
+<li><p>设置定时器</p>
+<pre><code>private final int TIME_PROGRESS = 30;
+private int curProgress = 0;
+private boolean isOddNumber= false; //是否是奇数阶段
+private Handler handler = new Handler();
+Runnable runnableProgress = new Runnable() {
+
+    @Override
+    public void run() {
+
+        if (circleProgressView != null) {
+
+            if (curProgress == 0) { //定义奇数和偶数阶段
+                isOddNumber = true;
+            } else if (curProgress &gt;= 100) {
+                isOddNumber = false;
+            }
+
+            if (isOddNumber) { //奇数阶段累加1
+                curProgress += 1;
+            } else {           //偶数阶段递减1
+                curProgress -= 1;
+            }
+
+            circleProgressView.setProgress(curProgress, isOddNumber);
+
+        }
+        handler.postDelayed(this, TIME_PROGRESS); //handler自带方法实现定时器
+    }
+};
+</code></pre></li>
+<li><p>启动</p>
+<pre><code>handler.postDelayed(runnableProgress, TIME_PROGRESS);//设置转圈进度定时器
+</code></pre></li>
+<li><p>关闭</p>
+<pre><code>handler.removeCallbacks(runnableProgress);  //取消转圈进度定时器线程
+</code></pre></li>
+</ul>
+<h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><ul>
+<li>其实很多自定义的View都可以用Canvas直接画出来，只要研究透了Canvas的使用和原理。 </li>
+</ul>
+<h3 id="五、最后附上源码"><a href="#五、最后附上源码" class="headerlink" title="五、最后附上源码"></a>五、最后附上源码</h3><ul>
+<li>源码下载地址：<a href="https://github.com/yygmind/AndroidStudy" target="_blank" rel="external">https://github.com/yygmind/AndroidStudy</a></li>
+<li><p>CircleProgressView</p>
+<pre><code>public class CircleProgressView extends View {
+
+    private static final String TAG = &quot;CircleProgressView&quot;;
+
+    private int mMaxProgress = 100;
+
+    private int mProgress = 30;
+
+    private final int mCircleLineStrokeWidthBottom = 10;
+    private final int mCircleLineStrokeWidthAbove = 20;
+
+    // 画圆所在的距形区域
+    private final RectF mRectFBottom;
+    private final RectF mRectFAbove;
+
+    private final Paint mPaint;
+
+    private final Context mContext;
+    private int width;
+    private int height;
+
+    private boolean isOddNumber= false; //是否是奇数阶段
+
+    public CircleProgressView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+        mContext = context;
+        mRectFBottom = new RectF();
+        mRectFAbove = new RectF();
+        mPaint = new Paint();
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        width = this.getWidth();
+        height = this.getHeight();
+
+        if (width != height) {
+            int min = Math.min(width, height);
+            width = min;
+            height = min;
+        }
+
+        // 设置背景画笔相关属性
+        mPaint.setAntiAlias(true);  //抗锯齿
+        mPaint.setColor(Color.rgb(0x3a, 0x58, 0x5f));
+        canvas.drawColor(Color.TRANSPARENT); //设置背景透明
+        mPaint.setStrokeWidth(mCircleLineStrokeWidthBottom);
+        mPaint.setStyle(Paint.Style.STROKE);
+        // 位置
+        setRectFPosition(mRectFBottom, mCircleLineStrokeWidthBottom);
+        setRectFPosition(mRectFAbove, mCircleLineStrokeWidthAbove);
+
+        // 绘制圆圈，进度条背景
+        canvas.drawArc(mRectFBottom, -90, 360, false, mPaint); //顺时针为正，起始点-90是视图上最高的点
+
+        //绘制上面可变的进度条
+        mPaint.setColor(Color.rgb(0x2f, 0xc2, 0xe6));
+        mPaint.setStrokeWidth(mCircleLineStrokeWidthAbove);
+
+        if (isOddNumber) { //奇数轮时
+            canvas.drawArc(mRectFAbove, -90, ((float) mProgress / mMaxProgress) * 360, false, mPaint);
+        } else {           //偶数轮时，反方向绘制
+            canvas.drawArc(mRectFAbove, -90, (-(float) mProgress / mMaxProgress) * 360, false, mPaint);
+        }
+
+    }
+
+    /**
+     * 设置RectF位置
+     * @param mRectF
+     * @param mCircleLineStrokeWidth
+     */
+    private void setRectFPosition(RectF mRectF, int mCircleLineStrokeWidth) {
+        mRectF.left = mCircleLineStrokeWidth / 2; // 左上角x
+        mRectF.top = mCircleLineStrokeWidth / 2; // 左上角y
+        mRectF.right = width - mCircleLineStrokeWidth / 2; // 左下角x
+        mRectF.bottom = height - mCircleLineStrokeWidth / 2; // 右下角y
+    }
+
+    public int getMaxProgress() {
+        return mMaxProgress;
+    }
+
+    public void setMaxProgress(int maxProgress) {
+        this.mMaxProgress = maxProgress;
+    }
+
+    public void setProgress(int progress, boolean isOddNumber) {
+        this.mProgress = progress;
+        this.isOddNumber = isOddNumber;
+        this.invalidate();
+    }
+
+    public void setProgressNotInUiThread(int progress) {
+        this.mProgress = progress;
+        this.postInvalidate();
+    }
+
+}
+</code></pre></li>
+<li><p>Xml中配置：</p>
+<pre><code>&lt;com.cody.myandroidstudy.view.CircleProgressView
+        android:id=&quot;@+id/circle_progress_view&quot;
+        android:layout_width=&quot;200dp&quot;
+        android:layout_height=&quot;200dp&quot;
+        android:layout_centerInParent=&quot;true&quot;/&gt;
+</code></pre></li>
+<li><p>Activity中使用：</p>
+<pre><code>public class CircleProgressActivity extends BaseActivity {
+
+    private final int TIME_PROGRESS = 30;
+    private int curProgress = 0;
+    private boolean isOddNumber= false; //是否是奇数阶段
+    private Handler handler = new Handler();
+    Runnable runnableProgress = new Runnable() {
+
+        @Override
+        public void run() {
+
+            if (circleProgressView != null) {
+
+                if (curProgress == 0) {  //定义奇数和偶数阶段
+                    isOddNumber = true;
+                } else if (curProgress &gt;= 100) {
+                    isOddNumber = false;
+                }
+
+                if (isOddNumber) { //奇数阶段累加1
+                    curProgress += 1;
+                } else {           //偶数阶段递减1
+                    curProgress -= 1;
+                }
+
+                circleProgressView.setProgress(curProgress, isOddNumber);
+
+            }
+            handler.postDelayed(this, TIME_PROGRESS); //handler自带方法实现定时器
+        }
+    };
+    private CircleProgressView circleProgressView;
+</code></pre></li>
+</ul>
+<pre><code>    @Override
+    public void initView() {
+        setContentView(R.layout.activity_circle_progress);
+        circleProgressView = (CircleProgressView) findViewById(R.id.circle_progress_view);
+    }
+
+    @Override
+    public void initData() {
+    }
+
+    @Override
+    public void initListener() {
+    }
+
+    @Override
+    public void progress(View v) {
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        handler.postDelayed(runnableProgress, TIME_PROGRESS);//设置转圈进度定时器
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        handler.removeCallbacks(runnableProgress);  //取消转圈进度定时器线程
+    }
+}
+</code></pre>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/自定义View/" rel="tag">#自定义View</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/29/React Native环境配置血泪爬坑/" rel="next" title="React Native环境配置血泪爬坑">
+                <i class="fa fa-chevron-left"></i> React Native环境配置血泪爬坑
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/27/每周TODO知识点总结 第一期/" rel="prev" title="每周TODO知识点总结 第一期">
+                每周TODO知识点总结 第一期 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/30/Android 动态绘制圆形进度条/"
+     data-title="Android 动态绘制圆形进度条"
+     data-content=""
+     data-url="http://yygmind.github.io/2016/10/30/Android 动态绘制圆形进度条/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/30/Android 动态绘制圆形进度条/"
+           data-title="Android 动态绘制圆形进度条" data-url="http://yygmind.github.io/2016/10/30/Android 动态绘制圆形进度条/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#效果图"><span class="nav-number">1.</span> <span class="nav-text">效果图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现思路"><span class="nav-number">2.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、画进度圆弧"><span class="nav-number">3.</span> <span class="nav-text">二、画进度圆弧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、定时器调用"><span class="nav-number">4.</span> <span class="nav-text">三、定时器调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、总结"><span class="nav-number">5.</span> <span class="nav-text">四、总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、最后附上源码"><span class="nav-number">6.</span> <span class="nav-text">五、最后附上源码</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

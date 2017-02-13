@@ -1,0 +1,1115 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Cookbook,翻译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1.5 遍历字符
+问题：你想遍历字符串中的每个字符，在遍历字符串时对每个字符进行操作。1.5.1 解决方案：
+根据你的需求和喜好，你可以使用map或者foreach方法，一个是循环，另一个是其他方法。
+
+map把输入字符转成大写的例子
+scala&amp;gt; val upper = &amp;quot;hello, world&amp;quot;.map(c =&amp;gt; c.toUpper)
+upper: Strin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala Cookbook翻译 Chapter 1.Strings 第二部分">
+<meta property="og:url" content="http://yygmind.github.io/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="1.5 遍历字符
+问题：你想遍历字符串中的每个字符，在遍历字符串时对每个字符进行操作。1.5.1 解决方案：
+根据你的需求和喜好，你可以使用map或者foreach方法，一个是循环，另一个是其他方法。
+
+map把输入字符转成大写的例子
+scala&amp;gt; val upper = &amp;quot;hello, world&amp;quot;.map(c =&amp;gt; c.toUpper)
+upper: Strin">
+<meta property="og:updated_time" content="2017-02-13T12:27:02.295Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala Cookbook翻译 Chapter 1.Strings 第二部分">
+<meta name="twitter:description" content="1.5 遍历字符
+问题：你想遍历字符串中的每个字符，在遍历字符串时对每个字符进行操作。1.5.1 解决方案：
+根据你的需求和喜好，你可以使用map或者foreach方法，一个是循环，另一个是其他方法。
+
+map把输入字符转成大写的例子
+scala&amp;gt; val upper = &amp;quot;hello, world&amp;quot;.map(c =&amp;gt; c.toUpper)
+upper: Strin">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Scala Cookbook翻译 Chapter 1.Strings 第二部分 | Cody Yang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cody Yang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Scala Cookbook翻译 Chapter 1.Strings 第二部分
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-05T21:27:24+08:00" content="2016-09-05">
+              2016-09-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 1.Strings 第二部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-5-遍历字符"><a href="#1-5-遍历字符" class="headerlink" title="1.5 遍历字符"></a>1.5 遍历字符</h2><ul>
+<li>问题：你想遍历字符串中的每个字符，在遍历字符串时对每个字符进行操作。<h4 id="1-5-1-解决方案："><a href="#1-5-1-解决方案：" class="headerlink" title="1.5.1 解决方案："></a>1.5.1 解决方案：</h4></li>
+<li><p>根据你的需求和喜好，你可以使用map或者foreach方法，一个是循环，另一个是其他方法。</p>
+</li>
+<li><p>map把输入字符转成大写的例子</p>
+<pre><code>scala&gt; val upper = &quot;hello, world&quot;.map(c =&gt; c.toUpper)
+upper: String = HELLO, WORLD
+
+//大部分使用以下缩写，使用下划线的魔法
+scala&gt; val upper = &quot;hello, world&quot;.map(_.toUpper)
+upper: String = HELLO, WORLD
+</code></pre></li>
+<li><p>任何集合中，如字符串的字符序列，你可以把集合方法链接在一起以达到预期的结果。下面的例子是在原始字符串的基础上调用filter方法将所有的小写字母“L”删除后创建一个新的字符串，然后已这个新的字符串作为ma方法的输入将剩余的字符转换成大写字符。</p>
+<pre><code>scala&gt; val upper = &quot;hello, world&quot;.filter(_ != &apos;l&apos;).map(_.toUpper)
+upper: String = HEO, WORD
+</code></pre><a id="more"></a>      </li>
+<li><p>当你刚开始使用Scala时可能不大习惯map方法，使用Scala的for循环可以达到相同的结果。</p>
+<pre><code>scala&gt; for (c &lt;- &quot;hello&quot;) println(c)
+h 
+e 
+l 
+l 
+o       
+</code></pre></li>
+<li><p>要写一个和map方法一样的for循环，可以在循环结束添加一个yield，此时的for/yield循环和前两个map方法例子是一样的。</p>
+<pre><code>scala&gt; val upper = for (c &lt;- &quot;hello, world&quot;) yield c.toUpper
+upper: String = HELLO, WORLD
+</code></pre></li>
+<li><p>在for循环中添加yield本质上是将每次循环结果放置到暂存区，当循环结果，所有在暂存区的元素将作为一个集合返回。下例for/yield循环结果和第三个map方法一样。</p>
+<pre><code>val result = for {
+c &lt;- &quot;hello, world&quot;
+if c != &apos;l&apos;
+} yield c.toUppe
+</code></pre></li>
+<li><p>map方法和for/yield方法用于将一个集合转换成另一个，而foreach方法通常用来操作每个元素而且没有返回值，下面这个打印的情况比较有用。</p>
+<pre><code>scala&gt; &quot;hello&quot;.foreach(println)
+h 
+e 
+l 
+l
+o
+</code></pre></li>
+</ul>
+<h4 id="1-5-2-讨论"><a href="#1-5-2-讨论" class="headerlink" title="1.5.2 讨论"></a>1.5.2 讨论</h4><ul>
+<li><p>因为Scala把string当做字符序列，并且Scala是面向对象和函数式编程语言，你可以如上述方法显示的一样遍历字符串中的字符，下面使用经典Java方法进行比较。</p>
+<pre><code>String s = &quot;Hello&quot;;
+StringBuilder sb = new StringBuilder();
+for (int i = 0; i &lt; s.length(); i++) {
+    char c = s.charAt(i);
+    // do something with the character ...
+    // sb.append ...
+}
+String result = sb.toString();
+</code></pre></li>
+<li><p>可以看到Scala方法更加简洁并且还是很可读的，这种简洁和可读使你更加专注于解决手上的问题，一旦你熟悉Scala，就像Java例子中的命令代码掩盖了业务逻辑。</p>
+</li>
+<li><p>维基百科中对命令式编程的描述是这样的：命令式编程是一种编程范式，在改变程序状态的一系列声明中描述计算。命令程序定义计算机的命令序列来执行。这是Java的例子所示，它定义了一系列明确的声明告诉计算机如何达到预期的结果。</p>
+</li>
+</ul>
+<h4 id="1-5-3-理解map如何工作："><a href="#1-5-3-理解map如何工作：" class="headerlink" title="1.5.3 理解map如何工作："></a>1.5.3 理解map如何工作：</h4><ul>
+<li><p>根据你的编码偏好，你可以在map方法中使用大的代码块。这两个例子证明了通过一个运算来传递一个map方法的语法。</p>
+<pre><code>// first example
+&quot;HELLO&quot;.map(c =&gt; (c.toByte+32).toChar)
+
+// second example
+&quot;HELLO&quot;.map{ c =&gt;
+(c.toByte+32).toChar
+}
+</code></pre></li>
+<li><p>注意算法一次操作一个字符。因为这个例子中map方法被字符串调用，map将字符串当做一个字符元素的有序集合。map方法有一个隐式循环，并且在循环中一次操作一个字符运算。</p>
+</li>
+<li><p>尽管这个运算很短，设想一下它需要很长的时间。在这种情况下，为了保持你的代码清晰，你可能想要把它写成一个方法（或函数），这个方法可以传递到map方法。要编写一个可以传递到map方法执行字符串中的字符的方法，定义它以一个单一的字符作为输入，然后执行该方法中的字符的逻辑。当逻辑完成时，返回任何运算返回的结果。尽管下面的运算依然很短，它演示了如何创建一个自定义方法，并将这个方法传递到map中。</p>
+<pre><code>// 自定义操作字符的方法
+scala&gt; def toLower(c: Char): Char = (c.toByte+32).toChar
+toLower: (c: Char)Char
+
+// 使用map方法
+scala&gt; &quot;HELLO&quot;.map(toLower)
+res0: String = hello
+</code></pre></li>
+<li><p>作为额外的好处，同样的方法也可以使用在for/yield方法中。</p>
+<pre><code>scala&gt; val s = &quot;HELLO&quot;
+s: java.lang.String = HELLO
+
+scala&gt; for (c &lt;- s) yield toLower(c)
+res1: String = hello
+</code></pre></li>
+<li><p>在讨论中我使用了“方法”一词，但是你也可以在这里使用函数代替方法，那么函数和方法的不同是什么?</p>
+<ul>
+<li><p>下面这个函数相当于toLower方法</p>
+<pre><code>val toLower = (c: Char) =&gt; (c.toByte+32).toChar
+toLower: Char =&gt; Char = &lt;function1&gt;
+</code></pre></li>
+<li><p>这个函数可以和之前使用的toLower方法以同样的方式传递到map中</p>
+<pre><code>scala&gt; &quot;HELLO&quot;.map(toLower)
+res0: String = hello    
+</code></pre></li>
+<li>详情可看第九章函数编程，查看更多函数信息和方法函数区别的。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-5-4-完整的例子"><a href="#1-5-4-完整的例子" class="headerlink" title="1.5.4 完整的例子"></a>1.5.4 完整的例子</h4><ul>
+<li><p>下面的例子演示如何在字符串中调用getBytes方法，然后传递代码块到foreach方法中来计算一个字符串的Adler-32校验和值。</p>
+<pre><code>package tests
+
+/**
+* Calculate the Adler-32 checksum using Scala.
+* @see http://en.wikipedia.org/wiki/Adler-32
+*/
+object Adler32Checksum {
+    val MOD_ADLER = 65521
+
+    def main(args: Array[String]) {
+        val sum = adler32sum(&quot;Wikipedia&quot;)
+        printf(&quot;checksum (int) = %d\n&quot;, sum)
+        printf(&quot;checksum (hex) = %s\n&quot;, sum.toHexString)
+    }
+
+    def adler32sum(s: String): Int = {
+        var a = 1
+        var b = 0
+        s.getBytes.foreach{char =&gt;
+            a = (char + a) % MOD_ADLER
+            b = (b + a) % MOD_ADLER
+        }
+        // note: Int is 32 bits, which this requires
+        b * 65536 + a // or (b &lt;&lt; 16) + a
+    }
+
+}
+</code></pre></li>
+<li><p>getBytes方法返回一个字符串的字节有序集合，如下所示：</p>
+<pre><code>scala&gt; &quot;hello&quot;.getBytes
+res0: Array[Byte] = Array(104, 101, 108, 108, 111)
+</code></pre></li>
+<li><p>调用getBytes之后添加foreach方法可以操作每个字节的值：</p>
+<pre><code>scala&gt; &quot;hello&quot;.getBytes.foreach(println)
+104
+101
+108
+108
+111
+</code></pre></li>
+<li><p>上面例子中使用foreach代替map，因为目标是循环字符串中的每个字节，并且在每个字节上进行一些操作，但是你并不想在循环的最后返回任何值。</p>
+</li>
+<li><p>查看更多</p>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Adler-32" target="_blank" rel="external"> The Adler-32 checksum algorithm</a></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="1-6-字符串中的搜索模式"><a href="#1-6-字符串中的搜索模式" class="headerlink" title="1.6 字符串中的搜索模式"></a>1.6 字符串中的搜索模式</h2><ul>
+<li>问题：确定一个字符串中是否包含正则表达式模式</li>
+</ul>
+<h4 id="1-6-1-解决方案"><a href="#1-6-1-解决方案" class="headerlink" title="1.6.1 解决方案"></a>1.6.1 解决方案</h4><ul>
+<li>通过在字符串上调用.r方法创建一个正则表达式对象，当你查找一个匹配时使用findFirstIn模式，搜索所有匹配时用findAllIn。</li>
+<li><p>首先创建一个你想搜索的正则表达式模式，下面例子中是一个或多个数字字符的序列。</p>
+<pre><code>//创建规则
+scala&gt; val numPattern = &quot;[0-9]+&quot;.r
+numPattern: scala.util.matching.Regex = [0-9]+
+
+//创建需要查找的字符串例子
+scala&gt; val address = &quot;123 Main Street Suite 101&quot;
+address: java.lang.String = 123 Main Street Suite 101
+
+//使用findFirstIn方法查找第一个匹配（返回的是Option[String]，讨论中详解）
+scala&gt; val match1 = numPattern.findFirstIn(address)
+match1: Option[String] = Some(123)
+
+//使用findAllIn查找复杂匹配,返回迭代器
+scala&gt; val matches = numPattern.findAllIn(address)
+matches: scala.util.matching.Regex.MatchIterator = non-empty iterator
+
+//循环输出结果
+scala&gt; matches.foreach(println)
+123
+101
+</code></pre></li>
+<li><p>如果findAllIn查找不到任何结果，就会返回一个空的迭代器，你不需要检查结果是否为空，所以你可以和之前一样写代码。如果你需要把结果输出成Array数组，可以再findAllIn之后调用toArray方法。</p>
+<pre><code>scala&gt; val matches = numPattern.findAllIn(address).toArray
+matches: Array[String] = Array(123, 101)
+</code></pre></li>
+<li><p>如果没有匹配结果，这个方法会yield一个空的Array数组，其他方法如toList,toSeq,toVector也可用。</p>
+</li>
+</ul>
+<h4 id="1-6-2-讨论"><a href="#1-6-2-讨论" class="headerlink" title="1.6.2 讨论"></a>1.6.2 讨论</h4><ul>
+<li><p>在字符串之后使用.r方法比创建一个正则表达式对象要更加简单。另一个方法是导入Regex类，创建正则实例，然后如下方式使用实例:</p>
+<pre><code>scala&gt; import scala.util.matching.Regex
+import scala.util.matching.Regex
+
+scala&gt; val numPattern = new Regex(&quot;[0-9]+&quot;)
+numPattern: scala.util.matching.Regex = [0-9]+
+
+scala&gt; val address = &quot;123 Main Street Suite 101&quot;
+address: java.lang.String = 123 Main Street Suite 101
+
+scala&gt; val match1 = numPattern.findFirstIn(address)
+match1: Option[String] = Some(123)
+</code></pre></li>
+<li><p>尽管稍显繁琐，不过更加明显易懂。我发现很容易在字符串的后面忽略.r（然后花了几分钟想知道我看到的代码如何工作）</p>
+</li>
+</ul>
+<h4 id="1-6-3-处理findFirstIn返回的Option"><a href="#1-6-3-处理findFirstIn返回的Option" class="headerlink" title="1.6.3 处理findFirstIn返回的Option"></a>1.6.3 处理findFirstIn返回的Option</h4><ul>
+<li><p>如在解决方案中提到过的，findFirstIn方法查找字符串中的第一个匹配然后返回一个Option[String]:</p>
+<pre><code>scala&gt; val match1 = numPattern.findFirstIn(address)
+match1: Option[String] = Some(123)
+</code></pre></li>
+<li><p>在章节20.6会详细说明Option/Some/None模式，简单的理解Option就是它是保存0个或1个值的容器。在这个findFirstIn的例子中，如果成功会返回字符串“123”如Some(123)，如果查找失败会返回None:</p>
+<pre><code>scala&gt; val address = &quot;No address given&quot;
+address: String = No address given
+
+scala&gt; val match1 = numPattern.findFirstIn(address)
+match1: Option[String] = None
+</code></pre></li>
+<li><p>总结就是，一个定义的方法返回的Option[String]要不返回的是Some(String)，要么是None。正常使用Option的方式一般如下：</p>
+<ul>
+<li>在结果后调用getOrElse</li>
+<li>在匹配表达式中使用Option</li>
+<li>在foreach循环中使用Option</li>
+</ul>
+</li>
+<li><p>章节20.6会详细描述这些方法，为了方便这里会简单介绍下。</p>
+</li>
+<li><p>使用getOrElse方法,会试图“get”到结果，同时还指定当方法失败时应使用的默认值：</p>
+<pre><code>scala&gt; val result = numPattern.findFirstIn(address).getOrElse(&quot;no match&quot;)
+result: String = 123
+</code></pre></li>
+<li><p>因为Option是0个或1个元素的集合,一个有经验的Scala开发者会在这种情况下同时使用foreach循环。</p>
+<pre><code>numPattern.findFirstIn(address).foreach { e =&gt;
+    // perform the next step in your algorithm,
+    // operating on the value &apos;e&apos;
+}
+</code></pre></li>
+<li><p>匹配表达式也为这个问题提供了一个非常可读的解决方案，更多查看20.6章。</p>
+<pre><code>match1 match {
+    case Some(s) =&gt; println(s&quot;Found: $s&quot;)
+    case None =&gt;
+}
+</code></pre></li>
+<li><p>对这个方法进行总结，下面的REPL例子显示了创建正则表达式，通过findFirstIn搜索字符串，在匹配结果使用foreach循环的完整结果。</p>
+<pre><code>scala&gt; val numPattern = &quot;[0-9]+&quot;.r
+numPattern: scala.util.matching.Regex = [0-9]+
+
+scala&gt; val address = &quot;123 Main Street Suite 101&quot;
+address: String = 123 Main Street Suite 101
+
+scala&gt; val match1 = numPattern.findFirstIn(address)
+match1: Option[String] = Some(123)
+
+scala&gt; match1.foreach { e =&gt;
+    | println(s&quot;Found a match: $e&quot;)
+    | }
+Found a match: 123
+</code></pre></li>
+<li><p>查看更多</p>
+<blockquote>
+<p><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.StringOps" target="_blank" rel="external">The StringOps class</a><br><a href="http://www.scala-lang.org/api/current/index.html#scala.util.matching.Regex" target="_blank" rel="external">The Regex class</a></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="1-7-字符串中的替换模式"><a href="#1-7-字符串中的替换模式" class="headerlink" title="1.7 字符串中的替换模式"></a>1.7 字符串中的替换模式</h2><ul>
+<li>问题：想要在字符串中搜索一个正则表达式模式并替换他们。<h4 id="1-7-1-解决方案"><a href="#1-7-1-解决方案" class="headerlink" title="1.7.1 解决方案"></a>1.7.1 解决方案</h4></li>
+<li>因为字符串是不可改变的，你不能直接在字符串的基础上进行查找并替换的操作。但是你可以创建一个包含被替换内容的新字符串。有以下几种方式做到这个。</li>
+<li><p>可以在字符串上调用replaceAll，记住将结果分配给一个新的变量。</p>
+<pre><code>scala&gt; val address = &quot;123 Main Street&quot;.replaceAll(&quot;[0-9]&quot;, &quot;x&quot;)
+address: java.lang.String = xxx Main Street
+</code></pre></li>
+<li><p>可以创建正则表达式然后在表达式基础上调用replaceAllIn，仍然需要记住将结果分配给一个新的变量。</p>
+<pre><code>scala&gt; val regex = &quot;[0-9]&quot;.r
+regex: scala.util.matching.Regex = [0-9]
+
+scala&gt; val newAddress = regex.replaceAllIn(&quot;123 Main Street&quot;, &quot;x&quot;)
+newAddress: String = xxx Main Street
+</code></pre></li>
+<li><p>只替换第一个匹配模式的，使用replaceFirst方法：</p>
+<pre><code>scala&gt; val result = &quot;123&quot;.replaceFirst(&quot;[0-9]&quot;, &quot;x&quot;)
+result: java.lang.String = x23
+</code></pre></li>
+<li><p>也可以使用一个正则表达式的replaceFirstIn:</p>
+<pre><code>scala&gt; val regex = &quot;H&quot;.r
+regex: scala.util.matching.Regex = H
+
+scala&gt; val result = regex.replaceFirstIn(&quot;Hello world&quot;, &quot;J&quot;)
+result: String = Jello world
+</code></pre></li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Cookbook/" rel="tag">#Cookbook</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/" rel="next" title="Scala Cookbook翻译 Chapter 1.Strings 第一部分">
+                <i class="fa fa-chevron-left"></i> Scala Cookbook翻译 Chapter 1.Strings 第一部分
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/" rel="prev" title="Scala Cookbook翻译 Chapter 1.Strings 第三部分">
+                Scala Cookbook翻译 Chapter 1.Strings 第三部分 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/"
+     data-title="Scala Cookbook翻译 Chapter 1.Strings 第二部分"
+     data-content=""
+     data-url="http://yygmind.github.io/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/"
+           data-title="Scala Cookbook翻译 Chapter 1.Strings 第二部分" data-url="http://yygmind.github.io/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-遍历字符"><span class="nav-number">1.</span> <span class="nav-text">1.5 遍历字符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-1-解决方案："><span class="nav-number">1.0.1.</span> <span class="nav-text">1.5.1 解决方案：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-2-讨论"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.5.2 讨论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-3-理解map如何工作："><span class="nav-number">1.0.3.</span> <span class="nav-text">1.5.3 理解map如何工作：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-4-完整的例子"><span class="nav-number">1.0.4.</span> <span class="nav-text">1.5.4 完整的例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-字符串中的搜索模式"><span class="nav-number">2.</span> <span class="nav-text">1.6 字符串中的搜索模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-1-解决方案"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.6.1 解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-2-讨论"><span class="nav-number">2.0.2.</span> <span class="nav-text">1.6.2 讨论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-3-处理findFirstIn返回的Option"><span class="nav-number">2.0.3.</span> <span class="nav-text">1.6.3 处理findFirstIn返回的Option</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-字符串中的替换模式"><span class="nav-number">3.</span> <span class="nav-text">1.7 字符串中的替换模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-1-解决方案"><span class="nav-number">3.0.1.</span> <span class="nav-text">1.7.1 解决方案</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

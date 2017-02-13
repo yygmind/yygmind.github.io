@@ -1,0 +1,1670 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Cookbook,翻译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="4.8 分配块或函数给字段
+使用代码块或者调用一个函数初始化类里的字段4.8.1 解决方案
+设置字段等于需要的代码块或者函数
+class Foo {
+
+    // set &amp;apos;text&amp;apos; equal to the result of the block of code
+    val text = {
+        var lines = &amp;quot;&amp;quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分">
+<meta property="og:url" content="http://yygmind.github.io/2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="4.8 分配块或函数给字段
+使用代码块或者调用一个函数初始化类里的字段4.8.1 解决方案
+设置字段等于需要的代码块或者函数
+class Foo {
+
+    // set &amp;apos;text&amp;apos; equal to the result of the block of code
+    val text = {
+        var lines = &amp;quot;&amp;quot;">
+<meta property="og:updated_time" content="2017-02-13T13:23:10.273Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分">
+<meta name="twitter:description" content="4.8 分配块或函数给字段
+使用代码块或者调用一个函数初始化类里的字段4.8.1 解决方案
+设置字段等于需要的代码块或者函数
+class Foo {
+
+    // set &amp;apos;text&amp;apos; equal to the result of the block of code
+    val text = {
+        var lines = &amp;quot;&amp;quot;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分 | Cody Yang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cody Yang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-29T14:35:46+08:00" content="2016-09-29">
+              2016-09-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/" class="leancloud_visitors" data-flag-title="Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="4-8-分配块或函数给字段"><a href="#4-8-分配块或函数给字段" class="headerlink" title="4.8 分配块或函数给字段"></a>4.8 分配块或函数给字段</h2><ul>
+<li>使用代码块或者调用一个函数初始化类里的字段<h3 id="4-8-1-解决方案"><a href="#4-8-1-解决方案" class="headerlink" title="4.8.1 解决方案"></a>4.8.1 解决方案</h3></li>
+<li><p>设置字段等于需要的代码块或者函数</p>
+<pre><code>class Foo {
+
+    // set &apos;text&apos; equal to the result of the block of code
+    val text = {
+        var lines = &quot;&quot;
+        try {
+            lines = io.Source.fromFile(&quot;/etc/passwd&quot;).getLines.mkString
+        } catch {
+            case e: Exception =&gt; lines = &quot;Error happened&quot;
+        }
+        lines
+        }
+        println(text)
+}
+
+object Test extends App {
+    val f = new Foo
+}
+</code></pre></li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>上面分配代码块给text字段和println语句都在类Foo的主体部分中，他们都是类的构造函数，当创建一个类的实例时他们会被执行。</li>
+<li><p>同样方式。分配方法或者函数给类字段</p>
+<pre><code>class Foo {
+    import scala.xml.XML
+
+    // assign the xml field to the result of the load method
+    val xml = XML.load(&quot;http://example.com/foo.xml&quot;)
+
+    // more code here ...
+}
+</code></pre><h3 id="4-8-2-讨论"><a href="#4-8-2-讨论" class="headerlink" title="4.8.2 讨论"></a>4.8.2 讨论</h3></li>
+<li><p>如果定义一个字段为lazy，意味着不会立马执行直到字段被获取调用：</p>
+<pre><code>class Foo {
+    val text =
+        io.Source.fromFile(&quot;/etc/passwd&quot;).getLines.foreach(println)
+}
+
+object Test extends App {
+    val f = new Foo
+}
+</code></pre></li>
+<li><p>上面代码忽略潜在错误，如果运行在Unix系统，会打印/etc/passwd文件</p>
+<pre><code>class Foo {
+    lazy val text =
+        io.Source.fromFile(&quot;/etc/passwd&quot;).getLines.foreach(println)
+}
+
+object Test extends App {
+    val f = new Foo
+}
+</code></pre></li>
+<li>上面声明成lazy字段的代码编译执行后，没有任何输出。因为text字段不会初始化直到它被获取。</li>
+</ul>
+<hr>
+<h2 id="4-9-设置未初始化的var字段类型"><a href="#4-9-设置未初始化的var字段类型" class="headerlink" title="4.9 设置未初始化的var字段类型"></a>4.9 设置未初始化的var字段类型</h2><ul>
+<li><p>问题： 想要设置一个未初始化var字段类型，所以开始写代码如下，然后如何完成表达式。</p>
+<pre><code>var x =
+</code></pre><h3 id="4-9-1-解决方案"><a href="#4-9-1-解决方案" class="headerlink" title="4.9.1 解决方案"></a>4.9.1 解决方案</h3></li>
+<li><p>一般来说，定义字段为Option。对于具体的类型，比如String和numeric字段，可以指定默认的初始化值，下面的address字段可以定义成Option,初始化如下。</p>
+<pre><code>case class Person(var username: String, var password: String) {
+
+    var age = 0
+    var firstName = &quot;&quot;
+    var lastName = &quot;&quot;
+    var address = None: Option[Address]
+}
+
+case class Address(city: String, state: String, zip: String)
+</code></pre></li>
+<li><p>使用Some[Address]赋值</p>
+<pre><code>val p = Person(&quot;alvinalexander&quot;, &quot;secret&quot;)
+p.address = Some(Address(&quot;Talkeetna&quot;, &quot;AK&quot;, &quot;99676&quot;))
+</code></pre></li>
+<li><p>如想要获取address字段，有很多方法可见20.6章。可以使用foreach循环打印：</p>
+<pre><code>p.address.foreach { a =&gt;
+    println(a.city)
+    println(a.state)
+    println(a.zip)
+}
+</code></pre></li>
+<li>如果address未赋值，那么address是一个None,调用foreach没有问题，循环会自动跳出。如果已经赋值，那么address是一个Some[Address],循环会进入然后打印。 </li>
+</ul>
+<h3 id="4-9-2-讨论"><a href="#4-9-2-讨论" class="headerlink" title="4.9.2 讨论"></a>4.9.2 讨论</h3><ul>
+<li><p>很容易创建一个Int和Double字段</p>
+<pre><code>var i = 0 // Int
+var d = 0.0 // Double
+</code></pre></li>
+<li><p>上面例子中编译器会自动区分需要的类型。如果需要不同的数字类型，方法如下：</p>
+<pre><code>var b: Byte = 0
+var c: Char = 0
+var f: Float = 0
+var l: Long = 0
+var s: Short = 0
+</code></pre></li>
+<li>查看更多</li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.Option" target="_blank" rel="external">Option class</a></li>
+<li>不要设置字段为null，更多见20.5章：“Eliminate null Values from Your Code”</li>
+<li>20.6章：“Using the Option/Some/None Pattern”</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="4-10-当继承类时处理构造函数参数"><a href="#4-10-当继承类时处理构造函数参数" class="headerlink" title="4.10 当继承类时处理构造函数参数"></a>4.10 当继承类时处理构造函数参数</h2><ul>
+<li>问题：当继承一个基类时，需要处理基类声明的构造函数参数以及子类新的参数<h3 id="4-10-1-解决方案"><a href="#4-10-1-解决方案" class="headerlink" title="4.10.1 解决方案"></a>4.10.1 解决方案</h3></li>
+<li><p>往常一样使用val或者var构造函数参数声明基类，当定义子类构造函数时，去掉两个类中相同字段前的val或者var声明,当定义子类新的构造函数参数时使用val或者var声明。</p>
+<pre><code>class Person (var name: String, var address: Address) {
+    override def toString = if (address == null) name else s&quot;$name @ $address&quot;
+}
+
+case class Address (city: String, state: String)
+</code></pre></li>
+<li><p>子类Employee</p>
+<pre><code>class Employee (name: String, address: Address, var age: Int) 
+extends Person (name, address) {
+    // rest of the class
+}
+</code></pre></li>
+<li><p>创建Employee实例</p>
+<pre><code>val teresa = new Employee(&quot;Teresa&quot;, Address(&quot;Louisville&quot;, &quot;KY&quot;), 25)
+</code></pre></li>
+<li><p>输出</p>
+<pre><code>scala&gt; teresa.name
+res0: String = Teresa
+
+scala&gt; teresa.address
+res1: Address = Address(Louisville,KY)
+
+scala&gt; teresa.age
+res2: Int = 25
+</code></pre></li>
+</ul>
+<h3 id="4-10-2-讨论"><a href="#4-10-2-讨论" class="headerlink" title="4.10.2 讨论"></a>4.10.2 讨论</h3><ul>
+<li><p>理解Scala编译器如何转换你的代码有助于理解子类构造函数参数如何工作，下面代码放到文件Person.scala中：</p>
+<pre><code>case class Address (city: String, state: String)
+
+class Person (var name: String, var address: Address) {
+    override def toString = if (address == null) name else s&quot;$name @ $address&quot;
+}
+</code></pre></li>
+<li><p>上面字段是var变量，Scala编译器生成了获取器和修改器，编译Person.scala反编译Person.class如下：</p>
+<pre><code>$ javap Person
+Compiled from &quot;Person.scala&quot;
+public class Person extends java.lang.Object implements scala.ScalaObject{
+    public java.lang.String name();
+    public void name_$eq(java.lang.String);
+    public Address address();
+    public void address_$eq(Address);
+    public java.lang.String toString();
+    public Person(java.lang.String, Address);
+}
+</code></pre></li>
+<li><p>新的问题：如果定义一个Employee类继承Person，如何处理Employee构造函数里的name和address字段？假设没有新的参数，至少有两种选择：</p>
+<pre><code>// Option 1: define name and address as &apos;var&apos;
+class Employee (var name: String, var address: Address) 
+extends Person (name, address) { ... }
+
+// Option 2: define name and address without var or val
+class Employee (name: String, address: Address)
+extends Person (name, address) { ... }
+</code></pre></li>
+<li><p>因为Scala已经为Person类里的name和address声明了getter和setter方法，解决方法是不使用var进行声明：</p>
+<pre><code>// this is correct
+class Employee (name: String, address: Address) 
+extends Person (name, address) { ... }
+</code></pre></li>
+<li><p>把下面代码编译反编译，文件名是Person.scala，反编译Employee.class</p>
+<pre><code>case class Address (city: String, state: String)
+
+class Person (var name: String, var address: Address) {
+    override def toString = if (address == null) name else s&quot;$name @ $address&quot;
+}
+
+class Employee (name: String, address: Address)
+extends Person (name, address) {
+    // code here ...
+}
+</code></pre></li>
+<li><p>反编译结果如下：</p>
+<pre><code>$ javap Employee
+Compiled from &quot;Person.scala&quot;
+public class Employee extends Person implements scala.ScalaObject{
+    public Employee(java.lang.String, Address);
+}
+</code></pre></li>
+<li>Employee继承Person，Scala不为name和address字段生成getter和setter方法，Employee类继承了Person类的行为。</li>
+</ul>
+<hr>
+<h2 id="4-11-调用超类构造函数"><a href="#4-11-调用超类构造函数" class="headerlink" title="4.11 调用超类构造函数"></a>4.11 调用超类构造函数</h2><ul>
+<li>问题：想要控制当创建子类构造函数时调用的父类构造函数<h3 id="4-11-1-解决方案"><a href="#4-11-1-解决方案" class="headerlink" title="4.11.1 解决方案"></a>4.11.1 解决方案</h3></li>
+<li>这有一个问题，你可以控制子类的主构造函数调用的父类构造函数，但是不可以控制子类的辅助构造函数调用的父类构造函数。</li>
+<li><p>下面例子，定义一个Dog类去调用Animal类的主构造函数：</p>
+<pre><code>class Animal (var name: String) {
+    // ...
+}
+
+class Dog (name: String) extends Animal (name) {
+    // ...
+}
+</code></pre></li>
+<li><p>如果Animal类有多个构造函数，那么Dog类的主构造函数可以调用任意一个</p>
+<pre><code>// (1) primary constructor
+class Animal (var name: String, var age: Int) {
+
+    // (2) auxiliary constructor
+    def this (name: String) {
+        this(name, 0)
+    }
+    override def toString = s&quot;$name is $age years old&quot;
+}
+
+// calls the Animal one-arg constructor
+class Dog (name: String) extends Animal (name) {
+    println(&quot;Dog constructor called&quot;)
+}
+
+// call the two-arg constructor
+class Dog (name: String) extends Animal (name, 0) {
+    println(&quot;Dog constructor called&quot;)
+}
+</code></pre><h3 id="4-11-2-辅助构造函数"><a href="#4-11-2-辅助构造函数" class="headerlink" title="4.11.2 辅助构造函数"></a>4.11.2 辅助构造函数</h3></li>
+<li><p>辅助构造函数的第一行必须调用当前类的另一个构造函数，不可能调用父类的构造函数</p>
+<pre><code>case class Address (city: String, state: String)
+case class Role (role: String)
+
+class Person (var name: String, var address: Address) {
+
+    // no way for Employee auxiliary constructors to call this constructor
+    def this (name: String) {
+        this(name, null)
+        address = null
+    }
+
+    override def toString = if (address == null) name else s&quot;$name @ $address&quot;
+}
+
+class Employee (name: String, role: Role, address: Address)
+extends Person (name, address) {
+
+    def this (name: String) {
+        this(name, null, null)
+    }
+
+    def this (name: String, role: Role) {
+        this(name, role, null)
+    }
+
+    def this (name: String, address: Address) {
+        this(name, null, address)
+    }
+
+}
+</code></pre></li>
+</ul>
+<hr>
+<h2 id="4-12-使用抽象类（Abstract-Class）"><a href="#4-12-使用抽象类（Abstract-Class）" class="headerlink" title="4.12 使用抽象类（Abstract Class）"></a>4.12 使用抽象类（Abstract Class）</h2><ul>
+<li>问题：Scala有特质（trait），而且特质比抽象类更灵活，那么什么时候使用抽象类<h3 id="4-12-1-解决方案"><a href="#4-12-1-解决方案" class="headerlink" title="4.12.1 解决方案"></a>4.12.1 解决方案</h3></li>
+<li>以下两点使用抽象类：<ul>
+<li>创建一个需要构造函数参数的基类</li>
+<li>Scala代码会被Java代码调用</li>
+</ul>
+</li>
+<li><p>特质不允许有构造函数参数：</p>
+<pre><code>// this won&apos;t compile
+trait Animal(name: String)
+
+// this compile
+abstract class Animal(name: String)
+</code></pre></li>
+<li>17.7章解决特质实现的方法不能被Java代码调用的问题</li>
+</ul>
+<h3 id="4-12-2-讨论"><a href="#4-12-2-讨论" class="headerlink" title="4.12.2 讨论"></a>4.12.2 讨论</h3><ul>
+<li>一个类智能继承一个抽象类。</li>
+<li><p>声明抽象方法：</p>
+<pre><code>def speak // no body makes the method abstract
+</code></pre></li>
+<li><p>抽象方法不需要使用abstract关键词，去除方法的body就会变成抽象方法。这和在特质里定义抽象方法是一致的。</p>
+<pre><code>abstract class BaseController(db: Database) {
+
+    def save { db.save }
+    def update { db.update }
+    def delete { db.delete }
+
+    // abstract
+    def connect
+
+    // an abstract method that returns a String
+    def getStatus: String
+
+    // an abstract method that takes a parameter
+    def setServerName(serverName: String)
+}
+</code></pre></li>
+<li><p>子类继承之后需要实现抽象方法或者继续声明成抽象的，不实现方法会报出“class needs to be abstract”错误</p>
+<pre><code>scala&gt; class WidgetController(db: Database) extends BaseController(db)
+&lt;console&gt;:9: error: class WidgetController needs to be abstract, since:
+method setServerName in class BaseController of type (serverName: String)Unit
+is not defined
+method getStatus in class BaseController of type =&gt; String is not defined
+method connect in class BaseController of type =&gt; Unit is not defined
+        class WidgetController(db: Database) extends BaseController(db)
+              ^
+</code></pre></li>
+<li>因为类只能继承一个抽象类，当决定使用特质还是抽象类时一般使用特质，除非基类需要构造函数参数</li>
+</ul>
+<hr>
+<h2 id="4-13-在抽象基类（或特质）中定义属性"><a href="#4-13-在抽象基类（或特质）中定义属性" class="headerlink" title="4.13 在抽象基类（或特质）中定义属性"></a>4.13 在抽象基类（或特质）中定义属性</h2><ul>
+<li>问题：在抽象基类（或特质）中定义抽象或具体属性可供所有子类引用<h3 id="4-13-1-解决方案"><a href="#4-13-1-解决方案" class="headerlink" title="4.13.1 解决方案"></a>4.13.1 解决方案</h3></li>
+<li>可以在抽象类或者特质里声明val和var字段。这些字段可以是抽象或者有具体实现。<h3 id="4-13-2-抽象的val和var字段"><a href="#4-13-2-抽象的val和var字段" class="headerlink" title="4.13.2 抽象的val和var字段"></a>4.13.2 抽象的val和var字段</h3></li>
+<li><p>下面抽象类有抽象的val和var字段，一个简单的具体方法：</p>
+<pre><code>abstract class Pet (name: String) {
+    val greeting: String
+    var age: Int
+    def sayHello { println(greeting) }
+    override def toString = s&quot;I say $greeting, and I&apos;m $age&quot;
+}
+</code></pre></li>
+<li><p>子类继承抽象类，然后为抽象的字段赋值，注意这些字段还是指定成val或者var:</p>
+<pre><code>class Dog (name: String) extends Pet (name) {
+    val greeting = &quot;Woof&quot;
+    var age = 2
+}
+
+class Cat (name: String) extends Pet (name) {
+    val greeting = &quot;Meow&quot;
+    var age = 5
+}
+</code></pre></li>
+<li><p>object中演示调用：</p>
+<pre><code>object AbstractFieldsDemo extends App {
+    val dog = new Dog(&quot;Fido&quot;)
+    val cat = new Cat(&quot;Morris&quot;)
+
+    dog.sayHello
+    cat.sayHello
+
+    println(dog)
+    println(cat)
+
+    // verify that the age can be changed
+    cat.age = 10
+    println(cat)
+}
+</code></pre></li>
+<li><p>结果输出：</p>
+<pre><code>Woof
+Meow
+I say Woof, and I&apos;m 2
+I say Meow, and I&apos;m 5
+I say Meow, and I&apos;m 10
+</code></pre></li>
+</ul>
+<h3 id="4-13-3-讨论"><a href="#4-13-3-讨论" class="headerlink" title="4.13.3 讨论"></a>4.13.3 讨论</h3><ul>
+<li>抽象类（或特质）里抽象字段的运行如下：<ul>
+<li>一个抽象的var字段会自动生成getter和setter方法</li>
+<li>一个抽象的val字段会自动生成getter方法</li>
+<li>当在抽象类或特质里定义一个抽象字段，Scala编译器不会在结果代码里创建一个字段，只会根据val或者var生成相应的方法</li>
+</ul>
+</li>
+<li><p>上面的代码通过 scalac -Xprint:all，或者反编译Pet.class文件，会发现没有greeting或者age字段。反编译输出如下：</p>
+<pre><code>import scala.*;
+import scala.runtime.BoxesRunTime;
+
+public abstract class Pet
+{
+    public abstract String greeting();
+    public abstract int age();
+    public abstract void age_$eq(int i);
+
+    public void sayHello() {
+        Predef$.MODULE$.println(greeting());
+    }
+
+    public String toString(){
+        // code omitted
+    }
+    public Pet(String name){}
+}
+</code></pre></li>
+<li>所以当你在具体的类里给这些字段提供具体的值时，必须重新定义字段为val或者var。因为在抽象类或者特质里这些字段实际并不存在，所以override关键词并不需要。</li>
+<li><p>另一个结果，可以在抽象基类使用def定义无参取代使用val定义，然后可以在具体类里定义成val。</p>
+<pre><code>abstract class Pet (name: String) {
+    def greeting: String
+}
+
+class Dog (name: String) extends Pet (name) {
+    val greeting = &quot;Woof&quot;
+}
+
+object Test extends App {
+    val dog = new Dog(&quot;Fido&quot;)
+    println(dog.greeting)
+}
+</code></pre><h3 id="4-13-4-抽象类里具体的val字段"><a href="#4-13-4-抽象类里具体的val字段" class="headerlink" title="4.13.4 抽象类里具体的val字段"></a>4.13.4 抽象类里具体的val字段</h3></li>
+<li><p>抽象类里定义一个具体的val字段可以提供一个初始化值，然后可以在具体子类重写那个值。</p>
+<pre><code>abstract class Animal {
+    val greeting = &quot;Hello&quot; // provide an initial value
+    def sayHello { println(greeting) }
+    def run
+}
+
+class Dog extends Animal {
+    override val greeting = &quot;Woof&quot; // override the value
+    def run { println(&quot;Dog is running&quot;) }
+}
+</code></pre></li>
+<li><p>上面例子中，两个类中都创建了greeting字段</p>
+<pre><code>abstract class Animal {
+    val greeting = { println(&quot;Animal&quot;); &quot;Hello&quot; }
+}
+
+class Dog extends Animal {
+    override val greeting = { println(&quot;Dog&quot;); &quot;Woof&quot; }
+}
+
+object Test extends App {
+    new Dog
+}
+</code></pre></li>
+<li><p>结果输出：</p>
+<pre><code>Animal
+Dog
+</code></pre></li>
+<li><p>可以反编译Animal和Dog类，greeting字段声明成如下：</p>
+<pre><code>private final String greeting = &quot;Hello&quot;;
+</code></pre></li>
+<li><p>抽象类中字段声明成final val那么具体子类中就不能重写这个字段的值：</p>
+<pre><code>abstract class Animal {
+    final val greeting = &quot;Hello&quot; // made the field &apos;final&apos;
+}
+
+class Dog extends Animal {
+    val greeting = &quot;Woof&quot; // this line won&apos;t compile
+}
+</code></pre></li>
+</ul>
+<h3 id="4-13-5-抽象类里具体var字段"><a href="#4-13-5-抽象类里具体var字段" class="headerlink" title="4.13.5 抽象类里具体var字段"></a>4.13.5 抽象类里具体var字段</h3><ul>
+<li><p>可以在抽象类或特质为var字段提供一个初始化值，然后在具体子类引用：</p>
+<pre><code>abstract class Animal {
+    var greeting = &quot;Hello&quot;
+    var age = 0
+    override def toString = s&quot;I say $greeting, and I&apos;m $age years old.&quot;
+}
+
+class Dog extends Animal {
+    greeting = &quot;Woof&quot; //调用setter方法
+    age = 2
+}
+</code></pre></li>
+<li><p>这些字段在抽象基类里声明并赋值，反编译Animal类如下：</p>
+<pre><code>private String greeting;
+private int age;
+
+public Animal(){
+    greeting = &quot;Hello&quot;;
+    age = 0;
+}
+
+// more code ...
+</code></pre></li>
+<li>因为在Animal基类里这个字段已经声明并且初始化，所以在具体子类里没有必要重新声明字段。</li>
+<li><p>Dog类使用 scalac -Xprint:all 编译：</p>
+<pre><code>class Dog extends Animal {
+    def &lt;init&gt;(): Dog = {
+        Dog.super.&lt;init&gt;();
+        Dog.this.greeting_=(&quot;Woof&quot;);
+        Dog.this.age_=(2);
+        ()
+    }
+}
+</code></pre></li>
+<li>因为这个字段在抽象类里是具体的，他们只需要在具体子类里重新赋值即可</li>
+</ul>
+<h3 id="4-13-6-不要使用null"><a href="#4-13-6-不要使用null" class="headerlink" title="4.13.6 不要使用null"></a>4.13.6 不要使用null</h3><ul>
+<li><p>使用Option/Some/None模式初始化字段:</p>
+<pre><code>trait Animal {
+    val greeting: Option[String]
+    var age: Option[Int] = None
+    override def toString = s&quot;I say $greeting, and I&apos;m $age years old.&quot;
+}
+
+class Dog extends Animal {
+    val greeting = Some(&quot;Woof&quot;)
+    age = Some(2)
+}
+
+object Test extends App {
+    val d = new Dog
+    println(d)
+}
+</code></pre></li>
+<li><p>输出如下：</p>
+<pre><code>I say Some(Woof), and I&apos;m Some(2) years old.
+</code></pre></li>
+</ul>
+<hr>
+<h2 id="4-14-Case类生成样本代码"><a href="#4-14-Case类生成样本代码" class="headerlink" title="4.14 Case类生成样本代码"></a>4.14 Case类生成样本代码</h2><ul>
+<li>问题： 在match表达式。actor或者其他使用case类生成样本代码的情况，生成包括获取器，修改器，apply，unapply，toString, equals和hashCode等等方法。</li>
+</ul>
+<h3 id="4-14-1-解决方案"><a href="#4-14-1-解决方案" class="headerlink" title="4.14.1 解决方案"></a>4.14.1 解决方案</h3><ul>
+<li><p>定义一个case类如下：</p>
+<pre><code>// name and relation are &apos;val&apos; by default
+case class Person(name: String, relation: String)
+</code></pre></li>
+<li>定义一个case类会生成很多样本代码，有以下好处：<ul>
+<li>生成apply方法，所以不需要使用new关键词去创建这个类的实例</li>
+<li>case类构造函数参数默认声明成val,会自动生成获取器方法，声明成var会自动生成获取器和修改器</li>
+<li>生成默认的toString方法</li>
+<li>生成unapply方法，可以在匹配表达式轻松使用case类</li>
+<li>生成equals和hashCode方法</li>
+<li>生成copy方法</li>
+</ul>
+</li>
+<li><p>定义case类，创建一个新的实例时不需要使用new关键词</p>
+<pre><code>scala&gt; case class Person(name: String, relation: String)
+defined class Person
+
+// &quot;new&quot; not needed before Person
+scala&gt; val emily = Person(&quot;Emily&quot;, &quot;niece&quot;)
+emily: Person = Person(Emily,niece)
+</code></pre></li>
+<li><p>构造函数默认声明成val，所以会自动生成获取器方法，但不会生成修改器方法：</p>
+<pre><code>scala&gt; emily.name
+res0: String = Emily
+
+scala&gt; emily.name = &quot;Fred&quot;
+&lt;console&gt;:10: error: reassignment to val
+    emily.name = &quot;Fred&quot;
+               ^
+</code></pre></li>
+<li><p>构造函数参数声明成var，会自动生成获取器和修改器方法:</p>
+<pre><code>scala&gt; case class Company (var name: String)
+defined class Company
+
+scala&gt; val c = Company(&quot;Mat-Su Valley Programming&quot;)
+c: Company = Company(Mat-Su Valley Programming)
+
+scala&gt; c.name
+res0: String = Mat-Su Valley Programming
+
+scala&gt; c.name = &quot;Valley Programming&quot;
+c.name: String = Valley Programming
+</code></pre></li>
+<li><p>Case类有一个默认的toString方法实现：</p>
+<pre><code>scala&gt; emily
+res0: Person = Person(Emily,niece)
+</code></pre></li>
+<li><p>自动生成提取器方法（unapply），当需要在匹配表达式提取信息时很好用（构造器从给定的参数列表创建一个对象， 而提取器却是从传递给它的对象中提取出构造该对象的参数）：</p>
+<pre><code>scala&gt; emily match { case Person(n, r) =&gt; println(n, r) }
+(Emily,niece)
+</code></pre></li>
+<li><p>自动生成equals和hashCode方法，实例可以如下方法比较：</p>
+<pre><code>scala&gt; val hannah = Person(&quot;Hannah&quot;, &quot;niece&quot;)
+hannah: Person = Person(Hannah,niece)
+
+scala&gt; emily == hannah
+res1: Boolean = false
+</code></pre></li>
+<li><p>自动创建copy方法，当需要clone一个对象时很有帮助，在运行过程中还可以改变一些字段：</p>
+<pre><code>scala&gt; case class Employee(name: String, loc: String, role: String)
+defined class Employee
+
+scala&gt; val fred = Employee(&quot;Fred&quot;, &quot;Anchorage&quot;, &quot;Salesman&quot;)
+fred: Employee = Employee(Fred,Anchorage,Salesman)
+
+scala&gt; val joe = fred.copy(name=&quot;Joe&quot;, role=&quot;Mechanic&quot;)
+joe: Employee = Employee(Joe,Anchorage,Mechanic)
+</code></pre></li>
+</ul>
+<h3 id="4-14-2-讨论"><a href="#4-14-2-讨论" class="headerlink" title="4.14.2 讨论"></a>4.14.2 讨论</h3><ul>
+<li>case类主要目的是创建“不可变的记录”，这样可以很容易的在模式匹配表达式里使用。<h3 id="4-14-3-生成的代码"><a href="#4-14-3-生成的代码" class="headerlink" title="4.14.3 生成的代码"></a>4.14.3 生成的代码</h3></li>
+<li><p>文件Person.scala：</p>
+<pre><code>case class Person(var name: String, var age: Int)
+</code></pre></li>
+<li><p>编译后会创建两个class文件，Person.class和Person$.class</p>
+<pre><code>$ scalac Person.scala
+</code></pre></li>
+<li><p>反编译Person.class</p>
+<pre><code>$ javap Person
+
+//结果
+Compiled from &quot;Person.scala&quot;
+public class Person extends java.lang.Object ↵
+implements scala.ScalaObject,scala.Product,scala.Serializable{
+    public static final scala.Function1 tupled();
+    public static final scala.Function1 curry();
+    public static final scala.Function1 curried();
+    public scala.collection.Iterator productIterator();
+    public scala.collection.Iterator productElements();
+    public java.lang.String name();
+    public void name_$eq(java.lang.String);
+    public int age();
+    public void age_$eq(int);
+    public Person copy(java.lang.String, int);
+    public int copy$default$2();
+    public java.lang.String copy$default$1();
+    public int hashCode();
+    public java.lang.String toString();
+    public boolean equals(java.lang.Object);
+    public java.lang.String productPrefix();
+    public int productArity();
+    public java.lang.Object productElement(int);
+    public boolean canEqual(java.lang.Object);
+    public Person(java.lang.String, int);
+}
+</code></pre></li>
+<li><p>反编译Person$.class        </p>
+<pre><code>$ javap Person$
+
+//结果
+Compiled from &quot;Person.scala&quot;
+public final class Person$ extends scala.runtime.AbstractFunction2 ↵
+implements scala.ScalaObject,scala.Serializable{
+    public static final Person$ MODULE$;
+    public static {};
+    public final java.lang.String toString();
+    public scala.Option unapply(Person);
+    public Person apply(java.lang.String, int);
+    public java.lang.Object readResolve();
+    public java.lang.Object apply(java.lang.Object,java.lang.Object);
+}
+</code></pre></li>
+<li><p>去掉case,然后编译反编译如下：</p>
+<pre><code>public class Person extends java.lang.Object{
+    public java.lang.String name();
+    public void name_$eq(java.lang.String);
+    public int age();
+    public void age_$eq(int);
+    public Person(java.lang.String, int);
+}
+</code></pre></li>
+<li><p>如果不需要那么多额外的函数，考虑使用正常的类。如果只想创建一个不适用new关键词创建实例的类，如下使用：</p>
+<pre><code>val p = Person(&quot;Alex&quot;)
+</code></pre></li>
+<li><p>此时，可以创建一个apply方法。详细看6.8章</p>
+</li>
+<li><p>查看更多</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="http://www.scala-lang.org/old/node/112" target="_blank" rel="external">A Tour of Scala: Extractor Objects</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="4-15-定义一个equals方法（对象相等）"><a href="#4-15-定义一个equals方法（对象相等）" class="headerlink" title="4.15 定义一个equals方法（对象相等）"></a>4.15 定义一个equals方法（对象相等）</h2><ul>
+<li>问题： 类中定义一个equals方法比较对象实例</li>
+</ul>
+<h3 id="4-15-1-解决方案"><a href="#4-15-1-解决方案" class="headerlink" title="4.15.1 解决方案"></a>4.15.1 解决方案</h3><ul>
+<li><p>和Java一样，定义一个equals（和hashCode）方法比较两个实例，和Java不同的是，然后可以使用 == 方法比较两个实例是否相等。</p>
+<pre><code>class Person (name: String, age: Int) {
+
+    def canEqual(a: Any) = a.isInstanceOf[Person]
+
+    override def equals(that: Any): Boolean =
+        that match {
+            case that: Person =&gt; that.canEqual(this) &amp;&amp; this.hashCode == that.hashCode
+            case _ =&gt; false
+    }
+
+    override def hashCode:Int = {
+        val prime = 31
+        var result = 1
+        result = prime * result + age;
+        result = prime * result + (if (name == null) 0 else name.hashCode)
+        return result
+    }
+
+}
+</code></pre></li>
+<li>上面例子显示的是一个修改后的hashCode方法。</li>
+<li><p>使用 == 方法比较两个实例：</p>
+<pre><code>import org.scalatest.FunSuite
+
+class PersonTests extends FunSuite {
+
+    // these first two instances should be equal
+    val nimoy = new Person(&quot;Leonard Nimoy&quot;, 82)
+    val nimoy2 = new Person(&quot;Leonard Nimoy&quot;, 82)
+    val shatner = new Person(&quot;William Shatner&quot;, 82)
+    val ed = new Person(&quot;Ed Chigliak&quot;, 20)
+
+    // all tests pass
+    test(&quot;nimoy == nimoy&quot;) { assert(nimoy == nimoy) }
+    test(&quot;nimoy == nimoy2&quot;) { assert(nimoy == nimoy2) }
+    test(&quot;nimoy2 == nimoy&quot;) { assert(nimoy2 == nimoy) }
+    test(&quot;nimoy != shatner&quot;) { assert(nimoy != shatner) }
+    test(&quot;shatner != nimoy&quot;) { assert(shatner != nimoy) }
+    test(&quot;nimoy != null&quot;) { assert(nimoy != null) }
+    test(&quot;nimoy != String&quot;) { assert(nimoy != &quot;Leonard Nimoy&quot;) }
+    test(&quot;nimoy != ed&quot;) { assert(nimoy != ed) }
+
+}
+</code></pre><ul>
+<li>上面的测试创建在ScalaTest FunSuite,和JUnit单元测试类似</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-15-2-讨论"><a href="#4-15-2-讨论" class="headerlink" title="4.15.2 讨论"></a>4.15.2 讨论</h3><ul>
+<li>Java中 == 操作符比较引用相等，Scala中 == 是比较两个实例是否相等的方法。</li>
+<li><p>当使用继承时依旧可以继续使用上面的方法</p>
+<pre><code>class Employee(name: String, age: Int, var role: String)
+extends Person(name, age)
+{
+    override def canEqual(a: Any) = a.isInstanceOf[Employee]
+
+    override def equals(that: Any): Boolean =
+        that match {
+            case that: Employee =&gt; 
+                that.canEqual(this) &amp;&amp; this.hashCode == that.hashCode
+            case _ =&gt; false  
+    } 
+    //上面case that: Employee保证that是Employee类型，that.canEqual(this)保证this也是Employee类型
+
+    override def hashCode:Int = {
+        val ourHash = if (role == null) 0 else role.hashCode
+        super.hashCode + ourHash
+    }
+}
+</code></pre></li>
+<li><p>上面的代码使用canEqual,equals,hashCode相同方式，而且是一致的，尤其是比较子类实例和其父类实例</p>
+<pre><code>class EmployeeTests extends FunSuite with BeforeAndAfter {
+
+    // these first two instance should be equal
+    val eNimoy1 = new Employee(&quot;Leonard Nimoy&quot;, 82, &quot;Actor&quot;)
+    val eNimoy2 = new Employee(&quot;Leonard Nimoy&quot;, 82, &quot;Actor&quot;)
+    val pNimoy = new Person(&quot;Leonard Nimoy&quot;, 82)
+    val eShatner = new Employee(&quot;William Shatner&quot;, 82, &quot;Actor&quot;)
+
+    test(&quot;eNimoy1 == eNimoy1&quot;) { assert(eNimoy1 == eNimoy1) }
+    test(&quot;eNimoy1 == eNimoy2&quot;) { assert(eNimoy1 == eNimoy2) }
+    test(&quot;eNimoy2 == eNimoy1&quot;) { assert(eNimoy2 == eNimoy1) }
+    test(&quot;eNimoy != pNimoy&quot;) { assert(eNimoy1 != pNimoy) }
+    test(&quot;pNimoy != eNimoy&quot;) { assert(pNimoy != eNimoy1) }
+}
+</code></pre><h3 id="4-15-3-理论"><a href="#4-15-3-理论" class="headerlink" title="4.15.3 理论"></a>4.15.3 理论</h3></li>
+<li>Scaladoc表述：“这个方法的任何实现都应该是等价关系”，等价关系应该有以下3个特征：<ul>
+<li>自反性（reflexive）：Any类型的实例x，x.equals(x)返回true</li>
+<li>对称性（symmetric）：Any类型的实例x和y，x.equals(y)和y.equals(x)返回true</li>
+<li>传递性（transitive）：AnyRef的实例x，y和z，如果x.equals(y)和y.equals(z)返回true，那么x.equals(z)也返回true</li>
+</ul>
+</li>
+<li><p>因此如果重写equals方法，应该确认你的实现保留了等价关系</p>
+</li>
+<li><p>查看更多</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="http://www.artima.com/lejava/articles/equality.html" target="_blank" rel="external"> How to Write an Equality Method in Java</a></li>
+<li><a href="https://gist.github.com/etorreborre/3847474" target="_blank" rel="external">Eric Torreborre shares an excellent canEqual example on GitHub</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Equivalence_relation" target="_blank" rel="external">“Equivalence relation” defined on Wikipedia</a></li>
+<li><a href="http://www.scala-lang.org/api/current/index.html#scala.Any" target="_blank" rel="external">The Scala Any class</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="4-16-创建内部类"><a href="#4-16-创建内部类" class="headerlink" title="4.16 创建内部类"></a>4.16 创建内部类</h2><ul>
+<li>希望创建一个类作为内部类并且保持在公开API之外，或者否则封装你的代码<h3 id="4-16-1-解决方案"><a href="#4-16-1-解决方案" class="headerlink" title="4.16.1 解决方案"></a>4.16.1 解决方案</h3></li>
+<li><p>在一个类里面声明另一个类</p>
+<pre><code>class PandorasBox {
+
+    case class Thing (name: String)
+
+    var things = new collection.mutable.ArrayBuffer[Thing]()
+    things += Thing(&quot;Evil Thing #1&quot;)
+    things += Thing(&quot;Evil Thing #2&quot;)
+
+    def addThing(name: String) { things += new Thing(name) }
+}
+</code></pre></li>
+<li><p>PandorasBox类的使用者不需要担心Thing的实现就能获得things集合</p>
+<pre><code>object ClassInAClassExample extends App {
+    val p = new PandorasBox
+
+    p.addThing(&quot;Evil Thing #3&quot;)
+    p.addThing(&quot;Evil Thing #4&quot;)
+
+    p.things.foreach(println)
+}
+</code></pre><h3 id="4-16-2-讨论"><a href="#4-16-2-讨论" class="headerlink" title="4.16.2 讨论"></a>4.16.2 讨论</h3></li>
+<li><p>Scala和Java不同，“不同于Java语言内部类是封闭类的成员，Scala中内部类和外部对象（object）绑定”：</p>
+<pre><code>object ClassInObject extends App {
+
+    // inner classes are bound to the object
+    val oc1 = new OuterClass
+    val oc2 = new OuterClass
+    val ic1 = new oc1.InnerClass
+    val ic2 = new oc2.InnerClass
+    ic1.x = 10
+    ic2.x = 20
+    println(s&quot;ic1.x = ${ic1.x}&quot;)
+    println(s&quot;ic2.x = ${ic2.x}&quot;)
+}
+
+class OuterClass {
+    class InnerClass {
+        var x = 1
+    }
+}
+</code></pre></li>
+<li><p>因为内部类绑定到他们的对象实例，打印如下：</p>
+<pre><code>ic1.x = 10
+ic2.x = 20
+</code></pre></li>
+<li><p>更多用法，对象里包括类，类里包括对象：</p>
+<pre><code>object InnerClassDemo2 extends App {
+
+    // class inside object
+    println(new OuterObject.InnerClass().x)
+
+    // object inside class
+    println(new OuterClass().InnerObject.y)
+}
+
+object OuterObject {
+    class InnerClass {
+        var x = 1
+    }
+}
+
+class OuterClass {
+    object InnerObject {
+        val y = 2
+    }
+}
+</code></pre></li>
+<li><p>查看更多</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="http://www.scala-lang.org/old/node/115" target="_blank" rel="external">A Tour of Scala: Inner Classes</a></li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Cookbook/" rel="tag">#Cookbook</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/" rel="next" title="Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分">
+                <i class="fa fa-chevron-left"></i> Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/" rel="prev" title="Scala Cookbook读书笔记 Chapter 5.Methods 第一部分">
+                Scala Cookbook读书笔记 Chapter 5.Methods 第一部分 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/"
+     data-title="Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分"
+     data-content=""
+     data-url="http://yygmind.github.io/2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/"
+           data-title="Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分" data-url="http://yygmind.github.io/2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-8-分配块或函数给字段"><span class="nav-number">1.</span> <span class="nav-text">4.8 分配块或函数给字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-8-1-解决方案"><span class="nav-number">1.1.</span> <span class="nav-text">4.8.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-8-2-讨论"><span class="nav-number">1.2.</span> <span class="nav-text">4.8.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-9-设置未初始化的var字段类型"><span class="nav-number">2.</span> <span class="nav-text">4.9 设置未初始化的var字段类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-9-1-解决方案"><span class="nav-number">2.1.</span> <span class="nav-text">4.9.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-9-2-讨论"><span class="nav-number">2.2.</span> <span class="nav-text">4.9.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-10-当继承类时处理构造函数参数"><span class="nav-number">3.</span> <span class="nav-text">4.10 当继承类时处理构造函数参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-10-1-解决方案"><span class="nav-number">3.1.</span> <span class="nav-text">4.10.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-10-2-讨论"><span class="nav-number">3.2.</span> <span class="nav-text">4.10.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-11-调用超类构造函数"><span class="nav-number">4.</span> <span class="nav-text">4.11 调用超类构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-11-1-解决方案"><span class="nav-number">4.1.</span> <span class="nav-text">4.11.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-11-2-辅助构造函数"><span class="nav-number">4.2.</span> <span class="nav-text">4.11.2 辅助构造函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-12-使用抽象类（Abstract-Class）"><span class="nav-number">5.</span> <span class="nav-text">4.12 使用抽象类（Abstract Class）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-12-1-解决方案"><span class="nav-number">5.1.</span> <span class="nav-text">4.12.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-12-2-讨论"><span class="nav-number">5.2.</span> <span class="nav-text">4.12.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-13-在抽象基类（或特质）中定义属性"><span class="nav-number">6.</span> <span class="nav-text">4.13 在抽象基类（或特质）中定义属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-13-1-解决方案"><span class="nav-number">6.1.</span> <span class="nav-text">4.13.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-13-2-抽象的val和var字段"><span class="nav-number">6.2.</span> <span class="nav-text">4.13.2 抽象的val和var字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-13-3-讨论"><span class="nav-number">6.3.</span> <span class="nav-text">4.13.3 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-13-4-抽象类里具体的val字段"><span class="nav-number">6.4.</span> <span class="nav-text">4.13.4 抽象类里具体的val字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-13-5-抽象类里具体var字段"><span class="nav-number">6.5.</span> <span class="nav-text">4.13.5 抽象类里具体var字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-13-6-不要使用null"><span class="nav-number">6.6.</span> <span class="nav-text">4.13.6 不要使用null</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-14-Case类生成样本代码"><span class="nav-number">7.</span> <span class="nav-text">4.14 Case类生成样本代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-14-1-解决方案"><span class="nav-number">7.1.</span> <span class="nav-text">4.14.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-14-2-讨论"><span class="nav-number">7.2.</span> <span class="nav-text">4.14.2 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-14-3-生成的代码"><span class="nav-number">7.3.</span> <span class="nav-text">4.14.3 生成的代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-15-定义一个equals方法（对象相等）"><span class="nav-number">8.</span> <span class="nav-text">4.15 定义一个equals方法（对象相等）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-15-1-解决方案"><span class="nav-number">8.1.</span> <span class="nav-text">4.15.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-15-2-讨论"><span class="nav-number">8.2.</span> <span class="nav-text">4.15.2 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-15-3-理论"><span class="nav-number">8.3.</span> <span class="nav-text">4.15.3 理论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-16-创建内部类"><span class="nav-number">9.</span> <span class="nav-text">4.16 创建内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-16-1-解决方案"><span class="nav-number">9.1.</span> <span class="nav-text">4.16.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-16-2-讨论"><span class="nav-number">9.2.</span> <span class="nav-text">4.16.2 讨论</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

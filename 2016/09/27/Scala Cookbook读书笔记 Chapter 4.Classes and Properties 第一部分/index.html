@@ -1,0 +1,1504 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Cookbook,翻译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="4.0 本章概述
+尽管Scala和Java有很多相同点，但是类的声明，类构造函数和字段可见控制是两者之间最大的不同。Java是更加冗长，Scala是更加简洁。
+
+4.1 创建主构造函数
+问题：创建主构造函数和Java不同4.1.1 解决方案
+Scala的主构造函数由下面几部分组成：
+构造器参数
+类的主体部分被调用的方法
+类的主体部分执行的语句和表达式
+
+
+Scala类主体部分声明的字段处理方式和J">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分">
+<meta property="og:url" content="http://yygmind.github.io/2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="4.0 本章概述
+尽管Scala和Java有很多相同点，但是类的声明，类构造函数和字段可见控制是两者之间最大的不同。Java是更加冗长，Scala是更加简洁。
+
+4.1 创建主构造函数
+问题：创建主构造函数和Java不同4.1.1 解决方案
+Scala的主构造函数由下面几部分组成：
+构造器参数
+类的主体部分被调用的方法
+类的主体部分执行的语句和表达式
+
+
+Scala类主体部分声明的字段处理方式和J">
+<meta property="og:updated_time" content="2017-02-13T13:07:57.953Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分">
+<meta name="twitter:description" content="4.0 本章概述
+尽管Scala和Java有很多相同点，但是类的声明，类构造函数和字段可见控制是两者之间最大的不同。Java是更加冗长，Scala是更加简洁。
+
+4.1 创建主构造函数
+问题：创建主构造函数和Java不同4.1.1 解决方案
+Scala的主构造函数由下面几部分组成：
+构造器参数
+类的主体部分被调用的方法
+类的主体部分执行的语句和表达式
+
+
+Scala类主体部分声明的字段处理方式和J">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分 | Cody Yang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cody Yang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-27T22:37:24+08:00" content="2016-09-27">
+              2016-09-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="4-0-本章概述"><a href="#4-0-本章概述" class="headerlink" title="4.0 本章概述"></a>4.0 本章概述</h2><ul>
+<li>尽管Scala和Java有很多相同点，但是类的声明，类构造函数和字段可见控制是两者之间最大的不同。Java是更加冗长，Scala是更加简洁。</li>
+</ul>
+<h2 id="4-1-创建主构造函数"><a href="#4-1-创建主构造函数" class="headerlink" title="4.1 创建主构造函数"></a>4.1 创建主构造函数</h2><ul>
+<li>问题：创建主构造函数和Java不同<h3 id="4-1-1-解决方案"><a href="#4-1-1-解决方案" class="headerlink" title="4.1.1 解决方案"></a>4.1.1 解决方案</h3></li>
+<li>Scala的主构造函数由下面几部分组成：<ul>
+<li>构造器参数</li>
+<li>类的主体部分被调用的方法</li>
+<li>类的主体部分执行的语句和表达式</li>
+</ul>
+</li>
+<li><p>Scala类主体部分声明的字段处理方式和Java相似，它们在类第一次实例化时被赋值。</p>
+<pre><code>class Person(var firstName: String, var lastName: String) {
+
+    println(&quot;the constructor begins&quot;)
+
+    // some class fields
+    private val HOME = System.getProperty(&quot;user.home&quot;)
+    var age = 0
+
+    // some methods
+    override def toString = s&quot;$firstName $lastName is $age years old&quot;
+    def printHome { println(s&quot;HOME = $HOME&quot;) }
+    def printFullName { println(this) } // uses toString
+
+    printHome
+    printFullName
+    println(&quot;still in the constructor&quot;)
+}
+</code></pre></li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>这些类里的方法仍然是构造函数的一部分，当一个Person类实例创建时，运行结果如下：</p>
+<pre><code>scala&gt; val p = new Person(&quot;Adam&quot;, &quot;Meyer&quot;)
+the constructor begins
+HOME = /Users/Al
+Adam Meyer is 0 years old
+still in the constructor
+</code></pre></li>
+</ul>
+<h3 id="4-1-2-讨论"><a href="#4-1-2-讨论" class="headerlink" title="4.1.2 讨论"></a>4.1.2 讨论</h3><ul>
+<li>Scala和Java声明主构造函数的过程完成不同，Java中可以很明显的看到是否在主构造函数中，但是Scala难以区分。然而一旦理解了这个方法，它会使得你的类声明比Java更加简洁。</li>
+<li><p>上面例子中，两个构造器参数被定义成var字段，意味着是可变的（variable）。初始化设置之后值还可以改变，Scala同时为var生成获取器（accessor）和修改器（mutator）:</p>
+<pre><code>//设值
+p.firstName = &quot;Scott&quot;
+p.lastName = &quot;Jones&quot;
+
+//取值
+println(p.firstName)
+println(p.lastName)
+
+p.age = 30
+println(p.age)
+</code></pre></li>
+<li><p>字段HOME被声明成一个私有的val，相当于Java中的private and final。它不可以被其他对象直接获取，它的值也不可以改变。</p>
+</li>
+<li><p>当你调用类里的方法时，比如调用printFullName方法，这个方法调用仍然是构造器的一部分。可以通过scalac把代码编译成Person.class文件，然后通过<a href="http://varaneckas.com/jad/" target="_blank" rel="external">JAD工具</a>反编译成Java源代码：</p>
+<pre><code>public Person(String firstName, String lastName)
+{
+    super();
+    this.firstName = firstName;
+    this.lastName = lastName;
+    Predef$.MODULE$.println(&quot;the constructor begins&quot;);
+    age = 0;
+    printHome();
+    printFullName();
+    Predef$.MODULE$.println(&quot;still in the constructor&quot;);
+}
+</code></pre></li>
+<li>上面可以看出printHome和printFullName方法在Person构造器里调用，同时age初始化赋值。</li>
+<li><p>反编译后，构造器参数和类字段如下：</p>
+<pre><code>private String firstName;
+private String lastName;
+private final String HOME = System.getProperty(&quot;user.home&quot;);
+private int age;
+</code></pre></li>
+<li>除了方法声明以外的类中定义的任何东西都是主类构造函数的一部分。因为辅助构造函数总是调用同一个类中先前定义的构造函数，辅助构造函数也将执行相同的代码。</li>
+</ul>
+<h3 id="4-1-3-与Java进行比较"><a href="#4-1-3-与Java进行比较" class="headerlink" title="4.1.3 与Java进行比较"></a>4.1.3 与Java进行比较</h3><ul>
+<li><p>Java版Person类如下，可以看出Java比Scala复杂详细，不需要知道太多编译器做了什么：</p>
+<pre><code>// java
+public class Person {
+
+    private String firstName;
+    private String lastName;
+    private final String HOME = System.getProperty(&quot;user.home&quot;);
+    private int age;
+
+    public Person(String firstName, String lastName) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        System.out.println(&quot;the constructor begins&quot;);
+        age = 0;
+        printHome();
+        printFullName();
+        System.out.println(&quot;still in the constructor&quot;);
+    }
+
+    public String firstName() { return firstName; }
+    public String lastName() { return lastName; }
+    public int age() { return age; }
+
+    public void firstName_$eq(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void lastName_$eq(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void age_$eq(int age) {
+        this.age = age;
+    }
+
+    public String toString() {
+        return firstName + &quot; &quot; + lastName + &quot; is &quot; + age + &quot; years old&quot;;
+    }
+
+    public void printHome() {
+        System.out.println(HOME);
+    }
+
+    public void printFullName() {
+        System.out.println(this);
+    }
+
+}
+</code></pre><h3 id="4-1-4-eq方法"><a href="#4-1-4-eq方法" class="headerlink" title="4.1.4 _$eq方法"></a>4.1.4 _$eq方法</h3></li>
+<li><p>生成的修改器方法如下：</p>
+<pre><code>public void firstName_$eq(String firstName) { ...
+public void age_$eq(int age) { ...
+</code></pre></li>
+<li><p>这些名字是修改var变量的Scala语法的一部分，不需要考虑太多。下面的类有一个命名为name的var变量：</p>
+<pre><code>class Person {
+    var name = &quot;&quot;
+    override def toString = s&quot;name = $name&quot;
+}
+</code></pre></li>
+<li><p>编译时修改器就会自动命名为name_$eq。</p>
+<pre><code>//代码修改变量
+p.name = &quot;Ron Artest&quot;
+
+//编译器自动转换
+p.name_$eq(&quot;Ron Artest&quot;)
+</code></pre></li>
+<li><p>下面演示两种调用修改器的方法：</p>
+<pre><code>object Test extends App {
+    val p = new Person
+
+    // the &apos;normal&apos; mutator approach
+    p.name = &quot;Ron Artest&quot;
+    println(p)
+
+    // the &apos;hidden&apos; mutator method
+    p.name_$eq(&quot;Metta World Peace&quot;)
+    println(p)
+}
+
+//输出
+name = Ron Artest
+name = Metta World Peace
+</code></pre><h3 id="4-1-5-总结"><a href="#4-1-5-总结" class="headerlink" title="4.1.5 总结"></a>4.1.5 总结</h3></li>
+<li>Java代码复杂，但是明确；Scala简洁，但是必须看一下构造器参数以便理解getters和setters是否已经生成，还需要知道类里调用的任何方法都是从主函数调用的。</li>
+</ul>
+<hr>
+<h2 id="4-2-控制构造器字段的显示"><a href="#4-2-控制构造器字段的显示" class="headerlink" title="4.2 控制构造器字段的显示"></a>4.2 控制构造器字段的显示</h2><ul>
+<li>问题：想要控制使用在构造器参数里的字段的显示<h3 id="4-2-1-解决方案"><a href="#4-2-1-解决方案" class="headerlink" title="4.2.1 解决方案"></a>4.2.1 解决方案</h3></li>
+<li>关键在于字段是否声明成val,var，val和var都没有，或者是否添加了private声明：<ul>
+<li>如果声明成var，Scala生成getter和setter方法</li>
+<li>如果声明成val，Scala只生成getter方法</li>
+<li>如果没有var和val修饰符，Scala不生成getter和setter方法</li>
+<li>var和val字段前可以添加private关键词，阻止生成getter和setter方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-2-var字段"><a href="#4-2-2-var字段" class="headerlink" title="4.2.2 var字段"></a>4.2.2 var字段</h3><ul>
+<li><p>构造器参数声明成var字段，那么字段的值可以改变，同时生成getter和setter方法：</p>
+<pre><code>scala&gt; class Person(var name: String)
+defined class Person
+
+scala&gt; val p = new Person(&quot;Alvin Alexander&quot;)
+p: Person = Person@369e58be
+
+// getter
+scala&gt; p.name
+res0: String = Alvin Alexander
+
+// setter
+scala&gt; p.name = &quot;Fred Flintstone&quot;
+p.name: String = Fred Flintstone
+
+scala&gt; p.name
+res1: String = Fred Flintstone
+</code></pre><h3 id="4-2-3-val字段"><a href="#4-2-3-val字段" class="headerlink" title="4.2.3 val字段"></a>4.2.3 val字段</h3></li>
+<li><p>构造器参数声明成val字段，一旦赋值之后值不可以改变。类似于Java中的final。</p>
+<pre><code>scala&gt; class Person(val name: String)
+defined class Person
+
+scala&gt; val p = new Person(&quot;Alvin Alexander&quot;)
+p: Person = Person@3f9f332b
+
+scala&gt; p.name
+res0: String = Alvin Alexander
+
+scala&gt; p.name = &quot;Fred Flintstone&quot;
+&lt;console&gt;:11: error: reassignment to val
+    p.name = &quot;Fred Flintstone&quot;
+           ^
+</code></pre><h3 id="4-2-4-没有var和val"><a href="#4-2-4-没有var和val" class="headerlink" title="4.2.4 没有var和val"></a>4.2.4 没有var和val</h3></li>
+<li><p>不生成获取器和修改器</p>
+<pre><code>scala&gt; class Person(name: String)
+defined class Person
+
+scala&gt; val p = new Person(&quot;Alvin Alexander&quot;)
+p: Person = Person@144b6a6c
+
+scala&gt; p.name
+&lt;console&gt;:12: error: value name is not a member of Person
+            p.name
+              ^
+</code></pre><h3 id="4-2-5-给val或var添加private"><a href="#4-2-5-给val或var添加private" class="headerlink" title="4.2.5 给val或var添加private"></a>4.2.5 给val或var添加private</h3></li>
+<li><p>阻止生成getter和setter方法，所以只能在类成员里获取这个字段</p>
+<pre><code>scala&gt; class Person(private var name: String) { def getName {println(name)} }
+defined class Person
+
+scala&gt; val p = new Person(&quot;Alvin Alexander&quot;)
+p: Person = Person@3cb7cee4
+
+scala&gt; p.name
+&lt;console&gt;:10: error: variable name in class Person cannot be accessed in Person
+              p.name
+                ^
+
+scala&gt; p.getName
+Alvin Alexander
+</code></pre></li>
+</ul>
+<h3 id="4-2-6-讨论"><a href="#4-2-6-讨论" class="headerlink" title="4.2.6 讨论"></a>4.2.6 讨论</h3><ul>
+<li><p>表如下：</p>
+<p>  Table 4-1. The effect of constructor parameter settings<br>  |Visibility                               |Accessor?| Mutator?|<br>  | ——–                                | —–:  | :—-:  |<br>  |var                                      |   Yes   |   Yes   |<br>  |val                                      |   Yes   |   No    |<br>  |Default visibility (no var or val)       |   No    |   No    |<br>  |Adding the private keyword to var or val |   No    |    No   |</p>
+</li>
+<li><p>详细看4.6章，手动添加自己的获取器和修改器</p>
+<h3 id="Case类"><a href="#Case类" class="headerlink" title="Case类"></a>Case类</h3></li>
+<li><p>Case类的构造器参数和上面规则不同，默认是val声明，如果没有声明成val或者var，仍然可以获取这个字段：</p>
+<pre><code>case class Person(name: String)
+
+scala&gt; val p = Person(&quot;Dale Cooper&quot;)
+p: Person = Person(Dale Cooper)
+
+scala&gt; p.name
+res0: String = Dale Cooper
+</code></pre></li>
+</ul>
+<hr>
+<h2 id="4-3-定义辅助构造函数"><a href="#4-3-定义辅助构造函数" class="headerlink" title="4.3 定义辅助构造函数"></a>4.3 定义辅助构造函数</h2><ul>
+<li>问题：一个类里定义一个或者更多辅助构造函数，可以给类消费者不同创建实例的方法<h3 id="4-3-1-解决方案"><a href="#4-3-1-解决方案" class="headerlink" title="4.3.1 解决方案"></a>4.3.1 解决方案</h3></li>
+<li><p>使用名字this定义辅助构造函数作为类里的方法。可以定义多个辅助构造函数，而且必须有不同的参数列表。每个构造函数必须调用先前定义的构造函数中的一个。</p>
+<pre><code>// primary constructor
+class Pizza (var crustSize: Int, var crustType: String) {
+
+    // one-arg auxiliary constructor
+    def this(crustSize: Int) {
+        this(crustSize, Pizza.DEFAULT_CRUST_TYPE)
+    }
+
+    // one-arg auxiliary constructor
+    def this(crustType: String) {
+        this(Pizza.DEFAULT_CRUST_SIZE, crustType)
+    }
+
+    // zero-arg auxiliary constructor
+    def this() {
+        this(Pizza.DEFAULT_CRUST_SIZE, Pizza.DEFAULT_CRUST_TYPE)
+    }
+
+    override def toString = s&quot;A $crustSize inch pizza with a $crustType crust&quot;
+}
+
+object Pizza {
+    val DEFAULT_CRUST_SIZE = 12
+    val DEFAULT_CRUST_TYPE = &quot;THIN&quot;
+}
+</code></pre></li>
+<li><p>通过下面的方法创建同一个pizza</p>
+<pre><code>val p1 = new Pizza(Pizza.DEFAULT_CRUST_SIZE, Pizza.DEFAULT_CRUST_TYPE)
+val p2 = new Pizza(Pizza.DEFAULT_CRUST_SIZE)
+val p3 = new Pizza(Pizza.DEFAULT_CRUST_TYPE)
+val p4 = new Pizza  //无参数不需要括号，case类时需要
+</code></pre><h3 id="4-3-2-讨论"><a href="#4-3-2-讨论" class="headerlink" title="4.3.2 讨论"></a>4.3.2 讨论</h3></li>
+<li>以下几个重要的点：<ul>
+<li>通过创建this方法定义辅助构造方法</li>
+<li>每个辅助构造函数必须以先前定义的构造函数开始</li>
+<li>每个构造函数必须有不同的参数列表</li>
+<li>一个构造函数使用this调用另一个构造函数</li>
+</ul>
+</li>
+<li><p>之前例子每个辅助构造函数都是调用主构造函数，但不是必须，只需要调用之前定义的构造函数其一即可：</p>
+<pre><code>def this(crustType: String) {
+    this(Pizza.DEFAULT_CRUST_SIZE)
+    this.crustType = Pizza.DEFAULT_CRUST_TYPE
+}
+</code></pre></li>
+<li><p>之前例子参数声明都是在主构造函数里，这不是必须，但这样做可以让Scala生成获取器和修改器。下面使用另一种方法，但是代码更多：</p>
+<pre><code>class Pizza () {
+
+    var crustSize = 0
+    var crustType = &quot;&quot;
+
+    def this(crustSize: Int) {
+        this()
+        this.crustSize = crustSize
+    }
+
+    def this(crustType: String) {
+        this()
+        this.crustType = crustType
+    }
+
+    // more constructors here ...
+
+    override def toString = s&quot;A $crustSize inch pizza with a $crustType crust&quot;
+
+}
+</code></pre></li>
+<li>总结。如果需要生成的获取器和修改器，把需要声明的参数放在主构造函数中</li>
+</ul>
+<h3 id="4-3-3-为case类生成辅助构造函数"><a href="#4-3-3-为case类生成辅助构造函数" class="headerlink" title="4.3.3 为case类生成辅助构造函数"></a>4.3.3 为case类生成辅助构造函数</h3><ul>
+<li>case类是一个会生成一堆样板代码的特殊的类，case类添加辅助构造函数和其他类不一样。因为它们并不是真的构造函数，它们在类的同伴对象中应用方法。</li>
+<li><p>下面演示，有一个叫做Person.scala的文件：</p>
+<pre><code>// initial case class
+case class Person (var name: String, var age: Int)
+</code></pre></li>
+<li><p>不需要使用new关键词创建一个Person实例</p>
+<pre><code>val p = Person(&quot;John Smith&quot;, 30)
+</code></pre></li>
+<li><p>事实上，上面是一个小的语法糖————工厂方法，实际上Scala编译器把它转成如下：</p>
+<pre><code>val p = Person.apply(&quot;John Smith&quot;, 30)
+</code></pre></li>
+<li><p>是在Person类的同伴对象中调用一个apply方法，这个是编译器自动转换的。如果想要给case类添加新的“构造函数”，就需要写新的apply方法。</p>
+<pre><code>// the case class
+case class Person (var name: String, var age: Int)
+
+// the companion object
+object Person {
+    def apply() = new Person(&quot;&lt;no name&gt;&quot;, 0)
+    def apply(name: String) = new Person(name, 0)
+}
+</code></pre></li>
+<li><p>测试代码</p>
+<pre><code>object CaseClassTest extends App {
+
+    val a = Person() // corresponds to apply() 无参数也需要括号，正常类无参数时不需要括号
+    val b = Person(&quot;Pam&quot;) // corresponds to apply(name: String)
+    val c = Person(&quot;William Shatner&quot;, 82)
+
+    println(a)
+    println(b)
+    println(c)
+
+    // verify the setter methods work
+    a.name = &quot;Leonard Nimoy&quot;
+    a.age = 82
+    println(a)
+}
+</code></pre></li>
+<li><p>输出</p>
+<pre><code>Person(&lt;no name&gt;,0)
+Person(Pam,0)
+Person(William Shatner,82)
+Person(Leonard Nimoy,82)
+</code></pre></li>
+<li>查看更多</li>
+</ul>
+<blockquote>
+<ul>
+<li>6.8章，不使用new关键词创建Object实例</li>
+<li>4.5章，给构造函数参数提供默认值</li>
+<li>4.14章，生成Case类的样板代码</li>
+</ul>
+</blockquote>
+<h2 id="4-4-定义一个私有的主构造函数"><a href="#4-4-定义一个私有的主构造函数" class="headerlink" title="4.4 定义一个私有的主构造函数"></a>4.4 定义一个私有的主构造函数</h2><ul>
+<li>问题： 把类的主构造函数私有化，使之成为单例模式<h3 id="4-4-1-解决方案"><a href="#4-4-1-解决方案" class="headerlink" title="4.4.1 解决方案"></a>4.4.1 解决方案</h3></li>
+<li><p>在类名和构造器参数之间插入private关键词：</p>
+<pre><code>// a private no-args primary constructor
+class Order private { ...
+
+// a private one-arg primary constructor
+class Person private (name: String) { ...
+</code></pre></li>
+<li><p>会阻止创建类的实例</p>
+<pre><code>scala&gt; class Person private (name: String)
+defined class Person
+
+scala&gt; val p = new Person(&quot;Mercedes&quot;)
+&lt;console&gt;:9: error: constructor Person in class Person cannot be accessed
+in object $iw
+        val p = new Person(&quot;Mercedes&quot;)
+                ^
+</code></pre><h3 id="4-4-2-讨论"><a href="#4-4-2-讨论" class="headerlink" title="4.4.2 讨论"></a>4.4.2 讨论</h3></li>
+<li><p>单例模式的简单方法是设置主构造函数私有化，然后在类的同伴对象里添加一个getInstance方法：</p>
+<pre><code>class Brain private {
+    override def toString = &quot;This is the brain.&quot;
+}
+
+object Brain {
+    val brain = new Brain
+    def getInstance = brain
+}
+
+object SingletonTest extends App {
+    // this won&apos;t compile
+    // val brain = new Brain
+
+    // this works
+    val brain = Brain.getInstance
+    println(brain)
+}
+</code></pre></li>
+<li>这里不是一定要命名成getInstance，这里这样使用是因为Java习惯</li>
+<li>同伴对象是一个在同一个类名文件中定义的简化对象，object和class使用同一个名字。如果有一个文件名叫做Foo.scala，类名叫做Foo，同一个文件中的对象叫做Foo，那么这个对象就是这个Foo类的同伴对象。</li>
+<li>同伴对象里声明的任何方法是这个对象的静态方法（static）</li>
+</ul>
+<h3 id="4-4-3-工具类"><a href="#4-4-3-工具类" class="headerlink" title="4.4.3 工具类"></a>4.4.3 工具类</h3><ul>
+<li><p>根据需要，创建一个私有的类构造函数可能完全没有必要。把所有方法放到Scala的object里，这样就定义了static静态方法了</p>
+<pre><code>object FileUtils {
+
+    def readFile(filename: String) = {
+        // code here ...
+    }
+
+    def writeToFile(filename: String, contents: String) {
+        // code here ...
+    }
+}
+</code></pre></li>
+<li><p>如下方式调用方法：</p>
+<pre><code>val contents = FileUtils.readFile(&quot;input.txt&quot;)
+FileUtils.writeToFile(&quot;output.txt&quot;, content)
+</code></pre></li>
+<li><p>因为只有一个对象会被定义，下面的代码不会编译：</p>
+<pre><code>val utils = new FileUtils // won&apos;t compile
+</code></pre></li>
+<li>所有这个例子中，没有必要写一个私有类构造函数，只要不定义这个类就可以了。</li>
+</ul>
+<h2 id="4-5-给构造器参数提供默认值"><a href="#4-5-给构造器参数提供默认值" class="headerlink" title="4.5 给构造器参数提供默认值"></a>4.5 给构造器参数提供默认值</h2><ul>
+<li>问题： 可以给其他类调用这个构造函数时指定参数值<h3 id="4-5-1-解决方案"><a href="#4-5-1-解决方案" class="headerlink" title="4.5.1 解决方案"></a>4.5.1 解决方案</h3></li>
+<li><p>给定默认值</p>
+<pre><code>class Socket (val timeout: Int = 10000)
+</code></pre></li>
+<li><p>因为已经定义了一个默认值，所以调用的时候可以不指定参数，可以获得这个默认值</p>
+<pre><code>scala&gt; val s = new Socket
+s: Socket = Socket@7862af46
+
+scala&gt; s.timeout
+res0: Int = 10000
+</code></pre></li>
+<li><p>创建一个新的Socket时可以指定参数值</p>
+<pre><code>scala&gt; val s = new Socket(5000)
+s: Socket = Socket@6df5205c
+
+scala&gt; s.timeout
+res1: Int = 5000
+</code></pre></li>
+<li><p>也可以用下面方式，调用构造函数时使用已命名的参数</p>
+<pre><code>scala&gt; val s = new Socket(timeout=5000)
+s: Socket = Socket@52aaf3d2
+
+scala&gt; s.timeout
+res0: Int = 5000
+</code></pre><h3 id="4-5-2-讨论"><a href="#4-5-2-讨论" class="headerlink" title="4.5.2 讨论"></a>4.5.2 讨论</h3></li>
+<li><p>这个可以减少辅助构造函数的需求，下面的一个构造函数相当于两个构造函数：</p>
+<pre><code>class Socket (val timeout: Int = 10000)
+</code></pre></li>
+<li><p>如果上面不存在，则需要两个构造函数：一个参数的主构造函数和一个无参数的辅助构造函数：</p>
+<pre><code>class Socket(val timeout: Int) {
+    def this() = this(10000)
+    override def toString = s&quot;timeout: $timeout&quot;
+}
+</code></pre></li>
+</ul>
+<h3 id="4-5-3-多个参数"><a href="#4-5-3-多个参数" class="headerlink" title="4.5.3 多个参数"></a>4.5.3 多个参数</h3><ul>
+<li><p>可以给多个参数指定默认值</p>
+<pre><code>class Socket(val timeout: Int = 1000, val linger: Int = 2000) {
+    override def toString = s&quot;timeout: $timeout, linger: $linger&quot;
+}
+</code></pre></li>
+<li><p>尽管只定义了一个构造函数，但是这个类有3个构造函数</p>
+<pre><code>scala&gt; println(new Socket)
+timeout: 1000, linger: 2000
+
+scala&gt; println(new Socket(3000))
+timeout: 3000, linger: 2000
+
+scala&gt; println(new Socket(3000, 4000))
+timeout: 3000, linger: 4000
+</code></pre><h3 id="4-5-4-使用命名参数"><a href="#4-5-4-使用命名参数" class="headerlink" title="4.5.4 使用命名参数"></a>4.5.4 使用命名参数</h3></li>
+<li><p>创建对象时可以提供构造参数名字，这和Objective-C和其他语法很像。</p>
+<pre><code>println(new Socket(timeout=3000, linger=4000))
+println(new Socket(linger=4000, timeout=3000))
+println(new Socket(timeout=3000))
+println(new Socket(linger=4000))
+</code></pre></li>
+</ul>
+<h2 id="4-6-重写默认的获取器和修改器"><a href="#4-6-重写默认的获取器和修改器" class="headerlink" title="4.6 重写默认的获取器和修改器"></a>4.6 重写默认的获取器和修改器</h2><ul>
+<li>问题：重写Scala生成的getter和setter方法<h3 id="4-6-1-解决方案"><a href="#4-6-1-解决方案" class="headerlink" title="4.6.1 解决方案"></a>4.6.1 解决方案</h3></li>
+<li><p>如果坚持使用Scala的命名规范，那么不可以重写默认生成的getter和setter方法：</p>
+<pre><code>// error: this won&apos;t work
+class Person(private var name: String) {
+    // this line essentially creates a circular reference
+    def name = name
+    def name_=(aName: String) { name = aName }
+}
+</code></pre></li>
+<li><p>编译报错：</p>
+<pre><code>Person.scala:3: error: overloaded method name needs result type
+    def name = name
+               ^
+Person.scala:4: error: ambiguous reference to overloaded definition,
+both method name_= in class Person of type (aName: String)Unit
+and method name_= in class Person of type (x$1: String)Unit
+match argument types (String)
+    def name_=(aName: String) { name = aName }
+                                ^
+Person.scala:4: error: method name_= is defined twice
+    def name_=(aName: String) { name = aName }
+        ^
+three errors found
+</code></pre></li>
+<li>解释：构造器参数和getter方法都命名成name，则Scala不会允许</li>
+<li><p>解决：改变构造参数名，这样就不会和getter方法冲突，一般在构造参数名前加入下划线_，如_name:</p>
+<pre><code>class Person(private var _name: String) {
+    def name = _name // accessor
+    def name_=(aName: String) { _name = aName } // mutator
+}
+</code></pre></li>
+<li>构造器参数声明成private和var，private保证其他类不能获取声明的字段，var保证是变量</li>
+<li><p>创建一个getter方法叫做name，setter方法叫做name_=，调用如下：</p>
+<pre><code>val p = new Person(&quot;Jonathan&quot;)
+p.name = &quot;Jony&quot; // setter
+println(p.name) // getter
+</code></pre></li>
+<li>如果不喜欢Scala对于getter和setter的命名方式，可以使用任何其他的方法。如果想要如Java一样使用getName和setName，最好添加@BeanProperty注解，更多见17.6章。</li>
+</ul>
+<h3 id="4-6-2-讨论"><a href="#4-6-2-讨论" class="headerlink" title="4.6.2 讨论"></a>4.6.2 讨论</h3><ul>
+<li><p>定义构造器参数为var，Scala使得变量私有化，同时自动生成getter和setter方法供其他类调用：</p>
+<pre><code>class Stock (var symbol: String)
+</code></pre></li>
+<li><p>scalac编译后，使用javap反编译代码：</p>
+<pre><code>$ javap Stock
+
+public class Stock extends java.lang.Object{
+    public java.lang.String symbol();
+    public void symbol_$eq(java.lang.String);
+    public Stock(java.lang.String);
+}
+</code></pre></li>
+<li>可以发现编译器生成两个方法：叫做symbol的getter方法，叫做symbol<em>$eq的setter方法。第二个方法和我们命名的symbol</em>=方法一样，但是Scala需要把=转换成JVM工作的$eq</li>
+<li><p>第二个方法命名有点不寻常，但它遵从Scala规范，当它使用魔法糖混合后，可以通过以下方式设值：</p>
+<pre><code>stock.symbol = &quot;GOOG&quot;
+</code></pre></li>
+<li><p>编译器把上面代码转换成：</p>
+<pre><code>stock.symbol_$eq(&quot;GOOG&quot;)
+</code></pre></li>
+</ul>
+<h3 id="4-6-3-总结"><a href="#4-6-3-总结" class="headerlink" title="4.6.3 总结"></a>4.6.3 总结</h3><ul>
+<li>总结如下：<ul>
+<li>创建private var构造器参数，例子中命名成 _name</li>
+<li>定义需要被其他类调用的getter和setter方法，例子中getter名字是name,setter名字是name_=</li>
+<li>修改getter和setter方法的主体部分</li>
+</ul>
+</li>
+<li><p>需要记住必须使用private关键词。如果没有使用，则需要隐藏的自动生成的getter/setter方法不会消失：</p>
+<pre><code>// intentionally left the &apos;private&apos; modifier off _symbol
+class Stock (var _symbol: String) {
+
+    // getter
+    def symbol = _symbol
+
+    // setter
+    def symbol_= (s: String) {
+        this.symbol = s
+        println(s&quot;symbol was updated, new value is $symbol&quot;)
+    }
+
+}
+</code></pre></li>
+<li><p>编译反编译后：</p>
+<pre><code>public class Stock extends java.lang.Object{
+    public java.lang.String _symbol();      // error
+    public void _symbol_$eq(java.lang.String);      // error
+    public java.lang.String symbol();
+    public void symbol_$eq(java.lang.String);
+    public Stock(java.lang.String);
+}
+</code></pre></li>
+<li><p>正确添加private关键词后编译反编译如下：</p>
+<pre><code>public class Stock extends java.lang.Object{
+    public java.lang.String symbol(); // println(stock.symbol)
+    public void symbol_$eq(java.lang.String); // stock.symbol = &quot;AAPL&quot;
+    public Stock(java.lang.String);
+}
+</code></pre></li>
+</ul>
+<h2 id="4-7-阻止生成getter和setter方法"><a href="#4-7-阻止生成getter和setter方法" class="headerlink" title="4.7 阻止生成getter和setter方法"></a>4.7 阻止生成getter和setter方法</h2><ul>
+<li>问题：定义类字段为var时会自动生成getter和setter方法，定义类字段为val时会自动生成getter方法，但是如果getter和setter方法都不想要呢。<h3 id="4-7-1-解决方案"><a href="#4-7-1-解决方案" class="headerlink" title="4.7.1 解决方案"></a>4.7.1 解决方案</h3></li>
+<li><p>使用private或者private[this]定义字段：</p>
+<pre><code>class Stock {
+    // getter and setter methods are generated
+    var delayedPrice: Double = _
+
+    // keep this field hidden from other classes
+    private var currentPrice: Double = _
+}
+</code></pre></li>
+<li><p>编译反编译后：</p>
+<pre><code>// Compiled from &quot;Stock.scala&quot;
+public class Stock extends java.lang.Object implements scala.ScalaObject{
+    public double delayedPrice();
+    public void delayedPrice_$eq(double);
+    public Stock();
+}
+</code></pre><h3 id="4-7-2-讨论"><a href="#4-7-2-讨论" class="headerlink" title="4.7.2 讨论"></a>4.7.2 讨论</h3></li>
+<li><p>私有属性字段只存在于同一个类的实例中，下面例子中，任何Stock类的实例可以获取其他Stock类实例的私有属性：</p>
+<pre><code>class Stock {
+    // a private field can be seen by any Stock instance
+    private var price: Double = _
+    def setPrice(p: Double) { price = p }
+    def isHigher(that: Stock): Boolean = this.price &gt; that.price
+}
+
+object Driver extends App {
+
+    val s1 = new Stock
+    s1.setPrice(20)
+
+    val s2 = new Stock
+    s2.setPrice(100)
+
+    println(s2.isHigher(s1))
+}
+</code></pre><h3 id="4-7-3-object-private-字段"><a href="#4-7-3-object-private-字段" class="headerlink" title="4.7.3 object-private 字段"></a>4.7.3 object-private 字段</h3></li>
+<li><p>使用private[this]定义字段意味着自由包含它的object可以获取这个字段。不同于private，这个字段不可以被同一类型的其他实例获取,比private设置更private。</p>
+<pre><code>class Stock {
+    // a private[this] var is object-private, and can only be seen
+    // by the current instance
+    private[this] var price: Double = _
+
+    def setPrice(p: Double) { price = p }
+
+    // error: this method won&apos;t compile because price is now object-private
+    def isHigher(that: Stock): Boolean = this.price &gt; that.price
+}
+</code></pre></li>
+<li><p>编译结果如下：</p>
+<pre><code>Stock.scala:5: error: value price is not a member of Stock
+    def isHigher(that: Stock): Boolean = this.price &gt; that.price
+                                                       ^
+one error found
+</code></pre></li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Cookbook/" rel="tag">#Cookbook</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/" rel="next" title="Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分">
+                <i class="fa fa-chevron-left"></i> Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/" rel="prev" title="Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分">
+                Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/"
+     data-title="Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分"
+     data-content=""
+     data-url="http://yygmind.github.io/2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/"
+           data-title="Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分" data-url="http://yygmind.github.io/2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-0-本章概述"><span class="nav-number">1.</span> <span class="nav-text">4.0 本章概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-创建主构造函数"><span class="nav-number">2.</span> <span class="nav-text">4.1 创建主构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-1-解决方案"><span class="nav-number">2.1.</span> <span class="nav-text">4.1.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-讨论"><span class="nav-number">2.2.</span> <span class="nav-text">4.1.2 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-3-与Java进行比较"><span class="nav-number">2.3.</span> <span class="nav-text">4.1.3 与Java进行比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-4-eq方法"><span class="nav-number">2.4.</span> <span class="nav-text">4.1.4 _$eq方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-5-总结"><span class="nav-number">2.5.</span> <span class="nav-text">4.1.5 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-控制构造器字段的显示"><span class="nav-number">3.</span> <span class="nav-text">4.2 控制构造器字段的显示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-解决方案"><span class="nav-number">3.1.</span> <span class="nav-text">4.2.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-var字段"><span class="nav-number">3.2.</span> <span class="nav-text">4.2.2 var字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3-val字段"><span class="nav-number">3.3.</span> <span class="nav-text">4.2.3 val字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-4-没有var和val"><span class="nav-number">3.4.</span> <span class="nav-text">4.2.4 没有var和val</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-5-给val或var添加private"><span class="nav-number">3.5.</span> <span class="nav-text">4.2.5 给val或var添加private</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-6-讨论"><span class="nav-number">3.6.</span> <span class="nav-text">4.2.6 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case类"><span class="nav-number">3.7.</span> <span class="nav-text">Case类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-定义辅助构造函数"><span class="nav-number">4.</span> <span class="nav-text">4.3 定义辅助构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-解决方案"><span class="nav-number">4.1.</span> <span class="nav-text">4.3.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-讨论"><span class="nav-number">4.2.</span> <span class="nav-text">4.3.2 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-为case类生成辅助构造函数"><span class="nav-number">4.3.</span> <span class="nav-text">4.3.3 为case类生成辅助构造函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-定义一个私有的主构造函数"><span class="nav-number">5.</span> <span class="nav-text">4.4 定义一个私有的主构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-1-解决方案"><span class="nav-number">5.1.</span> <span class="nav-text">4.4.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-2-讨论"><span class="nav-number">5.2.</span> <span class="nav-text">4.4.2 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-3-工具类"><span class="nav-number">5.3.</span> <span class="nav-text">4.4.3 工具类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-给构造器参数提供默认值"><span class="nav-number">6.</span> <span class="nav-text">4.5 给构造器参数提供默认值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-1-解决方案"><span class="nav-number">6.1.</span> <span class="nav-text">4.5.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-2-讨论"><span class="nav-number">6.2.</span> <span class="nav-text">4.5.2 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-3-多个参数"><span class="nav-number">6.3.</span> <span class="nav-text">4.5.3 多个参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-4-使用命名参数"><span class="nav-number">6.4.</span> <span class="nav-text">4.5.4 使用命名参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-重写默认的获取器和修改器"><span class="nav-number">7.</span> <span class="nav-text">4.6 重写默认的获取器和修改器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-1-解决方案"><span class="nav-number">7.1.</span> <span class="nav-text">4.6.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-2-讨论"><span class="nav-number">7.2.</span> <span class="nav-text">4.6.2 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-3-总结"><span class="nav-number">7.3.</span> <span class="nav-text">4.6.3 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7-阻止生成getter和setter方法"><span class="nav-number">8.</span> <span class="nav-text">4.7 阻止生成getter和setter方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-1-解决方案"><span class="nav-number">8.1.</span> <span class="nav-text">4.7.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-2-讨论"><span class="nav-number">8.2.</span> <span class="nav-text">4.7.2 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-3-object-private-字段"><span class="nav-number">8.3.</span> <span class="nav-text">4.7.3 object-private 字段</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

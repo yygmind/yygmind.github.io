@@ -1,0 +1,1040 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Cookbook,翻译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="5.0 本章概述
+Java和Scala定义简单method区别：
+// java
+public String doSomething(int x) {
+    // code here
+}
+
+// scala
+def doSomething(x: Int): String = {
+    // code here
+}
+
+Scala还可以使用下面方式，不指定返回值类型，不要求包裹body的大括号：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala Cookbook读书笔记 Chapter 5.Methods 第一部分">
+<meta property="og:url" content="http://yygmind.github.io/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="5.0 本章概述
+Java和Scala定义简单method区别：
+// java
+public String doSomething(int x) {
+    // code here
+}
+
+// scala
+def doSomething(x: Int): String = {
+    // code here
+}
+
+Scala还可以使用下面方式，不指定返回值类型，不要求包裹body的大括号：">
+<meta property="og:updated_time" content="2017-02-13T13:23:25.849Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala Cookbook读书笔记 Chapter 5.Methods 第一部分">
+<meta name="twitter:description" content="5.0 本章概述
+Java和Scala定义简单method区别：
+// java
+public String doSomething(int x) {
+    // code here
+}
+
+// scala
+def doSomething(x: Int): String = {
+    // code here
+}
+
+Scala还可以使用下面方式，不指定返回值类型，不要求包裹body的大括号：">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Scala Cookbook读书笔记 Chapter 5.Methods 第一部分 | Cody Yang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cody Yang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Scala Cookbook读书笔记 Chapter 5.Methods 第一部分
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-13T22:31:21+08:00" content="2016-10-13">
+              2016-10-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 5.Methods 第一部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="5-0-本章概述"><a href="#5-0-本章概述" class="headerlink" title="5.0 本章概述"></a>5.0 本章概述</h2><ul>
+<li><p>Java和Scala定义简单method区别：</p>
+<pre><code>// java
+public String doSomething(int x) {
+    // code here
+}
+
+// scala
+def doSomething(x: Int): String = {
+    // code here
+}
+</code></pre></li>
+<li><p>Scala还可以使用下面方式，不指定返回值类型，不要求包裹body的大括号：</p>
+<pre><code>def plusOne(i: Int) = i + 1
+</code></pre></li>
+<li>除了上面例子的区别，Java和Scala还包括以下不同：<ul>
+<li>指定方法获取控制（显示）</li>
+<li>给方法参数设置默认值的能力</li>
+<li>调用方法时指定方法参数名字的能力</li>
+<li>如何声明一个方法可能抛出的异常</li>
+<li>方法里使用可变参数</li>
+</ul>
+</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h2 id="5-1-控制方法范围"><a href="#5-1-控制方法范围" class="headerlink" title="5.1 控制方法范围"></a>5.1 控制方法范围</h2><ul>
+<li>问题：Scala方法默认是公开的，想要如Java一样控制它的范围<h3 id="5-1-1-解决方案"><a href="#5-1-1-解决方案" class="headerlink" title="5.1.1 解决方案"></a>5.1.1 解决方案</h3></li>
+<li><p>Scala从“更加限制”到“更加公开”有以下几个范围选项：</p>
+<ul>
+<li>Object-private scope</li>
+<li>Private</li>
+<li>Package</li>
+<li>Package-specific</li>
+<li>Public<h3 id="5-1-2-Object-private-scope"><a href="#5-1-2-Object-private-scope" class="headerlink" title="5.1.2 Object-private scope"></a>5.1.2 Object-private scope</h3></li>
+</ul>
+</li>
+<li>只有当前对象的当前实例可以获取这个方法，同一个类的其他实例不可以。</li>
+<li><p>使用private[this]修饰符：</p>
+<pre><code>private[this] def isFoo = true
+</code></pre></li>
+<li><p>下面例子，方法doFoo使用了一个Foo对象的实例，但是isFoo方法声明成Object-private，因为当前Foo实例不能获取到其他实例的isFoo方法，所以下面代码不会编译：</p>
+<pre><code>class Foo {
+
+    private[this] def isFoo = true
+
+    def doFoo(other: Foo) {
+        if (other.isFoo) { // this line won&apos;t compile
+            // ...
+        }
+    }
+}
+</code></pre><h3 id="5-1-3-Private-scope"><a href="#5-1-3-Private-scope" class="headerlink" title="5.1.3 Private scope"></a>5.1.3 Private scope</h3></li>
+<li><p>存在于当前类和当前类的其他实例，和Java中使用private一样，把上面的private[this] 改为private就可以编译成功了：</p>
+<pre><code>class Foo {
+
+    private def isFoo = true
+
+    def doFoo(other: Foo) {
+        if (other.isFoo) { // this now compiles
+            // ...
+        }
+    }
+}
+</code></pre></li>
+<li><p>private方法，子类不可以获取：</p>
+<pre><code>class Animal {
+    private def heartBeat {}
+}
+
+class Dog extends Animal {
+    heartBeat // won&apos;t compile
+}
+</code></pre><h3 id="5-1-4-Protected-scope"><a href="#5-1-4-Protected-scope" class="headerlink" title="5.1.4 Protected scope"></a>5.1.4 Protected scope</h3></li>
+<li><p>Protected方法子类可获取</p>
+<pre><code>class Animal {
+    protected def breathe {}
+}
+
+class Dog extends Animal {
+    breathe
+}
+</code></pre></li>
+<li><p>Java中protected方法可以被同一个包的其他类获取，Scala不是这样，下面不会编译：</p>
+<pre><code>package world {
+
+    class Animal {
+        protected def breathe {}
+    }
+
+    class Jungle {
+        val a = new Animal
+        a.breathe // error: this line won&apos;t compile
+    }
+}
+</code></pre></li>
+</ul>
+<h3 id="5-1-5-Package-scope"><a href="#5-1-5-Package-scope" class="headerlink" title="5.1.5 Package scope"></a>5.1.5 Package scope</h3><ul>
+<li><p>当前包内所有成员可见，使用private[packageName]表示对当前包私有，下面doX可以被同一个包内所有类获取，doY只能被Foo类获取：</p>
+<pre><code>package com.acme.coolapp.model {
+
+    class Foo {
+        private[model] def doX {}
+        private def doY {}
+    }
+
+    class Bar {
+        val f = new Foo
+        f.doX // compiles
+        f.doY // won&apos;t compile
+    }
+}
+</code></pre><h3 id="5-1-6-更多package等级控制"><a href="#5-1-6-更多package等级控制" class="headerlink" title="5.1.6 更多package等级控制"></a>5.1.6 更多package等级控制</h3></li>
+<li><p>不同包等级权限不同</p>
+<pre><code>package com.acme.coolapp.model {
+    class Foo {
+        private[model] def doX {}
+        private[coolapp] def doY {}
+        private[acme] def doZ {}
+    }
+}
+
+import com.acme.coolapp.model._
+
+package com.acme.coolapp.view {
+    class Bar {
+        val f = new Foo
+        f.doX // won&apos;t compile
+        f.doY
+        f.doZ
+    }
+}
+
+package com.acme.common {
+    class Bar {
+        val f = new Foo
+        f.doX // won&apos;t compile
+        f.doY // won&apos;t compile
+        f.doZ
+    }
+}
+</code></pre><h3 id="5-1-7-Public-scope"><a href="#5-1-7-Public-scope" class="headerlink" title="5.1.7 Public scope"></a>5.1.7 Public scope</h3></li>
+<li><p>不添加任何权限修饰符，方法是公开的：</p>
+<pre><code>package com.acme.coolapp.model {
+    class Foo {
+        def doX {}
+    }
+}
+
+package org.xyz.bar {
+    class Bar {
+        val f = new com.acme.coolapp.model.Foo
+        f.doX
+    }
+}
+</code></pre></li>
+</ul>
+<h3 id="5-1-8-讨论"><a href="#5-1-8-讨论" class="headerlink" title="5.1.8 讨论"></a>5.1.8 讨论</h3><p>Table 5-1. Descriptions of Scala’s access control modifiers</p>
+<table>
+<thead>
+<tr>
+<th>Access modifier</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>private[this]</td>
+<td>The method is available only to the current instance of the class</td>
+<td>it’s declared in.</td>
+</tr>
+<tr>
+<td>private</td>
+<td>The method is available to the current instance and other instances of the class it’s declared in.</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>The method is available only to instances of the current class and subclasses of the current class.</td>
+</tr>
+<tr>
+<td>private[model]</td>
+<td>The method is available to all classes beneath the com.acme.coolapp.model package.</td>
+</tr>
+<tr>
+<td>private[coolapp]</td>
+<td>The method is available to all classes beneath the com.acme.coolapp package.</td>
+</tr>
+<tr>
+<td>private[acme]</td>
+<td>The method is available to all classes beneath the com.acme package.</td>
+</tr>
+<tr>
+<td>(no modifier)</td>
+<td>The method is public.</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Cookbook/" rel="tag">#Cookbook</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/" rel="next" title="Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分">
+                <i class="fa fa-chevron-left"></i> Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/29/React Native环境配置血泪爬坑/" rel="prev" title="React Native环境配置血泪爬坑">
+                React Native环境配置血泪爬坑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/"
+     data-title="Scala Cookbook读书笔记 Chapter 5.Methods 第一部分"
+     data-content=""
+     data-url="http://yygmind.github.io/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/"
+           data-title="Scala Cookbook读书笔记 Chapter 5.Methods 第一部分" data-url="http://yygmind.github.io/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-0-本章概述"><span class="nav-number">1.</span> <span class="nav-text">5.0 本章概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-控制方法范围"><span class="nav-number">3.</span> <span class="nav-text">5.1 控制方法范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1-解决方案"><span class="nav-number">3.1.</span> <span class="nav-text">5.1.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-2-Object-private-scope"><span class="nav-number">3.2.</span> <span class="nav-text">5.1.2 Object-private scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-3-Private-scope"><span class="nav-number">3.3.</span> <span class="nav-text">5.1.3 Private scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-4-Protected-scope"><span class="nav-number">3.4.</span> <span class="nav-text">5.1.4 Protected scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-5-Package-scope"><span class="nav-number">3.5.</span> <span class="nav-text">5.1.5 Package scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-6-更多package等级控制"><span class="nav-number">3.6.</span> <span class="nav-text">5.1.6 更多package等级控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-7-Public-scope"><span class="nav-number">3.7.</span> <span class="nav-text">5.1.7 Public scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-8-讨论"><span class="nav-number">3.8.</span> <span class="nav-text">5.1.8 讨论</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1065 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Cookbook,翻译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1.8 提取一个匹配模式的字符串的部分
+问题：你想要提取出一个字符串中的一个或多个部分，以匹配你指定的正则表达式模式。1.8.1 解决方案
+定义要提取的正则表达式模式，将圆括号放在他们周围，所以可以把它们作为“正则表达式组”，首先定义所需的模式：
+val pattern = &amp;quot;([0-9]+) ([A-Za-z]+)&amp;quot;.r
+
+然后从目标字符串中提取正则表达式组
+val patt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala Cookbook翻译 Chapter 1.Strings 第三部分">
+<meta property="og:url" content="http://yygmind.github.io/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="1.8 提取一个匹配模式的字符串的部分
+问题：你想要提取出一个字符串中的一个或多个部分，以匹配你指定的正则表达式模式。1.8.1 解决方案
+定义要提取的正则表达式模式，将圆括号放在他们周围，所以可以把它们作为“正则表达式组”，首先定义所需的模式：
+val pattern = &amp;quot;([0-9]+) ([A-Za-z]+)&amp;quot;.r
+
+然后从目标字符串中提取正则表达式组
+val patt">
+<meta property="og:updated_time" content="2017-02-13T12:33:03.828Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala Cookbook翻译 Chapter 1.Strings 第三部分">
+<meta name="twitter:description" content="1.8 提取一个匹配模式的字符串的部分
+问题：你想要提取出一个字符串中的一个或多个部分，以匹配你指定的正则表达式模式。1.8.1 解决方案
+定义要提取的正则表达式模式，将圆括号放在他们周围，所以可以把它们作为“正则表达式组”，首先定义所需的模式：
+val pattern = &amp;quot;([0-9]+) ([A-Za-z]+)&amp;quot;.r
+
+然后从目标字符串中提取正则表达式组
+val patt">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Scala Cookbook翻译 Chapter 1.Strings 第三部分 | Cody Yang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cody Yang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Scala Cookbook翻译 Chapter 1.Strings 第三部分
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-06T20:59:24+08:00" content="2016-09-06">
+              2016-09-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 1.Strings 第三部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-8-提取一个匹配模式的字符串的部分"><a href="#1-8-提取一个匹配模式的字符串的部分" class="headerlink" title="1.8 提取一个匹配模式的字符串的部分"></a>1.8 提取一个匹配模式的字符串的部分</h2><ul>
+<li>问题：你想要提取出一个字符串中的一个或多个部分，以匹配你指定的正则表达式模式。<h3 id="1-8-1-解决方案"><a href="#1-8-1-解决方案" class="headerlink" title="1.8.1 解决方案"></a>1.8.1 解决方案</h3></li>
+<li><p>定义要提取的正则表达式模式，将圆括号放在他们周围，所以可以把它们作为“正则表达式组”，首先定义所需的模式：</p>
+<pre><code>val pattern = &quot;([0-9]+) ([A-Za-z]+)&quot;.r
+</code></pre></li>
+<li><p>然后从目标字符串中提取正则表达式组</p>
+<pre><code>val pattern(count, fruit) = &quot;100 Bananas&quot;
+</code></pre></li>
+<li><p>此代码从给定的字符串中提取出数字字段和字母字段作为两个独立的变量，count和fruit。</p>
+<pre><code>scala&gt; val pattern = &quot;([0-9]+) ([A-Za-z]+)&quot;.r
+pattern: scala.util.matching.Regex = ([0-9]+) ([A-Za-z]+)
+
+scala&gt; val pattern(count, fruit) = &quot;100 Bananas&quot;
+count: String = 100
+fruit: String = Bananas
+</code></pre></li>
+</ul>
+<a id="more"></a>  
+<h3 id="1-8-2-讨论"><a href="#1-8-2-讨论" class="headerlink" title="1.8.2 讨论"></a>1.8.2 讨论</h3><ul>
+<li>这个语法可能有点不寻常，因为看上去是两次定义模式作为一个变量，但这种语法在现实例子中更加方便和可读。</li>
+<li><p>想象一下你正在编写一个像谷歌一样的搜索引擎，而且你想让人们使用各种各样的短语搜索电影。要非常方便的，你可以让他们键入任何这些短语获得一个movies,near,Boulder,Colorado的列表。</p>
+<pre><code>&quot;movies near 80301&quot;
+&quot;movies 80301&quot;
+&quot;80301 movies&quot;
+&quot;movie: 80301&quot;
+&quot;movies: 80301&quot;
+&quot;movies near boulder, co&quot;
+&quot;movies near boulder, colorado&quot;
+</code></pre></li>
+<li><p>一种可以允许所有短语都被使用到的方法就是定义一系列正则表达式模式来进行匹配。只要定义你的表达式，然后尝试匹配任何你所允许的所有可能的表达式。举例，你只允许下面两个简单的模式。</p>
+<pre><code>// match &quot;movies 80301&quot;
+val MoviesZipRE = &quot;movies (\\d{5})&quot;.r
+
+// match &quot;movies near boulder, co&quot;
+val MoviesNearCityStateRE = &quot;movies near ([a-z]+), ([a-z]{2})&quot;.r
+</code></pre></li>
+<li><p>一旦你定义了你想允许的模式，无论用户键入什么都可以使用匹配表达式进行匹配。下例中，当需要匹配时可以调用一个虚构的方法，叫做getSearchResults。</p>
+<pre><code>textUserTyped match {
+    case MoviesZipRE(zip) =&gt; getSearchResults(zip)
+    case MoviesNearCityStateRE(city, state) =&gt; getSearchResults(city, state)
+    case _ =&gt; println(&quot;did not match a regex&quot;)
+}
+</code></pre></li>
+<li><p>正如你看到的，这个语法使你匹配表达式的可读性很强。对于你要匹配的两个模式，你可以调用getSearchResults方法的重载方法，把zip字段传递给第一个case,把city和state字段传递给第二个case。这个例子中展示的两个正则表达式会匹配如下的字符串：</p>
+<pre><code>&quot;movies 80301&quot;
+&quot;movies 99676&quot;
+&quot;movies near boulder, co&quot;
+&quot;movies near talkeetna, ak&quot;
+</code></pre></li>
+<li><p>值得注意的是，正则表达式必须匹配用户的输入。根据现在的正则表达式模式，如下的字符串将会匹配失败，因为每行的末尾有一个空格。</p>
+<pre><code>&quot;movies 80301 &quot;
+&quot;movies near boulder, co &quot;
+</code></pre></li>
+<li><p>可以通过去除输入的首尾空格来解决这个特别的问题，或者使用一个更加复杂的正则表达式，想要在真实世界中做任何事。</p>
+</li>
+<li>可以想象，你可以在很多不同的情况下使用相同的匹配模式，包括匹配日期和时间格式，街道地址，人的名字，等等很多其他情况。</li>
+</ul>
+<h2 id="1-9-访问字符串中的字符"><a href="#1-9-访问字符串中的字符" class="headerlink" title="1.9 访问字符串中的字符"></a>1.9 访问字符串中的字符</h2><ul>
+<li>问题：在字符串的特定位置获得一个字符。<h3 id="1-9-1-解决方案"><a href="#1-9-1-解决方案" class="headerlink" title="1.9.1 解决方案"></a>1.9.1 解决方案</h3></li>
+<li><p>可以使用Java的charAt方法</p>
+<pre><code>scala&gt; &quot;hello&quot;.charAt(0)
+res0: Char = h
+</code></pre></li>
+<li><p>然后首选方式是使用Scala的数组表示法：</p>
+<pre><code>scala&gt; &quot;hello&quot;(0)
+res1: Char = h
+
+scala&gt; &quot;hello&quot;(1)
+res2: Char = e
+</code></pre></li>
+</ul>
+<h3 id="1-9-2-讨论"><a href="#1-9-2-讨论" class="headerlink" title="1.9.2 讨论"></a>1.9.2 讨论</h3><ul>
+<li>当循环字符串中的字符时，通常会使用map方法和foreach方法。但是某些情况下这些方法可能不起作用，此时可以把字符串当做一个Array数组，然后可以通过数组表示法获取每个字符。</li>
+<li><p>Scala的数组表示法和Java的不同因为在Scala中它真的是一个方法调用，有一些很好的语法。如果你这样写代码将非常方便并且很易读。</p>
+<pre><code>scala&gt; &quot;hello&quot;(1)
+res0: Char = e
+</code></pre></li>
+<li><p>但在幕后，Scala将你的代码转成如下：</p>
+<pre><code>scala&gt; &quot;hello&quot;.apply(1)
+res1: Char = e
+</code></pre></li>
+<li><p>这个语法详解在第6.8章“不使用new关键词创建对象实例”</p>
+</li>
+</ul>
+<h2 id="1-10-在String类中自定义方法"><a href="#1-10-在String类中自定义方法" class="headerlink" title="1.10 在String类中自定义方法"></a>1.10 在String类中自定义方法</h2><ul>
+<li><p>问题：不是创建一个单独的字符串实用程序库，像StringUtilities类一样，你想要添加你自己的行为到String类中，所以你可以如下编写代码：</p>
+<pre><code>&quot;HAL&quot;.increment
+</code></pre></li>
+<li><p>而不是这个：</p>
+<pre><code>StringUtilities.increment(&quot;HAL&quot;)
+</code></pre></li>
+</ul>
+<h3 id="1-10-1-解决方案"><a href="#1-10-1-解决方案" class="headerlink" title="1.10.1 解决方案"></a>1.10.1 解决方案</h3><ul>
+<li>Scala2.10里，定义一个隐式类，然后再类里定义方法执行想要的行为。</li>
+<li><p>可以在REPL中看到，首先定义隐式类和方法：</p>
+<pre><code>scala&gt; implicit class StringImprovements(s: String) {
+| def increment = s.map(c =&gt; (c + 1).toChar)
+| }
+defined class StringImprovements
+</code></pre></li>
+<li><p>然后在任何字符串上调用你的方法：</p>
+<pre><code>scala&gt; val result = &quot;HAL&quot;.increment
+result: String = IBM
+</code></pre></li>
+<li><p>实际代码中，这只有一点复杂而已。根据<a href="http://docs.scala-lang.org/sips/completed/implicit-classes.html" target="_blank" rel="external">SIP-13 - Implicit classes</a>，“隐式类必须在允许方法定义（不在顶层）的范围内定义”，意味着隐式类必须在类、对象或包对象中定义。</p>
+</li>
+</ul>
+<h3 id="1-10-2-把隐类放在一个对象上"><a href="#1-10-2-把隐类放在一个对象上" class="headerlink" title="1.10.2 把隐类放在一个对象上"></a>1.10.2 把隐类放在一个对象上</h3><ul>
+<li><p>一种满足这种情况的方法就是把隐类放在一个对象里。举例，你可以把StringImprovements隐类放入一个对象里，如StringUtils对象：</p>
+<pre><code>package com.alvinalexander.utils
+
+object StringUtils {
+
+    implicit class StringImprovements(val s: String) {
+        def increment = s.map(c =&gt; (c + 1).toChar)
+    }
+}
+</code></pre></li>
+<li><p>然后就可以在添加适当的import语句后在任何地方使用increment方法：</p>
+<pre><code>package foo.bar
+
+import com.alvinalexander.utils.StringUtils._
+
+object Main extends App {
+
+    println(&quot;HAL&quot;.increment)
+}
+</code></pre></li>
+</ul>
+<h3 id="1-10-3-把隐类放在一个包对象上"><a href="#1-10-3-把隐类放在一个包对象上" class="headerlink" title="1.10.3 把隐类放在一个包对象上"></a>1.10.3 把隐类放在一个包对象上</h3><ul>
+<li>另一个满足要求的方法是把隐类放在一个包对象上。用这种方法，把下面的代码放到适当的目录下的一个命名为package.scala的文件中，如果使用SBT，应该把文件放到你项目src/main/scala/com/alvinalexander的目录下，文件包括以下内容：</li>
+<li><p>注SBT:SBT是Simple Build Tool的简称，如果使用过Maven，那么可以简单将SBT看做是Scala世界的Maven，虽然二者各有优劣，但完成的工作基本是类似的。可以使用SBT构建Scala应用。</p>
+<pre><code>package com.alvinalexander
+
+package object utils {
+
+    implicit class StringImprovements(val s: String) {
+        def increment = s.map(c =&gt; (c + 1).toChar)
+    }
+}
+</code></pre></li>
+<li><p>当需要在其他代码中使用increment方法时，从前面的示例中使用一个稍微不用的import语句：</p>
+<pre><code>package foo.bar
+
+import com.alvinalexander.utils._
+
+object MainDriver extends App {
+    println(&quot;HAL&quot;.increment)
+}
+</code></pre></li>
+<li><p>详情见6.7章节，“把普通代码放在包对象中”。     </p>
+</li>
+</ul>
+<h3 id="1-10-4-使用Scala-2-10之前版本"><a href="#1-10-4-使用Scala-2-10之前版本" class="headerlink" title="1.10.4 使用Scala 2.10之前版本"></a>1.10.4 使用Scala 2.10之前版本</h3><ul>
+<li><p>如果因为某些原因需要使用Scala2.10之前的版本，则需要采用一个稍微不同的方法。在这种情况下，在一个一般Scala类中定义一个increment方法：</p>
+<pre><code>class StringImprovements(val s: String) {
+    def increment = s.map(c =&gt; (c + 1).toChar)
+}
+</code></pre></li>
+<li><p>然后定义一个处理隐式转换的另一个方法：</p>
+<pre><code>implicit def stringToString(s: String) = new StringImprovements(s)
+</code></pre></li>
+<li><p>stringToString方法中的字符串参数本质上链接String类到StringImprovements类，现在就可以和之前例子一样使用increment方法了。</p>
+<pre><code>&quot;HAL&quot;.increment
+</code></pre></li>
+<li><p>REPL中演示如下：</p>
+<pre><code>scala&gt; class StringImprovements(val s: String) {
+    | def increment = s.map(c =&gt; (c + 1).toChar)
+    | }
+defined class StringImprovements
+
+scala&gt; implicit def stringToString(s: String) = new StringImprovements(s)
+stringToString: (s: String)StringImprovements
+
+scala&gt; &quot;HAL&quot;.increment
+res0: String = IBM
+</code></pre></li>
+</ul>
+<h3 id="1-10-5-讨论"><a href="#1-10-5-讨论" class="headerlink" title="1.10.5 讨论"></a>1.10.5 讨论</h3><ul>
+<li>正如之前所见，在Scala中，可以通过写隐式转换在闭类里添加新的功能，当你需要时把他们添加到作用域。这种方法的主要好处就是不需要继承已存在的类来添加新的功能。例如，没有必要创建一个继承String的新类MyString,然后在代码中使用MyString代替String。相反，你可以定义你想要的行为，然后将该行为添加到当前作用域的所有的String对象中，当你添加导入语句时。</li>
+<li><p>值得注意的是你可以在隐类中定义许多你需要的方法。下面的代码显示了increment和decrement方法，以及一个hideAll方法返回一个所有字符都被“*”字符替换的字符串。</p>
+<pre><code>implicit class StringImprovements(val s: String) {
+    def increment = s.map(c =&gt; (c + 1).toChar)
+    def decrement = s.map(c =&gt; (c − 1).toChar)
+    def hideAll = s.replaceAll(&quot;.&quot;, &quot;*&quot;)
+}
+</code></pre></li>
+<li><p>注意，除了类名前的implicit关键词，StringImprovements类和他的方法和往常一个写。</p>
+</li>
+<li><p>通过导入语句简单的将代码带到范围里，你可以使用这些方法，REPL中显示如下：</p>
+<pre><code>scala&gt; &quot;HAL&quot;.increment
+res0: String = IBM
+</code></pre></li>
+<li>有一个关于它如何工作的简单描述：<ul>
+<li>编译器看到字符串“HAL”</li>
+<li>编译器看到你正在尝试调用一个String类里的increment方法</li>
+<li>因为编译器无法再String类里找到这个方法，它开始开始查寻找周围的隐式转换方法，并且接受一个字符串参数</li>
+<li>这个将编译器指向StringImprovements类，在那里它会找到increment方法</li>
+</ul>
+</li>
+<li>这是工作过程的简单化，但它给了隐式转换如何工作的总体思路。</li>
+</ul>
+<h3 id="1-10-6-注释你的方法的返回类型"><a href="#1-10-6-注释你的方法的返回类型" class="headerlink" title="1.10.6 注释你的方法的返回类型"></a>1.10.6 注释你的方法的返回类型</h3><ul>
+<li>建议应该注释掉隐式方法定义的返回类型，如果你的运行环境编译器无法找到你的隐式方法，或者你只想显示的声明你的方法，添加你的方法定义的返回类型。</li>
+<li><p>在increment,decrement和hideAll方法中，返回字符串的类型是显示的：</p>
+<pre><code>implicit class StringImprovements(val s: String) {
+    // being explicit that each method returns a String
+    def increment: String = s.map(c =&gt; (c + 1).toChar)
+    def decrement: String = s.map(c =&gt; (c − 1).toChar)
+    def hideAll: String = s.replaceAll(&quot;.&quot;, &quot;*&quot;)
+}
+</code></pre></li>
+</ul>
+<h3 id="1-10-7-返回其他类型"><a href="#1-10-7-返回其他类型" class="headerlink" title="1.10.7 返回其他类型"></a>1.10.7 返回其他类型</h3><ul>
+<li><p>尽管到目前所显示的所有方法都返回一个字符串，你可以从你的方法里返回你需要的任何类型。下面的类演示了几种不同的字符串转换方法类型。</p>
+<pre><code>implicit class StringImprovements(val s: String) {
+    def increment = s.map(c =&gt; (c + 1).toChar)
+    def decrement = s.map(c =&gt; (c − 1).toChar)
+    def hideAll: String = s.replaceAll(&quot;.&quot;, &quot;*&quot;)
+    def plusOne = s.toInt + 1
+    def asBoolean = s match {
+        case &quot;0&quot; | &quot;zero&quot; | &quot;&quot; | &quot; &quot; =&gt; false
+        case _ =&gt; true
+    }
+}
+</code></pre></li>
+<li><p>有了这些新方法，可以执行Int和Boolean的转换，除了之前显示的字符串转换：</p>
+<pre><code>scala&gt; &quot;4&quot;.plusOne
+res0: Int = 5
+
+scala&gt; &quot;0&quot;.asBoolean
+res1: Boolean = false
+
+scala&gt; &quot;1&quot;.asBoolean
+res2: Boolean = true
+</code></pre></li>
+</ul>
+<p>*　值得注意的是这些方法已经简化，以保持它们的简短和可读性。在实际代码中，你可能会添加一些错误检查。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Cookbook/" rel="tag">#Cookbook</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/" rel="next" title="Scala Cookbook翻译 Chapter 1.Strings 第二部分">
+                <i class="fa fa-chevron-left"></i> Scala Cookbook翻译 Chapter 1.Strings 第二部分
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/" rel="prev" title="Scala Cookbook翻译 Chapter 2.Numbers 第一部分">
+                Scala Cookbook翻译 Chapter 2.Numbers 第一部分 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/"
+     data-title="Scala Cookbook翻译 Chapter 1.Strings 第三部分"
+     data-content=""
+     data-url="http://yygmind.github.io/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/"
+           data-title="Scala Cookbook翻译 Chapter 1.Strings 第三部分" data-url="http://yygmind.github.io/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-提取一个匹配模式的字符串的部分"><span class="nav-number">1.</span> <span class="nav-text">1.8 提取一个匹配模式的字符串的部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-1-解决方案"><span class="nav-number">1.1.</span> <span class="nav-text">1.8.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-2-讨论"><span class="nav-number">1.2.</span> <span class="nav-text">1.8.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-访问字符串中的字符"><span class="nav-number">2.</span> <span class="nav-text">1.9 访问字符串中的字符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-1-解决方案"><span class="nav-number">2.1.</span> <span class="nav-text">1.9.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-2-讨论"><span class="nav-number">2.2.</span> <span class="nav-text">1.9.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-在String类中自定义方法"><span class="nav-number">3.</span> <span class="nav-text">1.10 在String类中自定义方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-1-解决方案"><span class="nav-number">3.1.</span> <span class="nav-text">1.10.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-2-把隐类放在一个对象上"><span class="nav-number">3.2.</span> <span class="nav-text">1.10.2 把隐类放在一个对象上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-3-把隐类放在一个包对象上"><span class="nav-number">3.3.</span> <span class="nav-text">1.10.3 把隐类放在一个包对象上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-4-使用Scala-2-10之前版本"><span class="nav-number">3.4.</span> <span class="nav-text">1.10.4 使用Scala 2.10之前版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-5-讨论"><span class="nav-number">3.5.</span> <span class="nav-text">1.10.5 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-6-注释你的方法的返回类型"><span class="nav-number">3.6.</span> <span class="nav-text">1.10.6 注释你的方法的返回类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-7-返回其他类型"><span class="nav-number">3.7.</span> <span class="nav-text">1.10.7 返回其他类型</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

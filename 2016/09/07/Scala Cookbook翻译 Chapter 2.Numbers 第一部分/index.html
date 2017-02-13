@@ -1,0 +1,1110 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Cookbook,翻译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="总体介绍
+Scala中所有的数值类型都是对象，包括Byte,Char,Double,Float,Int,Long和Short。这7个数值类型继承自AnyVal特质，Unit和Boolean类被认为是“非数字的值类型”。
+这七个内置的数值类型有相同的数据范围，和java中是等价的。
+Data    type Range
+Char    16-bit unsigned Unicode characte">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala Cookbook翻译 Chapter 2.Numbers 第一部分">
+<meta property="og:url" content="http://yygmind.github.io/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="总体介绍
+Scala中所有的数值类型都是对象，包括Byte,Char,Double,Float,Int,Long和Short。这7个数值类型继承自AnyVal特质，Unit和Boolean类被认为是“非数字的值类型”。
+这七个内置的数值类型有相同的数据范围，和java中是等价的。
+Data    type Range
+Char    16-bit unsigned Unicode characte">
+<meta property="og:updated_time" content="2017-02-13T13:36:04.695Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala Cookbook翻译 Chapter 2.Numbers 第一部分">
+<meta name="twitter:description" content="总体介绍
+Scala中所有的数值类型都是对象，包括Byte,Char,Double,Float,Int,Long和Short。这7个数值类型继承自AnyVal特质，Unit和Boolean类被认为是“非数字的值类型”。
+这七个内置的数值类型有相同的数据范围，和java中是等价的。
+Data    type Range
+Char    16-bit unsigned Unicode characte">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Scala Cookbook翻译 Chapter 2.Numbers 第一部分 | Cody Yang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cody Yang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Scala Cookbook翻译 Chapter 2.Numbers 第一部分
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-07T21:37:24+08:00" content="2016-09-07">
+              2016-09-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 2.Numbers 第一部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="总体介绍"><a href="#总体介绍" class="headerlink" title="总体介绍"></a>总体介绍</h2><ul>
+<li>Scala中所有的数值类型都是对象，包括Byte,Char,Double,Float,Int,Long和Short。这7个数值类型继承自AnyVal特质，Unit和Boolean类被认为是“非数字的值类型”。</li>
+<li><p>这七个内置的数值类型有相同的数据范围，和java中是等价的。</p>
+<pre><code>Data    type Range
+Char    16-bit unsigned Unicode character
+Byte    8-bit signed value
+Short    16-bit signed value
+Int    32-bit signed value
+Long    64-bit signed value
+Float    32-bit IEEE 754 single precision float
+Double    64-bit IEEE 754 single precision float
+</code></pre></li>
+<li><p>除了这些类型之外，Boolean有true或者false的值。</p>
+</li>
+<li><p>如果想要知道这些数据范围的精确值，可以通过Scala的REPL中查到。</p>
+<pre><code>scala&gt; Short.MinValue
+res0: Short = −32768
+
+scala&gt; Short.MaxValue
+res1: Short = 32767
+
+scala&gt; Int.MinValue
+res2: Int = −2147483648
+
+scala&gt; Float.MinValue
+res3: Float = −3.4028235E38
+</code></pre></li>
+</ul>
+<a id="more"></a> 
+<ul>
+<li>除了这些基本类型外，理解BigInt和BigDecimal类是有帮助的，以及在scala.math包中封装的方法。这些都包括在本章中。</li>
+<li>复数和日期：如果需要比标准Scala更强大的math类，可以查看<a href="https://github.com/non/spire" target="_blank" rel="external">Spire project</a>，里面包括了像有理数、复数、真值等等，或者查看<a href="https://code.google.com/archive/p/scalalab/" target="_blank" rel="external"> ScalaLab</a>，提供了可以在Scala使用的科学计算Matlab-like。</li>
+<li><p>Java中<a href="http://www.joda.org/joda-time/" target="_blank" rel="external">Joda Time</a>项目用于处理日期是非常流行，一个叫做<a href="https://github.com/nscala-time/nscala-time" target="_blank" rel="external">nscala-time</a>的项目实现了Scala包裹Joda Time，可以让你用Scala方法写日期表达式，包括下面例子：</p>
+<pre><code>DateTime.now // returns org.joda.time.DateTime
+DateTime.now + 2.months
+DateTime.nextMonth &lt; DateTime.now + 2.months
+(2.hours + 45.minutes + 10.seconds).millis
+</code></pre></li>
+</ul>
+<h2 id="2-1-从字符串中解析数字"><a href="#2-1-从字符串中解析数字" class="headerlink" title="2.1 从字符串中解析数字"></a>2.1 从字符串中解析数字</h2><ul>
+<li>问题：要把字符串转成Scala的任意数值类型。<h3 id="2-1-1-解决方案"><a href="#2-1-1-解决方案" class="headerlink" title="2.1.1 解决方案"></a>2.1.1 解决方案</h3></li>
+<li><p>在字符串后面使用to*方法（StringLike特质）</p>
+<pre><code>scala&gt; &quot;100&quot;.toInt
+res0: Int = 100
+
+scala&gt; &quot;100&quot;.toDouble
+res1: Double = 100.0
+
+scala&gt; &quot;100&quot;.toFloat
+res2: Float = 100.0
+
+scala&gt; &quot;1&quot;.toLong
+res3: Long = 1
+
+scala&gt; &quot;1&quot;.toShort
+res4: Short = 1
+
+scala&gt; &quot;1&quot;.toByte
+res5: Byte = 1
+</code></pre></li>
+<li><p>小心，因为这些方法会抛出Java的NumberFormatException异常：</p>
+<pre><code>scala&gt; &quot;foo&quot;.toInt
+java.lang.NumberFormatException: For input string: &quot;foo&quot;
+    at java.lang.NumberFormatException.forInputString(NumberFormatException.java)
+    at java.lang.Integer.parseInt(Integer.java:449)
+    ... more output here ...
+</code></pre></li>
+<li><p>BigInt和BigDecimal实例也可以直接从字符串中创建（也可以抛出NumberFormatException异常）：</p>
+<pre><code>scala&gt; val b = BigInt(&quot;1&quot;)
+b: scala.math.BigInt = 1
+
+scala&gt; val b = BigDecimal(&quot;3.14159&quot;)
+b: scala.math.BigDecimal = 3.14159
+</code></pre><h3 id="2-1-2-进制处理"><a href="#2-1-2-进制处理" class="headerlink" title="2.1.2 进制处理"></a>2.1.2 进制处理</h3></li>
+<li><p>如果需要使用其他基于10的基数进行计算，可以发现在Scala的Int类里的toInt方法没有一个让你根据进制处理的方法。解决这个问题，使用java.lang.Integer类里的parseInt方法。</p>
+<pre><code>scala&gt; Integer.parseInt(&quot;1&quot;, 2)
+res0: Int = 1
+
+scala&gt; Integer.parseInt(&quot;10&quot;, 2)
+res1: Int = 2
+
+scala&gt; Integer.parseInt(&quot;100&quot;, 2)
+res2: Int = 4
+
+scala&gt; Integer.parseInt(&quot;1&quot;, 8)
+res3: Int = 1
+
+scala&gt; Integer.parseInt(&quot;10&quot;, 8)
+res4: Int = 8
+</code></pre></li>
+<li><p>如果你是隐式转换的粉丝，你可以创建一个隐式类和方法来解决这个问题：</p>
+<pre><code>implicit class StringToInt(s: String) {
+    def toInt(radix: Int) = Integer.parseInt(s, radix)
+}
+</code></pre></li>
+<li><p>定义一个隐类并添加到范围里，添加一个toInt方法，以一个基数参数到String类，现在可以调用这个方法代替Integer.parseInt:</p>
+<pre><code>scala&gt; implicit class StringToInt(s: String) {
+    | def toInt(radix: Int) = Integer.parseInt(s, radix)
+    | }
+defined class StringToInt
+
+scala&gt; &quot;1&quot;.toInt(2)
+res0: Int = 1
+
+scala&gt; &quot;10&quot;.toInt(2)
+res1: Int = 2
+
+scala&gt; &quot;100&quot;.toInt(2)
+res2: Int = 4
+
+scala&gt; &quot;100&quot;.toInt(8)
+res3: Int = 64
+
+scala&gt; &quot;100&quot;.toInt(16)
+res4: Int = 256
+</code></pre><h3 id="2-1-3-讨论"><a href="#2-1-3-讨论" class="headerlink" title="2.1.3 讨论"></a>2.1.3 讨论</h3></li>
+<li>如果使用过Java的字符串转数值类型，就会对NumberFormatException很熟悉，然后Scala没有异常检查，所以可能会想以不同的方式处理这种情况。</li>
+<li><p>首先，没有必须声明在Scala方法可能会抛出一个异常，所以像这样声明一个Scala方法是完全合法的：</p>
+<pre><code>// not required to declare &quot;throws NumberFormatException&quot;
+def toInt(s: String) = s.toInt
+</code></pre></li>
+<li>如果你允许像这样抛出一个异常，你方法的调用者可能需要提前知道这可能发生，考虑给你的方法添加一个Scala文档。</li>
+<li><p>如果你更喜欢给你的方法抛出一个异常，使用@throws注解进行标记：</p>
+<pre><code>@throws(classOf[NumberFormatException])
+def toInt(s: String) = s.toInt
+</code></pre></li>
+<li>如果这个方法在Java代码中被调用是需要进行@throws注解标注的，详细看第17.2章。</li>
+<li><p>然而，在Scala中这种情况通常使用Option/Some/None模式进行处理，详细描述见20.6章，使用这种方式如下定义方法：</p>
+<pre><code>def toInt(s: String):Option[Int] = {
+    try {
+        Some(s.toInt)
+    } catch {
+        case e: NumberFormatException =&gt; None
+    }
+}
+</code></pre></li>
+<li><p>现在可以根据不同需求用不同的方法调用toInt，一种使用getOrElse:</p>
+<pre><code>println(toInt(&quot;1&quot;).getOrElse(0)) // 1
+println(toInt(&quot;a&quot;).getOrElse(0)) // 0
+
+// assign the result to x
+val x = toInt(aString).getOrElse(0)
+</code></pre></li>
+<li><p>另一个方法就是使用匹配表达式，使用匹配表达式打印toInt结果：</p>
+<pre><code>toInt(aString) match {
+    case Some(n) =&gt; println(n)
+    case None =&gt; println(&quot;Boom! That wasn&apos;t a number.&quot;)
+}
+</code></pre></li>
+<li><p>使用匹配表达式分配结果给一个变量：</p>
+<pre><code>val result = toInt(aString) match {
+    case Some(x) =&gt; x
+    case None =&gt; 0 // however you want to handle this
+}
+</code></pre></li>
+<li>如果这些例子还是没有让你很好的使用 Option/Some/None方法，可以查看第10章和第11章，这个模式在处理集合的时候会非常有用和方便。<h3 id="2-1-4-Option的选择"><a href="#2-1-4-Option的选择" class="headerlink" title="2.1.4 Option的选择"></a>2.1.4 Option的选择</h3></li>
+<li>如果你喜欢Option/Some/None思想，但是需要访问异常信息，有几个额外的可能性：<ul>
+<li>Try, Success, and Failure （2.10描述）</li>
+<li>Either, Left, and Right</li>
+</ul>
+</li>
+<li>查看更多<blockquote>
+<p><a href="http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.StringLike" target="_blank" rel="external">The StringLike trait</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="2-2-数值类型间转换（强转）"><a href="#2-2-数值类型间转换（强转）" class="headerlink" title="2.2 数值类型间转换（强转）"></a>2.2 数值类型间转换（强转）</h2><ul>
+<li>问题：需要从一个数值类型转换成另一个数值类型，比如Int转成Double。<h3 id="2-2-1-解决方案"><a href="#2-2-1-解决方案" class="headerlink" title="2.2.1 解决方案"></a>2.2.1 解决方案</h3></li>
+<li><p>除了在Java中使用的“cast”方法，在所有数值类型上都可使用to*方法，演示如下：</p>
+<pre><code>scala&gt; val b = a.to[Tab]
+toByte toChar toDouble toFloat toInt toLong
+toShort toString
+
+scala&gt; 19.45.toInt
+res0: Int = 19
+
+scala&gt; 19.toFloat
+res1: Float = 19.0
+
+scala&gt; 19.toDouble
+res2: Double = 19.0
+
+scala&gt; 19.toLong
+res3: Long = 19
+
+scala&gt; val b = a.toFloat
+b: Float = 1945.0
+</code></pre><h3 id="讨论："><a href="#讨论：" class="headerlink" title="讨论："></a>讨论：</h3></li>
+<li><p>在Java中通过强转从一个数值类型转换到另一个数值类型：</p>
+<pre><code>int a = (int) 100.00;
+</code></pre></li>
+<li>但是在Scala中使用to*方法即可。</li>
+<li><p>如果你想避免潜在的转换错误，可以在转换之前尝试使用相关的isValid方法测试类型是否可以被转换。举例，Double对象有一个isValidInt和isValidShort方法：</p>
+<pre><code>scala&gt; val a = 1000L
+a: Long = 1000
+
+scala&gt; a.isValidByte
+res0: Boolean = false
+
+scala&gt; a.isValidShort
+res1: Boolean = true
+</code></pre></li>
+<li>查看更多<blockquote>
+<p><a href="http://www.scala-lang.org/api/current/index.html#scala.runtime.RichDouble" target="_blank" rel="external">The RichDouble class</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="2-3-重写默认数值类型"><a href="#2-3-重写默认数值类型" class="headerlink" title="2.3 重写默认数值类型"></a>2.3 重写默认数值类型</h2><ul>
+<li>问题：Scala会自动给数值分配类型，当你创建一个数值字段时需要重写默认类型。<h3 id="2-3-1-解决方案："><a href="#2-3-1-解决方案：" class="headerlink" title="2.3.1 解决方案："></a>2.3.1 解决方案：</h3></li>
+<li><p>如果你把1赋值给一个变量，Scala会分配Int类型：</p>
+<pre><code>scala&gt; val a = 1
+a: Int = 1
+</code></pre></li>
+<li><p>下面的例子显示一种重写简单数值类型的方法：</p>
+<pre><code>scala&gt; val a = 1d
+a: Double = 1.0
+
+scala&gt; val a = 1f
+a: Float = 1.0
+
+scala&gt; val a = 1000L
+a: Long = 1000
+</code></pre></li>
+<li><p>另一个方法是用一个类型进行注解：</p>
+<pre><code>scala&gt; val a = 0: Byte
+a: Byte = 0
+
+scala&gt; val a = 0: Int
+a: Int = 0
+
+scala&gt; val a = 0: Short
+a: Short = 0
+
+scala&gt; val a = 0: Double
+a: Double = 0.0
+
+scala&gt; val a = 0: Float
+a: Float = 0.0
+</code></pre></li>
+<li><p>冒号后面的间距不重要，如果首选的话使用下面的格式：</p>
+<pre><code>val a = 0:Byte
+</code></pre></li>
+<li><p>根据<a href="http://docs.scala-lang.org/style/types.html" target="_blank" rel="external"> Scala Style Guide</a>，这些例子显示了首选的注解类型，但是个人而言，当分配类型给变量时我更喜欢下面的语法，在变量名后面指定类型：</p>
+<pre><code>scala&gt; val a:Byte = 0
+a: Byte = 0
+
+scala&gt; val a:Int = 0
+a: Int = 0
+</code></pre></li>
+<li><p>可以在数字之前添加0x或者0X创建十六进制数值，然后可以把他们当做整形或者长整形存储：</p>
+<pre><code>scala&gt; val a = 0x20
+a: Int = 32
+
+// if you want to store the value as a Long
+scala&gt; val a = 0x20L
+a: Long = 32
+</code></pre></li>
+<li><p>在一些罕见的情况下，可能需要利用类型归属，<a href="http://stackoverflow.com/questions/2087250/what-is-the-purpose-of-type-ascriptions-in-scala" target="_blank" rel="external">Stack Overflow</a>显示了一个String向上转型到Object的例子：</p>
+<pre><code>scala&gt; val s = &quot;Dave&quot;
+s: String = Dave
+
+scala&gt; val p = s: Object
+p: Object = Dave
+</code></pre></li>
+<li>这个技术和这章节很像，向上转型常见于类型归属。官方文档描述如下：</li>
+<li>归属是基本的向上转型，编译执行时的类型检查，使用并不常见。但是可能在某些情况发生，最常见的情况是使用一个单一序列参数调用一个可变方法。<h3 id="2-3-2-讨论"><a href="#2-3-2-讨论" class="headerlink" title="2.3.2 讨论"></a>2.3.2 讨论</h3></li>
+<li><p>创建对象实例的时候很有用，大体语法如下：</p>
+<pre><code>// general case
+var [name]:[Type] = [initial value]
+
+// example
+var a:Short = 0
+</code></pre></li>
+<li><p>当需要在一个类中初始化数值变量字段时，这种形式将非常有用。</p>
+<pre><code>class Foo {
+    var a: Short = 0 // specify a default value
+    var b: Short = _ // defaults to 0
+}
+</code></pre></li>
+<li><p>当分配一个初始化值时可以使用下划线作为占位符，当创建类变量时起作用，但是在其他地方不起作用，比如在一个方法里不起作用。对于数值类型这不是问题，你可以指定值为0，但是在其他类型中，你可以在方法中用下面的方法：</p>
+<pre><code>var name = null.asInstanceOf[String]
+</code></pre></li>
+<li>更好的方式是使用 Option/Some/None模式，它有助于消除你代码中的空值，这是一个非常好的东西。你可以在Scala最好的库和框架中看到这个模式，比如Play框架。最好的例子看12.4章。</li>
+<li>更多讨论这个话题的信息看20.5章和20.6章。</li>
+<li>查看更多<blockquote>
+<p><a href="http://docs.scala-lang.org/style/" target="_blank" rel="external">The Scala Style Guide</a><br><a href="http://stackoverflow.com/questions/2087250/what-is-the-purpose-of-type-ascriptions-in-scala" target="_blank" rel="external">What is the purpose of type ascriptions in Scala?</a></p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Cookbook/" rel="tag">#Cookbook</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/" rel="next" title="Scala Cookbook翻译 Chapter 1.Strings 第三部分">
+                <i class="fa fa-chevron-left"></i> Scala Cookbook翻译 Chapter 1.Strings 第三部分
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/" rel="prev" title="Scala Cookbook翻译 Chapter 2.Numbers 第二部分">
+                Scala Cookbook翻译 Chapter 2.Numbers 第二部分 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/"
+     data-title="Scala Cookbook翻译 Chapter 2.Numbers 第一部分"
+     data-content=""
+     data-url="http://yygmind.github.io/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/"
+           data-title="Scala Cookbook翻译 Chapter 2.Numbers 第一部分" data-url="http://yygmind.github.io/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#总体介绍"><span class="nav-number">1.</span> <span class="nav-text">总体介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-从字符串中解析数字"><span class="nav-number">2.</span> <span class="nav-text">2.1 从字符串中解析数字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-解决方案"><span class="nav-number">2.1.</span> <span class="nav-text">2.1.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-进制处理"><span class="nav-number">2.2.</span> <span class="nav-text">2.1.2 进制处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-讨论"><span class="nav-number">2.3.</span> <span class="nav-text">2.1.3 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-4-Option的选择"><span class="nav-number">2.4.</span> <span class="nav-text">2.1.4 Option的选择</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-数值类型间转换（强转）"><span class="nav-number">3.</span> <span class="nav-text">2.2 数值类型间转换（强转）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-解决方案"><span class="nav-number">3.1.</span> <span class="nav-text">2.2.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讨论："><span class="nav-number">3.2.</span> <span class="nav-text">讨论：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-重写默认数值类型"><span class="nav-number">4.</span> <span class="nav-text">2.3 重写默认数值类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-解决方案："><span class="nav-number">4.1.</span> <span class="nav-text">2.3.1 解决方案：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-讨论"><span class="nav-number">4.2.</span> <span class="nav-text">2.3.2 讨论</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1513 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Cookbook,翻译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="3.8 使用一个case语句匹配复杂条件
+几个匹配条件要求执行相同的业务逻辑，而不是使用多个case重复业务逻辑，想要使用的是匹配条件的业务逻辑的复制。3.8.1 解决方案
+使用 | 分隔符将相同的业务逻辑的匹配条件放置到同一行上
+val i = 5
+i match {
+    case 1 | 3 | 5 | 7 | 9 =&amp;gt; println(&amp;quot;odd&amp;quot;)
+    ca">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分">
+<meta property="og:url" content="http://yygmind.github.io/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="3.8 使用一个case语句匹配复杂条件
+几个匹配条件要求执行相同的业务逻辑，而不是使用多个case重复业务逻辑，想要使用的是匹配条件的业务逻辑的复制。3.8.1 解决方案
+使用 | 分隔符将相同的业务逻辑的匹配条件放置到同一行上
+val i = 5
+i match {
+    case 1 | 3 | 5 | 7 | 9 =&amp;gt; println(&amp;quot;odd&amp;quot;)
+    ca">
+<meta property="og:updated_time" content="2017-02-13T12:58:07.890Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分">
+<meta name="twitter:description" content="3.8 使用一个case语句匹配复杂条件
+几个匹配条件要求执行相同的业务逻辑，而不是使用多个case重复业务逻辑，想要使用的是匹配条件的业务逻辑的复制。3.8.1 解决方案
+使用 | 分隔符将相同的业务逻辑的匹配条件放置到同一行上
+val i = 5
+i match {
+    case 1 | 3 | 5 | 7 | 9 =&amp;gt; println(&amp;quot;odd&amp;quot;)
+    ca">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分 | Cody Yang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cody Yang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-18T12:37:28+08:00" content="2016-09-18">
+              2016-09-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="3-8-使用一个case语句匹配复杂条件"><a href="#3-8-使用一个case语句匹配复杂条件" class="headerlink" title="3.8 使用一个case语句匹配复杂条件"></a>3.8 使用一个case语句匹配复杂条件</h2><ul>
+<li>几个匹配条件要求执行相同的业务逻辑，而不是使用多个case重复业务逻辑，想要使用的是匹配条件的业务逻辑的复制。<h3 id="3-8-1-解决方案"><a href="#3-8-1-解决方案" class="headerlink" title="3.8.1 解决方案"></a>3.8.1 解决方案</h3></li>
+<li><p>使用 | 分隔符将相同的业务逻辑的匹配条件放置到同一行上</p>
+<pre><code>val i = 5
+i match {
+    case 1 | 3 | 5 | 7 | 9 =&gt; println(&quot;odd&quot;)
+    case 2 | 4 | 6 | 8 | 10 =&gt; println(&quot;even&quot;)
+}
+</code></pre></li>
+<li><p>其他类型也适用：</p>
+<pre><code>val cmd = &quot;stop&quot;
+cmd match {
+    case &quot;start&quot; | &quot;go&quot; =&gt; println(&quot;starting&quot;)
+    case &quot;stop&quot; | &quot;quit&quot; | &quot;exit&quot; =&gt; println(&quot;stopping&quot;)
+    case _ =&gt; println(&quot;doing nothing&quot;)
+}
+</code></pre><a id="more"></a></li>
+<li><p>匹配多个case对象：</p>
+<pre><code>trait Command
+case object Start extends Command
+case object Go extends Command
+case object Stop extends Command
+case object Whoa extends Command
+
+def executeCommand(cmd: Command) = cmd match {
+    case Start | Go =&gt; start()
+    case Stop | Whoa =&gt; stop()
+}
+</code></pre></li>
+</ul>
+<hr>
+<h2 id="3-9-分配匹配表达式结果给变量"><a href="#3-9-分配匹配表达式结果给变量" class="headerlink" title="3.9 分配匹配表达式结果给变量"></a>3.9 分配匹配表达式结果给变量</h2><ul>
+<li>问题：从匹配表达式返回值然后分配给一个变量，或者使用匹配表达式作为一个方法的内容。<h3 id="3-9-1-解决方案"><a href="#3-9-1-解决方案" class="headerlink" title="3.9.1 解决方案"></a>3.9.1 解决方案</h3></li>
+<li><p>在匹配表达式前插入变量：</p>
+<pre><code>val evenOrOdd = someNumber match {
+    case 1 | 3 | 5 | 7 | 9 =&gt; println(&quot;odd&quot;)
+    case 2 | 4 | 6 | 8 | 10 =&gt; println(&quot;even&quot;)
+}
+</code></pre></li>
+<li><p>这种方式一般用来创建短方法和函数</p>
+<pre><code>def isTrue(a: Any) = a match {
+    case 0 | &quot;&quot; =&gt; false
+    case _ =&gt; true
+}
+</code></pre></li>
+<li>查看更多</li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Expression-oriented_programming_language" target="_blank" rel="external">Expression-oriented programming language</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="3-10-获取匹配表达式中默认case的值"><a href="#3-10-获取匹配表达式中默认case的值" class="headerlink" title="3.10 获取匹配表达式中默认case的值"></a>3.10 获取匹配表达式中默认case的值</h2><ul>
+<li>问题：想要获取默认值，但是使用_下划线进行匹配时不能获取值。<h3 id="3-10-1-解决方案"><a href="#3-10-1-解决方案" class="headerlink" title="3.10.1 解决方案"></a>3.10.1 解决方案</h3></li>
+<li><p>给默认case分配一个变量名代替使用_下划线，可以在语句的右边获取变量</p>
+<pre><code>i match {
+    case 0 =&gt; println(&quot;1&quot;)
+    case 1 =&gt; println(&quot;2&quot;)
+    case default =&gt; println(&quot;You gave me: &quot; + default)
+}
+</code></pre><h3 id="3-10-2-讨论"><a href="#3-10-2-讨论" class="headerlink" title="3.10.2 讨论"></a>3.10.2 讨论</h3></li>
+<li>本章关键是使用一个变量名代表默认匹配，代替使用下划线_字符</li>
+<li><p>分配的名字可以是任何合法的变量名：</p>
+<pre><code>i match {
+    case 0 =&gt; println(&quot;1&quot;)
+    case 1 =&gt; println(&quot;2&quot;)
+    case whoa =&gt; println(&quot;You gave me: &quot; + whoa)
+}
+</code></pre></li>
+<li><p>必须提供一个默认匹配，不提供会产生MatchError错误：</p>
+<pre><code>scala&gt; 3 match {
+    | case 1 =&gt; println(&quot;one&quot;)
+    | case 2 =&gt; println(&quot;two&quot;)
+    | // no default match
+    | }
+scala.MatchError: 3 (of class java.lang.Integer)
+many more lines of output ...
+</code></pre></li>
+</ul>
+<hr>
+<h2 id="3-11-在匹配表达式里使用模式匹配"><a href="#3-11-在匹配表达式里使用模式匹配" class="headerlink" title="3.11 在匹配表达式里使用模式匹配"></a>3.11 在匹配表达式里使用模式匹配</h2><ul>
+<li>问题：需要在一个匹配表达式里匹配一个或者多个模式，并且模式可能是常量模式，变量模式，构造函数模式，序列模式，元组模式，或者类型模式<h3 id="3-11-1-解决方案"><a href="#3-11-1-解决方案" class="headerlink" title="3.11.1 解决方案"></a>3.11.1 解决方案</h3></li>
+<li><p>给想要匹配的每个模式定义一个case语句：</p>
+<pre><code>def echoWhatYouGaveMe(x: Any): String = x match {
+
+    // constant patterns
+    case 0 =&gt; &quot;zero&quot;
+    case true =&gt; &quot;true&quot;
+    case &quot;hello&quot; =&gt; &quot;you said &apos;hello&apos;&quot;
+    case Nil =&gt; &quot;an empty List&quot;
+
+    // sequence patterns
+    case List(0, _, _) =&gt; &quot;a three-element list with 0 as the first element&quot;
+    case List(1, _*) =&gt; &quot;a list beginning with 1, having any number of elements&quot;
+    case Vector(1, _*) =&gt; &quot;a vector starting with 1, having any number of elements&quot;
+
+    // tuples
+    case (a, b) =&gt; s&quot;got $a and $b&quot;
+    case (a, b, c) =&gt; s&quot;got $a, $b, and $c&quot;
+
+    // constructor patterns
+    case Person(first, &quot;Alexander&quot;) =&gt; s&quot;found an Alexander, first name = $first&quot;
+    case Dog(&quot;Suka&quot;) =&gt; &quot;found a dog named Suka&quot;
+
+    // typed patterns
+    case s: String =&gt; s&quot;you gave me this string: $s&quot;
+    case i: Int =&gt; s&quot;thanks for the int: $i&quot;
+    case f: Float =&gt; s&quot;thanks for the float: $f&quot;
+    case a: Array[Int] =&gt; s&quot;an array of int: ${a.mkString(&quot;,&quot;)}&quot;
+    case as: Array[String] =&gt; s&quot;an array of strings: ${as.mkString(&quot;,&quot;)}&quot;
+    case d: Dog =&gt; s&quot;dog: ${d.name}&quot;
+    case list: List[_] =&gt; s&quot;thanks for the List: $list&quot;
+    case m: Map[_, _] =&gt; m.toString
+
+    // the default wildcard pattern
+    case _ =&gt; &quot;Unknown&quot;
+}
+</code></pre></li>
+<li><p>测试上面的匹配表达式：</p>
+<pre><code>object LargeMatchTest extends App {
+
+    case class Person(firstName: String, lastName: String)
+    case class Dog(name: String)
+
+    // trigger the constant patterns
+    println(echoWhatYouGaveMe(0))
+    println(echoWhatYouGaveMe(true))
+    println(echoWhatYouGaveMe(&quot;hello&quot;))
+    println(echoWhatYouGaveMe(Nil))
+
+    // trigger the sequence patterns
+    println(echoWhatYouGaveMe(List(0,1,2)))
+    println(echoWhatYouGaveMe(List(1,2)))
+    println(echoWhatYouGaveMe(List(1,2,3)))
+    println(echoWhatYouGaveMe(Vector(1,2,3)))
+
+    // trigger the tuple patterns
+    println(echoWhatYouGaveMe((1,2))) // two element tuple
+    println(echoWhatYouGaveMe((1,2,3))) // three element tuple
+
+    // trigger the constructor patterns
+    println(echoWhatYouGaveMe(Person(&quot;Melissa&quot;, &quot;Alexander&quot;)))
+    println(echoWhatYouGaveMe(Dog(&quot;Suka&quot;)))
+
+    // trigger the typed patterns
+    println(echoWhatYouGaveMe(&quot;Hello, world&quot;))
+    println(echoWhatYouGaveMe(42))
+    println(echoWhatYouGaveMe(42F))
+    println(echoWhatYouGaveMe(Array(1,2,3)))
+    println(echoWhatYouGaveMe(Array(&quot;coffee&quot;, &quot;apple pie&quot;)))
+    println(echoWhatYouGaveMe(Dog(&quot;Fido&quot;)))
+    println(echoWhatYouGaveMe(List(&quot;apple&quot;, &quot;banana&quot;)))
+    println(echoWhatYouGaveMe(Map(1-&gt;&quot;Al&quot;, 2-&gt;&quot;Alexander&quot;)))
+
+    // trigger the wildcard pattern
+    println(echoWhatYouGaveMe(&quot;33d&quot;))
+}
+</code></pre></li>
+<li><p>输出如下</p>
+<pre><code>zero
+true
+you said &apos;hello&apos;
+an empty List
+
+a three-element list with 0 as the first element
+a list beginning with 1 and having any number of elements
+a list beginning with 1 and having any number of elements
+a vector beginning with 1 and having any number of elements
+a list beginning with 1 and having any number of elements
+
+got 1 and 2
+got 1, 2, and 3
+
+found an Alexander, first name = Melissa
+found a dog named Suka
+
+you gave me this string: Hello, world
+thanks for the int: 42
+thanks for the float: 42.0
+an array of int: 1,2,3
+an array of strings: coffee,apple pie
+dog: Fido
+thanks for the List: List(apple, banana)
+Map(1 -&gt; Al, 2 -&gt; Alexander)
+
+you gave me this string: 33d
+</code></pre></li>
+<li><p>在匹配表达式中，List和Map语句写成如下：</p>
+<pre><code>case list: List[_] =&gt; s&quot;thanks for the List: $list&quot;
+case m: Map[_, _] =&gt; m.toString
+</code></pre></li>
+<li><p>也可以使用下面方式替代：</p>
+<pre><code>case list: List[x] =&gt; s&quot;thanks for the List: $list&quot;
+case m: Map[a, b] =&gt; m.toString
+</code></pre></li>
+<li>更偏爱使用下划线方法，因为代码清晰不需要关心存储在List和Map中的值是什么。当然有时需要知道存储在List和Map中的值是什么，但是由于JVM中的类型擦除，那将是一个困难的问题。</li>
+<li><p>如果List表达式写成如下：</p>
+<pre><code>case l: List[Int] =&gt; &quot;List&quot;
+</code></pre><ul>
+<li><p>如果熟悉java平台的类型擦除，就会知道这个例子不会工作，Scala编译器会有如下警告：</p>
+<pre><code>Test1.scala:7: warning: non-variable type argument Int in type pattern
+List[Int] is unchecked since it is eliminated by erasure
+case l: List[Int] =&gt; &quot;List[Int]&quot;
+         ^
+</code></pre></li>
+<li>如果对类型擦除不熟悉，请移步查看更多</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-11-2-讨论"><a href="#3-11-2-讨论" class="headerlink" title="3.11.2 讨论"></a>3.11.2 讨论</h3><ul>
+<li>通常使用这种技术时，你的方法将期待一个继承基类或者特性的实例,然后case语句将调用那个基类的子类。如echoWhatYouGaveMe方法中，每个Scala的类型都是Any的子类。</li>
+<li><p>在 <a href="http://alvinalexander.com/blueparrot" target="_blank" rel="external">Blue Parrot application</a>，以随机间隔播放音乐文件或者朗读文档，有以下方法：</p>
+<pre><code>import java.io.File
+
+sealed trait RandomThing
+
+case class RandomFile(f: File) extends RandomThing
+case class RandomString(s: String) extends RandomThing
+
+class RandomNoiseMaker {
+
+    def makeRandomNoise(t: RandomThing) = t match {
+        case RandomFile(f) =&gt; playSoundFile(f)
+        case RandomString(s) =&gt; speak(s)
+    }
+}
+</code></pre></li>
+<li>makeRandomNoise方法声明采用RandomThing类型做参数，然后匹配表达式处理两个子类，RandomFile和RandomString。</li>
+</ul>
+<h3 id="3-11-3-模式"><a href="#3-11-3-模式" class="headerlink" title="3.11.3 模式"></a>3.11.3 模式</h3><ul>
+<li><p>常量模式：常量模式只能匹配自己，任何文本都可以作为常量，如果指定0作为文本，那么只有整形 0 将会匹配</p>
+<pre><code>case 0 =&gt; &quot;zero&quot;
+case true =&gt; &quot;true&quot;
+</code></pre></li>
+<li><p>变量模式：上面例子中没有展示变量模式，在3.10中进行了讨论，变量模式如下划线字符一样匹配任何对象。Scala绑定变量为任何对象，在case语句的右边可以使用这个变量。</p>
+<pre><code>case _ =&gt; s&quot;Hmm, you gave me something ...&quot;
+
+//使用变量模式代替上面
+case foo =&gt; s&quot;Hmm, you gave me a $foo&quot;   
+</code></pre></li>
+<li><p>构造函数模式：可以在case语句中匹配构造函数，可以根据构造函数需要指定常量和变量模式：</p>
+<pre><code>case Person(first, &quot;Alexander&quot;) =&gt; s&quot;found an Alexander, first name = $first&quot;
+case Dog(&quot;Suka&quot;) =&gt; &quot;found a dog named Suka&quot;
+</code></pre></li>
+<li><p>序列模式：可以匹配List,Array,Vector等序列。使用下划线 <em> 字符代表序列的一个元素，使用 </em>* 代表 “0或多个字符”：</p>
+<pre><code>case List(0, _, _) =&gt; &quot;a three-element list with 0 as the first element&quot;
+case List(1, _*) =&gt; &quot;a list beginning with 1, having any number of elements&quot;
+case Vector(1, _*) =&gt; &quot;a vector beginning with 1 and having any number …&quot;
+</code></pre></li>
+<li><p>元组模式：匹配元祖模式并且获取元祖中每个元素的值，如果不关心一个元素的值可以使用下划线 _ 代替：</p>
+<pre><code>case (a, b, c) =&gt; s&quot;3-elem tuple, with values $a, $b, and $c&quot;
+case (a, b, c, _) =&gt; s&quot;4-elem tuple: got $a, $b, and $c&quot;
+</code></pre></li>
+<li><p>类型模式：下面的例子中str: String是一个类型模式，str是一个模式变量，可以在声明之后在表达式右边获取模式变量：</p>
+<pre><code>case str: String =&gt; s&quot;you gave me this string: $str&quot;
+</code></pre></li>
+</ul>
+<h3 id="3-11-4-给模式添加变量"><a href="#3-11-4-给模式添加变量" class="headerlink" title="3.11.4 给模式添加变量"></a>3.11.4 给模式添加变量</h3><ul>
+<li><p>通过以下语法给模式添加变量</p>
+<pre><code>variableName @ pattern
+</code></pre></li>
+<li>如 Programming in Scala 这本书描述，“这个提供了一个变量绑定模式。这样一个模式的意义是正常执行模式匹配，如果模式成功，就像一个简单变量模式设置变量给匹配对象”。</li>
+<li><p>下面通过演示问题解决来说明用处，假设有一个List模式：</p>
+<pre><code>case List(1, _*) =&gt; &quot;a list beginning with 1, having any number of elements&quot;
+</code></pre></li>
+<li><p>上面例子无法再表达式右侧获取list。想要获取list时，可以用下面方法：</p>
+<pre><code>case list: List[_] =&gt; s&quot;thanks for the List: $list&quot;
+</code></pre></li>
+<li><p>所以看上去应该尝试用一个序列模式：</p>
+<pre><code>case list: List(1, _*) =&gt; s&quot;thanks for the List: $list&quot;
+
+//编译错误
+Test2.scala:22: error: &apos;=&gt;&apos; expected but &apos;(&apos; found.
+    case list: List(1, _*) =&gt; s&quot;thanks for the List: $list&quot;
+                   ^
+one error found
+</code></pre></li>
+<li><p>解决方案是在序列模式添加一个绑定变量模式</p>
+<pre><code>case list @ List(1, _*) =&gt; s&quot;$list&quot;
+</code></pre></li>
+<li><p>下面更多演示：</p>
+<pre><code>case class Person(firstName: String, lastName: String)
+
+object Test2 extends App {
+
+    def matchType(x: Any): String = x match {
+
+        //case x: List(1, _*) =&gt; s&quot;$x&quot; // doesn&apos;t compile
+        case x @ List(1, _*) =&gt; s&quot;$x&quot; // works; prints the list
+
+        //case Some(_) =&gt; &quot;got a Some&quot; // works, but can&apos;t access the Some
+        //case Some(x) =&gt; s&quot;$x&quot; // works, returns &quot;foo&quot;
+        case x @ Some(_) =&gt; s&quot;$x&quot; // works, returns &quot;Some(foo)&quot;
+
+        case p @ Person(first, &quot;Doe&quot;) =&gt; s&quot;$p&quot; // works, returns &quot;Person(John,Doe)&quot;
+    }
+
+    println(matchType(List(1,2,3))) // prints &quot;List(1, 2, 3)&quot;
+    println(matchType(Some(&quot;foo&quot;))) // prints &quot;Some(foo)&quot;
+    println(matchType(Person(&quot;John&quot;, &quot;Doe&quot;))) // prints &quot;Person(John,Doe)&quot;
+}
+</code></pre></li>
+</ul>
+<h3 id="3-11-5-匹配表达式中使用Some和None"><a href="#3-11-5-匹配表达式中使用Some和None" class="headerlink" title="3.11.5 匹配表达式中使用Some和None"></a>3.11.5 匹配表达式中使用Some和None</h3><ul>
+<li><p>可能会经常在匹配表达式中使用Some和None。假定有一个toInt方法定义：</p>
+<pre><code>def toInt(s: String): Option[Int] = {
+    try {
+        Some(Integer.parseInt(s.trim))
+    } catch {
+        case e: Exception =&gt; None
+    }
+}
+</code></pre></li>
+<li><p>使用方法：</p>
+<pre><code>toInt(&quot;42&quot;) match {
+    case Some(i) =&gt; println(i)
+    case None =&gt; println(&quot;That wasn&apos;t an Int.&quot;)
+}
+</code></pre></li>
+<li><p>查看更多</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="http://stackoverflow.com/questions/1094173/how-do-i-get-around-type-erasure-on-scala-or-why-cant-i-get-the-type-paramete" target="_blank" rel="external">How do I get around type erasure on Scala? Or, why can’t I get the type parameter of my collections?</a></li>
+<li><a href="http://alvinalexander.com/blueparrot" target="_blank" rel="external">My Blue Parrot application</a></li>
+<li><a href="http://docs.oracle.com/javase/tutorial/java/generics/erasure.html" target="_blank" rel="external">The “Type Erasure” documentation</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="3-12-在匹配表达式中使用Case类"><a href="#3-12-在匹配表达式中使用Case类" class="headerlink" title="3.12 在匹配表达式中使用Case类"></a>3.12 在匹配表达式中使用Case类</h2><ul>
+<li>问题：想要在匹配表达式中匹配不同的case类或case对象，比如在actor里接收信息时。<h3 id="3-12-1-解决方案"><a href="#3-12-1-解决方案" class="headerlink" title="3.12.1 解决方案"></a>3.12.1 解决方案</h3></li>
+<li><p>使用不同的模式匹配case类和对象</p>
+<pre><code>trait Animal
+case class Dog(name: String) extends Animal
+case class Cat(name: String) extends Animal
+case object Woodpecker extends Animal
+
+object CaseClassTest extends App {
+
+    def determineType(x: Animal): String = x match {
+        case Dog(moniker) =&gt; &quot;Got a Dog, name = &quot; + moniker
+        case _:Cat =&gt; &quot;Got a Cat (ignoring the name)&quot;
+        case Woodpecker =&gt; &quot;That was a Woodpecker&quot;
+        case _ =&gt; &quot;That was something else&quot;
+    }
+
+    println(determineType(new Dog(&quot;Rocky&quot;)))
+    println(determineType(new Cat(&quot;Rusty the Cat&quot;)))
+    println(determineType(Woodpecker))
+}
+
+//输出
+Got a Dog, name = Rocky
+Got a Cat (ignoring the name)
+That was a Woodpecker
+</code></pre></li>
+</ul>
+<hr>
+<h2 id="3-13-Case语句中添加if表达式"><a href="#3-13-Case语句中添加if表达式" class="headerlink" title="3.13 Case语句中添加if表达式"></a>3.13 Case语句中添加if表达式</h2><ul>
+<li>问题：match表达式中给case语句添加限定逻辑，比如数字范围或者匹配模式，只要模式匹配一些额外的标准<h3 id="3-13-1-解决方案"><a href="#3-13-1-解决方案" class="headerlink" title="3.13.1 解决方案"></a>3.13.1 解决方案</h3></li>
+<li><p>case语句中添加if判断</p>
+<pre><code>//匹配数字范围
+i match {
+    case a if 0 to 9 contains a =&gt; println(&quot;0-9 range: &quot; + a)
+    case b if 10 to 19 contains b =&gt; println(&quot;10-19 range: &quot; + b)
+    case c if 20 to 29 contains c =&gt; println(&quot;20-29 range: &quot; + c)
+    case _ =&gt; println(&quot;Hmmm...&quot;)
+}
+
+//匹配一个对象的不同值
+num match {
+    case x if x == 1 =&gt; println(&quot;one, a lonely number&quot;)
+    case x if (x == 2 || x == 3) =&gt; println(x)
+    case _ =&gt; println(&quot;some other value&quot;)
+}
+</code></pre></li>
+<li><p>可以在if判断里引用类字段，假设如下x是Stock类的实例，并且有symbol和price字段</p>
+<pre><code>stock match {
+    case x if (x.symbol == &quot;XYZ&quot; &amp;&amp; x.price &lt; 20) =&gt; buy(x)
+    case x if (x.symbol == &quot;XYZ&quot; &amp;&amp; x.price &gt; 50) =&gt; sell(x)
+    case _ =&gt; // do nothing
+}
+</code></pre></li>
+<li><p>可以从case类里提取字段并应用在if判断里</p>
+<pre><code>def speak(p: Person) = p match {
+    case Person(name) if name == &quot;Fred&quot; =&gt; println(&quot;Yubba dubba doo&quot;)
+    case Person(name) if name == &quot;Bam Bam&quot; =&gt; println(&quot;Bam bam!&quot;)
+    case _ =&gt; println(&quot;Watch the Flintstones!&quot;)
+}
+</code></pre></li>
+</ul>
+<h3 id="3-13-2-讨论"><a href="#3-13-2-讨论" class="headerlink" title="3.13.2 讨论"></a>3.13.2 讨论</h3><ul>
+<li><p>注意所有的例子都可以如下把if判断放在表达式的右侧：</p>
+<pre><code>case Person(name) =&gt;
+    if (name == &quot;Fred&quot;) println(&quot;Yubba dubba doo&quot;)
+    else if (name == &quot;Bam Bam&quot;) println(&quot;Bam bam!&quot;)
+</code></pre></li>
+<li>但是在很多情况下，为了代码更简洁易读会直接在case语句中加入if判断，而不是右边</li>
+</ul>
+<hr>
+<h2 id="3-14-使用一个match表达式代替isInstanceOf"><a href="#3-14-使用一个match表达式代替isInstanceOf" class="headerlink" title="3.14 使用一个match表达式代替isInstanceOf"></a>3.14 使用一个match表达式代替isInstanceOf</h2><ul>
+<li>问题：需要匹配一个类型或者多个不同的类型<h3 id="3-14-1-解决方案"><a href="#3-14-1-解决方案" class="headerlink" title="3.14.1 解决方案"></a>3.14.1 解决方案</h3></li>
+<li><p>可以使用isInstanceOf方法测试一个对象的类型</p>
+<pre><code>if (x.isInstanceOf[Foo]) { do something ...
+</code></pre></li>
+<li><p>然后一些编程开发人员并不鼓励使用这种方法，并且在其他情况下会更加复杂。下面的例子中可以在一个match表达式中处理不同的类型</p>
+<pre><code>//确定对象是否是Person的实例
+def isPerson(x: Any): Boolean = x match {
+    case p: Person =&gt; true
+    case _ =&gt; false
+}
+
+//处理不同的子类
+trait SentientBeing
+trait Animal extends SentientBeing
+case class Dog(name: String) extends Animal
+case class Person(name: String, age: Int) extends SentientBeing
+
+// later in the code ...
+def printInfo(x: SentientBeing) = x match {
+    case Person(name, age) =&gt; // handle the Person
+    case Dog(name) =&gt; // handle the Dog
+}
+</code></pre></li>
+</ul>
+<h3 id="3-14-2-讨论"><a href="#3-14-2-讨论" class="headerlink" title="3.14.2 讨论"></a>3.14.2 讨论</h3><ul>
+<li>匹配多个类型时使用match表达式替代isInstanceOf是自然而然的事</li>
+<li><p>简单例子中，isInstanceOf方法匹配一个对象更简单点：</p>
+<pre><code>if (o.isInstanceOf[Person]) { // handle this ...
+</code></pre></li>
+<li>但是伴随更多需求，match表达式比if/else语句可读性更高</li>
+</ul>
+<hr>
+<h2 id="3-15-在match表达式中使用List"><a href="#3-15-在match表达式中使用List" class="headerlink" title="3.15 在match表达式中使用List"></a>3.15 在match表达式中使用List</h2><ul>
+<li>问题：List数据结构和其他集合数据结构有所不同，它从<a href="http://deathking.github.io/yast-cn/contents/chapter3.html" target="_blank" rel="external">Cons单元（Cons cells）</a>创建，结束于一个Nil元素。match表达式中使用这个会更好，比如写一个递归函数时。<h3 id="3-15-1-解决方案"><a href="#3-15-1-解决方案" class="headerlink" title="3.15.1 解决方案"></a>3.15.1 解决方案</h3></li>
+<li><p>创建一个List</p>
+<pre><code>val x = List(1, 2, 3)
+</code></pre></li>
+<li><p>使用cons单元和一个Nil元素创建List</p>
+<pre><code>val y = 1 :: 2 :: 3 :: Nil
+</code></pre></li>
+<li><p>写一个递归算法时，可以利用List的最后一个元素是一个Nil对象：</p>
+<pre><code>def listToString(list: List[String]): String = list match {
+    case s :: rest =&gt; s + &quot; &quot; + listToString(rest)
+    case Nil =&gt; &quot;&quot;
+}
+</code></pre></li>
+<li><p>REPL中运行：</p>
+<pre><code>scala&gt; val fruits = &quot;Apples&quot; :: &quot;Bananas&quot; :: &quot;Oranges&quot; :: Nil
+fruits: List[java.lang.String] = List(Apples, Bananas, Oranges)
+
+scala&gt; listToString(fruits)
+res0: String = &quot;Apples Bananas Oranges &quot;
+</code></pre></li>
+<li><p>这种一个case处理Nil，一个case处理List其他部分的方法也可以用在List的其他类型上：</p>
+<pre><code>def sum(list: List[Int]): Int = list match {
+    case Nil =&gt; 1
+    case n :: rest =&gt; n + sum(rest)
+}
+
+def multiply(list: List[Int]): Int = list match {
+    case Nil =&gt; 1
+    case n :: rest =&gt; n * multiply(rest)
+}
+</code></pre></li>
+<li><p>REPL中运行</p>
+<pre><code>scala&gt; val nums = List(1,2,3,4,5)
+nums: List[Int] = List(1, 2, 3, 4, 5)
+
+scala&gt; sum(nums)
+res0: Int = 16
+
+scala&gt; multiply(nums)
+res1: Int = 120
+</code></pre></li>
+</ul>
+<h3 id="3-15-2-讨论"><a href="#3-15-2-讨论" class="headerlink" title="3.15.2 讨论"></a>3.15.2 讨论</h3><ul>
+<li><p>记住必须处理Nil这个case，不然会报错：</p>
+<ul>
+<li><p>REPL中：</p>
+<pre><code>warning: match is not exhaustive! （完整）
+</code></pre></li>
+<li><p>正式项目中：</p>
+<pre><code>Exception in thread &quot;main&quot; scala.MatchError: List()
+(of class scala.collection.immutable.Nil$)
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-16-在try-catch中匹配一个或更多异常"><a href="#3-16-在try-catch中匹配一个或更多异常" class="headerlink" title="3.16 在try/catch中匹配一个或更多异常"></a>3.16 在try/catch中匹配一个或更多异常</h2><ul>
+<li>问题：在一个try/catch语句块中捕获一个或者更多异常<h3 id="3-16-1-解决方案"><a href="#3-16-1-解决方案" class="headerlink" title="3.16.1 解决方案"></a>3.16.1 解决方案</h3></li>
+<li><p>Scala的try/catch/finally语法和Java很像，但是他在catch语句块中使用match表达式：</p>
+<pre><code>val s = &quot;Foo&quot;
+try {
+    val i = s.toInt
+} catch {
+    case e: Exception =&gt; e.printStackTrace
+}
+</code></pre></li>
+<li><p>捕获更多异常：</p>
+<pre><code>try {
+    openAndReadAFile(filename)
+} catch {
+    case e: FileNotFoundException =&gt; println(&quot;Couldn&apos;t find that file.&quot;)
+    case e: IOException =&gt; println(&quot;Had an IOException trying to read that file&quot;)
+}
+</code></pre></li>
+</ul>
+<h3 id="3-16-2-讨论"><a href="#3-16-2-讨论" class="headerlink" title="3.16.2 讨论"></a>3.16.2 讨论</h3><ul>
+<li><p>如果不关心具体异常，想要捕获所有异常并进行处理：</p>
+<pre><code>try {
+    openAndReadAFile(&quot;foo&quot;)
+} catch {
+    case t: Throwable =&gt; t.printStackTrace()
+}
+</code></pre></li>
+<li><p>捕获所有并且忽略不进行信息处理：</p>
+<pre><code>try {
+    val i = s.toInt
+} catch {
+    case _: Throwable =&gt; println(&quot;exception ignored&quot;)
+}
+</code></pre></li>
+<li><p>在Java中，可以从一个catch语句抛出一个异常。但是因为Scala没有已检查的异常，不需要指定一个方法抛出异常。下面演示方法不使用注解：</p>
+<pre><code>// nothing required here
+def toInt(s: String): Option[Int] =
+    try {
+        Some(s.toInt)
+    } catch {
+        case e: Exception =&gt; throw e
+    }
+</code></pre></li>
+<li><p>如果喜欢声明方法抛出的异常或者需要和Java进行交互，添加@throws注解</p>
+<pre><code>@throws(classOf[NumberFormatException])
+def toInt(s: String): Option[Int] =
+    try {
+        Some(s.toInt)
+    } catch {
+        case e: NumberFormatException =&gt; throw e
+    }
+</code></pre></li>
+</ul>
+<hr>
+<h2 id="3-17-在try-catch-finally语句块里使用变量之前先声明它"><a href="#3-17-在try-catch-finally语句块里使用变量之前先声明它" class="headerlink" title="3.17 在try/catch/finally语句块里使用变量之前先声明它"></a>3.17 在try/catch/finally语句块里使用变量之前先声明它</h2><ul>
+<li>问题：想要在try语句里使用一个对象，然后在finally部分获取这个对象，例如需要在一个对象上调用一个关闭的方法。<h3 id="3-17-1-解决方案"><a href="#3-17-1-解决方案" class="headerlink" title="3.17.1 解决方案"></a>3.17.1 解决方案</h3></li>
+<li><p>在try/catch语句块之前声明字段为Option类型，然后在try语句内创建一个Some：</p>
+<pre><code>import java.io._
+
+object CopyBytes extends App {
+
+    var in = None: Option[FileInputStream]
+    var out = None: Option[FileOutputStream]
+
+    try {
+        in = Some(new FileInputStream(&quot;/tmp/Test.class&quot;))
+        out = Some(new FileOutputStream(&quot;/tmp/Test.class.copy&quot;))
+        var c = 0
+        while ({c = in.get.read; c != −1}) {
+            out.get.write(c)
+        }
+    } catch {
+        case e: IOException =&gt; e.printStackTrace
+    } finally {
+        println(&quot;entered finally ...&quot;)
+        if (in.isDefined) in.get.close
+        if (out.isDefined) out.get.close
+    }
+
+}
+</code></pre></li>
+<li>通常会告诉别人不要使用Option的get和isDefined方法，但是这是为数不多的一次认为这种使用是可以接受的，并且代码更可读</li>
+<li><p>另一种方法是使用foreach方法：</p>
+<pre><code>try {
+    in = Some(new FileInputStream(&quot;/tmp/Test.class&quot;))
+    out = Some(new FileOutputStream(&quot;/tmp/Test.class.copy&quot;))
+    in.foreach { inputStream =&gt;
+        out.foreach { outputStream =&gt;
+            var c = 0
+            while ({c = inputStream.read; c != −1}) {
+                outputStream.write(c)
+            }
+        }
+    }
+} // ...
+</code></pre></li>
+<li>上面方法两个变量时仍然可读，并且避免了get方法的调用。但是更多变量时并不实用。<h3 id="3-17-2-讨论"><a href="#3-17-2-讨论" class="headerlink" title="3.17.2 讨论"></a>3.17.2 讨论</h3></li>
+<li><p>声明Option字段的关键点在于没有初始化赋值：</p>
+<pre><code>var in = None: Option[FileInputStream]
+var out = None: Option[FileOutputStream]
+</code></pre></li>
+<li><p>可以通过以下方式理解：</p>
+<pre><code>var x has No Option[yeT]
+var x = None: Option[Type]
+</code></pre></li>
+<li><p>下面演示声明变量为null的处理，但是Scala中完全不需要考虑null值，所以下面的方法并不推荐：</p>
+<pre><code>// (1) declare the null variables
+var store: Store = null
+var inbox: Folder = null
+
+try {
+    // (2) use the variables/fields in the try block
+    store = session.getStore(&quot;imaps&quot;)
+    inbox = getFolder(store, &quot;INBOX&quot;)
+    // rest of the code here ...
+} catch {
+    case e: NoSuchProviderException =&gt; e.printStackTrace
+    case me: MessagingException =&gt; me.printStackTrace
+} finally {
+    // (3) call close() on the objects in the finally clause
+    if (inbox != null) inbox.close
+    if (store != null) store.close
+}
+</code></pre></li>
+<li>查看更多</li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="http://docs.oracle.com/javase/tutorial/essential/io/bytestreams.html" target="_blank" rel="external">this Oracle “Byte Streams” example</a></li>
+</ul>
+</blockquote>
+<h2 id="3-18-创建自己的控制结构体"><a href="#3-18-创建自己的控制结构体" class="headerlink" title="3.18 创建自己的控制结构体"></a>3.18 创建自己的控制结构体</h2><ul>
+<li>问题：自定义控制结构体改善Scala语言，简化代码，或者创建DSL给其他人使用<h3 id="3-18-1-解决方案"><a href="#3-18-1-解决方案" class="headerlink" title="3.18.1 解决方案"></a>3.18.1 解决方案</h3></li>
+<li>Scala语言创建者有意不实现一些关键词，反而通过Scala库实现功能。比如3.5章节的“Implementing break and continue”，尽管Scala语言没有break和continue关键词，同样可以通过库里的方法实现同样的功能。</li>
+<li><p>下面例子演示，假设不喜欢while循环，创建自己的whilst循环，可以像下面方法使用：</p>
+<pre><code>package foo
+
+import com.alvinalexander.controls.Whilst._
+
+object WhilstDemo extends App {
+
+    var i = 0
+    whilst (i &lt; 5) {
+        println(i)
+        i += 1
+    }
+
+}
+</code></pre></li>
+<li>创建whilst控制结构体，定义一个叫做whilst的函数并且需要两个参数，第一个参数处理测试条件（i &lt; 5），第二个参数运行用户代码块。</li>
+<li><p>可以通过包裹while操作来实现方法：</p>
+<pre><code>// 1st attempt
+def whilst(testCondition: =&gt; Boolean)(codeBlock: =&gt; Unit) {
+    while (testCondition) {
+        codeBlock
+    }
+}
+</code></pre></li>
+<li><p>更好的方法是不调用while：</p>
+<pre><code>package com.alvinalexander.controls
+
+import scala.annotation.tailrec
+
+object Whilst {
+
+    // 2nd attempt
+    @tailrec
+    def whilst(testCondition: =&gt; Boolean)(codeBlock: =&gt; Unit) {
+        if (testCondition) {
+            codeBlock
+            whilst(testCondition)(codeBlock)
+        }
+    }
+
+}
+</code></pre><h3 id="3-18-2-讨论"><a href="#3-18-2-讨论" class="headerlink" title="3.18.2 讨论"></a>3.18.2 讨论</h3></li>
+<li><p>第二个例子中使用了递归调用，但是在其他简单例子中不需要递归。假设需要一个执行两个条件判断的控制结构体。如果两个都为true，则运行代码块。表达式可能如下方法调用：</p>
+<pre><code>doubleif(age &gt; 18)(numAccidents == 0) { println(&quot;Discount!&quot;) }
+</code></pre></li>
+<li><p>定义一个三个参数的函数：</p>
+<pre><code>// two &apos;if&apos; condition tests
+def doubleif(test1: =&gt; Boolean)(test2: =&gt; Boolean)(codeBlock: =&gt; Unit) {
+    if (test1 &amp;&amp; test2) {
+        codeBlock
+    }
+}
+</code></pre></li>
+<li>查看更多</li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="http://alvinalexander.com/scala/using-control-structure-beginning-scala-david-pollak" target="_blank" rel="external">The ‘using’ control structure in Beginning Scala (by David Pollak)</a></li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Cookbook/" rel="tag">#Cookbook</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/" rel="next" title="Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分">
+                <i class="fa fa-chevron-left"></i> Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/" rel="prev" title="Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分">
+                Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/"
+     data-title="Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分"
+     data-content=""
+     data-url="http://yygmind.github.io/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/"
+           data-title="Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分" data-url="http://yygmind.github.io/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-8-使用一个case语句匹配复杂条件"><span class="nav-number">1.</span> <span class="nav-text">3.8 使用一个case语句匹配复杂条件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-1-解决方案"><span class="nav-number">1.1.</span> <span class="nav-text">3.8.1 解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-9-分配匹配表达式结果给变量"><span class="nav-number">2.</span> <span class="nav-text">3.9 分配匹配表达式结果给变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-9-1-解决方案"><span class="nav-number">2.1.</span> <span class="nav-text">3.9.1 解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-10-获取匹配表达式中默认case的值"><span class="nav-number">3.</span> <span class="nav-text">3.10 获取匹配表达式中默认case的值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-10-1-解决方案"><span class="nav-number">3.1.</span> <span class="nav-text">3.10.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-10-2-讨论"><span class="nav-number">3.2.</span> <span class="nav-text">3.10.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-11-在匹配表达式里使用模式匹配"><span class="nav-number">4.</span> <span class="nav-text">3.11 在匹配表达式里使用模式匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-11-1-解决方案"><span class="nav-number">4.1.</span> <span class="nav-text">3.11.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-11-2-讨论"><span class="nav-number">4.2.</span> <span class="nav-text">3.11.2 讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-11-3-模式"><span class="nav-number">4.3.</span> <span class="nav-text">3.11.3 模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-11-4-给模式添加变量"><span class="nav-number">4.4.</span> <span class="nav-text">3.11.4 给模式添加变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-11-5-匹配表达式中使用Some和None"><span class="nav-number">4.5.</span> <span class="nav-text">3.11.5 匹配表达式中使用Some和None</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-12-在匹配表达式中使用Case类"><span class="nav-number">5.</span> <span class="nav-text">3.12 在匹配表达式中使用Case类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-12-1-解决方案"><span class="nav-number">5.1.</span> <span class="nav-text">3.12.1 解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-13-Case语句中添加if表达式"><span class="nav-number">6.</span> <span class="nav-text">3.13 Case语句中添加if表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-13-1-解决方案"><span class="nav-number">6.1.</span> <span class="nav-text">3.13.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-13-2-讨论"><span class="nav-number">6.2.</span> <span class="nav-text">3.13.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-14-使用一个match表达式代替isInstanceOf"><span class="nav-number">7.</span> <span class="nav-text">3.14 使用一个match表达式代替isInstanceOf</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-14-1-解决方案"><span class="nav-number">7.1.</span> <span class="nav-text">3.14.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-14-2-讨论"><span class="nav-number">7.2.</span> <span class="nav-text">3.14.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-15-在match表达式中使用List"><span class="nav-number">8.</span> <span class="nav-text">3.15 在match表达式中使用List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-15-1-解决方案"><span class="nav-number">8.1.</span> <span class="nav-text">3.15.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-15-2-讨论"><span class="nav-number">8.2.</span> <span class="nav-text">3.15.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-16-在try-catch中匹配一个或更多异常"><span class="nav-number">9.</span> <span class="nav-text">3.16 在try/catch中匹配一个或更多异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-16-1-解决方案"><span class="nav-number">9.1.</span> <span class="nav-text">3.16.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-16-2-讨论"><span class="nav-number">9.2.</span> <span class="nav-text">3.16.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-17-在try-catch-finally语句块里使用变量之前先声明它"><span class="nav-number">10.</span> <span class="nav-text">3.17 在try/catch/finally语句块里使用变量之前先声明它</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-17-1-解决方案"><span class="nav-number">10.1.</span> <span class="nav-text">3.17.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-17-2-讨论"><span class="nav-number">10.2.</span> <span class="nav-text">3.17.2 讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-18-创建自己的控制结构体"><span class="nav-number">11.</span> <span class="nav-text">3.18 创建自己的控制结构体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-18-1-解决方案"><span class="nav-number">11.1.</span> <span class="nav-text">3.18.1 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-18-2-讨论"><span class="nav-number">11.2.</span> <span class="nav-text">3.18.2 讨论</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
