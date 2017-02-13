@@ -1,0 +1,1072 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Cookbook,翻译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1.0 总体介绍
+Scala中的String类型就是Java中的String，所以可以使用Java中String的一些方法。
+Scala提供了隐式转换，String也可以使用StringOps类的所有方法，此时可以把String当做字符序列，
+
+可以利用foreach迭代打印每个字符：”hello”.foreach(println)
+通过for循环打印每个字符：for (c &amp;lt;- “hell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala Cookbook翻译 Chapter 1.Strings 第一部分">
+<meta property="og:url" content="http://yygmind.github.io/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/index.html">
+<meta property="og:site_name" content="Cody Yang">
+<meta property="og:description" content="1.0 总体介绍
+Scala中的String类型就是Java中的String，所以可以使用Java中String的一些方法。
+Scala提供了隐式转换，String也可以使用StringOps类的所有方法，此时可以把String当做字符序列，
+
+可以利用foreach迭代打印每个字符：”hello”.foreach(println)
+通过for循环打印每个字符：for (c &amp;lt;- “hell">
+<meta property="og:updated_time" content="2017-02-13T12:14:24.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala Cookbook翻译 Chapter 1.Strings 第一部分">
+<meta name="twitter:description" content="1.0 总体介绍
+Scala中的String类型就是Java中的String，所以可以使用Java中String的一些方法。
+Scala提供了隐式转换，String也可以使用StringOps类的所有方法，此时可以把String当做字符序列，
+
+可以利用foreach迭代打印每个字符：”hello”.foreach(println)
+通过for循环打印每个字符：for (c &amp;lt;- “hell">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Scala Cookbook翻译 Chapter 1.Strings 第一部分 | Cody Yang </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cody Yang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Scala Cookbook翻译 Chapter 1.Strings 第一部分
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-03T22:37:24+08:00" content="2016-09-03">
+              2016-09-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 1.Strings 第一部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-0-总体介绍"><a href="#1-0-总体介绍" class="headerlink" title="1.0 总体介绍"></a>1.0 总体介绍</h2><ul>
+<li>Scala中的String类型就是Java中的String，所以可以使用Java中String的一些方法。</li>
+<li><p>Scala提供了隐式转换，String也可以使用StringOps类的所有方法，此时可以把String当做字符序列，</p>
+<ul>
+<li>可以利用foreach迭代打印每个字符：”hello”.foreach(println)</li>
+<li>通过for循环打印每个字符：for (c &lt;- “hello”) println(c)</li>
+<li>也可以当做字节序列：”hello”.getBytes.foreach(println) //104 101 108 108 111(十进制ASCII编码)</li>
+<li>使用过滤器：val result = “hello world”.filter(_ != ‘l’) //heo word</li>
+</ul>
+</li>
+<li><p>实际上这些方法并不都是来自类StringOps，有的还来自StringLike和WrappedString等，可到api文档查看String到StringOps的隐式转换。</p>
+</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h2 id="1-1-字符串相等"><a href="#1-1-字符串相等" class="headerlink" title="1.1 字符串相等"></a>1.1 字符串相等</h2><ul>
+<li>Scala中通过 == 比较两个对象是否相等，这点与Java不同，Java中是通过equals比较两个对象。</li>
+<li>Scala中==方法定义在类AnyRef中，首先会检查是否为null,然后再调用第一个对象的equals方法比较两个对象，所以比较两个字符串时不需要再进行null值判断。</li>
+<li><p>在Scala语法中，从来不会使用空值，但是不排除使用java类库或者其他库时出现null的可能。</p>
+<pre><code>val s1 = &quot;Hello&quot;
+val s2 = &quot;Hello&quot;
+val s3 = &quot;H&quot; + &quot;ello&quot;
+s1 == s2 //true
+s1 == s3 //true
+</code></pre></li>
+<li><p>忽略大小写判断字符串相等</p>
+<pre><code>val s1: String = null
+val s2: String = null
+s1.toUpperCase == s2.toUpperCase //此刻报空指针错误，正确姿势如下
+
+val a = &quot;Marisa&quot;
+val b = &quot;marisa&quot;
+a.equalsIgnoreCase(b)  //true
+a.toUpperCase == b.toUpperCase //true
+</code></pre></li>
+</ul>
+<hr>
+<h2 id="1-2-创建多行字符串"><a href="#1-2-创建多行字符串" class="headerlink" title="1.2 创建多行字符串"></a>1.2 创建多行字符串</h2><ul>
+<li><p>在Scala中通过3个双引号创建多行字符串，但是下例打印出来第二及之后行行首以白色空格开始</p>
+<pre><code>val foo = &quot;&quot;&quot;This is
+a multiline
+String&quot;&quot;&quot;
+
+------------//输出如下
+This is
+    a multiline
+    String
+</code></pre></li>
+<li><p>可通过以下几种方法解决这个问题</p>
+<ul>
+<li>每行都和第一行对齐</li>
+<li><p>在多行字符串的最后添加stripMargin方法，第一行之外的每行行首以分隔符|开始</p>
+<pre><code>val speech = &quot;&quot;&quot;Four score and
+|seven years ago&quot;&quot;&quot;.stripMargin
+</code></pre></li>
+<li><p>如果不喜欢|分隔符， 可通过stripMargin方法使用任何字符</p>
+<pre><code>val speech = &quot;&quot;&quot;Four score and
+#seven years ago&quot;&quot;&quot;.stripMargin(&apos;#&apos;)
+
+------------//输出如下
+Four score and
+seven years ago
+</code></pre></li>
+<li><p>上述多行字符串实际是在行末有一个隐藏的\n换行字符，如果要把多行转成一行，可在stripMargin方法之后调用replaceAll方法，用空格替换换行符</p>
+<pre><code>val speech = &quot;&quot;&quot;Four score and
+|seven years ago
+|our fathers&quot;&quot;&quot;.stripMargin.replaceAll(&quot;\n&quot;, &quot;&quot;)
+
+------------//输出如下
+Four score and seven years ago our fathers
+</code></pre></li>
+<li><p>多行字符串有一个好处就是可以直接输出单双引号，而不用可以避免</p>
+<pre><code>val s = &quot;&quot;&quot;This is known as a
+|&quot;multiline&quot; string
+|or &apos;heredoc&apos; syntax.&quot;&quot;&quot;. stripMargin.replaceAll(&quot;\n&quot;, &quot; &quot;)
+
+------------//输出如下
+This is known as a &quot;multiline&quot; string or &apos;heredoc&apos; syntax.
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="1-3-分隔字符串"><a href="#1-3-分隔字符串" class="headerlink" title="1.3 分隔字符串"></a>1.3 分隔字符串</h2><ul>
+<li><p>通过split方法分隔字符串，返回字符串元素的Array数组</p>
+<pre><code>scala&gt; &quot;hello world&quot;.split(&quot; &quot;)
+res0: Array[java.lang.String] = Array(hello, world)
+
+scala&gt; &quot;hello world&quot;.split(&quot; &quot;).foreach(println)
+hello
+world
+</code></pre></li>
+<li><p>对于下面的例子最好使用map方法调用trim去除左右两边的空格</p>
+<pre><code>scala&gt; val s = &quot;eggs, milk, butter, Coco Puffs&quot;
+s: java.lang.String = eggs, milk, butter, Coco Puffs
+// 1st attempt
+scala&gt; s.split(&quot;,&quot;)
+res0: Array[java.lang.String] = Array(eggs, &quot; milk&quot;, &quot; butter&quot;, &quot; Coco Puffs&quot;)  //此处引号的存在是因为空格的存在，所以必须用引号指出来
+
+---------正确姿势如下
+// 2nd attempt, cleaned up
+scala&gt; s.split(&quot;,&quot;).map(_.trim)
+res1: Array[java.lang.String] = Array(eggs, milk, butter, Coco Puffs)
+</code></pre></li>
+<li><p>匹配空白字符作为分隔符</p>
+<pre><code>scala&gt; &quot;hello world, this is Al&quot;.split(&quot;\\s+&quot;) //正则表达，见下
+res0: Array[java.lang.String] = Array(hello, world,, this, is, Al)
+</code></pre></li>
+<li><p>split方法有些版本来自Java中String类，有的来自Scala中StringLike类，比如用字符串表示来自String，用字符表示来自StringLike</p>
+<pre><code>// split with a String argument
+scala&gt; &quot;hello world&quot;.split(&quot; &quot;)
+res0: Array[java.lang.String] = Array(hello, world)
+
+// split with a Char argument
+scala&gt; &quot;hello world&quot;.split(&apos; &apos;)
+res1: Array[String] = Array(hello, world)
+</code></pre></li>
+</ul>
+<h3 id="正则表达-s-详解"><a href="#正则表达-s-详解" class="headerlink" title="正则表达\s+详解"></a>正则表达\s+详解</h3><ul>
+<li><p>正则表达式中\s匹配任何空白字符，包括空格、制表符、换页符等等, 等价于[ \f\n\r\t\v]</p>
+<pre><code>\f -&gt; 匹配一个换页
+\n -&gt; 匹配一个换行符
+\r -&gt; 匹配一个回车符
+\t -&gt; 匹配一个制表符
+\v -&gt; 匹配一个垂直制表符
+</code></pre></li>
+<li>而“\s+”则表示匹配任意多个上面的字符。另因为反斜杠在Java里是转义字符，所以在Java里，我们要这么用“\s+”.<blockquote>
+<p><a href="http://www.tuicool.com/articles/vy2ymm" target="_blank" rel="external">非常好用的正则表达式”\s+” - 匹配任意空白字符</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="1-4-在字符串中插入变量"><a href="#1-4-在字符串中插入变量" class="headerlink" title="1.4 在字符串中插入变量"></a>1.4 在字符串中插入变量</h2><h4 id="1-4-1-在字符串中使用变量"><a href="#1-4-1-在字符串中使用变量" class="headerlink" title="1.4.1 在字符串中使用变量"></a>1.4.1 在字符串中使用变量</h4><ul>
+<li><p>2.10开始，Scala通过字符串插值可以有Perl,PHP,Puby语言一样的效果。如下需要字母 s 在字符串之前，字符串包含变量，变量前用 $ 符表示</p>
+<pre><code>scala&gt; val name = &quot;Fred&quot;
+name: String = Fred
+scala&gt; val age = 33
+age: Int = 33
+scala&gt; val weight = 200.00
+weight: Double = 200.0
+
+scala&gt; println(s&quot;$name is $age years old, and weights $weight pounds.&quot;)
+Fred is 33 years old, and weights 200.0 pounds.
+</code></pre></li>
+<li><p>当字母 s 在字符串之前时，就创建了一个可处理的字符串文本。Scala中规定，当字母 s 出现在任何字符串之前都允许直接在字符串中使用变量。</p>
+</li>
+</ul>
+<h4 id="1-4-2-在字符串中使用表达式"><a href="#1-4-2-在字符串中使用表达式" class="headerlink" title="1.4.2 在字符串中使用表达式"></a>1.4.2 在字符串中使用表达式</h4><ul>
+<li><p>通过通过${}在字符串中插入算术表达式</p>
+<pre><code>//算术表达式
+scala&gt; println(s&quot;Age next year: ${age + 1}&quot;)
+Age next year: 34
+
+//相等表达式
+scala&gt; println(s&quot;You are 33 years old: ${age == 33}&quot;)
+You are 33 years old: true
+</code></pre></li>
+<li><p>当打印对象的字段时需要用大括号包裹</p>
+<pre><code>//正确方式
+scala&gt; case class Student(name: String, score: Int)
+defined class Student
+scala&gt; val hannah = Student(&quot;Hannah&quot;, 95)
+hannah: Student = Student(Hannah,95)
+scala&gt; println(s&quot;${hannah.name} has a score of ${hannah.score}&quot;)
+Hannah has a score of 95
+
+//错误方式,此处是调用类的toString方法输出hannah变量
+scala&gt; println(s&quot;$hannah.name has a score of $hannah.score&quot;)
+Student(Hannah,95).name has a score of Student(Hannah,95).score
+</code></pre></li>
+</ul>
+<h4 id="1-4-3-字母s是一个方法"><a href="#1-4-3-字母s是一个方法" class="headerlink" title="1.4.3 字母s是一个方法"></a>1.4.3 字母s是一个方法</h4><ul>
+<li>字母s是一个方法，尽管看起来比直接在字符串中插入变量要麻烦一点，但是它至少有以下两个优点：<ul>
+<li>Scala提供了更多现成的插补函数</li>
+<li>可以自定义插补函数</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-4-4-插补器f（使用printf格式），可以格式化输出值"><a href="#1-4-4-插补器f（使用printf格式），可以格式化输出值" class="headerlink" title="1.4.4 插补器f（使用printf格式），可以格式化输出值"></a>1.4.4 插补器f（使用printf格式），可以格式化输出值</h4><ul>
+<li><p>输出两个小数位数</p>
+<pre><code>scala&gt; println(f&quot;$name is $age years old, and weighs $weight%.2f pounds.&quot;)
+Fred is 33 years old, and weighs 200.00 pounds.
+</code></pre></li>
+<li><p>完全去掉小数位</p>
+<pre><code>scala&gt; println(f&quot;$name is $age years old, and weighs $weight%.0f pounds.&quot;)
+Fred is 33 years old, and weighs 200 pounds.
+</code></pre></li>
+<li><p>把格式化的结果插补给另一个变量，如同在其他语言中调用sprintf一样(sprintf：字符串格式化命令，主要功能是把格式化的数据写入某个字符串中， sprintf函数的功能与printf函数的功能基本一样，只是它把结果输出到指定的字符串中了)</p>
+<pre><code>scala&gt; val out = f&quot;$name, you weigh $weight%.0f pounds.&quot;
+out: String = Fred, you weigh 200 pounds.
+</code></pre></li>
+</ul>
+<h4 id="1-4-5-插补器raw"><a href="#1-4-5-插补器raw" class="headerlink" title="1.4.5 插补器raw"></a>1.4.5 插补器raw</h4><ul>
+<li><p>用于显示字符串中所有文本，原封不动的显示出来</p>
+<pre><code>scala&gt; &quot;foo\nbar&quot;
+res0: String =
+foo
+bar
+
+scala&gt; s&quot;foo\nbar&quot;
+res1: String =
+foo
+bar
+
+scala&gt; raw&quot;foo\nbar&quot;
+res1: String = foo\nbar
+</code></pre></li>
+<li><p>当想要避免如\n转换成换行符情况的字符序列时将非常有用</p>
+</li>
+</ul>
+<h4 id="1-4-6-自定义插补器"><a href="#1-4-6-自定义插补器" class="headerlink" title="1.4.6 自定义插补器"></a>1.4.6 自定义插补器</h4><ul>
+<li>比较复杂，以后回顾看以下官方文档</li>
+<li>字符串插补器在Scala2.10时对模式匹配语句不起作用，此功能计划在2.11上<blockquote>
+<p><a href="http://docs.scala-lang.org/overviews/core/string-interpolation.html" target="_blank" rel="external">String Interpolation</a></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="1-4-7-2-10版本之前解决办法"><a href="#1-4-7-2-10版本之前解决办法" class="headerlink" title="1.4.7 2.10版本之前解决办法"></a>1.4.7 2.10版本之前解决办法</h4><ul>
+<li><p>如果因为某些原因需要使用2.10之前的版本，可以用format方法作用在字符串上，如下</p>
+<pre><code>scala&gt; val name = &quot;Fred&quot;
+name: java.lang.String = Fred
+
+scala&gt; val age = 33
+age: Int = 33
+
+scala&gt; val s = &quot;%s is %d years old&quot;.format(name, age)
+s: String = Fred is 33 years old
+
+scala&gt; println(&quot;%s is %d years old&quot;.format(name, age))
+Fred is 33 years old
+</code></pre></li>
+<li><p>和字符串插补器一样，这种方法也可以使用在任何需要格式化字符串的地方，比如toString方法</p>
+<pre><code>override def toString: String =
+    &quot;%s %s, age %d&quot;.format(firstName, lastName, age)
+</code></pre></li>
+<li><p>无论使用哪种方法，都可以使用printf说明符格式化变量。以下是常用格式符</p>
+<pre><code>格式符  描述
+%c  字符型
+%d  十进制整数 Decimal number (integer, base 10)
+%e  浮点型指数
+%f  浮点数
+%i  十进制整数 Integer (base 10)
+%o  八进制整数
+%s  字符串
+%u  十进制无符号整数
+%x  十六进制整数
+%%  打印百分比字符
+\%  打印百分比字符
+</code></pre></li>
+<li><p>查看更多</p>
+<blockquote>
+<p>更多printf格式符 <a href="http://alvinalexander.com/programming/printf-format-cheat-sheet" target="_blank" rel="external">format specifiers and examples</a><br>java中更多例子和细节 <a href="http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html" target="_blank" rel="external">Oracle Formatter page</a><br>官方文档 <a href="http://docs.scala-lang.org/overviews/core/string-interpolation.html" target="_blank" rel="external">The official Scala String Interpolation documentation</a></p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Cookbook/" rel="tag">#Cookbook</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/03/新建 - 副本/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/"
+     data-title="Scala Cookbook翻译 Chapter 1.Strings 第一部分"
+     data-content=""
+     data-url="http://yygmind.github.io/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/"
+           data-title="Scala Cookbook翻译 Chapter 1.Strings 第一部分" data-url="http://yygmind.github.io/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cody Yang" />
+          <p class="site-author-name" itemprop="name">Cody Yang</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-0-总体介绍"><span class="nav-number">1.</span> <span class="nav-text">1.0 总体介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-字符串相等"><span class="nav-number">3.</span> <span class="nav-text">1.1 字符串相等</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-创建多行字符串"><span class="nav-number">4.</span> <span class="nav-text">1.2 创建多行字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-分隔字符串"><span class="nav-number">5.</span> <span class="nav-text">1.3 分隔字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达-s-详解"><span class="nav-number">5.1.</span> <span class="nav-text">正则表达\s+详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-在字符串中插入变量"><span class="nav-number">6.</span> <span class="nav-text">1.4 在字符串中插入变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-1-在字符串中使用变量"><span class="nav-number">6.0.1.</span> <span class="nav-text">1.4.1 在字符串中使用变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-2-在字符串中使用表达式"><span class="nav-number">6.0.2.</span> <span class="nav-text">1.4.2 在字符串中使用表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-3-字母s是一个方法"><span class="nav-number">6.0.3.</span> <span class="nav-text">1.4.3 字母s是一个方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-4-插补器f（使用printf格式），可以格式化输出值"><span class="nav-number">6.0.4.</span> <span class="nav-text">1.4.4 插补器f（使用printf格式），可以格式化输出值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-5-插补器raw"><span class="nav-number">6.0.5.</span> <span class="nav-text">1.4.5 插补器raw</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-6-自定义插补器"><span class="nav-number">6.0.6.</span> <span class="nav-text">1.4.6 自定义插补器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-7-2-10版本之前解决办法"><span class="nav-number">6.0.7.</span> <span class="nav-text">1.4.7 2.10版本之前解决办法</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cody Yang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
