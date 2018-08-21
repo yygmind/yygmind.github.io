@@ -1,0 +1,1003 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="JS数组常考算法详解数组方法概述1、不改变原数组，返回新数组
+concat()
+连接两个或多个数组，两边的原始数组都不会变化，返回被连接数组的一个副本。
+
+
+
+join()
+把数组中所有元素放入一个字符串中，返回字符串。
+
+
+
+slice()
+从开始到结束（不包括结束）选择数组的一部分浅拷贝到一个新数组。
+
+
+
+map()
+创建一个新数组并返回，其中新数组的每个元素由调用原始数组中的每一个元素执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yygmind">
+<meta property="og:url" content="http://yygmind.github.io/2018/07/31/JS数组常考算法详解/index.html">
+<meta property="og:site_name" content="yygmind">
+<meta property="og:description" content="JS数组常考算法详解数组方法概述1、不改变原数组，返回新数组
+concat()
+连接两个或多个数组，两边的原始数组都不会变化，返回被连接数组的一个副本。
+
+
+
+join()
+把数组中所有元素放入一个字符串中，返回字符串。
+
+
+
+slice()
+从开始到结束（不包括结束）选择数组的一部分浅拷贝到一个新数组。
+
+
+
+map()
+创建一个新数组并返回，其中新数组的每个元素由调用原始数组中的每一个元素执行">
+<meta property="og:updated_time" content="2018-08-15T04:16:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="yygmind">
+<meta name="twitter:description" content="JS数组常考算法详解数组方法概述1、不改变原数组，返回新数组
+concat()
+连接两个或多个数组，两边的原始数组都不会变化，返回被连接数组的一个副本。
+
+
+
+join()
+把数组中所有元素放入一个字符串中，返回字符串。
+
+
+
+slice()
+从开始到结束（不包括结束）选择数组的一部分浅拷贝到一个新数组。
+
+
+
+map()
+创建一个新数组并返回，其中新数组的每个元素由调用原始数组中的每一个元素执行">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title>  | yygmind </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">yygmind</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-07-31T10:23:29+08:00" content="2018-07-31">
+              2018-07-31
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/07/31/JS数组常考算法详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/07/31/JS数组常考算法详解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/07/31/JS数组常考算法详解/" class="leancloud_visitors" data-flag-title="">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="JS数组常考算法详解"><a href="#JS数组常考算法详解" class="headerlink" title="JS数组常考算法详解"></a>JS数组常考算法详解</h3><h4 id="数组方法概述"><a href="#数组方法概述" class="headerlink" title="数组方法概述"></a>数组方法概述</h4><h5 id="1、不改变原数组，返回新数组"><a href="#1、不改变原数组，返回新数组" class="headerlink" title="1、不改变原数组，返回新数组"></a>1、不改变原数组，返回新数组</h5><ul>
+<li><p><code>concat()</code></p>
+<p>连接两个或多个数组，两边的原始数组都不会变化，返回被连接数组的一个副本。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>join()</code></p>
+<p>把数组中所有元素放入一个字符串中，返回字符串。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>slice()</code></p>
+<p>从开始到结束（不包括结束）选择数组的一部分浅拷贝到一个新数组。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>map()</code></p>
+<p>创建一个新数组并返回，其中新数组的每个元素由调用原始数组中的每一个元素执行提供的函数得来，原始数组不会改变。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>every()</code></p>
+<p>对数组中的每个元素都执行一次指定的回调函数，直到回调函数返回<code>false</code>，此时<code>every()</code>返回<code>false</code>并不再继续执行。如果回调函数对每个元素都返回<code>true</code>，那么<code>every()</code>将返回<code>true</code>。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>some()</code></p>
+<p>对数组中的每个元素都执行一次指定的回调函数，直到回调函数返回<code>true</code>，此时<code>some()</code>返回<code>true</code>并不再继续执行。如果回调函数对每个元素都返回<code>false</code>，那么<code>some()</code>将返回<code>false</code>。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>filter()</code></p>
+<p>创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。</p>
+</li>
+</ul>
+<h5 id="2、改变原数组"><a href="#2、改变原数组" class="headerlink" title="2、改变原数组"></a>2、改变原数组</h5><ul>
+<li><p><code>forEach()</code></p>
+<p>针对每一个元素执行提供的函数。会修改原来的数组，不会返回执行结果，返回<code>undefined</code>。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>pop()</code></p>
+<p>删除数组最后一个元素，返回被删除的元素。如果数组为空，则不改变数组，返回<code>undefined</code>。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>push()</code></p>
+<p>向数组末尾添加一个或多个元素，返回改变后数组的长度。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>reverse()</code></p>
+<p>颠倒数组中元素的位置，返回该数组的引用。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>shift()</code></p>
+<p>从数组中<strong>删除</strong>第一个元素，并返回该元素的值。此方法更改数组的长度。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>unshift()</code></p>
+<p>将一个或多个元素添加到数组的开头，并返回新数组的长度。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>sort()</code></p>
+<p>对数组的元素进行排序，并返回数组。排序不一定是稳定的。默认排序顺序是根据字符串Unicode码点。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>splice()</code></p>
+<p>向数组中添加/删除项目，然后返回被删除项目的新数组。</p>
+</li>
+</ul>
+<h4 id="ES6语法之Map键值对转化数组"><a href="#ES6语法之Map键值对转化数组" class="headerlink" title="ES6语法之Map键值对转化数组"></a>ES6语法之Map键值对转化数组</h4><p>new Map创建一个map</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// new Map创建一个map</span></span><br><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="number">1</span>,<span class="string">"one"</span>], [<span class="number">2</span>,<span class="string">"two"</span>], [<span class="number">3</span>,<span class="string">"three"</span>]]);</span><br><span class="line">map.set(<span class="number">4</span>, <span class="string">"four"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取所有键值对</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"获取key"</span>)</span><br><span class="line"><span class="built_in">console</span>.log([...map.keys()]) <span class="comment">// 输出[1, 2, 3, 4]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"获取value"</span>)</span><br><span class="line"><span class="built_in">console</span>.log([...map.values()]) <span class="comment">// 输出[one, two, three, four]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"获取map数组"</span>)</span><br><span class="line"><span class="built_in">console</span>.log([...map]) <span class="comment">// 输出[[1, "one"], [2, "two"], [3, "three"], [4, "four"]]</span></span><br></pre></td></tr></table></figure>
+<h4 id="两个升序数组合并成一个升序数组"><a href="#两个升序数组合并成一个升序数组" class="headerlink" title="两个升序数组合并成一个升序数组"></a>两个升序数组合并成一个升序数组</h4><ul>
+<li>时间复杂度 O(M+N)，空间复杂度O(M+N) </li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">left, right</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result  = [],</span><br><span class="line">        il      = <span class="number">0</span>,</span><br><span class="line">        ir      = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (il &lt; left.length &amp;&amp; ir &lt; right.length) &#123;</span><br><span class="line">        result.push(left[il] &lt; right[ir] ? left[il++] : right[ir++]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result.concat(left.slice(il)).concat(right.slice(ir));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度 O(M+N) ，空间复杂度 O(1) </li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">// m, n 是数组长度</span></span><br><span class="line">    public <span class="keyword">void</span> merge(int[] nums1, int m, int[] nums2, int n) &#123;</span><br><span class="line">        int i = m - <span class="number">1</span>, j = n - <span class="number">1</span>, writeIdx = m + n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &gt;= <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span>)</span><br><span class="line">            nums1[writeIdx--] = nums1[i] &gt; nums2[j]? nums1[i--] : nums2[j--];</span><br><span class="line">        <span class="keyword">while</span> (j &gt;= <span class="number">0</span>)</span><br><span class="line">            nums1[writeIdx--] = nums2[j--];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h4><ul>
+<li>reduce方法</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> distinct = arr =&gt; arr.sort().reduce( (init, current) =&gt; &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (init.length === <span class="number">0</span> || init[init.length - <span class="number">1</span>] !== current) &#123;</span><br><span class="line">        init.push( current );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> init;</span><br><span class="line">&#125;, []);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>];</span><br><span class="line">distinct(arr); <span class="comment">// [1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>filter方法</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> distinct = arr =&gt; arr.filter( (element, index, self) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> self.indexOf( element ) === index;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>];</span><br><span class="line">distinct(arr); <span class="comment">// [1, 2, 3, 5, 4]</span></span><br></pre></td></tr></table></figure>
+<h4 id="多维数组降维"><a href="#多维数组降维" class="headerlink" title="多维数组降维"></a>多维数组降维</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> flattenDeep = arr =&gt; <span class="built_in">Array</span>.isArray(arr)</span><br><span class="line">  ? arr.reduce( (a, b) =&gt; [...a, ...flattenDeep(b)] , [])</span><br><span class="line">  : [arr]</span><br><span class="line"></span><br><span class="line">flattenDeep([<span class="number">1</span>, [[<span class="number">2</span>], [<span class="number">3</span>, [<span class="number">4</span>]], <span class="number">5</span>]]); <span class="comment">// [1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>
+<h4 id="两个数组的交集-II"><a href="#两个数组的交集-II" class="headerlink" title="两个数组的交集 II"></a>两个数组的交集 II</h4><p>给定两个数组，写一个方法来计算它们的交集。</p>
+<p>例如:</p>
+<p>给定 nums1 = [1, 2, 2, 1], nums2 = [2, 2], 返回 [2, 2].</p>
+<p>注意：</p>
+<ul>
+<li>输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。</li>
+<li>我们可以不考虑输出结果的顺序。</li>
+</ul>
+<p>跟进:</p>
+<ul>
+<li>如果给定的数组已经排好序呢？你将如何优化你的算法？</li>
+<li>如果 nums1 的大小比 nums2 小很多，哪种方法更优？</li>
+<li>如果nums2的元素存储在磁盘上，内存是有限的，你不能一次加载所有的元素到内存中，你该怎么办？</li>
+</ul>
+<p>解法：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * <span class="doctag">@param</span> &#123;number[]&#125; nums1</span><br><span class="line"> * <span class="doctag">@param</span> &#123;number[]&#125; nums2</span><br><span class="line"> * <span class="doctag">@return</span> &#123;number[]&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> intersect = function(nums1, nums2) &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> map1 = new Map();</span><br><span class="line">    <span class="keyword">var</span> number = [];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; nums1.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> map1Value = map1.<span class="keyword">get</span>(nums1[i]);</span><br><span class="line">        map1.<span class="keyword">set</span>( nums1[i], ( map1Value ? map1Value : <span class="number">0</span> ) + <span class="number">1</span> );</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; nums2.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>( map1.has(nums2[i]) &amp;&amp; map1.<span class="keyword">get</span>(nums2[i]) != <span class="number">0</span> ) &#123;</span><br><span class="line">            number.push(nums2[i]);</span><br><span class="line">            map1.<span class="keyword">set</span>( nums2[i], map1.<span class="keyword">get</span>(nums2[i]) - <span class="number">1</span> );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> number;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="从排序数组中删除重复项"><a href="#从排序数组中删除重复项" class="headerlink" title="从排序数组中删除重复项"></a>从排序数组中删除重复项</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> removeDuplicates = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(!nums || nums.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> len = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[len] != nums[i]) &#123;</span><br><span class="line">            nums[++ len] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len + <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="只出现一次的数字"><a href="#只出现一次的数字" class="headerlink" title="只出现一次的数字"></a>只出现一次的数字</h4><p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> singleNumber = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">number</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="built_in">number</span> ^= nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">number</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>参考资料：<a href="https://blog.csdn.net/qq_35546040/article/details/80284079" target="_blank" rel="external">https://blog.csdn.net/qq_35546040/article/details/80284079</a> </p>
+<h4 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h4><p>给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。</p>
+<p>你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。</p>
+<p>示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">给定 nums = [<span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">15</span>], target = <span class="number">9</span></span><br><span class="line"></span><br><span class="line">因为 nums[<span class="number">0</span>] + nums[<span class="number">1</span>] = <span class="number">2</span> + <span class="number">7</span> = <span class="number">9</span></span><br><span class="line">所以返回 [<span class="number">0</span>, <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>解法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @param &#123;number&#125; target</span><br><span class="line"> * @return &#123;number[]&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">var</span> number = [];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; nums.length; i ++) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(map.has(target - nums[i])) &#123;</span><br><span class="line">           number.push(i, map.get(target - nums[i]));</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        map.set(nums[i], i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> number;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考资料：<a href="http://www.cnblogs.com/grandyang/p/4130379.html" target="_blank" rel="external">http://www.cnblogs.com/grandyang/p/4130379.html</a></p>
+</blockquote>
+<h4 id="旋转数组"><a href="#旋转数组" class="headerlink" title="旋转数组"></a>旋转数组</h4><p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。</p>
+<p>示例 1:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>] 和 k = <span class="number">3</span></span><br><span class="line">输出: [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">解释:</span><br><span class="line">向右旋转 <span class="number">1</span> 步: [<span class="number">7</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">向右旋转 <span class="number">2</span> 步: [<span class="number">6</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">向右旋转 <span class="number">3</span> 步: [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">-1</span>,<span class="number">-100</span>,<span class="number">3</span>,<span class="number">99</span>] 和 k = <span class="number">2</span></span><br><span class="line">输出: [<span class="number">3</span>,<span class="number">99</span>,<span class="number">-1</span>,<span class="number">-100</span>]</span><br><span class="line">解释: </span><br><span class="line">向右旋转 <span class="number">1</span> 步: [<span class="number">99</span>,<span class="number">-1</span>,<span class="number">-100</span>,<span class="number">3</span>]</span><br><span class="line">向右旋转 <span class="number">2</span> 步: [<span class="number">3</span>,<span class="number">99</span>,<span class="number">-1</span>,<span class="number">-100</span>]</span><br></pre></td></tr></table></figure>
+<p>说明:</p>
+<ul>
+<li>尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。</li>
+<li>要求使用空间复杂度为 O(1) 的原地算法。</li>
+</ul>
+<p>解法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @param &#123;number&#125; k</span><br><span class="line"> * @return &#123;void&#125; Do not return anything, modify nums in-place instead.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> rotate = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> k = k % nums.length;</span><br><span class="line">    reverse(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line">    reverse(nums, k, nums.length - <span class="number">1</span>);</span><br><span class="line">    reverse(nums, <span class="number">0</span>, k - <span class="number">1</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reverse = <span class="function"><span class="keyword">function</span>(<span class="params">nums, i, j</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(i &lt; j) &#123;</span><br><span class="line">       swap(nums, i++, j--);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> swap = <span class="function"><span class="keyword">function</span>(<span class="params">nums, i, j</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> temp = nums[i];</span><br><span class="line">    nums[i] = nums[j];</span><br><span class="line">    nums[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考资料：<a href="https://segmentfault.com/a/1190000003705446" target="_blank" rel="external">https://segmentfault.com/a/1190000003705446</a></p>
+</blockquote>
+<h4 id="加一"><a href="#加一" class="headerlink" title="加一"></a>加一</h4><p>给定一个非负整数组成的非空数组，在该数的基础上加一，返回一个新的数组。</p>
+<p>最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。</p>
+<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<p>示例 1:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">输出: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>]</span><br><span class="line">解释: 输入数组表示数字 <span class="number">123</span>。</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">输出: [<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>]</span><br><span class="line">解释: 输入数组表示数字 <span class="number">4321</span>。</span><br></pre></td></tr></table></figure>
+<p>解法： </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; digits</span><br><span class="line"> * @return &#123;number[]&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> plusOne = <span class="function"><span class="keyword">function</span>(<span class="params">digits</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(digits.length == <span class="number">0</span>) <span class="keyword">return</span> digits;</span><br><span class="line">    <span class="keyword">var</span> carry = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> res = [<span class="number">1</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = digits.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(carry == <span class="number">0</span>) <span class="keyword">return</span> digits;</span><br><span class="line">        <span class="keyword">var</span> sum = carry + digits[i];</span><br><span class="line">        digits[i] = sum % <span class="number">10</span>;</span><br><span class="line">        carry = <span class="built_in">parseInt</span>(sum / <span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = digits.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        res.push(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> carry == <span class="number">0</span> ? digits : res;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考资料：<a href="http://www.cnblogs.com/grandyang/p/4079357.html" target="_blank" rel="external">http://www.cnblogs.com/grandyang/p/4079357.html</a> </p>
+</blockquote>
+<h4 id="存在重复"><a href="#存在重复" class="headerlink" title="存在重复"></a>存在重复</h4><p>给定一个整数数组，判断是否存在重复元素。</p>
+<p>如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。</p>
+<p>示例 1:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>]</span><br><span class="line">输出: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">输出: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>示例 3:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">2</span>]</span><br><span class="line">输出: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>解法 :</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;boolean&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> containsDuplicate = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> hashMap = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>( hashMap.has(nums[i]) ) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        hashMap.set(nums[i], <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="移动零"><a href="#移动零" class="headerlink" title="移动零"></a>移动零</h4><p>给定一个数组 <code>nums</code>，编写一个函数将所有 <code>0</code> 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: <span class="selector-attr">[0,1,0,3,12]</span></span><br><span class="line">输出: <span class="selector-attr">[1,3,12,0,0]</span></span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>:</p>
+<ol>
+<li>必须在原数组上操作，不能拷贝额外的数组。</li>
+<li>尽量减少操作次数。</li>
+</ol>
+<p><strong>解法</strong>1：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;void&#125; Do not return anything, modify nums in-place instead.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">let</span> moveZeroes = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> n = nums.length;</span><br><span class="line">    <span class="keyword">let</span> slow = <span class="number">-1</span>; 	<span class="comment">// 指针索引</span></span><br><span class="line">    <span class="keyword">let</span> fast = <span class="number">0</span>;	<span class="comment">// 指针索引</span></span><br><span class="line">    <span class="keyword">let</span> x = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(slow &lt; fast &amp;&amp; fast &lt; n) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (nums[fast] != x) &#123;</span><br><span class="line">            slow ++;</span><br><span class="line">            swap(nums, slow, fast);</span><br><span class="line">        &#125;</span><br><span class="line">        fast ++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> swap = <span class="function"><span class="keyword">function</span>(<span class="params">nums, i, j</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> temp = nums[i];</span><br><span class="line">    nums[i] = nums[j];</span><br><span class="line">    nums[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>解法2</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;void&#125; Do not return anything, modify nums in-place instead.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">let</span> moveZeroes = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> n = nums.length;</span><br><span class="line">    <span class="keyword">let</span> one = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">let</span> x = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (nums[i] != x) &#123;</span><br><span class="line">            nums[one ++] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = one; i &lt; n; i ++) &#123;</span><br><span class="line">        nums[i] = x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/10/RecyclerView调节项目间间距大小/" rel="next" title="RecyclerView调节项目间间距大小">
+                <i class="fa fa-chevron-left"></i> RecyclerView调节项目间间距大小
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/31/跨域解决方案之jsonp&CORS/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2018/07/31/JS数组常考算法详解/"
+     data-title=""
+     data-content=""
+     data-url="http://yygmind.github.io/2018/07/31/JS数组常考算法详解/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/07/31/JS数组常考算法详解/"
+           data-title="" data-url="http://yygmind.github.io/2018/07/31/JS数组常考算法详解/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="yygmind" />
+          <p class="site-author-name" itemprop="name">yygmind</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS数组常考算法详解"><span class="nav-number">1.</span> <span class="nav-text">JS数组常考算法详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组方法概述"><span class="nav-number">1.1.</span> <span class="nav-text">数组方法概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、不改变原数组，返回新数组"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、不改变原数组，返回新数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、改变原数组"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、改变原数组</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6语法之Map键值对转化数组"><span class="nav-number">1.2.</span> <span class="nav-text">ES6语法之Map键值对转化数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两个升序数组合并成一个升序数组"><span class="nav-number">1.3.</span> <span class="nav-text">两个升序数组合并成一个升序数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组去重"><span class="nav-number">1.4.</span> <span class="nav-text">数组去重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多维数组降维"><span class="nav-number">1.5.</span> <span class="nav-text">多维数组降维</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两个数组的交集-II"><span class="nav-number">1.6.</span> <span class="nav-text">两个数组的交集 II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从排序数组中删除重复项"><span class="nav-number">1.7.</span> <span class="nav-text">从排序数组中删除重复项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#只出现一次的数字"><span class="nav-number">1.8.</span> <span class="nav-text">只出现一次的数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两数之和"><span class="nav-number">1.9.</span> <span class="nav-text">两数之和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#旋转数组"><span class="nav-number">1.10.</span> <span class="nav-text">旋转数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加一"><span class="nav-number">1.11.</span> <span class="nav-text">加一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存在重复"><span class="nav-number">1.12.</span> <span class="nav-text">存在重复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#移动零"><span class="nav-number">1.13.</span> <span class="nav-text">移动零</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yygmind</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

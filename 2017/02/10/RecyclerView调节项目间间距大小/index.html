@@ -355,7 +355,7 @@
       
 
       
-        <p>调用处直接调用<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置item之间的间隔</span></span><br><span class="line">SpacesItemDecoration decoration = <span class="keyword">new</span> SpacesItemDecoration(<span class="number">8</span>);</span><br><span class="line">recyclerView.addItemDecoration(decoration);</span><br></pre></td></tr></table></figure></p>
+        <p>调用处直接调用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置item之间的间隔</span></span><br><span class="line">SpacesItemDecoration decoration = <span class="keyword">new</span> SpacesItemDecoration(<span class="number">8</span>);</span><br><span class="line">recyclerView.addItemDecoration(decoration);</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SpacesItemDecoration</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ItemDecoration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> int space;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">StaggeredGridLayoutManager</span>.<span class="type">LayoutParams</span> lp;</span><br><span class="line"></span><br><span class="line">    public <span class="type">SpacesItemDecoration</span>(int space) &#123;</span><br><span class="line">        <span class="keyword">this</span>.space = space;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void getItemOffsets(<span class="type">Rect</span> outRect, <span class="type">View</span> view, <span class="type">RecyclerView</span> parent, <span class="type">RecyclerView</span>.<span class="type">State</span> state) &#123;</span><br><span class="line"></span><br><span class="line">        int position = parent.getChildAdapterPosition(view);</span><br><span class="line">        lp = (<span class="type">StaggeredGridLayoutManager</span>.<span class="type">LayoutParams</span>)view.getLayoutParams();</span><br><span class="line">        <span class="keyword">if</span> (position == <span class="number">0</span> || position==<span class="number">1</span>)&#123;</span><br><span class="line">            outRect.top = space * <span class="number">2</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            outRect.top = space;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (lp.getSpanIndex() == <span class="number">0</span>) &#123;</span><br><span class="line">            outRect.left = space * <span class="number">2</span>;</span><br><span class="line">            outRect.right = space;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            outRect.left = space;</span><br><span class="line">            outRect.right = space * <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        outRect.bottom = space;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//注掉的方法总有漏网之鱼，不知为啥</span></span><br><span class="line"><span class="comment">//        outRect.left = space;</span></span><br><span class="line"><span class="comment">//        outRect.right = space;</span></span><br><span class="line"><span class="comment">//        outRect.bottom = space;</span></span><br><span class="line"><span class="comment">//        if (position == 0 || position == 1) &#123;</span></span><br><span class="line"><span class="comment">//            //用于设置第一行跟顶部的距离</span></span><br><span class="line"><span class="comment">//            outRect.top = space;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        if (lp.getSpanIndex() == 0) &#123;</span></span><br><span class="line"><span class="comment">//            //用于设同行两个间隔间跟其距离左右屏幕间隔相同</span></span><br><span class="line"><span class="comment">//            outRect.right = 0;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -394,6 +394,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/31/JS数组常考算法详解/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -484,7 +488,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -492,7 +496,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -501,7 +505,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

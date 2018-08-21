@@ -279,6 +279,1697 @@
             
               
                 
+                <a class="post-title-link" href="/2018/08/21/JavaScript常用六种继承方案/" itemprop="url">
+                  JavaScript常用六种继承方案
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-08-21T12:21:33+08:00" content="2018-08-21">
+              2018-08-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/08/21/JavaScript常用六种继承方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/21/JavaScript常用六种继承方案/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/08/21/JavaScript常用六种继承方案/" class="leancloud_visitors" data-flag-title="JavaScript常用六种继承方案">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="JavaScript常用六种继承方案"><a href="#JavaScript常用六种继承方案" class="headerlink" title="JavaScript常用六种继承方案"></a>JavaScript常用六种继承方案</h3><p>[TOC]</p>
+<h4 id="1、原型链方案"><a href="#1、原型链方案" class="headerlink" title="1、原型链方案"></a>1、原型链方案</h4><p>构造函数、原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个原型对象的指针。</p>
+<p>继承的本质是<strong>重写原型对象，代之以一个新类型的实例</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.property = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SuperType.prototype.getSuperValue = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.property;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.subproperty = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里是关键，创建SuperType的实例，并将该实例赋值给SubType.prototype</span></span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType(); </span><br><span class="line"></span><br><span class="line">SubType.prototype.getSubValue = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.subproperty;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> SubType();</span><br><span class="line"><span class="built_in">console</span>.log(instance.getSuperValue()); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://image-static.segmentfault.com/812/190/812190403-5a02efaf053b8_articlex" alt=""></p>
+<p>原型链方案存在的缺点：多个实例对引用类型的操作会被篡改。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance1 = <span class="keyword">new</span> SubType();</span><br><span class="line">instance1.colors.push(<span class="string">"black"</span>);</span><br><span class="line">alert(instance1.colors); <span class="comment">//"red,blue,green,black"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance2 = <span class="keyword">new</span> SubType(); </span><br><span class="line">alert(instance2.colors); <span class="comment">//"red,blue,green,black"</span></span><br></pre></td></tr></table></figure>
+<h4 id="2、借用构造函数方案"><a href="#2、借用构造函数方案" class="headerlink" title="2、借用构造函数方案"></a>2、借用构造函数方案</h4><p>使用父类的构造函数来增强子类<strong>实例</strong>，等同于复制父类的实例给子类（不使用原型）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">SuperType</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.color=[<span class="string">"red"</span>,<span class="string">"green"</span>,<span class="string">"blue"</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">SubType</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//继承自SuperType</span></span><br><span class="line">    SuperType.call(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> instance1 = <span class="keyword">new</span> SubType();</span><br><span class="line">instance1.color.push(<span class="string">"black"</span>);</span><br><span class="line">alert(instance1.color);<span class="comment">//"red,green,blue,black"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance2 = <span class="keyword">new</span> SubType();</span><br><span class="line">alert(instance2.color);<span class="comment">//"red,green,blue"</span></span><br></pre></td></tr></table></figure>
+<p>核心代码是<code>SuperType.call(this)</code>，创建子类实例时调用<code>SuperType</code>构造函数，于是<code>SubType</code>的每个实例都会将SuperType中的属性复制一份。</p>
+<p>缺点：</p>
+<ul>
+<li>只能继承父类的<strong>实例</strong>属性和方法，不能继承原型属性/方法</li>
+<li>无法实现复用，每个子类都有父类实例函数的副本，影响性能</li>
+</ul>
+<h4 id="3、组合继承"><a href="#3、组合继承" class="headerlink" title="3、组合继承"></a>3、组合继承</h4><p>组合上述两种方法就是组合继承。用原型链实现对<strong>原型</strong>属性和方法的继承，用借用构造函数技术来实现<strong>实例</strong>属性的继承。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line">&#125;</span><br><span class="line">SuperType.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params">name, age</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 继承属性</span></span><br><span class="line">  <span class="comment">// 第二次调用SuperType()</span></span><br><span class="line">  SuperType.call(<span class="keyword">this</span>, name);</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 继承方法</span></span><br><span class="line"><span class="comment">// 构建原型链</span></span><br><span class="line"><span class="comment">// 第一次调用SuperType()</span></span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType(); </span><br><span class="line"><span class="comment">// 重写SubType.prototype的constructor属性，指向自己的构造函数SubType</span></span><br><span class="line">SubType.prototype.constructor = SubType; </span><br><span class="line">SubType.prototype.sayAge = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.age);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance1 = <span class="keyword">new</span> SubType(<span class="string">"Nicholas"</span>, <span class="number">29</span>);</span><br><span class="line">instance1.colors.push(<span class="string">"black"</span>);</span><br><span class="line">alert(instance1.colors); <span class="comment">//"red,blue,green,black"</span></span><br><span class="line">instance1.sayName(); <span class="comment">//"Nicholas";</span></span><br><span class="line">instance1.sayAge(); <span class="comment">//29</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance2 = <span class="keyword">new</span> SubType(<span class="string">"Greg"</span>, <span class="number">27</span>);</span><br><span class="line">alert(instance2.colors); <span class="comment">//"red,blue,green"</span></span><br><span class="line">instance2.sayName(); <span class="comment">//"Greg";</span></span><br><span class="line">instance2.sayAge(); <span class="comment">//27</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://image-static.segmentfault.com/298/565/2985656793-5a02efcd786da_articlex" alt=""></p>
+<p>缺点：</p>
+<ul>
+<li>第一次调用<code>SuperType()</code>：给<code>SubType.prototype</code>写入两个属性name，color。</li>
+<li>第二次调用<code>SuperType()</code>：给<code>instance1</code>写入两个属性name，color。</li>
+</ul>
+<p>实例对象<code>instance1</code>上的两个属性就屏蔽了其原型对象SubType.prototype的两个同名属性。所以，组合模式的缺点就是在使用子类创建实例对象时，其原型中会存在两份相同的属性/方法。</p>
+<h4 id="4、原型式继承"><a href="#4、原型式继承" class="headerlink" title="4、原型式继承"></a>4、原型式继承</h4><p>利用一个空对象作为中介，将某个对象直接赋值给空对象构造函数的原型。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">object</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">  F.prototype = obj;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>object()对传入其中的对象执行了一次<code>浅复制</code>，将构造函数F的原型直接指向传入的对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">"Nicholas"</span>,</span><br><span class="line">  friends: [<span class="string">"Shelby"</span>, <span class="string">"Court"</span>, <span class="string">"Van"</span>]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> anotherPerson = object(person);</span><br><span class="line">anotherPerson.name = <span class="string">"Greg"</span>;</span><br><span class="line">anotherPerson.friends.push(<span class="string">"Rob"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> yetAnotherPerson = object(person);</span><br><span class="line">yetAnotherPerson.name = <span class="string">"Linda"</span>;</span><br><span class="line">yetAnotherPerson.friends.push(<span class="string">"Barbie"</span>);</span><br><span class="line"></span><br><span class="line">alert(person.friends);   <span class="comment">//"Shelby,Court,Van,Rob,Barbie"</span></span><br></pre></td></tr></table></figure>
+<p>缺点： </p>
+<ul>
+<li>原型链继承多个实例的引用类型属性指向相同，存在篡改的可能。</li>
+<li>无法传递参数</li>
+</ul>
+<p>另外，ES5中存在<code>Object.create()</code>的方法，能够代替上面的object方法。</p>
+<h4 id="5、寄生式继承"><a href="#5、寄生式继承" class="headerlink" title="5、寄生式继承"></a>5、寄生式继承</h4><p>核心：在原型式继承的基础上，增强对象，返回构造函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createAnother</span>(<span class="params">original</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> clone = object(original); <span class="comment">// 通过调用 object() 函数创建一个新对象</span></span><br><span class="line">  clone.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  <span class="comment">// 以某种方式来增强对象</span></span><br><span class="line">    alert(<span class="string">"hi"</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> clone; <span class="comment">// 返回这个对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>函数的主要作用是为构造函数新增属性和方法，以<strong>增强函数</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">"Nicholas"</span>,</span><br><span class="line">  friends: [<span class="string">"Shelby"</span>, <span class="string">"Court"</span>, <span class="string">"Van"</span>]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> anotherPerson = createAnother(person);</span><br><span class="line">anotherPerson.sayHi(); <span class="comment">//"hi"</span></span><br></pre></td></tr></table></figure>
+<p>缺点（同原型式继承）：</p>
+<ul>
+<li>原型链继承多个实例的引用类型属性指向相同，存在篡改的可能。</li>
+<li>无法传递参数</li>
+</ul>
+<h4 id="6、寄生组合式继承"><a href="#6、寄生组合式继承" class="headerlink" title="6、寄生组合式继承"></a>6、寄生组合式继承</h4><p>结合借用构造函数传递参数和寄生模式实现继承</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inheritPrototype</span>(<span class="params">subType, superType</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> prototype = <span class="built_in">Object</span>.create(superType.prototype); <span class="comment">// 创建对象，创建父类原型的一个副本</span></span><br><span class="line">  prototype.constructor = subType;                    <span class="comment">// 增强对象，弥补因重写原型而失去的默认的constructor 属性</span></span><br><span class="line">  subType.prototype = prototype;                      <span class="comment">// 指定对象，将新创建的对象赋值给子类的原型</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 父类初始化实例属性和原型属性</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line">&#125;</span><br><span class="line">SuperType.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 借用构造函数传递增强子类实例属性（支持传参和避免篡改）</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params">name, age</span>)</span>&#123;</span><br><span class="line">  SuperType.call(<span class="keyword">this</span>, name);</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将父类原型指向子类</span></span><br><span class="line">inheritPrototype(SubType, SuperType);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新增子类原型属性</span></span><br><span class="line">SubType.prototype.sayAge = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance1 = <span class="keyword">new</span> SubType(<span class="string">"xyc"</span>, <span class="number">23</span>);</span><br><span class="line"><span class="keyword">var</span> instance2 = <span class="keyword">new</span> SubType(<span class="string">"lxy"</span>, <span class="number">23</span>);</span><br><span class="line"></span><br><span class="line">instance1.colors.push(<span class="string">"2"</span>); <span class="comment">// ["red", "blue", "green", "2"]</span></span><br><span class="line">instance1.colors.push(<span class="string">"3"</span>); <span class="comment">// ["red", "blue", "green", "3"]</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://image-static.segmentfault.com/139/488/1394881561-5a02efdda2e5e_articlex" alt=""></p>
+<p>这个例子的高效率体现在它只调用了一次<code>SuperType</code> 构造函数，并且因此避免了在<code>SubType.prototype</code> 上创建不必要的、多余的属性。于此同时，原型链还能保持不变；因此，还能够正常使用<code>instanceof</code> 和<code>isPrototypeOf()</code></p>
+<p><strong>这是最成熟的方法，也是现在库实现的方法</strong></p>
+<blockquote>
+<p><a href="https://segmentfault.com/a/1190000011917606" target="_blank" rel="external">《javascript高级程序设计》笔记：继承</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/08/20/JavaScript常用设计模式/" itemprop="url">
+                  JavaScript常用设计模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-08-20T19:21:33+08:00" content="2018-08-20">
+              2018-08-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/08/20/JavaScript常用设计模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/20/JavaScript常用设计模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/08/20/JavaScript常用设计模式/" class="leancloud_visitors" data-flag-title="JavaScript常用设计模式">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="JavaScript常用设计模式"><a href="#JavaScript常用设计模式" class="headerlink" title="JavaScript常用设计模式"></a>JavaScript常用设计模式</h3><h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><p>单例就是保证一个类只有一个实例，实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。</p>
+<p>在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。</p>
+<p>单例一般用在系统间各种模式的通信协调上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> SingletonTester = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 参数：传递给单例的一个参数集合</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Singleton</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置args变量为接收的参数或者为空（如果没有提供的话）</span></span><br><span class="line">        <span class="comment">// 只有在使用的时候才初始化</span></span><br><span class="line">        <span class="keyword">var</span> args = args || &#123;&#125;;</span><br><span class="line">        <span class="comment">// 设置name参数</span></span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">'SingletonTester'</span>;</span><br><span class="line">        <span class="comment">// 设置pointX的值</span></span><br><span class="line">        <span class="keyword">this</span>.pointX = args.pointX || <span class="number">6</span>; <span class="comment">// 从接收的参数里获取，或者设置为默认值</span></span><br><span class="line">        <span class="comment">// 设置pointY的值</span></span><br><span class="line">        <span class="keyword">this</span>.pointY = args.pointY || <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 实例容器</span></span><br><span class="line">    <span class="keyword">var</span> instance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> _static = &#123;</span><br><span class="line">        name: <span class="string">'SingletonTester'</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取实例的方法</span></span><br><span class="line">        <span class="comment">// 返回Singleton的实例</span></span><br><span class="line">        getInstance: <span class="function"><span class="keyword">function</span> (<span class="params">args</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (instance === <span class="literal">undefined</span>) &#123;</span><br><span class="line">                instance = <span class="keyword">new</span> Singleton(args);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> instance;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> _static;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> singletonTest = SingletonTester.getInstance(&#123; pointX: <span class="number">5</span> &#125;);</span><br><span class="line"><span class="built_in">console</span>.log(singletonTest.pointX); <span class="comment">// 输出 5</span></span><br></pre></td></tr></table></figure>
+<h4 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h4><p>工厂模式创建对象（视为工厂里的产品）时无需指定创建对象的具体类。</p>
+<p>工厂模式定义一个用于创建对象的接口，这个接口由子类决定实例化哪一个类。该模式使一个类的实例化延迟到了子类。而子类可以重写接口方法以便创建的时候指定自己的对象类型。</p>
+<p>这个模式十分有用，尤其是创建对象的流程赋值的时候，比如依赖于很多设置文件等。并且，你会经常在程序里看到工厂方法，用于让子类类定义需要创建的对象类型。</p>
+<p>以下几种情景下工厂模式特别有用：</p>
+<ul>
+<li>对象的构建十分复杂</li>
+<li>需要依赖具体环境创建不同实例</li>
+<li>处理大量具有相同属性的小对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> productManager = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">productManager.createProductA = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'ProductA'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">productManager.createProductB = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'ProductB'</span>);</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line">productManager.factory = <span class="function"><span class="keyword">function</span> (<span class="params">typeType</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> productManager[typeType];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">productManager.factory(<span class="string">"createProductA"</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h4><p>建造者模式可以将一个复杂对象的构建和表示分离，使得同样的构建过程可以创建不同的表示。也就是说如果我们用了建造者模式，那么用户只需要指定建造的类型就可以得到它们，而具体建造的过程和细节就不需要知道了。</p>
+<p>网络请求框架Fetch中有很多回调函数（比如success, error回调等），这些回调就采用了建造者模式，主要目的就是<strong>职责分离</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getBeerById</span>(<span class="params">id, callback</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 使用ID来请求数据，然后返回数据.</span></span><br><span class="line">    asyncRequest(<span class="string">'GET'</span>, <span class="string">'beer.uri?id='</span> + id, <span class="function"><span class="keyword">function</span> (<span class="params">resp</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// callback调用 response</span></span><br><span class="line">        callback(resp.responseText);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.querySelector(<span class="string">'#test'</span>);</span><br><span class="line">el.addEventListener(<span class="string">'click'</span>, getBeerByIdBridge, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getBeerByIdBridge</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    getBeerById(<span class="keyword">this</span>.id, <span class="function"><span class="keyword">function</span> (<span class="params">beer</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Requested Beer: '</span> + beer);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据建造者的定义，表相即是回调，也就是说获取数据以后如何显示和处理取决于回调函数，相应地回调函数在处理数据的时候不需要关注是如何获取数据的。</p>
+<p>下面的jQuery例子中，只需要传入要生成的HTML字符，而不需要关系具体的HTML对象是如何生产的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'&lt;div class= "foo"&gt; bar &lt;/div&gt;'</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h4><p>观察者模式又叫发布-订阅模式（Publish/Subscribe），它定义了一种一对多的关系，让多个观察者对象同时监听某一个主题对象，这个主题对象的状态发生变化时就会通知所有的观察者对象，使得它们能够自动更新自己。</p>
+<p>使用观察者模式的好处：</p>
+<ol>
+<li>支持简单的广播通信，自动通知所有已经订阅过的对象。</li>
+<li>页面载入后目标对象很容易与观察者存在一种动态关联，增加了灵活性。</li>
+<li>目标对象与观察者之间的抽象耦合关系能够单独扩展以及重用。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yourMsg = &#123;&#125;;</span><br><span class="line">yourMsg.peopleList =&#123;&#125;;</span><br><span class="line">yourMsg.listen = <span class="function"><span class="keyword">function</span> (<span class="params">key,fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.peopleList[key]) &#123; <span class="comment">//如果没有订阅过此类消息，创建一个缓存列表</span></span><br><span class="line">        <span class="keyword">this</span>.peopleList[key] = [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.peopleList[key].push(fn);</span><br><span class="line">&#125;</span><br><span class="line">yourMsg.triger = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> key = <span class="built_in">Array</span>.prototype.shift.call(<span class="built_in">arguments</span>);</span><br><span class="line">    <span class="keyword">let</span> fns = <span class="keyword">this</span>.peopleList[key];</span><br><span class="line">    <span class="keyword">if</span> (!fns || fns.length == <span class="number">0</span>) &#123;<span class="comment">//没有订阅 则返回</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,fn;fn=fns[i++];)&#123;</span><br><span class="line">        fn.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">yourMsg.listen(<span class="string">'marrgie'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;name&#125;</span>想知道你结婚`</span>);</span><br><span class="line">&#125;)</span><br><span class="line">yourMsg.listen(<span class="string">'unemployment'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;name&#125;</span>想知道你失业`</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">yourMsg.triger(<span class="string">'marrgie'</span>,<span class="string">'张三'</span>);</span><br><span class="line">yourMsg.triger(<span class="string">'unemployment'</span>,<span class="string">'李四'</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h4><p>原型模式（prototype）是指用原型实例指向创建对象的种类，并且通过拷贝这些原型创建新的对象。</p>
+<p>对于原型模式，我们可以利用JavaScript特有的原型继承特性去创建对象的方式，也就是创建的一个对象作为另外一个对象的prototype属性值。原型对象本身就是有效地利用了每个构造器创建的对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vehicle = &#123;</span><br><span class="line">    getModel: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'车辆的模具是：'</span> + <span class="keyword">this</span>.model);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> car = <span class="built_in">Object</span>.create(vehicle, &#123;</span><br><span class="line">    <span class="string">'id'</span>: &#123;</span><br><span class="line">        value: MY_GLOBAL.nextId(),</span><br><span class="line">        enumerable: <span class="literal">true</span> <span class="comment">// 默认writable:false, configurable:false</span></span><br><span class="line"> &#125;,</span><br><span class="line">    <span class="string">'model'</span>: &#123;</span><br><span class="line">        value: <span class="string">'福特'</span>,</span><br><span class="line">        enumerable: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/08/10/HTML和CSS常见问题整理/" itemprop="url">
+                  HTML和CSS常见问题整理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-08-10T20:12:22+08:00" content="2018-08-10">
+              2018-08-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/HTML/" itemprop="url" rel="index">
+                    <span itemprop="name">HTML</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/08/10/HTML和CSS常见问题整理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/10/HTML和CSS常见问题整理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/08/10/HTML和CSS常见问题整理/" class="leancloud_visitors" data-flag-title="HTML和CSS常见问题整理">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="HTML和CSS常见问题整理"><a href="#HTML和CSS常见问题整理" class="headerlink" title="HTML和CSS常见问题整理"></a>HTML和CSS常见问题整理</h3><ul>
+<li>盒子模型</li>
+</ul>
+<p><img src="http://www.runoob.com/images/box-model.gif" alt=""></p>
+<p>对于现代浏览器来说，css中指定的width就是content width。</p>
+<p>对于IE5.x和6来说，在怪异模式中width等于content、左右padding和左右border。</p>
+<p>其中<code>padding</code>和<code>margin</code>的4种写法。</p>
+<p>1、上  右  下  左</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">padding</span><span class="selector-pseudo">:10px</span> 5<span class="selector-tag">px</span> 15<span class="selector-tag">px</span> 20<span class="selector-tag">px</span>;</span><br></pre></td></tr></table></figure>
+<p>2、上  右左  下</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">padding</span><span class="selector-pseudo">:10px</span> 5<span class="selector-tag">px</span> 15<span class="selector-tag">px</span>;</span><br></pre></td></tr></table></figure>
+<p>3、上下  右左</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">padding</span><span class="selector-pseudo">:10px</span> 5<span class="selector-tag">px</span>;</span><br></pre></td></tr></table></figure>
+<p>4、四边一致</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">padding</span><span class="selector-pseudo">:10px</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>display</code>和<code>position</code>介绍</p>
+<ul>
+<li><code>display</code>规定元素应该生成的框的类型。</li>
+</ul>
+<p>| 值           | 描述                                                 |<br>| :———– | —————————————————- |<br>| flex         | 设置弹性容器                                         |<br>| block        | 此元素将显示为块级元素，此元素前后会带有换行符。     |<br>| inline       | 默认。此元素会被显示为内联元素，元素前后没有换行符。 |<br>| inline-block | 行内块元素。（CSS2.1 新增的值）                      |<br>| none         | 此元素不会被显示。                                   |<br>| list-item    | 此元素会作为列表显示。                               |</p>
+</li>
+</ul>
+<ul>
+<li><p><code>position</code>: 指定一个元素在文档中的定位方式，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/top" target="_blank" rel="external"><code>top</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/right" target="_blank" rel="external"><code>right</code></a>，<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/bottom" target="_blank" rel="external"><code>bottom</code></a>和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/left" target="_blank" rel="external"><code>left</code></a> 属性则决定了该元素的最终位置。</p>
+<p>| 值       | 描述                                                         |<br>| ——– | ———————————————————— |<br>| absolute | 生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。<br>元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。 |<br>| fixed    | 生成绝对定位的元素，相对于浏览器窗口进行定位。<br>元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。 |<br>| relative | 生成相对定位的元素，相对于其正常位置进行定位。<br>因此，”left:20” 会向元素的 left 位置添加 20 像素。 |<br>| static   | 默认值。没有定位，元素出现在正常的流中<br>（忽略 top, bottom, left, right 或者 z-index 声明）。 |<br>| inherit  | 规定应该从父元素继承 position 属性的值。                     |</p>
+</li>
+</ul>
+<ul>
+<li><p>CSS选择器分类</p>
+<p>不同级别：排序：!important &gt; 行内样式 &gt; ID选择器 &gt; 类选择器 &gt; 标签 &gt; 通配符 &gt; 继承 &gt; 浏览器默认属性。</p>
+<p>同一级别：后写的会覆盖先写的。</p>
+</li>
+</ul>
+<ul>
+<li>使元素消失的方法<ul>
+<li><code>opacity：0</code>：该元素隐藏起来，但不会改变页面布局，如果该元素绑定了事件会触发。</li>
+<li><code>visibility:hidden</code>：该元素隐藏起来，但不会改变页面布局，不会触发该元素已经绑定的事件。</li>
+<li><code>display:node</code>：把元素隐藏起来，并且会改变页面布局，可以理解成在页面中把该元素删掉。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>如何画一个三角形</p>
+<p>左右边框设置为透明，长度为底部边框的一半。左右边框长度必须设置，不设置则只有底部一条边框，是不能展示的。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.child</span>&#123;</span><br><span class="line">  	<span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border-bottom</span>: <span class="number">100px</span> solid cyan;</span><br><span class="line">    <span class="attribute">border-left</span>: <span class="number">50px</span> solid transparent;</span><br><span class="line">    <span class="attribute">border-right</span>: <span class="number">50px</span> solid transparent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>浮动相关</p>
+<ul>
+<li><p>为什么要清除浮动</p>
+<p>主要是为了解决父元素高度坍陷问题。</p>
+<p>一个块级元素如果没有设置<code>height</code>,其<code>height</code>由子元素撑开，对子元素使用了浮动之后，子元素就会脱离文档流。那么父元素中没有内容撑开其高度，这样父元素的<code>height</code>就会被忽略。</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>如何清除</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1、父元素设置overflow: hidden(少用)</span><br><span class="line"></span><br><span class="line">2、clearfix：使用内容生成的方式清除浮动，不会破坏文档流。</span><br><span class="line">    .clearfix: after &#123; 	 // :after选择器向选定的元素之后插入内容</span><br><span class="line">        content:""; 	 // 生成内容为空</span><br><span class="line">        display: block;  // 块级元素显示</span><br><span class="line">        clear:both; 	 // 清除前面元素</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>行内元素居中</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">    <span class="attribute">text-align</span>: center</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>DIV居中问题</p>
+<p>1、使用flex</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">600px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">display</span>: flex; </span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid green;</span><br><span class="line">  	<span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、使用transform</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">600px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.child</span>&#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid green;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(-50%,-50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、使用margin-top -一半的高度</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">600px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.child</span>&#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid green;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">150px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4、使用绝对布局<code>absolute</code>和<code>margin:auto</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">600px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.child</span>&#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid green;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>三栏布局</p>
+<p>要求两边两栏宽度固定，中间栏宽度自适应</p>
+<ul>
+<li><p>方案一：position绝对定位法</p>
+<p><strong>center的div需要放到后面</strong>，将左右两边使用absolute定位，因为绝对定位使其脱离文档流，最后面的center会显示在正常文档流中，然后设置margin属性，留出左右两边的宽度。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">.parent &#123;</span><br><span class="line">  border: 1px solid red;</span><br><span class="line">  position: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.child_left &#123;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  border: 1px solid gray;</span><br><span class="line">  position: absolute;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.child_right &#123;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  border: 1px solid green;</span><br><span class="line">  position: absolute;</span><br><span class="line">  right: 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// div在html中必须放在left和right之后</span><br><span class="line">.child_center &#123;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  border: 1px solid black;</span><br><span class="line">  margin: auto</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>方案二：float 自身浮动法</p>
+<p><strong>center的div需要放到后面</strong>，对左右使用float:left和float：right，float使左右两个元素脱离文档流，中间的正常文档流中，然后设置margin属性，留出左右两边的宽度。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child_left</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid gray;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child_right</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid green;</span><br><span class="line">  <span class="attribute">float</span>: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child_center</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">  <span class="attribute">margin</span>: auto</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>介绍BFC</p>
+<p>BFC是CSS布局的一个概念，是一块独立的渲染区域，是一个环境，里面的元素不会影响到外部的元素 。</p>
+<ul>
+<li>如何生成BFC：（即脱离文档流）          <ul>
+<li>1、根元素，即HTML元素（最大的一个BFC）<br>   2、float的值不为none<br>   3、position的值为absolute或fixed<br>   4、overflow的值不为visible（默认值。内容不会被修剪，会呈现在元素框之外）          </li>
+<li>5、display的值为inline-block、table-cell、table-caption </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>BFC布局规则：</p>
+<ul>
+<li><p>1.内部的Box会在垂直方向，一个接一个地放置。          </p>
+<p>   2.属于同一个BFC的两个相邻的Box的margin会发生重叠         </p>
+<p>   3.BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此, 文字环绕效果，设置float          </p>
+<p>   4.BFC的区域不会与float box重叠。          </p>
+</li>
+<li><p>5.计算BFC的高度，浮动元素也参与计算</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>BFC作用：</p>
+<ul>
+<li>1.自适应两栏布局<br>   2.可以阻止元素被浮动元素覆盖<br>   3.可以包含浮动元素—清除内部浮动 原理：触发父div的BFC属性，使下面的子div都处在父div的同一个BFC区域之内      </li>
+<li>4.分属于不同的BFC时，可以阻止margin重叠</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>CSS3特性 <code>vh</code>和<code>vw</code></p>
+<ul>
+<li><code>vh</code> 相对于视窗的高度，视窗高度是100vh</li>
+<li><code>vw</code> 相对于视窗的宽度，视窗宽度是100vw</li>
+</ul>
+<p>这里是视窗指的是<strong>浏览器内部的可视区域大小</strong>，即<code>window.innerWidth/window.innerHeight</code>大小，不包含任务栏标题栏以及底部工具栏的浏览器区域大小。</p>
+<ul>
+<li>可以通过<strong>@supports</strong>来判断是否支持某个css属性。</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@supports (property: value)&#123;</span><br><span class="line">  element &#123;</span><br><span class="line">    property: value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 例</span><br><span class="line">@supports (display: flex)&#123;</span><br><span class="line">  .flex &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    float: none;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/08/07/Redux相关/" itemprop="url">
+                  Untitled
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-08-07T18:37:07+08:00" content="2018-08-07">
+              2018-08-07
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/08/07/Redux相关/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/07/Redux相关/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/08/07/Redux相关/" class="leancloud_visitors" data-flag-title="">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Redux相关"><a href="#Redux相关" class="headerlink" title="Redux相关"></a>Redux相关</h3><p>Flux 作为 Facebook 发布的一种应用架构，他本身是一种模式，而不是一种框架，基于这个应用架构模式，在开源社区上产生了众多框架，其中最受欢迎的就是Redux。</p>
+<p>Flux 需要四大部分组成：Dispatcher、Stores、Views/Controller-Views、Actions，其中的 Views/Controller-Views 可以理解为React 组件，其作用是从 state 当中获取到相应的数据，并将其传递给他的子组件（descendants）。而另外 3 个部分，则是由 Redux 来提供了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;createStore&#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reducer</span>(<span class="params">state = &#123;&#125;, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> action;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> store = createStore(reducer);</span><br></pre></td></tr></table></figure>
+<p>将一个名为 <code>reducer</code> 的函数作为参数，生成我们所需要的 store，reducer 接受两个参数，一个是存储在 store 里面的 state，另一个是每一次调用 dispatch 所传进来的 action。reducer 的作用，就是对 dispatch 传进来的 action 进行处理，并将结果返回。而里面的 state 可以通过 store 里面的 getState 方法进行获得，其结果与最后一次通过 reducer 处理后的结果保持一致。</p>
+<p>通过单例保存一个多组件共享的数据对象。？？？哪里有</p>
+<p>可以通过以下方式对Redux进行封装</p>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/08/07/React相关/" itemprop="url">
+                  Untitled
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-08-07T18:36:55+08:00" content="2018-08-07">
+              2018-08-07
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/08/07/React相关/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/07/React相关/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/08/07/React相关/" class="leancloud_visitors" data-flag-title="">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="React相关"><a href="#React相关" class="headerlink" title="React相关"></a>React相关</h3><h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p><img src="https://user-gold-cdn.xitu.io/2018/8/12/1652a030ed1506e0?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""></p>
+<h5 id="挂载阶段："><a href="#挂载阶段：" class="headerlink" title="挂载阶段："></a>挂载阶段：</h5><ul>
+<li>constructor</li>
+<li>getDerivedStateFromProps</li>
+<li><del>componentWillMount/UNSAVE_componentWillMount</del></li>
+<li>render</li>
+<li>componentDidMount</li>
+</ul>
+<h5 id="更新阶段："><a href="#更新阶段：" class="headerlink" title="更新阶段："></a>更新阶段：</h5><ul>
+<li><del>componentWillReceiveProps/UNSAFE_componentWillReceiveProps</del></li>
+<li>getDerivedStateFromProps</li>
+<li>shouldComponentUpdate</li>
+<li><del>componentWillUpdate/UNSAFE_componentWillUpdate</del></li>
+<li>render</li>
+<li>getSnapshotBeforeUpdate</li>
+<li>componentDidUpdate</li>
+</ul>
+<h5 id="卸载阶段"><a href="#卸载阶段" class="headerlink" title="卸载阶段"></a>卸载阶段</h5><ul>
+<li>componentWillUnmount</li>
+</ul>
+<h4 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h4><p>要修改state，只能使用this.setState()，不能使用this.state.value=2类似方式设置state，一是不会驱动重新渲染，二是很可能被后面的操作替换，造成无法预知的错误。此外，React利用状态队列来实现setState的异步更新，避免频繁地重复更新state。</p>
+<h4 id="React事件机制"><a href="#React事件机制" class="headerlink" title="React事件机制"></a>React事件机制</h4>
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/08/02/面试题整理/" itemprop="url">
+                  Untitled
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-08-02T15:27:11+08:00" content="2018-08-02">
+              2018-08-02
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/08/02/面试题整理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/02/面试题整理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/08/02/面试题整理/" class="leancloud_visitors" data-flag-title="">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="面试题整理"><a href="#面试题整理" class="headerlink" title="面试题整理"></a>面试题整理</h3><h4 id="今日头条"><a href="#今日头条" class="headerlink" title="今日头条"></a>今日头条</h4><ul>
+<li>对async、await的理解，内部原理 </li>
+<li>介绍下Promise，内部实现 </li>
+<li>[x] 清除浮动  </li>
+<li>[x] 定位问题（绝对定位、相对定位等） </li>
+<li>从输入URL到页面加载全过程 </li>
+<li>tcp3次握手 </li>
+<li>tcp属于哪一层（第四层 传输层） </li>
+<li>redux的设计思想 </li>
+<li>接入redux的过程 </li>
+<li>绑定connect的过程 </li>
+<li>connect原理 </li>
+<li>webpack介绍 </li>
+<li>== 和 ===的区别，什么情况下用相等== </li>
+<li>bind、call、apply的区别 </li>
+<li>动画的了解 </li>
+<li>介绍下原型链（解决的是继承问题吗） </li>
+<li>对跨域的了解 </li>
+</ul>
+<h4 id="海风教育"><a href="#海风教育" class="headerlink" title="海风教育"></a>海风教育</h4><ul>
+<li><p>对react看法，它的优缺点 </p>
+</li>
+<li><p>使用过程中遇到的问题，如何解决的 </p>
+</li>
+<li><p>react的理念是什么（拿函数式编程来做页面渲染）</p>
+</li>
+<li><p>JS是什么范式语言(面向对象还是函数式编程)</p>
+</li>
+<li><p>koa原理，为什么要用koa(express和koa对比) </p>
+</li>
+<li><p>使用的koa中间件 </p>
+</li>
+<li><p>ES6使用的语法 </p>
+</li>
+<li><p>Promise 和 async/await 和 callback的区别 </p>
+</li>
+<li><p>Promise有没有解决异步的问题（promise链是真正强大的地方）</p>
+</li>
+<li><p>Promise和setTimeout的区别（Event Loop）</p>
+</li>
+<li><p>进程和线程的区别（一个node实例就是一个进程，node是单线程，通过事件循环来实现异步 </p>
+<p>）</p>
+</li>
+<li><p>介绍下DFS深度优先 </p>
+</li>
+<li><p>介绍下观察者模式 </p>
+</li>
+<li><p>观察者模式里面使用的数据结构(不具备顺序 ，是一个list) </p>
+</li>
+</ul>
+<h4 id="沪江"><a href="#沪江" class="headerlink" title="沪江"></a>沪江</h4><ul>
+<li>介绍下浏览器跨域</li>
+<li>怎么去解决跨域问题</li>
+<li>jsonp方案需要服务端怎么配合</li>
+<li>Ajax发生跨域要设置什么（前端）</li>
+<li>加上CORS之后从发起到请求正式成功的过程</li>
+<li>xsrf跨域攻击的安全性问题怎么防范</li>
+<li>使用Async会注意哪些东西</li>
+<li>Async里面有多个await请求，可以怎么优化（请求是否有依赖）</li>
+<li>Promise和Async处理失败的时候有什么区别</li>
+<li>Redux在状态管理方面解决了React本身不能解决的问题</li>
+<li>Redux有没有做过封装</li>
+<li>react生命周期，常用的生命周期 </li>
+<li>对应的生命周期做什么事 </li>
+<li>遇到性能问题一般在哪个生命周期里解决 </li>
+<li>怎么做性能优化（异步加载组件…）</li>
+<li>写react有哪些细节可以优化 </li>
+<li>React的事件机制（绑定一个事件到一个组件上）</li>
+<li>介绍下事件代理，主要解决什么问题</li>
+<li>前端开发中用到哪些设计模式</li>
+<li>React/Redux中哪些功能用到了哪些设计模式</li>
+<li>JS变量类型分为几种，区别是什么</li>
+<li>JS里垃圾回收机制是什么，常用的是哪种，怎么处理的</li>
+<li>一般怎么组织CSS（Webpack）</li>
+</ul>
+<h4 id="饿了么"><a href="#饿了么" class="headerlink" title="饿了么"></a>饿了么</h4><ul>
+<li>小程序里面开页面最多多少</li>
+<li>React子父组件之间如何传值</li>
+<li>Emit事件怎么发，需要引入什么</li>
+<li>介绍下React高阶组件，和普通组件有什么区别</li>
+<li>一个对象数组，每个子对象包含一个id和name，React如何渲染出全部的name</li>
+<li>在哪个生命周期里写</li>
+<li>其中有几个name不存在，通过异步接口获取，如何做</li>
+<li>渲染的时候key给什么值，可以使用index吗，用id好还是index好</li>
+<li>webpack如何配sass，需要配哪些loader</li>
+<li>配css需要哪些loader</li>
+<li>如何配置把js、css、html单独打包成一个文件</li>
+<li>[x] div垂直水平居中（flex、绝对定位）</li>
+<li>两个元素块，一左一右，中间相距10像素</li>
+<li>上下固定，中间滚动布局如何实现</li>
+<li>[1, 2, 3, 4, 5]变成[1, 2, 3, a, b, 5]</li>
+<li>取数组的最大值（ES5、ES6）</li>
+<li>apply和call的区别</li>
+<li>ES5和ES6有什么区别</li>
+<li>some、every、find、filter、map、forEach有什么区别</li>
+<li>上述数组随机取数，每次返回的值都不一样</li>
+<li>如何找0-5的随机数，95-99呢</li>
+<li>页面上有1万个button如何绑定事件</li>
+<li>如何判断是button</li>
+<li>页面上生成一万个button，并且绑定事件，如何做（JS原生操作DOM）</li>
+<li>循环绑定时的index是多少，为什么，怎么解决</li>
+<li>页面上有一个input，还有一个p标签，改变input后p标签就跟着变化，如何处理</li>
+<li>监听input的哪个事件，在什么时候触发</li>
+</ul>
+<h4 id="携程"><a href="#携程" class="headerlink" title="携程"></a>携程</h4><ul>
+<li>对React看法，有没有遇到一些坑</li>
+<li>对闭包的看法，为什么要用闭包</li>
+<li>手写数组去重函数</li>
+<li>手写数组扁平化函数</li>
+<li>介绍下Promise的用途和性质</li>
+<li><p>Promise和Callback有什么区别</p>
+</li>
+<li><p>React生命周期</p>
+</li>
+</ul>
+<h4 id="喜马拉雅"><a href="#喜马拉雅" class="headerlink" title="喜马拉雅"></a>喜马拉雅</h4><ul>
+<li>ES6新的特性</li>
+<li>介绍Promise</li>
+<li>Promise有几个状态</li>
+<li>说一下闭包</li>
+<li>React的生命周期</li>
+<li>componentWillReceiveProps的触发条件是什么</li>
+<li>React16.3对生命周期的改变</li>
+<li>介绍下React的Filber架构</li>
+<li>画Filber渲染树</li>
+<li>介绍React高阶组件</li>
+<li>父子组件之间如何通信</li>
+<li>Redux怎么实现属性传递，介绍下原理</li>
+<li>React-Router版本号</li>
+<li>网站SEO怎么处理</li>
+<li>介绍下HTTP状态码</li>
+<li>403、301、302是什么</li>
+<li>缓存相关的HTTP请求头</li>
+<li>介绍HTTPS</li>
+<li>HTTPS怎么建立安全通道</li>
+<li>前端性能优化（JS原生和React）</li>
+<li>用户体验做过什么优化</li>
+<li>对PWA有什么了解</li>
+<li>对安全有什么了解</li>
+<li>介绍下数字签名的原理</li>
+<li><p>今后三年有什么打算</p>
+</li>
+<li><p>前后端通信使用什么方案</p>
+</li>
+<li>RESTful常用的Method</li>
+<li>介绍下跨域</li>
+<li>Access-Control-Allow-Origin在服务端哪里配置</li>
+<li>csrf跨站攻击怎么解决</li>
+<li>前端和后端怎么联调</li>
+</ul>
+<h4 id="国双科技"><a href="#国双科技" class="headerlink" title="国双科技"></a>国双科技</h4><ul>
+<li>介绍下Redux状态管理，以及原理</li>
+<li>浏览器刷新后redux数据会丢失吗</li>
+<li>NodeJS是单线程，这种说法正确吗</li>
+<li>介绍下Generator</li>
+<li>async和callback的区别</li>
+<li>介绍下事件循环</li>
+<li>Promise除了进行API调用，还能在什么场景解决问题</li>
+<li>介绍下策略模式，builder模式 </li>
+<li>手写单链表反转 </li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/07/31/JS异步之Async/" itemprop="url">
+                  JS异步之Async
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-07-31T21:32:11+08:00" content="2018-07-31">
+              2018-07-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/07/31/JS异步之Async/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/07/31/JS异步之Async/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/07/31/JS异步之Async/" class="leancloud_visitors" data-flag-title="JS异步之Async">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="JS异步之Async"><a href="#JS异步之Async" class="headerlink" title="JS异步之Async"></a>JS异步之Async</h3><p><strong>我们都知道Promise是一个立即执行函数，但是他的成功（或失败：reject）的回调函数resolve却是一个异步执行的回调。</strong> <strong>当执行到resolve()时，这个任务会被放入到回调队列中，等待调用栈有空闲时事件循环再来取走它。</strong></p>
+<p>然后执行到 await async2()，发现 async2 也是个 async 定义的函数，所以直接执行了“console.log(‘async2’)”，同时async2返回了一个Promise，划重点：<strong>此时返回的Promise会被放入到回调队列中等待，await会让出线程（js是单线程还用我介绍吗），接下来就会跳出 async1函数 继续往下执行。</strong></p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'async1 start'</span>);</span><br><span class="line">    <span class="keyword">await</span> async2();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'async1 end'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'async2'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script start'</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>)</span><br><span class="line">&#125;,<span class="number">0</span>);</span><br><span class="line">async1();</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script end'</span>)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/07/31/跨域解决方案之jsonp&CORS/" itemprop="url">
+                  Untitled
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-07-31T10:23:29+08:00" content="2018-07-31">
+              2018-07-31
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/07/31/跨域解决方案之jsonp&CORS/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/07/31/跨域解决方案之jsonp&CORS/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/07/31/跨域解决方案之jsonp&CORS/" class="leancloud_visitors" data-flag-title="">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/07/31/JS数组常考算法详解/" itemprop="url">
+                  Untitled
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-07-31T10:23:29+08:00" content="2018-07-31">
+              2018-07-31
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/07/31/JS数组常考算法详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/07/31/JS数组常考算法详解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/07/31/JS数组常考算法详解/" class="leancloud_visitors" data-flag-title="">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="JS数组常考算法详解"><a href="#JS数组常考算法详解" class="headerlink" title="JS数组常考算法详解"></a>JS数组常考算法详解</h3><h4 id="数组方法概述"><a href="#数组方法概述" class="headerlink" title="数组方法概述"></a>数组方法概述</h4><h5 id="1、不改变原数组，返回新数组"><a href="#1、不改变原数组，返回新数组" class="headerlink" title="1、不改变原数组，返回新数组"></a>1、不改变原数组，返回新数组</h5><ul>
+<li><p><code>concat()</code></p>
+<p>连接两个或多个数组，两边的原始数组都不会变化，返回被连接数组的一个副本。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>join()</code></p>
+<p>把数组中所有元素放入一个字符串中，返回字符串。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>slice()</code></p>
+<p>从开始到结束（不包括结束）选择数组的一部分浅拷贝到一个新数组。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>map()</code></p>
+<p>创建一个新数组并返回，其中新数组的每个元素由调用原始数组中的每一个元素执行提供的函数得来，原始数组不会改变。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>every()</code></p>
+<p>对数组中的每个元素都执行一次指定的回调函数，直到回调函数返回<code>false</code>，此时<code>every()</code>返回<code>false</code>并不再继续执行。如果回调函数对每个元素都返回<code>true</code>，那么<code>every()</code>将返回<code>true</code>。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>some()</code></p>
+<p>对数组中的每个元素都执行一次指定的回调函数，直到回调函数返回<code>true</code>，此时<code>some()</code>返回<code>true</code>并不再继续执行。如果回调函数对每个元素都返回<code>false</code>，那么<code>some()</code>将返回<code>false</code>。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>filter()</code></p>
+<p>创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。</p>
+</li>
+</ul>
+<h5 id="2、改变原数组"><a href="#2、改变原数组" class="headerlink" title="2、改变原数组"></a>2、改变原数组</h5><ul>
+<li><p><code>forEach()</code></p>
+<p>针对每一个元素执行提供的函数。会修改原来的数组，不会返回执行结果，返回<code>undefined</code>。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>pop()</code></p>
+<p>删除数组最后一个元素，返回被删除的元素。如果数组为空，则不改变数组，返回<code>undefined</code>。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>push()</code></p>
+<p>向数组末尾添加一个或多个元素，返回改变后数组的长度。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>reverse()</code></p>
+<p>颠倒数组中元素的位置，返回该数组的引用。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>shift()</code></p>
+<p>从数组中<strong>删除</strong>第一个元素，并返回该元素的值。此方法更改数组的长度。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>unshift()</code></p>
+<p>将一个或多个元素添加到数组的开头，并返回新数组的长度。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>sort()</code></p>
+<p>对数组的元素进行排序，并返回数组。排序不一定是稳定的。默认排序顺序是根据字符串Unicode码点。</p>
+</li>
+</ul>
+<ul>
+<li><p><code>splice()</code></p>
+<p>向数组中添加/删除项目，然后返回被删除项目的新数组。</p>
+</li>
+</ul>
+<h4 id="ES6语法之Map键值对转化数组"><a href="#ES6语法之Map键值对转化数组" class="headerlink" title="ES6语法之Map键值对转化数组"></a>ES6语法之Map键值对转化数组</h4><p>new Map创建一个map</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// new Map创建一个map</span></span><br><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="number">1</span>,<span class="string">"one"</span>], [<span class="number">2</span>,<span class="string">"two"</span>], [<span class="number">3</span>,<span class="string">"three"</span>]]);</span><br><span class="line">map.set(<span class="number">4</span>, <span class="string">"four"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取所有键值对</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"获取key"</span>)</span><br><span class="line"><span class="built_in">console</span>.log([...map.keys()]) <span class="comment">// 输出[1, 2, 3, 4]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"获取value"</span>)</span><br><span class="line"><span class="built_in">console</span>.log([...map.values()]) <span class="comment">// 输出[one, two, three, four]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"获取map数组"</span>)</span><br><span class="line"><span class="built_in">console</span>.log([...map]) <span class="comment">// 输出[[1, "one"], [2, "two"], [3, "three"], [4, "four"]]</span></span><br></pre></td></tr></table></figure>
+<h4 id="两个升序数组合并成一个升序数组"><a href="#两个升序数组合并成一个升序数组" class="headerlink" title="两个升序数组合并成一个升序数组"></a>两个升序数组合并成一个升序数组</h4><ul>
+<li>时间复杂度 O(M+N)，空间复杂度O(M+N) </li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">left, right</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result  = [],</span><br><span class="line">        il      = <span class="number">0</span>,</span><br><span class="line">        ir      = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (il &lt; left.length &amp;&amp; ir &lt; right.length) &#123;</span><br><span class="line">        result.push(left[il] &lt; right[ir] ? left[il++] : right[ir++]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result.concat(left.slice(il)).concat(right.slice(ir));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度 O(M+N) ，空间复杂度 O(1) </li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">// m, n 是数组长度</span></span><br><span class="line">    public <span class="keyword">void</span> merge(int[] nums1, int m, int[] nums2, int n) &#123;</span><br><span class="line">        int i = m - <span class="number">1</span>, j = n - <span class="number">1</span>, writeIdx = m + n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &gt;= <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span>)</span><br><span class="line">            nums1[writeIdx--] = nums1[i] &gt; nums2[j]? nums1[i--] : nums2[j--];</span><br><span class="line">        <span class="keyword">while</span> (j &gt;= <span class="number">0</span>)</span><br><span class="line">            nums1[writeIdx--] = nums2[j--];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h4><ul>
+<li>reduce方法</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> distinct = arr =&gt; arr.sort().reduce( (init, current) =&gt; &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (init.length === <span class="number">0</span> || init[init.length - <span class="number">1</span>] !== current) &#123;</span><br><span class="line">        init.push( current );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> init;</span><br><span class="line">&#125;, []);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>];</span><br><span class="line">distinct(arr); <span class="comment">// [1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>filter方法</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> distinct = arr =&gt; arr.filter( (element, index, self) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> self.indexOf( element ) === index;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>];</span><br><span class="line">distinct(arr); <span class="comment">// [1, 2, 3, 5, 4]</span></span><br></pre></td></tr></table></figure>
+<h4 id="多维数组降维"><a href="#多维数组降维" class="headerlink" title="多维数组降维"></a>多维数组降维</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> flattenDeep = arr =&gt; <span class="built_in">Array</span>.isArray(arr)</span><br><span class="line">  ? arr.reduce( (a, b) =&gt; [...a, ...flattenDeep(b)] , [])</span><br><span class="line">  : [arr]</span><br><span class="line"></span><br><span class="line">flattenDeep([<span class="number">1</span>, [[<span class="number">2</span>], [<span class="number">3</span>, [<span class="number">4</span>]], <span class="number">5</span>]]); <span class="comment">// [1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>
+<h4 id="两个数组的交集-II"><a href="#两个数组的交集-II" class="headerlink" title="两个数组的交集 II"></a>两个数组的交集 II</h4><p>给定两个数组，写一个方法来计算它们的交集。</p>
+<p>例如:</p>
+<p>给定 nums1 = [1, 2, 2, 1], nums2 = [2, 2], 返回 [2, 2].</p>
+<p>注意：</p>
+<ul>
+<li>输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。</li>
+<li>我们可以不考虑输出结果的顺序。</li>
+</ul>
+<p>跟进:</p>
+<ul>
+<li>如果给定的数组已经排好序呢？你将如何优化你的算法？</li>
+<li>如果 nums1 的大小比 nums2 小很多，哪种方法更优？</li>
+<li>如果nums2的元素存储在磁盘上，内存是有限的，你不能一次加载所有的元素到内存中，你该怎么办？</li>
+</ul>
+<p>解法：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * <span class="doctag">@param</span> &#123;number[]&#125; nums1</span><br><span class="line"> * <span class="doctag">@param</span> &#123;number[]&#125; nums2</span><br><span class="line"> * <span class="doctag">@return</span> &#123;number[]&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> intersect = function(nums1, nums2) &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> map1 = new Map();</span><br><span class="line">    <span class="keyword">var</span> number = [];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; nums1.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> map1Value = map1.<span class="keyword">get</span>(nums1[i]);</span><br><span class="line">        map1.<span class="keyword">set</span>( nums1[i], ( map1Value ? map1Value : <span class="number">0</span> ) + <span class="number">1</span> );</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; nums2.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>( map1.has(nums2[i]) &amp;&amp; map1.<span class="keyword">get</span>(nums2[i]) != <span class="number">0</span> ) &#123;</span><br><span class="line">            number.push(nums2[i]);</span><br><span class="line">            map1.<span class="keyword">set</span>( nums2[i], map1.<span class="keyword">get</span>(nums2[i]) - <span class="number">1</span> );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> number;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="从排序数组中删除重复项"><a href="#从排序数组中删除重复项" class="headerlink" title="从排序数组中删除重复项"></a>从排序数组中删除重复项</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> removeDuplicates = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(!nums || nums.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> len = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[len] != nums[i]) &#123;</span><br><span class="line">            nums[++ len] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len + <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="只出现一次的数字"><a href="#只出现一次的数字" class="headerlink" title="只出现一次的数字"></a>只出现一次的数字</h4><p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> singleNumber = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">number</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="built_in">number</span> ^= nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">number</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>参考资料：<a href="https://blog.csdn.net/qq_35546040/article/details/80284079" target="_blank" rel="external">https://blog.csdn.net/qq_35546040/article/details/80284079</a> </p>
+<h4 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h4><p>给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。</p>
+<p>你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。</p>
+<p>示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">给定 nums = [<span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">15</span>], target = <span class="number">9</span></span><br><span class="line"></span><br><span class="line">因为 nums[<span class="number">0</span>] + nums[<span class="number">1</span>] = <span class="number">2</span> + <span class="number">7</span> = <span class="number">9</span></span><br><span class="line">所以返回 [<span class="number">0</span>, <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>解法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @param &#123;number&#125; target</span><br><span class="line"> * @return &#123;number[]&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">var</span> number = [];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; nums.length; i ++) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(map.has(target - nums[i])) &#123;</span><br><span class="line">           number.push(i, map.get(target - nums[i]));</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        map.set(nums[i], i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> number;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考资料：<a href="http://www.cnblogs.com/grandyang/p/4130379.html" target="_blank" rel="external">http://www.cnblogs.com/grandyang/p/4130379.html</a></p>
+</blockquote>
+<h4 id="旋转数组"><a href="#旋转数组" class="headerlink" title="旋转数组"></a>旋转数组</h4><p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。</p>
+<p>示例 1:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>] 和 k = <span class="number">3</span></span><br><span class="line">输出: [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">解释:</span><br><span class="line">向右旋转 <span class="number">1</span> 步: [<span class="number">7</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">向右旋转 <span class="number">2</span> 步: [<span class="number">6</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">向右旋转 <span class="number">3</span> 步: [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">-1</span>,<span class="number">-100</span>,<span class="number">3</span>,<span class="number">99</span>] 和 k = <span class="number">2</span></span><br><span class="line">输出: [<span class="number">3</span>,<span class="number">99</span>,<span class="number">-1</span>,<span class="number">-100</span>]</span><br><span class="line">解释: </span><br><span class="line">向右旋转 <span class="number">1</span> 步: [<span class="number">99</span>,<span class="number">-1</span>,<span class="number">-100</span>,<span class="number">3</span>]</span><br><span class="line">向右旋转 <span class="number">2</span> 步: [<span class="number">3</span>,<span class="number">99</span>,<span class="number">-1</span>,<span class="number">-100</span>]</span><br></pre></td></tr></table></figure>
+<p>说明:</p>
+<ul>
+<li>尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。</li>
+<li>要求使用空间复杂度为 O(1) 的原地算法。</li>
+</ul>
+<p>解法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @param &#123;number&#125; k</span><br><span class="line"> * @return &#123;void&#125; Do not return anything, modify nums in-place instead.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> rotate = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> k = k % nums.length;</span><br><span class="line">    reverse(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line">    reverse(nums, k, nums.length - <span class="number">1</span>);</span><br><span class="line">    reverse(nums, <span class="number">0</span>, k - <span class="number">1</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reverse = <span class="function"><span class="keyword">function</span>(<span class="params">nums, i, j</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(i &lt; j) &#123;</span><br><span class="line">       swap(nums, i++, j--);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> swap = <span class="function"><span class="keyword">function</span>(<span class="params">nums, i, j</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> temp = nums[i];</span><br><span class="line">    nums[i] = nums[j];</span><br><span class="line">    nums[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考资料：<a href="https://segmentfault.com/a/1190000003705446" target="_blank" rel="external">https://segmentfault.com/a/1190000003705446</a></p>
+</blockquote>
+<h4 id="加一"><a href="#加一" class="headerlink" title="加一"></a>加一</h4><p>给定一个非负整数组成的非空数组，在该数的基础上加一，返回一个新的数组。</p>
+<p>最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。</p>
+<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<p>示例 1:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">输出: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>]</span><br><span class="line">解释: 输入数组表示数字 <span class="number">123</span>。</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">输出: [<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>]</span><br><span class="line">解释: 输入数组表示数字 <span class="number">4321</span>。</span><br></pre></td></tr></table></figure>
+<p>解法： </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; digits</span><br><span class="line"> * @return &#123;number[]&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> plusOne = <span class="function"><span class="keyword">function</span>(<span class="params">digits</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(digits.length == <span class="number">0</span>) <span class="keyword">return</span> digits;</span><br><span class="line">    <span class="keyword">var</span> carry = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> res = [<span class="number">1</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = digits.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(carry == <span class="number">0</span>) <span class="keyword">return</span> digits;</span><br><span class="line">        <span class="keyword">var</span> sum = carry + digits[i];</span><br><span class="line">        digits[i] = sum % <span class="number">10</span>;</span><br><span class="line">        carry = <span class="built_in">parseInt</span>(sum / <span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = digits.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        res.push(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> carry == <span class="number">0</span> ? digits : res;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考资料：<a href="http://www.cnblogs.com/grandyang/p/4079357.html" target="_blank" rel="external">http://www.cnblogs.com/grandyang/p/4079357.html</a> </p>
+</blockquote>
+<h4 id="存在重复"><a href="#存在重复" class="headerlink" title="存在重复"></a>存在重复</h4><p>给定一个整数数组，判断是否存在重复元素。</p>
+<p>如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。</p>
+<p>示例 1:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>]</span><br><span class="line">输出: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">输出: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>示例 3:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">2</span>]</span><br><span class="line">输出: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>解法 :</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;boolean&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> containsDuplicate = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> hashMap = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>( hashMap.has(nums[i]) ) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        hashMap.set(nums[i], <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="移动零"><a href="#移动零" class="headerlink" title="移动零"></a>移动零</h4><p>给定一个数组 <code>nums</code>，编写一个函数将所有 <code>0</code> 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: <span class="selector-attr">[0,1,0,3,12]</span></span><br><span class="line">输出: <span class="selector-attr">[1,3,12,0,0]</span></span><br></pre></td></tr></table></figure>
+<p><strong>说明</strong>:</p>
+<ol>
+<li>必须在原数组上操作，不能拷贝额外的数组。</li>
+<li>尽量减少操作次数。</li>
+</ol>
+<p><strong>解法</strong>1：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;void&#125; Do not return anything, modify nums in-place instead.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">let</span> moveZeroes = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> n = nums.length;</span><br><span class="line">    <span class="keyword">let</span> slow = <span class="number">-1</span>; 	<span class="comment">// 指针索引</span></span><br><span class="line">    <span class="keyword">let</span> fast = <span class="number">0</span>;	<span class="comment">// 指针索引</span></span><br><span class="line">    <span class="keyword">let</span> x = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(slow &lt; fast &amp;&amp; fast &lt; n) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (nums[fast] != x) &#123;</span><br><span class="line">            slow ++;</span><br><span class="line">            swap(nums, slow, fast);</span><br><span class="line">        &#125;</span><br><span class="line">        fast ++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> swap = <span class="function"><span class="keyword">function</span>(<span class="params">nums, i, j</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> temp = nums[i];</span><br><span class="line">    nums[i] = nums[j];</span><br><span class="line">    nums[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>解法2</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;void&#125; Do not return anything, modify nums in-place instead.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">let</span> moveZeroes = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> n = nums.length;</span><br><span class="line">    <span class="keyword">let</span> one = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">let</span> x = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (nums[i] != x) &#123;</span><br><span class="line">            nums[one ++] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = one; i &lt; n; i ++) &#123;</span><br><span class="line">        nums[i] = x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/10/RecyclerView调节项目间间距大小/" itemprop="url">
                   RecyclerView调节项目间间距大小
                 </a>
@@ -358,1351 +2049,9 @@
       
         
           
-            <p>调用处直接调用<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置item之间的间隔</span></span><br><span class="line">SpacesItemDecoration decoration = <span class="keyword">new</span> SpacesItemDecoration(<span class="number">8</span>);</span><br><span class="line">recyclerView.addItemDecoration(decoration);</span><br></pre></td></tr></table></figure></p>
+            <p>调用处直接调用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置item之间的间隔</span></span><br><span class="line">SpacesItemDecoration decoration = <span class="keyword">new</span> SpacesItemDecoration(<span class="number">8</span>);</span><br><span class="line">recyclerView.addItemDecoration(decoration);</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SpacesItemDecoration</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ItemDecoration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> int space;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">StaggeredGridLayoutManager</span>.<span class="type">LayoutParams</span> lp;</span><br><span class="line"></span><br><span class="line">    public <span class="type">SpacesItemDecoration</span>(int space) &#123;</span><br><span class="line">        <span class="keyword">this</span>.space = space;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void getItemOffsets(<span class="type">Rect</span> outRect, <span class="type">View</span> view, <span class="type">RecyclerView</span> parent, <span class="type">RecyclerView</span>.<span class="type">State</span> state) &#123;</span><br><span class="line"></span><br><span class="line">        int position = parent.getChildAdapterPosition(view);</span><br><span class="line">        lp = (<span class="type">StaggeredGridLayoutManager</span>.<span class="type">LayoutParams</span>)view.getLayoutParams();</span><br><span class="line">        <span class="keyword">if</span> (position == <span class="number">0</span> || position==<span class="number">1</span>)&#123;</span><br><span class="line">            outRect.top = space * <span class="number">2</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            outRect.top = space;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (lp.getSpanIndex() == <span class="number">0</span>) &#123;</span><br><span class="line">            outRect.left = space * <span class="number">2</span>;</span><br><span class="line">            outRect.right = space;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            outRect.left = space;</span><br><span class="line">            outRect.right = space * <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        outRect.bottom = space;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//注掉的方法总有漏网之鱼，不知为啥</span></span><br><span class="line"><span class="comment">//        outRect.left = space;</span></span><br><span class="line"><span class="comment">//        outRect.right = space;</span></span><br><span class="line"><span class="comment">//        outRect.bottom = space;</span></span><br><span class="line"><span class="comment">//        if (position == 0 || position == 1) &#123;</span></span><br><span class="line"><span class="comment">//            //用于设置第一行跟顶部的距离</span></span><br><span class="line"><span class="comment">//            outRect.top = space;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        if (lp.getSpanIndex() == 0) &#123;</span></span><br><span class="line"><span class="comment">//            //用于设同行两个间隔间跟其距离左右屏幕间隔相同</span></span><br><span class="line"><span class="comment">//            outRect.right = 0;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/27/每周TODO知识点总结 第一期/" itemprop="url">
-                  每周TODO知识点总结 第一期
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-11-27T20:07:24+08:00" content="2016-11-27">
-              2016-11-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/每周TODO/" itemprop="url" rel="index">
-                    <span itemprop="name">每周TODO</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/27/每周TODO知识点总结 第一期/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/27/每周TODO知识点总结 第一期/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/11/27/每周TODO知识点总结 第一期/" class="leancloud_visitors" data-flag-title="每周TODO知识点总结 第一期">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Java基础相关"><a href="#Java基础相关" class="headerlink" title="Java基础相关"></a>Java基础相关</h2><h3 id="1、正则表达式里，字符串“-”写成“-”，“-”写成“-”，为什么？"><a href="#1、正则表达式里，字符串“-”写成“-”，“-”写成“-”，为什么？" class="headerlink" title="1、正则表达式里，字符串“*”写成“\\*”，“\”写成“\\\\”，为什么？"></a>1、正则表达式里，字符串“*”写成“\\*”，“\”写成“\\\\”，为什么？</h3><ul>
-<li><p>注意以下两点：</p>
-<ul>
-<li>1.字符串里面表示斜杠就需要两个斜杠如“\\”</li>
-<li>2.正则表达式里的斜杠需要转意，是用“\”标示。</li>
-</ul>
-</li>
-<li><p>所以对于“\\\\”，第一个斜杠是转义符，第二个斜杠是斜杠本身，第三个斜杠是转义符，第四个斜杠是斜杠本身。这样就成了4个斜杠在正则表达式里面表示一个斜杠。</p>
-</li>
-<li><p>更多知识点：</p>
-<ul>
-<li>引用说明：有正斜杠与反斜杠之分，正斜杠，一般就叫做斜杠，符号为“/”；反斜杠的符号为“\”。斜杠（/）在JAVA中没有什么特别的意义，就是代表一个字符‘/’; </li>
-<li>反斜杠（\）则不然，它和紧跟着它的那个字符构成转义字符，如“\n”（表示换行）、“\””（表示字符‘”’）等,所以在字符串中要表示字符’\’要用“\\”来表示，例：如果你这样定义一个字符串String s = “name\sex”是错误的，要这样定义String s = “name\\sex”; </li>
-</ul>
-</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/27/每周TODO知识点总结 第一期/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/30/Android 动态绘制圆形进度条/" itemprop="url">
-                  Android 动态绘制圆形进度条
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-30T22:37:24+08:00" content="2016-10-30">
-              2016-10-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/30/Android 动态绘制圆形进度条/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/30/Android 动态绘制圆形进度条/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/10/30/Android 动态绘制圆形进度条/" class="leancloud_visitors" data-flag-title="Android 动态绘制圆形进度条">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="http://img.blog.csdn.net/20161029200752725" alt="此处输入图片的描述"></p>
-<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><ul>
-<li>在画布上直接绘制View，需要了解一下几点 <ul>
-<li>1.需要画一个底层小圆和上层大圆 </li>
-<li>2.圆圈上有不同进度的颜色 </li>
-<li>3.颜色的变化规律是先慢慢变多再慢慢减少</li>
-</ul>
-</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/30/Android 动态绘制圆形进度条/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/29/React Native环境配置血泪爬坑/" itemprop="url">
-                  React Native环境配置血泪爬坑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-29T12:32:24+08:00" content="2016-10-29">
-              2016-10-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/React-Native/" itemprop="url" rel="index">
-                    <span itemprop="name">React-Native</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/29/React Native环境配置血泪爬坑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/29/React Native环境配置血泪爬坑/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/10/29/React Native环境配置血泪爬坑/" class="leancloud_visitors" data-flag-title="React Native环境配置血泪爬坑">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="1-下载gradle文件超时"><a href="#1-下载gradle文件超时" class="headerlink" title="1.下载gradle文件超时"></a>1.下载gradle文件超时</h3><p>进入AwesomeProject目录，\$ cd AwesomeProject，然后在AwesomeProject目录下运行\$ react-native run-android，就会构建工程并自动安装到你的模拟器或者设备，同时启动用于实现动态代码加载的Node服务。第一次运行的时候，会下载gradle文件，然而在我们的办公网络环境运行就会报下面的错：ConnectException</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/29/React Native环境配置血泪爬坑/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/" itemprop="url">
-                  Scala Cookbook读书笔记 Chapter 5.Methods 第一部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-13T22:31:21+08:00" content="2016-10-13">
-              2016-10-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 5.Methods 第一部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="5-0-本章概述"><a href="#5-0-本章概述" class="headerlink" title="5.0 本章概述"></a>5.0 本章概述</h2><ul>
-<li><p>Java和Scala定义简单method区别：</p>
-<pre><code>// java
-public String doSomething(int x) {
-    // code here
-}
-
-// scala
-def doSomething(x: Int): String = {
-    // code here
-}
-</code></pre></li>
-<li><p>Scala还可以使用下面方式，不指定返回值类型，不要求包裹body的大括号：</p>
-<pre><code>def plusOne(i: Int) = i + 1
-</code></pre></li>
-<li>除了上面例子的区别，Java和Scala还包括以下不同：<ul>
-<li>指定方法获取控制（显示）</li>
-<li>给方法参数设置默认值的能力</li>
-<li>调用方法时指定方法参数名字的能力</li>
-<li>如何声明一个方法可能抛出的异常</li>
-<li>方法里使用可变参数</li>
-</ul>
-</li>
-</ul>
-<h2 id=""><a href="#" class="headerlink" title=""></a>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/" itemprop="url">
-                  Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-29T14:35:46+08:00" content="2016-09-29">
-              2016-09-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/" class="leancloud_visitors" data-flag-title="Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="4-8-分配块或函数给字段"><a href="#4-8-分配块或函数给字段" class="headerlink" title="4.8 分配块或函数给字段"></a>4.8 分配块或函数给字段</h2><ul>
-<li>使用代码块或者调用一个函数初始化类里的字段<h3 id="4-8-1-解决方案"><a href="#4-8-1-解决方案" class="headerlink" title="4.8.1 解决方案"></a>4.8.1 解决方案</h3></li>
-<li><p>设置字段等于需要的代码块或者函数</p>
-<pre><code>class Foo {
-
-    // set &apos;text&apos; equal to the result of the block of code
-    val text = {
-        var lines = &quot;&quot;
-        try {
-            lines = io.Source.fromFile(&quot;/etc/passwd&quot;).getLines.mkString
-        } catch {
-            case e: Exception =&gt; lines = &quot;Error happened&quot;
-        }
-        lines
-        }
-        println(text)
-}
-
-object Test extends App {
-    val f = new Foo
-}
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/" itemprop="url">
-                  Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-27T22:37:24+08:00" content="2016-09-27">
-              2016-09-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="4-0-本章概述"><a href="#4-0-本章概述" class="headerlink" title="4.0 本章概述"></a>4.0 本章概述</h2><ul>
-<li>尽管Scala和Java有很多相同点，但是类的声明，类构造函数和字段可见控制是两者之间最大的不同。Java是更加冗长，Scala是更加简洁。</li>
-</ul>
-<h2 id="4-1-创建主构造函数"><a href="#4-1-创建主构造函数" class="headerlink" title="4.1 创建主构造函数"></a>4.1 创建主构造函数</h2><ul>
-<li>问题：创建主构造函数和Java不同<h3 id="4-1-1-解决方案"><a href="#4-1-1-解决方案" class="headerlink" title="4.1.1 解决方案"></a>4.1.1 解决方案</h3></li>
-<li>Scala的主构造函数由下面几部分组成：<ul>
-<li>构造器参数</li>
-<li>类的主体部分被调用的方法</li>
-<li>类的主体部分执行的语句和表达式</li>
-</ul>
-</li>
-<li><p>Scala类主体部分声明的字段处理方式和Java相似，它们在类第一次实例化时被赋值。</p>
-<pre><code>class Person(var firstName: String, var lastName: String) {
-
-    println(&quot;the constructor begins&quot;)
-
-    // some class fields
-    private val HOME = System.getProperty(&quot;user.home&quot;)
-    var age = 0
-
-    // some methods
-    override def toString = s&quot;$firstName $lastName is $age years old&quot;
-    def printHome { println(s&quot;HOME = $HOME&quot;) }
-    def printFullName { println(this) } // uses toString
-
-    printHome
-    printFullName
-    println(&quot;still in the constructor&quot;)
-}
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/27/Scala Cookbook读书笔记 Chapter 4.Classes and Properties 第一部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/" itemprop="url">
-                  Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-18T12:37:28+08:00" content="2016-09-18">
-              2016-09-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="3-8-使用一个case语句匹配复杂条件"><a href="#3-8-使用一个case语句匹配复杂条件" class="headerlink" title="3.8 使用一个case语句匹配复杂条件"></a>3.8 使用一个case语句匹配复杂条件</h2><ul>
-<li>几个匹配条件要求执行相同的业务逻辑，而不是使用多个case重复业务逻辑，想要使用的是匹配条件的业务逻辑的复制。<h3 id="3-8-1-解决方案"><a href="#3-8-1-解决方案" class="headerlink" title="3.8.1 解决方案"></a>3.8.1 解决方案</h3></li>
-<li><p>使用 | 分隔符将相同的业务逻辑的匹配条件放置到同一行上</p>
-<pre><code>val i = 5
-i match {
-    case 1 | 3 | 5 | 7 | 9 =&gt; println(&quot;odd&quot;)
-    case 2 | 4 | 6 | 8 | 10 =&gt; println(&quot;even&quot;)
-}
-</code></pre></li>
-<li><p>其他类型也适用：</p>
-<pre><code>val cmd = &quot;stop&quot;
-cmd match {
-    case &quot;start&quot; | &quot;go&quot; =&gt; println(&quot;starting&quot;)
-    case &quot;stop&quot; | &quot;quit&quot; | &quot;exit&quot; =&gt; println(&quot;stopping&quot;)
-    case _ =&gt; println(&quot;doing nothing&quot;)
-}
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/" itemprop="url">
-                  Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-14T18:34:34+08:00" content="2016-09-14">
-              2016-09-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="3-0-总体介绍"><a href="#3-0-总体介绍" class="headerlink" title="3.0 总体介绍"></a>3.0 总体介绍</h2><ul>
-<li><p>Scala中的if/then/else结构和Java中很像，但是它还可以用来返回一个值。比如Java中用的三目运算，在Scala中只需要使用正常的if语句即可。</p>
-<pre><code>val x = if (a) y else z
-</code></pre></li>
-<li>try/catch/finilly结构和Java中很像，但是Scala中的catch部分使用的是模式匹配。</li>
-<li><p>Scala中可以使用2个for循环读取文件的每行，然后在每行上操作每个字符：</p>
-<pre><code>for (line &lt;- source.getLines) {
-    for {
-        char &lt;- line
-        if char.isLetter
-    } // char algorithm here ...
-}
-</code></pre></li>
-<li><p>在Scala中，还可以更加简单点：</p>
-<pre><code>for {
-    line &lt;- source.getLines
-    char &lt;- line
-    if char.isLetter
-} // char algorithm here ...
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/" itemprop="url">
-                  Scala Cookbook翻译 Chapter 2.Numbers 第二部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-08T18:37:24+08:00" content="2016-09-08">
-              2016-09-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 2.Numbers 第二部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="2-4-代替-和–"><a href="#2-4-代替-和–" class="headerlink" title="2.4 代替++和–"></a>2.4 代替++和–</h2><ul>
-<li>问题：你想要在其他语言用++和–操作符增长数值或减少数值，但是在Scala中没有这些运算符。<h3 id="2-4-1-解决方案"><a href="#2-4-1-解决方案" class="headerlink" title="2.4.1 解决方案"></a>2.4.1 解决方案</h3></li>
-<li><p>因为val字段时不可改变的，他们不能增加或者减少，但是var整形字段可以通过+=和-=方法改变。</p>
-<pre><code>scala&gt; var a = 1
-a: Int = 1
-
-scala&gt; a += 1
-
-scala&gt; println(a)
-2
-
-scala&gt; a −= 1
-
-scala&gt; println(a)
-1
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
         
       
     </div>
@@ -1774,7 +2123,7 @@ scala&gt; println(a)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1782,7 +2131,7 @@ scala&gt; println(a)
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1791,7 +2140,7 @@ scala&gt; println(a)
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
