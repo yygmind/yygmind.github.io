@@ -1,0 +1,888 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JS,笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="2.1 词法阶段词法作用域是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，所以在词法分析器处理代码时会保持作用域不变。（不考虑欺骗词法作用域情况下）
+2.1.1 查找
+作用域查找会在找到第一个匹配的标识符时停止。
+
+遮蔽效应：在多层嵌套作用域中可以定义同名的标识符，内部的标识符会“遮蔽”外部的标识符。
+
+全局变量会自动变成全局对象的属性，可以间接的通过对全局对象属性的引用来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="You Don't Know JS上卷Part1 Chapter2.词法作用域">
+<meta property="og:url" content="http://yygmind.github.io/2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/index.html">
+<meta property="og:site_name" content="yygmind">
+<meta property="og:description" content="2.1 词法阶段词法作用域是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，所以在词法分析器处理代码时会保持作用域不变。（不考虑欺骗词法作用域情况下）
+2.1.1 查找
+作用域查找会在找到第一个匹配的标识符时停止。
+
+遮蔽效应：在多层嵌套作用域中可以定义同名的标识符，内部的标识符会“遮蔽”外部的标识符。
+
+全局变量会自动变成全局对象的属性，可以间接的通过对全局对象属性的引用来">
+<meta property="og:updated_time" content="2018-08-21T07:14:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="You Don't Know JS上卷Part1 Chapter2.词法作用域">
+<meta name="twitter:description" content="2.1 词法阶段词法作用域是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，所以在词法分析器处理代码时会保持作用域不变。（不考虑欺骗词法作用域情况下）
+2.1.1 查找
+作用域查找会在找到第一个匹配的标识符时停止。
+
+遮蔽效应：在多层嵌套作用域中可以定义同名的标识符，内部的标识符会“遮蔽”外部的标识符。
+
+全局变量会自动变成全局对象的属性，可以间接的通过对全局对象属性的引用来">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6275932990145037000,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> You Don't Know JS上卷Part1 Chapter2.词法作用域 | yygmind </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?fab6ecfed3b31668002fc8a08ef369c9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">yygmind</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '8ps575xQqVpRhxC_HumU','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                You Don't Know JS上卷Part1 Chapter2.词法作用域
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-06-09T11:31:12+08:00" content="2018-06-09">
+              2018-06-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/" class="leancloud_visitors" data-flag-title="You Don't Know JS上卷Part1 Chapter2.词法作用域">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="2-1-词法阶段"><a href="#2-1-词法阶段" class="headerlink" title="2.1 词法阶段"></a>2.1 词法阶段</h4><p>词法作用域是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，所以在词法分析器处理代码时会保持作用域不变。（不考虑欺骗词法作用域情况下）</p>
+<h5 id="2-1-1-查找"><a href="#2-1-1-查找" class="headerlink" title="2.1.1 查找"></a>2.1.1 查找</h5><ul>
+<li><p>作用域查找会在找到第一个匹配的标识符时停止。</p>
+</li>
+<li><p>遮蔽效应：在多层嵌套作用域中可以定义同名的标识符，内部的标识符会“遮蔽”外部的标识符。</p>
+</li>
+<li><p>全局变量会自动变成全局对象的属性，可以间接的通过对全局对象属性的引用来访问。通过这种技术可以访问那些被同名变量所遮蔽的全局变量，但是非全局的变量如果被遮蔽了，无论如何都无法被访问到。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>词法作用域只由函数被声明时所处的位置决定。</p>
+</li>
+<li><p>词法作用域查找只会查找一级标识符，比如a、b、c。对于<code>foo.bar.baz</code>，词法作用域只会查找<code>foo</code>标识符,找到之后，<strong>对象属性访问规则</strong>会分别接管对<code>bar</code>和<code>baz</code>属性的访问。</p>
+</li>
+</ul>
+<a id="more"></a>
+<h4 id="2-2-欺骗词法"><a href="#2-2-欺骗词法" class="headerlink" title="2.2 欺骗词法"></a>2.2 欺骗词法</h4><p>欺骗词法作用域会导致性能下降。以下两种方法<strong>不推荐使用</strong></p>
+<h5 id="2-2-1-eval"><a href="#2-2-1-eval" class="headerlink" title="2.2.1 eval"></a>2.2.1 eval</h5><p><code>eval(..)</code>函数可以接受一个字符串为参数，并将其中的内容视为好像在书写时就存在于程序中这个位置的代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">str, a</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">eval</span>( str ); <span class="comment">// 欺骗！</span></span><br><span class="line">    <span class="built_in">console</span>.log( a, b );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">2</span>;</span><br><span class="line">foo( <span class="string">"var b = 3;"</span>, <span class="number">1</span> ); <span class="comment">// 1, 3</span></span><br></pre></td></tr></table></figure>
+<p><code>eval(&#39;var b = 3&#39;)</code>会被当做本来就在那里一样来处理。</p>
+<ul>
+<li>非严格模式下，如果<code>eval(..)</code>中所执行的代码包含一个或多个声明，会在运行期修改书写期的词法作用域。上述代码中在<code>foo(..)</code>内部创建了一个变量b，并遮蔽了外部作用域中的同名变量。</li>
+<li>严格模式下，<code>eval(..)</code>在运行时有自己的词法作用域，其中的声明无法修改作用域。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line"><span class="meta">    "use strict"</span>; </span><br><span class="line">    <span class="built_in">eval</span>( str ); </span><br><span class="line">    <span class="built_in">console</span>.log( a ); <span class="comment">// ReferenceError: a is not defined</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo( <span class="string">"var a = 2;"</span> );</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>setTimeout(..)</code>和<code>setInterval(..)</code>的第一个参数可以是字符串，会被解释为一段动态生成的函数代码。<strong>已过时，不要使用</strong></li>
+<li><code>new Function(..)</code>的最后一个参数可以接受代码字符串（前面的参数是新生成的函数的形参）。<strong>避免使用</strong></li>
+</ul>
+<h5 id="2-2-2-with"><a href="#2-2-2-with" class="headerlink" title="2.2.2 with"></a>2.2.2 with</h5><p><code>with</code>通常被当做重复引用同一个对象中的多个属性的快捷方式，可以<strong>不需要重复引用对象本身</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    a: <span class="number">1</span>,</span><br><span class="line">    b: <span class="number">2</span>,</span><br><span class="line">    c: <span class="number">3</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单调乏味的重复“obj”</span></span><br><span class="line">obj.a = <span class="number">2</span>;</span><br><span class="line">obj.b = <span class="number">3</span>;</span><br><span class="line">obj.c = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 简单的快捷方式</span></span><br><span class="line"><span class="keyword">with</span> (obj) &#123;</span><br><span class="line">	a = <span class="number">3</span>;</span><br><span class="line">    b = <span class="number">4</span>;</span><br><span class="line">    c = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>with可以将一个没有或有多个属性的对象处理为一个完全隔离的词法作用域，这个对象的属性会被处理为定义在这个作用域中的词法标识符。</p>
+<p>这个块内部正常的var声明并不会被限制在这个块的作用域中，而是被添加到with所处的函数作用域中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">with</span> (obj) &#123;</span><br><span class="line">        a = <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o1 = &#123;</span><br><span class="line">    a: <span class="number">3</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o2 = &#123;</span><br><span class="line">    b : <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo( o1 );</span><br><span class="line"><span class="built_in">console</span>.log( o1.a ); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">foo( o2 );</span><br><span class="line"><span class="built_in">console</span>.log( o2.a ); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log( a ); <span class="comment">// 2 -- 不好，a被泄露到全局作用域上了！</span></span><br></pre></td></tr></table></figure>
+<p>上面例子中，创建了<code>o1</code>和<code>o2</code>两个对象。其中一个有<code>a</code>属性，另一个没有。在<code>with(obj){..}</code>内部是一个LHS引用，并将2赋值给它。</p>
+<ul>
+<li><code>o1</code>传递进去后，with声明的作用域是<code>o1</code>,<code>a = 2</code>赋值操作找到<code>o1.a</code>并将2赋值给它。</li>
+<li><code>o2</code>传递进去后，作用域<code>o2</code>中并没有<code>a</code>属性，因此进行正常的LHS标识符查找，o2的作用域、<code>foo(..)</code>的作用域和全局作用域都没有找到标识符a，因此当<code>a = 2</code>执行时，自动创建了一个全局变量（非严格模式），所以<code>o2.a</code>保持undefined。</li>
+</ul>
+<h5 id="2-2-3-性能"><a href="#2-2-3-性能" class="headerlink" title="2.2.3 性能"></a>2.2.3 性能</h5><ul>
+<li>JavaScript引擎会在编译阶段进行数项的性能优化，其中有些优化依赖于能够根据代码的词法进行静态分析，并预先确定所有变量和函数的定义位置，才能在执行过程中快速找到标识符。</li>
+<li>引擎在代码中发现<code>eval(..)</code>或<code>with</code>，它只能简单的<strong>假设</strong>关于标识符位置的判断都是无效的。因为无法在词法分析阶段明确知道<code>eval(..)</code>会接收到什么代码，这些代码会如何对作用域进行修改，也无法知道传递给<code>with</code>用来创建词法作用域的对象的内容到底是什么。</li>
+<li>悲观情况下如果出现了<code>eval(..)</code>或with，所有的优化<strong>可能</strong>都是无意义的，最简单的做法就是<strong>完全不做</strong>任何优化。代码运行起来一定会变得非常慢。</li>
+</ul>
+<h4 id="2-3-小结"><a href="#2-3-小结" class="headerlink" title="2.3 小结"></a>2.3 小结</h4><p>词法作用域意味着作用域是由书写代码时函数声明的位置来决定的。</p>
+<p>编译的词法分析阶段基本能够知道全部标识符在哪里以及是如何声明的，从而能够预测在执行过程中如何对它们进行查找。</p>
+<p>有以下两个机制可以“欺骗”词法作用域：</p>
+<ul>
+<li><code>eval(..)</code>：对一段包含一个或多个声明的”代码“字符串进行演算，借此来修改已经存在的词法作用域（<strong>运行时</strong>）。</li>
+<li><code>with</code>：将一个对象的引用<strong>当做</strong>作用域来处理，将对象的属性当做作用域中的标识符来处理，创建一个新的词法作用域（<strong>运行时</strong>）。</li>
+</ul>
+<p>副作用是引擎无法在编译时对作用域查找进行优化。因为引擎只能谨慎地认为这样的优化是无效的，使用任何一个都将导致代码运行变慢。<strong>不要使用它们</strong></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag">#JS</a>
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/02/You Don't Know JS上卷Part1 Chapter1.作用域是什么/" rel="next" title="You Don't Know JS上卷Part1 Chapter1.作用域是什么">
+                <i class="fa fa-chevron-left"></i> You Don't Know JS上卷Part1 Chapter1.作用域是什么
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/15/You Don't Know JS上卷Part1 Chapter3.函数作用域和块作用域/" rel="prev" title="You Don't Know JS上卷Part1 Chapter3.函数作用域和块作用域">
+                You Don't Know JS上卷Part1 Chapter3.函数作用域和块作用域 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/"
+     data-title="You Don't Know JS上卷Part1 Chapter2.词法作用域"
+     data-content=""
+     data-url="http://yygmind.github.io/2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/"
+           data-title="You Don't Know JS上卷Part1 Chapter2.词法作用域" data-url="http://yygmind.github.io/2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="yygmind" />
+          <p class="site-author-name" itemprop="name">yygmind</p>
+          <p class="site-description motion-element" itemprop="description">To obsess or to die</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yygmind" target="_blank" title="github">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yygmind" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/yyg204731" target="_blank" title="csdn">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  csdn
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-词法阶段"><span class="nav-number">1.</span> <span class="nav-text">2.1 词法阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-查找"><span class="nav-number">1.1.</span> <span class="nav-text">2.1.1 查找</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-欺骗词法"><span class="nav-number">2.</span> <span class="nav-text">2.2 欺骗词法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-eval"><span class="nav-number">2.1.</span> <span class="nav-text">2.2.1 eval</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-with"><span class="nav-number">2.2.</span> <span class="nav-text">2.2.2 with</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-3-性能"><span class="nav-number">2.3.</span> <span class="nav-text">2.2.3 性能</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-小结"><span class="nav-number">3.</span> <span class="nav-text">2.3 小结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yygmind</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yangyuanguang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Tn7UeJc67pWv5TsgT44dA8aG-gzGzoHsz", "dAlApTKeAm4pYvob0yFTqEiH");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

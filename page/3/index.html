@@ -279,6 +279,1200 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/" itemprop="url">
+                  Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-18T12:37:28+08:00" content="2016-09-18">
+              2016-09-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="3-8-使用一个case语句匹配复杂条件"><a href="#3-8-使用一个case语句匹配复杂条件" class="headerlink" title="3.8 使用一个case语句匹配复杂条件"></a>3.8 使用一个case语句匹配复杂条件</h2><ul>
+<li>几个匹配条件要求执行相同的业务逻辑，而不是使用多个case重复业务逻辑，想要使用的是匹配条件的业务逻辑的复制。<h3 id="3-8-1-解决方案"><a href="#3-8-1-解决方案" class="headerlink" title="3.8.1 解决方案"></a>3.8.1 解决方案</h3></li>
+<li><p>使用 | 分隔符将相同的业务逻辑的匹配条件放置到同一行上</p>
+<pre><code>val i = 5
+i match {
+    case 1 | 3 | 5 | 7 | 9 =&gt; println(&quot;odd&quot;)
+    case 2 | 4 | 6 | 8 | 10 =&gt; println(&quot;even&quot;)
+}
+</code></pre></li>
+<li><p>其他类型也适用：</p>
+<pre><code>val cmd = &quot;stop&quot;
+cmd match {
+    case &quot;start&quot; | &quot;go&quot; =&gt; println(&quot;starting&quot;)
+    case &quot;stop&quot; | &quot;quit&quot; | &quot;exit&quot; =&gt; println(&quot;stopping&quot;)
+    case _ =&gt; println(&quot;doing nothing&quot;)
+}
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/" itemprop="url">
+                  Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T18:34:34+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="3-0-总体介绍"><a href="#3-0-总体介绍" class="headerlink" title="3.0 总体介绍"></a>3.0 总体介绍</h2><ul>
+<li><p>Scala中的if/then/else结构和Java中很像，但是它还可以用来返回一个值。比如Java中用的三目运算，在Scala中只需要使用正常的if语句即可。</p>
+<pre><code>val x = if (a) y else z
+</code></pre></li>
+<li>try/catch/finilly结构和Java中很像，但是Scala中的catch部分使用的是模式匹配。</li>
+<li><p>Scala中可以使用2个for循环读取文件的每行，然后在每行上操作每个字符：</p>
+<pre><code>for (line &lt;- source.getLines) {
+    for {
+        char &lt;- line
+        if char.isLetter
+    } // char algorithm here ...
+}
+</code></pre></li>
+<li><p>在Scala中，还可以更加简单点：</p>
+<pre><code>for {
+    line &lt;- source.getLines
+    char &lt;- line
+    if char.isLetter
+} // char algorithm here ...
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/" itemprop="url">
+                  Scala Cookbook翻译 Chapter 2.Numbers 第二部分
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-08T18:37:24+08:00" content="2016-09-08">
+              2016-09-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 2.Numbers 第二部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="2-4-代替-和–"><a href="#2-4-代替-和–" class="headerlink" title="2.4 代替++和–"></a>2.4 代替++和–</h2><ul>
+<li>问题：你想要在其他语言用++和–操作符增长数值或减少数值，但是在Scala中没有这些运算符。<h3 id="2-4-1-解决方案"><a href="#2-4-1-解决方案" class="headerlink" title="2.4.1 解决方案"></a>2.4.1 解决方案</h3></li>
+<li><p>因为val字段时不可改变的，他们不能增加或者减少，但是var整形字段可以通过+=和-=方法改变。</p>
+<pre><code>scala&gt; var a = 1
+a: Int = 1
+
+scala&gt; a += 1
+
+scala&gt; println(a)
+2
+
+scala&gt; a −= 1
+
+scala&gt; println(a)
+1
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/" itemprop="url">
+                  Scala Cookbook翻译 Chapter 2.Numbers 第一部分
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-07T21:37:24+08:00" content="2016-09-07">
+              2016-09-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 2.Numbers 第一部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="总体介绍"><a href="#总体介绍" class="headerlink" title="总体介绍"></a>总体介绍</h2><ul>
+<li>Scala中所有的数值类型都是对象，包括Byte,Char,Double,Float,Int,Long和Short。这7个数值类型继承自AnyVal特质，Unit和Boolean类被认为是“非数字的值类型”。</li>
+<li><p>这七个内置的数值类型有相同的数据范围，和java中是等价的。</p>
+<pre><code>Data    type Range
+Char    16-bit unsigned Unicode character
+Byte    8-bit signed value
+Short    16-bit signed value
+Int    32-bit signed value
+Long    64-bit signed value
+Float    32-bit IEEE 754 single precision float
+Double    64-bit IEEE 754 single precision float
+</code></pre></li>
+<li><p>除了这些类型之外，Boolean有true或者false的值。</p>
+</li>
+<li><p>如果想要知道这些数据范围的精确值，可以通过Scala的REPL中查到。</p>
+<pre><code>scala&gt; Short.MinValue
+res0: Short = −32768
+
+scala&gt; Short.MaxValue
+res1: Short = 32767
+
+scala&gt; Int.MinValue
+res2: Int = −2147483648
+
+scala&gt; Float.MinValue
+res3: Float = −3.4028235E38
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/" itemprop="url">
+                  Scala Cookbook翻译 Chapter 1.Strings 第三部分
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-06T20:59:24+08:00" content="2016-09-06">
+              2016-09-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 1.Strings 第三部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="1-8-提取一个匹配模式的字符串的部分"><a href="#1-8-提取一个匹配模式的字符串的部分" class="headerlink" title="1.8 提取一个匹配模式的字符串的部分"></a>1.8 提取一个匹配模式的字符串的部分</h2><ul>
+<li>问题：你想要提取出一个字符串中的一个或多个部分，以匹配你指定的正则表达式模式。<h3 id="1-8-1-解决方案"><a href="#1-8-1-解决方案" class="headerlink" title="1.8.1 解决方案"></a>1.8.1 解决方案</h3></li>
+<li><p>定义要提取的正则表达式模式，将圆括号放在他们周围，所以可以把它们作为“正则表达式组”，首先定义所需的模式：</p>
+<pre><code>val pattern = &quot;([0-9]+) ([A-Za-z]+)&quot;.r
+</code></pre></li>
+<li><p>然后从目标字符串中提取正则表达式组</p>
+<pre><code>val pattern(count, fruit) = &quot;100 Bananas&quot;
+</code></pre></li>
+<li><p>此代码从给定的字符串中提取出数字字段和字母字段作为两个独立的变量，count和fruit。</p>
+<pre><code>scala&gt; val pattern = &quot;([0-9]+) ([A-Za-z]+)&quot;.r
+pattern: scala.util.matching.Regex = ([0-9]+) ([A-Za-z]+)
+
+scala&gt; val pattern(count, fruit) = &quot;100 Bananas&quot;
+count: String = 100
+fruit: String = Bananas
+</code></pre></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/" itemprop="url">
+                  Scala Cookbook翻译 Chapter 1.Strings 第二部分
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-05T21:27:24+08:00" content="2016-09-05">
+              2016-09-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 1.Strings 第二部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="1-5-遍历字符"><a href="#1-5-遍历字符" class="headerlink" title="1.5 遍历字符"></a>1.5 遍历字符</h2><ul>
+<li>问题：你想遍历字符串中的每个字符，在遍历字符串时对每个字符进行操作。<h4 id="1-5-1-解决方案："><a href="#1-5-1-解决方案：" class="headerlink" title="1.5.1 解决方案："></a>1.5.1 解决方案：</h4></li>
+<li><p>根据你的需求和喜好，你可以使用map或者foreach方法，一个是循环，另一个是其他方法。</p>
+</li>
+<li><p>map把输入字符转成大写的例子</p>
+<pre><code>scala&gt; val upper = &quot;hello, world&quot;.map(c =&gt; c.toUpper)
+upper: String = HELLO, WORLD
+
+//大部分使用以下缩写，使用下划线的魔法
+scala&gt; val upper = &quot;hello, world&quot;.map(_.toUpper)
+upper: String = HELLO, WORLD
+</code></pre></li>
+<li><p>任何集合中，如字符串的字符序列，你可以把集合方法链接在一起以达到预期的结果。下面的例子是在原始字符串的基础上调用filter方法将所有的小写字母“L”删除后创建一个新的字符串，然后已这个新的字符串作为ma方法的输入将剩余的字符转换成大写字符。</p>
+<pre><code>scala&gt; val upper = &quot;hello, world&quot;.filter(_ != &apos;l&apos;).map(_.toUpper)
+upper: String = HEO, WORD
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/" itemprop="url">
+                  Scala Cookbook翻译 Chapter 1.Strings 第一部分
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-03T22:37:24+08:00" content="2016-09-03">
+              2016-09-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 1.Strings 第一部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="1-0-总体介绍"><a href="#1-0-总体介绍" class="headerlink" title="1.0 总体介绍"></a>1.0 总体介绍</h2><ul>
+<li>Scala中的String类型就是Java中的String，所以可以使用Java中String的一些方法。</li>
+<li><p>Scala提供了隐式转换，String也可以使用StringOps类的所有方法，此时可以把String当做字符序列，</p>
+<ul>
+<li>可以利用foreach迭代打印每个字符：”hello”.foreach(println)</li>
+<li>通过for循环打印每个字符：for (c &lt;- “hello”) println(c)</li>
+<li>也可以当做字节序列：”hello”.getBytes.foreach(println) //104 101 108 108 111(十进制ASCII编码)</li>
+<li>使用过滤器：val result = “hello world”.filter(_ != ‘l’) //heo word</li>
+</ul>
+</li>
+<li><p>实际上这些方法并不都是来自类StringOps，有的还来自StringLike和WrappedString等，可到api文档查看String到StringOps的隐式转换。</p>
+</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/31/各大Android开发群问题总结及解决/" itemprop="url">
+                  各大Android开发群问题总结及解决
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-31T20:59:44+08:00" content="2016-05-31">
+              2016-05-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/31/各大Android开发群问题总结及解决/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/31/各大Android开发群问题总结及解决/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/31/各大Android开发群问题总结及解决/" class="leancloud_visitors" data-flag-title="各大Android开发群问题总结及解决">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <ul>
+<li>1、 android比较好用的websocket三方库<ul>
+<li>websocket老是会自动断</li>
+<li>socket.io<ul>
+<li>采用轮询的方式，会定时发心跳包检测连接状态，基于事件通信。</li>
+<li>服务端nodejs，客服端java,ios都有支持库</li>
+<li>android端可以基于这个库封装你自己的推送和即时聊天框架</li>
+<li>包含有websocket的，底层基于okhttp-ws，支持http,https,websocket</li>
+</ul>
+</li>
+<li>好像要用nio的socket，不然会有丢包现象</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>2 、retrofit如何设置cookiemanager<ul>
+<li>CookieManager 应该交给下面的 okhttp 做</li>
+<li>知道在OkhttpClient中设置  可是在okhttp3中  OkhttpClient没有设置cookieManager的方法</li>
+<li>那你搜搜 okhttp3 CookieManager 啊</li>
+</ul>
+</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/31/各大Android开发群问题总结及解决/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/27/解决两个ViewPager的冲突事件/" itemprop="url">
                   解决两个ViewPager的冲突事件
                 </a>
@@ -523,556 +1717,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/23/使用ViewPager和Fragment实现底部导航滑动重构版/" itemprop="url">
-                  使用ViewPager和Fragment实现底部导航滑动重构版
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-23T12:43:22+08:00" content="2016-04-23">
-              2016-04-23
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/23/使用ViewPager和Fragment实现底部导航滑动重构版/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/23/使用ViewPager和Fragment实现底部导航滑动重构版/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/23/使用ViewPager和Fragment实现底部导航滑动重构版/" class="leancloud_visitors" data-flag-title="使用ViewPager和Fragment实现底部导航滑动重构版">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="自定义view"><a href="#自定义view" class="headerlink" title="自定义view"></a>自定义view</h1><h2 id="设置每个页面的子item"><a href="#设置每个页面的子item" class="headerlink" title="设置每个页面的子item"></a>设置每个页面的子item</h2><p>layout_tab_item.xml，每个item由一个ImageView和一个TextView组成</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">                <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">                <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">RelativeLayout</span></span><br><span class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">        <span class="attr">android:layout_centerInParent</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="tag">&lt;<span class="name">ImageView</span></span><br><span class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tabImg"</span></span><br><span class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span><br><span class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">            <span class="attr">android:layout_centerHorizontal</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">            </span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span><br><span class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tabText"</span></span><br><span class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span><br><span class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">            <span class="attr">android:layout_below</span>=<span class="string">"@+id/tabImg"</span></span><br><span class="line">            <span class="attr">android:layout_centerHorizontal</span>=<span class="string">"true"</span></span><br><span class="line">            <span class="attr">android:text</span>=<span class="string">"@string/app_name"</span></span><br><span class="line">            <span class="attr">android:textColor</span>=<span class="string">"@android:color/white"</span></span><br><span class="line">            <span class="attr">android:textSize</span>=<span class="string">"16sp"</span> /&gt;</span></span><br><span class="line">            </span><br><span class="line">    <span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/23/使用ViewPager和Fragment实现底部导航滑动重构版/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/22/Linux基础入门（1）：用户及文件权限管理/" itemprop="url">
-                  Linux基础入门（1）：用户及文件权限管理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-22T10:44:56+08:00" content="2016-04-22">
-              2016-04-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/22/Linux基础入门（1）：用户及文件权限管理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/22/Linux基础入门（1）：用户及文件权限管理/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/22/Linux基础入门（1）：用户及文件权限管理/" class="leancloud_visitors" data-flag-title="Linux基础入门（1）：用户及文件权限管理">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="一、Linux-用户管理"><a href="#一、Linux-用户管理" class="headerlink" title="一、Linux 用户管理"></a>一、Linux 用户管理</h1><h2 id="1、查看用户"><a href="#1、查看用户" class="headerlink" title="1、查看用户"></a>1、查看用户</h2><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>who am i</span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>who mom likes</span><br></pre></td></tr></table></figure>
-<p>输出内容如下</p>
-<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yyg      pts/<span class="number">0</span>        <span class="number">2016-04-21</span> <span class="number">08</span>:<span class="number">28</span> (:<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>其中第一列表示打开当前伪终端的用户的用户名（可直接使用whoami）</li>
-<li>第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言，即使用 [Ctrl]+[Alt]+[F1]～[F7] 进行切换的 /dev/tty 设备（“真终端”）</li>
-<li>pts/0后面的0表示伪终端序号，再开一个终端即为1</li>
-</ul>
-<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">who 命令其它常用参数</span><br><span class="line"></span><br><span class="line">参数	说明</span><br><span class="line">-<span class="ruby">a	打印能打印的全部</span><br><span class="line"></span>-<span class="ruby">d	打印死掉的进程</span><br><span class="line"></span>-<span class="ruby">m	同am i,mom likes</span><br><span class="line"></span>-<span class="ruby">q	打印当前登录用户数及用户名</span><br><span class="line"></span>-<span class="ruby">u	打印当前登录用户登录信息</span><br><span class="line"></span>-<span class="ruby">r	打印运行等级</span></span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/22/Linux基础入门（1）：用户及文件权限管理/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/21/Toast和TextView可能会出现的问题/" itemprop="url">
-                  Toast和TextView可能会出现的问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-21T20:06:17+08:00" content="2016-04-21">
-              2016-04-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/21/Toast和TextView可能会出现的问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/Toast和TextView可能会出现的问题/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/21/Toast和TextView可能会出现的问题/" class="leancloud_visitors" data-flag-title="Toast和TextView可能会出现的问题">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Toast对象可能抛出的Bug"><a href="#Toast对象可能抛出的Bug" class="headerlink" title="Toast对象可能抛出的Bug"></a>Toast对象可能抛出的Bug</h2><ul>
-<li>Toast对象提供了两个makeText方法，如下</li>
-</ul>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//此方法传入的是字符串序列</span></span><br><span class="line">Toast.makeText(Context context, CharSequence <span class="built_in">text</span>, <span class="keyword">int</span> duration);</span><br><span class="line"></span><br><span class="line"><span class="comment">//此方法传入的是资源id</span></span><br><span class="line">Toast.makeText(Context context, <span class="keyword">int</span> resId, <span class="keyword">int</span> duration);</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/21/Toast和TextView可能会出现的问题/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/" itemprop="url">
-                  细数Android Studio中使用junit4测试框架中的坑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-21T20:02:28+08:00" content="2016-04-21">
-              2016-04-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/" class="leancloud_visitors" data-flag-title="细数Android Studio中使用junit4测试框架中的坑">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ul>
-<li><p>build.gradle中添加依赖</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">    <span class="keyword">compile</span> <span class="string">'com.android.support:appcompat-v7:23.2.1'</span></span><br><span class="line">    testCompile <span class="string">'junit:junit:4.12'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加以下，使用模拟环境代替真实环境</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">android</span> &#123;</span><br><span class="line">    <span class="section">testOptions</span> &#123; </span><br><span class="line">        <span class="section">unitTests</span> &#123;</span><br><span class="line">            <span class="attribute">returnDefaultValues</span> = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/21/细数Android-Studio中使用junit4测试框架中的坑/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1113,7 +1762,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1130,7 +1779,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

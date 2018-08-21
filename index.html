@@ -369,7 +369,7 @@
 
       
         
-          <h3 id="JavaScript常用六种继承方案"><a href="#JavaScript常用六种继承方案" class="headerlink" title="JavaScript常用六种继承方案"></a>JavaScript常用六种继承方案</h3><h4 id="1、原型链方案"><a href="#1、原型链方案" class="headerlink" title="1、原型链方案"></a>1、原型链方案</h4><p>构造函数、原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个原型对象的指针。</p>
+          <h4 id="1、原型链方案"><a href="#1、原型链方案" class="headerlink" title="1、原型链方案"></a>1、原型链方案</h4><p>构造函数、原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个原型对象的指针。</p>
 <p>继承的本质是<strong>重写原型对象，代之以一个新类型的实例</strong>。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.property = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SuperType.prototype.getSuperValue = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.property;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.subproperty = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里是关键，创建SuperType的实例，并将该实例赋值给SubType.prototype</span></span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType(); </span><br><span class="line"></span><br><span class="line">SubType.prototype.getSubValue = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.subproperty;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> SubType();</span><br><span class="line"><span class="built_in">console</span>.log(instance.getSuperValue()); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://image-static.segmentfault.com/812/190/812190403-5a02efaf053b8_articlex" alt=""></p>
@@ -515,7 +515,7 @@
 
       
         
-          <h3 id="JavaScript常用设计模式"><a href="#JavaScript常用设计模式" class="headerlink" title="JavaScript常用设计模式"></a>JavaScript常用设计模式</h3><h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><p>单例就是保证一个类只有一个实例，实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。</p>
+          <h3 id="JavaScript常用设计模式"><a href="#JavaScript常用设计模式" class="headerlink" title="JavaScript常用设计模式"></a>JavaScript常用设计模式</h3><h4 id="1、单例模式"><a href="#1、单例模式" class="headerlink" title="1、单例模式"></a>1、单例模式</h4><p>单例就是保证一个类只有一个实例，实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。</p>
 <p>在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。</p>
 <p>单例一般用在系统间各种模式的通信协调上。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> SingletonTester = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 参数：传递给单例的一个参数集合</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Singleton</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置args变量为接收的参数或者为空（如果没有提供的话）</span></span><br><span class="line">        <span class="comment">// 只有在使用的时候才初始化</span></span><br><span class="line">        <span class="keyword">var</span> args = args || &#123;&#125;;</span><br><span class="line">        <span class="comment">// 设置name参数</span></span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">'SingletonTester'</span>;</span><br><span class="line">        <span class="comment">// 设置pointX的值</span></span><br><span class="line">        <span class="keyword">this</span>.pointX = args.pointX || <span class="number">6</span>; <span class="comment">// 从接收的参数里获取，或者设置为默认值</span></span><br><span class="line">        <span class="comment">// 设置pointY的值</span></span><br><span class="line">        <span class="keyword">this</span>.pointY = args.pointY || <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 实例容器</span></span><br><span class="line">    <span class="keyword">var</span> instance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> _static = &#123;</span><br><span class="line">        name: <span class="string">'SingletonTester'</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取实例的方法</span></span><br><span class="line">        <span class="comment">// 返回Singleton的实例</span></span><br><span class="line">        getInstance: <span class="function"><span class="keyword">function</span> (<span class="params">args</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (instance === <span class="literal">undefined</span>) &#123;</span><br><span class="line">                instance = <span class="keyword">new</span> Singleton(args);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> instance;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> _static;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> singletonTest = SingletonTester.getInstance(&#123; pointX: <span class="number">5</span> &#125;);</span><br><span class="line"><span class="built_in">console</span>.log(singletonTest.pointX); <span class="comment">// 输出 5</span></span><br></pre></td></tr></table></figure>
@@ -661,7 +661,7 @@
 
       
         
-          <h3 id="HTML和CSS常见问题整理"><a href="#HTML和CSS常见问题整理" class="headerlink" title="HTML和CSS常见问题整理"></a>HTML和CSS常见问题整理</h3><ul>
+          <ul>
 <li>盒子模型</li>
 </ul>
 <p><img src="http://www.runoob.com/images/box-model.gif" alt=""></p>
@@ -818,7 +818,7 @@
 
       
         
-          <h3 id="React相关"><a href="#React相关" class="headerlink" title="React相关"></a>React相关</h3><h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p><img src="https://user-gold-cdn.xitu.io/2018/8/12/1652a030ed1506e0?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""></p>
+          <h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p><img src="https://user-gold-cdn.xitu.io/2018/8/12/1652a030ed1506e0?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""></p>
 <h5 id="挂载阶段："><a href="#挂载阶段：" class="headerlink" title="挂载阶段："></a>挂载阶段：</h5><ul>
 <li>constructor</li>
 <li>getDerivedStateFromProps</li>
@@ -980,7 +980,7 @@
 
       
         
-          <h3 id="JS数组常用算法详解"><a href="#JS数组常用算法详解" class="headerlink" title="JS数组常用算法详解"></a>JS数组常用算法详解</h3><h4 id="数组方法概述"><a href="#数组方法概述" class="headerlink" title="数组方法概述"></a>数组方法概述</h4><h5 id="1、不改变原数组，返回新数组"><a href="#1、不改变原数组，返回新数组" class="headerlink" title="1、不改变原数组，返回新数组"></a>1、不改变原数组，返回新数组</h5><ul>
+          <h4 id="数组方法概述"><a href="#数组方法概述" class="headerlink" title="数组方法概述"></a>数组方法概述</h4><h5 id="1、不改变原数组，返回新数组"><a href="#1、不改变原数组，返回新数组" class="headerlink" title="1、不改变原数组，返回新数组"></a>1、不改变原数组，返回新数组</h5><ul>
 <li><p><code>concat()</code></p>
 <p>连接两个或多个数组，两边的原始数组都不会变化，返回被连接数组的一个副本。</p>
 </li>
@@ -1067,8 +1067,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/02/10/RecyclerView调节项目间间距大小/" itemprop="url">
-                  RecyclerView调节项目间间距大小
+                <a class="post-title-link" href="/2018/07/20/You Don't Know JS上卷Part2 Chapter4.混合对象“类”/" itemprop="url">
+                  You Don't Know JS上卷Part2 Chapter4.混合对象“类”
                 </a>
               
             
@@ -1081,8 +1081,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-02-10T12:27:53+08:00" content="2017-02-10">
-              2017-02-10
+            <time itemprop="dateCreated" datetime="2018-07-20T16:33:26+08:00" content="2018-07-20">
+              2018-07-20
             </time>
           </span>
 
@@ -1095,422 +1095,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/02/10/RecyclerView调节项目间间距大小/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/10/RecyclerView调节项目间间距大小/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/02/10/RecyclerView调节项目间间距大小/" class="leancloud_visitors" data-flag-title="RecyclerView调节项目间间距大小">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>调用处直接调用<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置item之间的间隔</span></span><br><span class="line">SpacesItemDecoration decoration = <span class="keyword">new</span> SpacesItemDecoration(<span class="number">8</span>);</span><br><span class="line">recyclerView.addItemDecoration(decoration);</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SpacesItemDecoration</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ItemDecoration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> int space;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">StaggeredGridLayoutManager</span>.<span class="type">LayoutParams</span> lp;</span><br><span class="line"></span><br><span class="line">    public <span class="type">SpacesItemDecoration</span>(int space) &#123;</span><br><span class="line">        <span class="keyword">this</span>.space = space;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void getItemOffsets(<span class="type">Rect</span> outRect, <span class="type">View</span> view, <span class="type">RecyclerView</span> parent, <span class="type">RecyclerView</span>.<span class="type">State</span> state) &#123;</span><br><span class="line"></span><br><span class="line">        int position = parent.getChildAdapterPosition(view);</span><br><span class="line">        lp = (<span class="type">StaggeredGridLayoutManager</span>.<span class="type">LayoutParams</span>)view.getLayoutParams();</span><br><span class="line">        <span class="keyword">if</span> (position == <span class="number">0</span> || position==<span class="number">1</span>)&#123;</span><br><span class="line">            outRect.top = space * <span class="number">2</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            outRect.top = space;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (lp.getSpanIndex() == <span class="number">0</span>) &#123;</span><br><span class="line">            outRect.left = space * <span class="number">2</span>;</span><br><span class="line">            outRect.right = space;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            outRect.left = space;</span><br><span class="line">            outRect.right = space * <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        outRect.bottom = space;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//注掉的方法总有漏网之鱼，不知为啥</span></span><br><span class="line"><span class="comment">//        outRect.left = space;</span></span><br><span class="line"><span class="comment">//        outRect.right = space;</span></span><br><span class="line"><span class="comment">//        outRect.bottom = space;</span></span><br><span class="line"><span class="comment">//        if (position == 0 || position == 1) &#123;</span></span><br><span class="line"><span class="comment">//            //用于设置第一行跟顶部的距离</span></span><br><span class="line"><span class="comment">//            outRect.top = space;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        if (lp.getSpanIndex() == 0) &#123;</span></span><br><span class="line"><span class="comment">//            //用于设同行两个间隔间跟其距离左右屏幕间隔相同</span></span><br><span class="line"><span class="comment">//            outRect.right = 0;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/27/每周TODO知识点总结 第一期/" itemprop="url">
-                  每周TODO知识点总结 第一期
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-11-27T20:07:24+08:00" content="2016-11-27">
-              2016-11-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/每周TODO/" itemprop="url" rel="index">
-                    <span itemprop="name">每周TODO</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/27/每周TODO知识点总结 第一期/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/27/每周TODO知识点总结 第一期/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/11/27/每周TODO知识点总结 第一期/" class="leancloud_visitors" data-flag-title="每周TODO知识点总结 第一期">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Java基础相关"><a href="#Java基础相关" class="headerlink" title="Java基础相关"></a>Java基础相关</h2><h3 id="1、正则表达式里，字符串“-”写成“-”，“-”写成“-”，为什么？"><a href="#1、正则表达式里，字符串“-”写成“-”，“-”写成“-”，为什么？" class="headerlink" title="1、正则表达式里，字符串“*”写成“\\*”，“\”写成“\\\\”，为什么？"></a>1、正则表达式里，字符串“*”写成“\\*”，“\”写成“\\\\”，为什么？</h3><ul>
-<li><p>注意以下两点：</p>
-<ul>
-<li>1.字符串里面表示斜杠就需要两个斜杠如“\\”</li>
-<li>2.正则表达式里的斜杠需要转意，是用“\”标示。</li>
-</ul>
-</li>
-<li><p>所以对于“\\\\”，第一个斜杠是转义符，第二个斜杠是斜杠本身，第三个斜杠是转义符，第四个斜杠是斜杠本身。这样就成了4个斜杠在正则表达式里面表示一个斜杠。</p>
-</li>
-<li><p>更多知识点：</p>
-<ul>
-<li>引用说明：有正斜杠与反斜杠之分，正斜杠，一般就叫做斜杠，符号为“/”；反斜杠的符号为“\”。斜杠（/）在JAVA中没有什么特别的意义，就是代表一个字符‘/’; </li>
-<li>反斜杠（\）则不然，它和紧跟着它的那个字符构成转义字符，如“\n”（表示换行）、“\””（表示字符‘”’）等,所以在字符串中要表示字符’\’要用“\\”来表示，例：如果你这样定义一个字符串String s = “name\sex”是错误的，要这样定义String s = “name\\sex”; </li>
-</ul>
-</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/27/每周TODO知识点总结 第一期/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/30/Android 动态绘制圆形进度条/" itemprop="url">
-                  Android 动态绘制圆形进度条
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-30T22:37:24+08:00" content="2016-10-30">
-              2016-10-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/30/Android 动态绘制圆形进度条/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/30/Android 动态绘制圆形进度条/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/10/30/Android 动态绘制圆形进度条/" class="leancloud_visitors" data-flag-title="Android 动态绘制圆形进度条">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="http://img.blog.csdn.net/20161029200752725" alt="此处输入图片的描述"></p>
-<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><ul>
-<li>在画布上直接绘制View，需要了解一下几点 <ul>
-<li>1.需要画一个底层小圆和上层大圆 </li>
-<li>2.圆圈上有不同进度的颜色 </li>
-<li>3.颜色的变化规律是先慢慢变多再慢慢减少</li>
-</ul>
-</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/30/Android 动态绘制圆形进度条/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/29/React Native环境配置血泪爬坑/" itemprop="url">
-                  React Native环境配置血泪爬坑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-29T12:32:24+08:00" content="2016-10-29">
-              2016-10-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -1521,8 +1107,8 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/React-Native/" itemprop="url" rel="index">
-                    <span itemprop="name">React-Native</span>
+                  <a href="/categories/前端/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
                   </a>
                 </span>
 
@@ -1537,8 +1123,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/29/React Native环境配置血泪爬坑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/29/React Native环境配置血泪爬坑/" itemprop="commentsCount"></span>
+                <a href="/2018/07/20/You Don't Know JS上卷Part2 Chapter4.混合对象“类”/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/07/20/You Don't Know JS上卷Part2 Chapter4.混合对象“类”/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1548,7 +1134,7 @@
 
           
           
-             <span id="/2016/10/29/React Native环境配置血泪爬坑/" class="leancloud_visitors" data-flag-title="React Native环境配置血泪爬坑">
+             <span id="/2018/07/20/You Don't Know JS上卷Part2 Chapter4.混合对象“类”/" class="leancloud_visitors" data-flag-title="You Don't Know JS上卷Part2 Chapter4.混合对象“类”">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1571,9 +1157,15 @@
 
       
         
-          <h3 id="1-下载gradle文件超时"><a href="#1-下载gradle文件超时" class="headerlink" title="1.下载gradle文件超时"></a>1.下载gradle文件超时</h3><p>进入AwesomeProject目录，\$ cd AwesomeProject，然后在AwesomeProject目录下运行\$ react-native run-android，就会构建工程并自动安装到你的模拟器或者设备，同时启动用于实现动态代码加载的Node服务。第一次运行的时候，会下载gradle文件，然而在我们的办公网络环境运行就会报下面的错：ConnectException</p>
+          <h4 id="4-1-混入"><a href="#4-1-混入" class="headerlink" title="4.1 混入"></a>4.1 混入</h4><ul>
+<li>混入用来模拟类的复制行为。</li>
+</ul>
+<h5 id="4-1-1-显式混入"><a href="#4-1-1-显式混入" class="headerlink" title="4.1.1 显式混入"></a>4.1.1 显式混入</h5><ul>
+<li>混入处理的已经不再是类了，因为在JS中不存在类，<code>Vehicle</code>和<code>Car</code>都是对象，进行复制和粘贴。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非常简单的mixin(..)例子：</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mixin</span>(<span class="params"> sourceObj, targetObj </span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> sourceObj) &#123;</span><br><span class="line">        <span class="comment">// 只会在不存在的情况下复制</span></span><br><span class="line">        <span class="keyword">if</span>(!(key <span class="keyword">in</span> targetObj)) &#123;</span><br><span class="line">            targetObj[key] = sourceObj[key];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> targetObj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Vehicle = &#123;</span><br><span class="line">    engines: <span class="number">1</span>,</span><br><span class="line">    </span><br><span class="line">    ignition: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log( <span class="string">"Turning on my engine."</span> );</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    drive: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ignition();</span><br><span class="line">        <span class="built_in">console</span>.log( <span class="string">"Steering and moving forward!"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Car = mixin( Vehicle, &#123;</span><br><span class="line">    wheels: <span class="number">4</span>,</span><br><span class="line">    </span><br><span class="line">    drive: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        Vehicle.drive.call( <span class="keyword">this</span> ); <span class="comment">// 显示多态(伪多态)调用，因为Vehicle和Car中都有drive</span></span><br><span class="line">        <span class="built_in">console</span>.log(</span><br><span class="line">        	<span class="string">"Rolling on all"</span> + <span class="keyword">this</span>.wheels + <span class="string">"wheels!"</span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125; );</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/29/React Native环境配置血泪爬坑/#more" rel="contents">
+            <a class="btn" href="/2018/07/20/You Don't Know JS上卷Part2 Chapter4.混合对象“类”/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1624,8 +1216,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/" itemprop="url">
-                  Scala Cookbook读书笔记 Chapter 5.Methods 第一部分
+                <a class="post-title-link" href="/2018/07/14/You Don't Know JS上卷Part2 Chapter3.对象/" itemprop="url">
+                  You Don't Know JS上卷Part2 Chapter3.对象
                 </a>
               
             
@@ -1638,8 +1230,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-13T22:31:21+08:00" content="2016-10-13">
-              2016-10-13
+            <time itemprop="dateCreated" datetime="2018-07-14T14:29:36+08:00" content="2018-07-14">
+              2018-07-14
             </time>
           </span>
 
@@ -1652,8 +1244,20 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
                   </a>
                 </span>
 
@@ -1668,8 +1272,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/" itemprop="commentsCount"></span>
+                <a href="/2018/07/14/You Don't Know JS上卷Part2 Chapter3.对象/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/07/14/You Don't Know JS上卷Part2 Chapter3.对象/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1679,7 +1283,7 @@
 
           
           
-             <span id="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 5.Methods 第一部分">
+             <span id="/2018/07/14/You Don't Know JS上卷Part2 Chapter3.对象/" class="leancloud_visitors" data-flag-title="You Don't Know JS上卷Part2 Chapter3.对象">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1702,33 +1306,483 @@
 
       
         
-          <h2 id="5-0-本章概述"><a href="#5-0-本章概述" class="headerlink" title="5.0 本章概述"></a>5.0 本章概述</h2><ul>
-<li><p>Java和Scala定义简单method区别：</p>
-<pre><code>// java
-public String doSomething(int x) {
-    // code here
-}
-
-// scala
-def doSomething(x: Int): String = {
-    // code here
-}
-</code></pre></li>
-<li><p>Scala还可以使用下面方式，不指定返回值类型，不要求包裹body的大括号：</p>
-<pre><code>def plusOne(i: Int) = i + 1
-</code></pre></li>
-<li>除了上面例子的区别，Java和Scala还包括以下不同：<ul>
-<li>指定方法获取控制（显示）</li>
-<li>给方法参数设置默认值的能力</li>
-<li>调用方法时指定方法参数名字的能力</li>
-<li>如何声明一个方法可能抛出的异常</li>
-<li>方法里使用可变参数</li>
+          <h4 id="3-1-语法"><a href="#3-1-语法" class="headerlink" title="3.1 语法"></a>3.1 语法</h4><p>文字形式和构造形式生成的对象是一样的。</p>
+<ul>
+<li><p>文字（声明）形式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObj = &#123;</span><br><span class="line">    key: value</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>构造形式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">myObj.key = value;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-2-类型"><a href="#3-2-类型" class="headerlink" title="3.2 类型"></a>3.2 类型</h4><ul>
+<li><p>基本数据类型：<code>string</code>、<code>number</code>、<code>boolean</code>、<code>null</code>、<code>undefined</code>、<code>symbol</code></p>
+<ul>
+<li>上述6种数据类型本身不是对象，”JS中万物皆是对象“的说法是错误的</li>
+<li><code>typeof null</code>返回字符串”object“，实际上，<code>null</code>本身是基本数据类型，这是语言本身的一个bug。(原理是这样：<strong>不同的对象在底层都表示为二进制，在JS中二进制前三位都为0的话会被判断为object类型，null的二进制表示是全0，自然前三位也是0，所以执行typeof时会返回”object“</strong>)</li>
 </ul>
 </li>
 </ul>
-<h2 id=""><a href="#" class="headerlink" title=""></a>
+<ul>
+<li>引用数据类型：统称为<code>object</code>类型，称作对象子类型（内置对象），细分有<code>String</code>、<code>Number</code>、<code>Boolean</code>、<code>Object</code>、<code>Function</code>、<code>Array</code>、<code>Date</code>、<code>RegExp</code>、<code>Error</code></li>
+</ul>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/#more" rel="contents">
+            <a class="btn" href="/2018/07/14/You Don't Know JS上卷Part2 Chapter3.对象/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/07/08/You Don't Know JS上卷Part2 Chapter1&2.this全面解析/" itemprop="url">
+                  You Don't Know JS上卷Part2 Chapter1&2.this全面解析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-07-08T10:16:32+08:00" content="2018-07-08">
+              2018-07-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/07/08/You Don't Know JS上卷Part2 Chapter1&2.this全面解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/07/08/You Don't Know JS上卷Part2 Chapter1&2.this全面解析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/07/08/You Don't Know JS上卷Part2 Chapter1&2.this全面解析/" class="leancloud_visitors" data-flag-title="You Don't Know JS上卷Part2 Chapter1&2.this全面解析">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="第1章-关于this"><a href="#第1章-关于this" class="headerlink" title="第1章 关于this"></a>第1章 关于this</h3><ul>
+<li><code>this</code>既不指向函数自身也不指向函数的词法作用域</li>
+<li><code>this</code>实际上是在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用。this和词法作用域是不一样的，不能混合使用。</li>
+<li>当一个函数被调用时，会创建一个活动记录（执行上下文）。这个记录会包含函数在哪里被调用（调用栈）、函数的调用方式、传入的参数等信息。<strong>this就是这个记录的一个属性</strong>，会在函数执行的过程中用到。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用this，提供一种优雅的方式隐式“传递”一个对象引用。API设计更加简洁并且易于复用。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identify</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name.toUpperCase();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">speak</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> greeting = <span class="string">"Hello, I'm "</span> + identify.call( <span class="keyword">this</span> );</span><br><span class="line">    <span class="built_in">console</span>.log( greeting );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> me = &#123;</span><br><span class="line">    name: <span class="string">"Kyle"</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> you = &#123;</span><br><span class="line">    name: <span class="string">"Reader"</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">identify.call( me ); <span class="comment">// KYLE</span></span><br><span class="line">identify.call( you ); <span class="comment">// READER</span></span><br><span class="line"></span><br><span class="line">speak.call( me ); <span class="comment">// Hello, I'm KYLE</span></span><br><span class="line">speak.call( you ); <span class="comment">// Hello, I'm READER</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// -----------------------------------------------</span></span><br><span class="line"><span class="comment">// 词法作用域方案，显式传递上下文对象方式，会让代码变得越来越混乱</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">identify</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> context.name.toUpperCase();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">speak</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> greeting = <span class="string">"Hello, I'm "</span> + identify( context );</span><br><span class="line">    <span class="built_in">console</span>.log( greeting );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">identify( you ); <span class="comment">// READER</span></span><br><span class="line">speak.call( me ); <span class="comment">// Hello, I'm KYLE</span></span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/07/08/You Don't Know JS上卷Part2 Chapter1&2.this全面解析/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/06/30/You Don't Know JS上卷Part1 Chapter5.作用域闭包/" itemprop="url">
+                  You Don't Know JS上卷Part1 Chapter5.作用域闭包
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-06-30T20:52:12+08:00" content="2018-06-30">
+              2018-06-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/06/30/You Don't Know JS上卷Part1 Chapter5.作用域闭包/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/30/You Don't Know JS上卷Part1 Chapter5.作用域闭包/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/06/30/You Don't Know JS上卷Part1 Chapter5.作用域闭包/" class="leancloud_visitors" data-flag-title="You Don't Know JS上卷Part1 Chapter5.作用域闭包">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="5-1-闭包"><a href="#5-1-闭包" class="headerlink" title="5.1 闭包"></a>5.1 闭包</h4><ul>
+<li>当函数可以记住并访问所在的词法作用域，即使函数名是在当前词法作用域之外执行，这时就产生了闭包。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log( a );</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> baz = foo();</span><br><span class="line"></span><br><span class="line">baz(); <span class="comment">// 2 ---- 这就是闭包的效果</span></span><br></pre></td></tr></table></figure>
+<p><code>bar()</code>在自己定义的词法作用域以外的地方执行。</p>
+<p><code>bar()</code>拥有覆盖<code>foo()</code>内部作用域的闭包，使得该作用域能够一直存活，以供<code>bar()</code>在之后任何时间进行引用，不会被垃圾回收器回收</p>
+<ul>
+<li><code>bar()</code>持有对<code>foo()</code>内部作用域的引用，这个引用就叫做闭包。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对函数类型的值进行传递</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log( a ); <span class="comment">// 2</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    bar( baz );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    fn(); <span class="comment">// 这就是闭包</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>把内部函数<code>baz</code>传递给<code>bar</code>，当调用这个内部函数时（现在叫做<code>fn</code>），它覆盖的<code>foo()</code>内部作用域的闭包就形成了，因为它能够访问a。</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/06/30/You Don't Know JS上卷Part1 Chapter5.作用域闭包/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/06/23/You Don't Know JS上卷Part1 Chapter4.提升/" itemprop="url">
+                  You Don't Know JS上卷Part1 Chapter4.提升
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-06-23T19:23:12+08:00" content="2018-06-23">
+              2018-06-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/06/23/You Don't Know JS上卷Part1 Chapter4.提升/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/23/You Don't Know JS上卷Part1 Chapter4.提升/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/06/23/You Don't Know JS上卷Part1 Chapter4.提升/" class="leancloud_visitors" data-flag-title="You Don't Know JS上卷Part1 Chapter4.提升">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="第4章-提升"><a href="#第4章-提升" class="headerlink" title="第4章 提升"></a>第4章 提升</h3><ul>
+<li>任何声明在某个作用域内的变量，都将附属于这个作用域。</li>
+<li>包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理。</li>
+<li><code>var a = 2;</code>会被看成两个声明，<code>var a;</code>和<code>a = 2;</code>，第一个声明在<strong>编译阶段</strong>进行，第二个赋值声明会被留在原地等待<strong>执行阶段</strong>。</li>
+<li>所有的声明（变量和函数）都会被<strong>“移动”</strong>到各自作用域的最顶端，这个过程叫做<strong>提升</strong></li>
+<li>只有声明本身会被提升，而包括函数表达式在内的赋值或其他运行逻辑并不会提升。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( a ); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">---------------------------------------</span><br><span class="line"><span class="comment">// 实际按如下形式进行处理</span></span><br><span class="line"><span class="keyword">var</span> a; <span class="comment">// 编译阶段</span></span><br><span class="line"></span><br><span class="line">a = <span class="number">2</span>; <span class="comment">// 执行阶段</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( a ); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/06/23/You Don't Know JS上卷Part1 Chapter4.提升/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1762,7 +1816,7 @@ def doSomething(x: Int): String = {
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1803,7 +1857,7 @@ def doSomething(x: Int): String = {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1820,7 +1874,7 @@ def doSomething(x: Int): String = {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

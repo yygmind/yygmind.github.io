@@ -80,25 +80,25 @@
 
 
 
-<meta name="description" content="JavaScript常用六种继承方案1、原型链方案构造函数、原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个原型对象的指针。
+<meta name="description" content="1、原型链方案构造函数、原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个原型对象的指针。
 继承的本质是重写原型对象，代之以一个新类型的实例。
-123456789101112131415161718192021function SuperType() &amp;#123;    this.property = tr">
+123456789101112131415161718192021function SuperType() &amp;#123;    this.property = true;&amp;#125;SuperType">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript常用六种继承方案">
 <meta property="og:url" content="http://yygmind.github.io/2018/08/21/JavaScript常用六种继承方案/index.html">
 <meta property="og:site_name" content="yygmind">
-<meta property="og:description" content="JavaScript常用六种继承方案1、原型链方案构造函数、原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个原型对象的指针。
+<meta property="og:description" content="1、原型链方案构造函数、原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个原型对象的指针。
 继承的本质是重写原型对象，代之以一个新类型的实例。
-123456789101112131415161718192021function SuperType() &amp;#123;    this.property = tr">
+123456789101112131415161718192021function SuperType() &amp;#123;    this.property = true;&amp;#125;SuperType">
 <meta property="og:image" content="https://image-static.segmentfault.com/812/190/812190403-5a02efaf053b8_articlex">
 <meta property="og:image" content="https://image-static.segmentfault.com/298/565/2985656793-5a02efcd786da_articlex">
 <meta property="og:image" content="https://image-static.segmentfault.com/139/488/1394881561-5a02efdda2e5e_articlex">
-<meta property="og:updated_time" content="2018-08-21T06:38:42.000Z">
+<meta property="og:updated_time" content="2018-08-21T06:43:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript常用六种继承方案">
-<meta name="twitter:description" content="JavaScript常用六种继承方案1、原型链方案构造函数、原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个原型对象的指针。
+<meta name="twitter:description" content="1、原型链方案构造函数、原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个原型对象的指针。
 继承的本质是重写原型对象，代之以一个新类型的实例。
-123456789101112131415161718192021function SuperType() &amp;#123;    this.property = tr">
+123456789101112131415161718192021function SuperType() &amp;#123;    this.property = true;&amp;#125;SuperType">
 <meta name="twitter:image" content="https://image-static.segmentfault.com/812/190/812190403-5a02efaf053b8_articlex">
 
 
@@ -374,7 +374,7 @@
       
 
       
-        <h3 id="JavaScript常用六种继承方案"><a href="#JavaScript常用六种继承方案" class="headerlink" title="JavaScript常用六种继承方案"></a>JavaScript常用六种继承方案</h3><h4 id="1、原型链方案"><a href="#1、原型链方案" class="headerlink" title="1、原型链方案"></a>1、原型链方案</h4><p>构造函数、原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个原型对象的指针。</p>
+        <h4 id="1、原型链方案"><a href="#1、原型链方案" class="headerlink" title="1、原型链方案"></a>1、原型链方案</h4><p>构造函数、原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个原型对象的指针。</p>
 <p>继承的本质是<strong>重写原型对象，代之以一个新类型的实例</strong>。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.property = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SuperType.prototype.getSuperValue = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.property;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.subproperty = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里是关键，创建SuperType的实例，并将该实例赋值给SubType.prototype</span></span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType(); </span><br><span class="line"></span><br><span class="line">SubType.prototype.getSubValue = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.subproperty;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> SubType();</span><br><span class="line"><span class="built_in">console</span>.log(instance.getSuperValue()); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://image-static.segmentfault.com/812/190/812190403-5a02efaf053b8_articlex" alt=""></p>
@@ -553,7 +553,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -570,7 +570,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -628,7 +628,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript常用六种继承方案"><span class="nav-number">1.</span> <span class="nav-text">JavaScript常用六种继承方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、原型链方案"><span class="nav-number">1.1.</span> <span class="nav-text">1、原型链方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、借用构造函数方案"><span class="nav-number">1.2.</span> <span class="nav-text">2、借用构造函数方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、组合继承"><span class="nav-number">1.3.</span> <span class="nav-text">3、组合继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、原型式继承"><span class="nav-number">1.4.</span> <span class="nav-text">4、原型式继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、寄生式继承"><span class="nav-number">1.5.</span> <span class="nav-text">5、寄生式继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、寄生组合式继承"><span class="nav-number">1.6.</span> <span class="nav-text">6、寄生组合式继承</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、原型链方案"><span class="nav-number">1.</span> <span class="nav-text">1、原型链方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、借用构造函数方案"><span class="nav-number">2.</span> <span class="nav-text">2、借用构造函数方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、组合继承"><span class="nav-number">3.</span> <span class="nav-text">3、组合继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、原型式继承"><span class="nav-number">4.</span> <span class="nav-text">4、原型式继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、寄生式继承"><span class="nav-number">5.</span> <span class="nav-text">5、寄生式继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、寄生组合式继承"><span class="nav-number">6.</span> <span class="nav-text">6、寄生组合式继承</span></a></li></ol></div>
             
           </div>
         </section>

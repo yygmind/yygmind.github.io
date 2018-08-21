@@ -279,6 +279,1202 @@
             
               
                 
+                <a class="post-title-link" href="/2018/06/15/You Don't Know JS上卷Part1 Chapter3.函数作用域和块作用域/" itemprop="url">
+                  You Don't Know JS上卷Part1 Chapter3.函数作用域和块作用域
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-06-15T15:22:15+08:00" content="2018-06-15">
+              2018-06-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/06/15/You Don't Know JS上卷Part1 Chapter3.函数作用域和块作用域/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/15/You Don't Know JS上卷Part1 Chapter3.函数作用域和块作用域/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/06/15/You Don't Know JS上卷Part1 Chapter3.函数作用域和块作用域/" class="leancloud_visitors" data-flag-title="You Don't Know JS上卷Part1 Chapter3.函数作用域和块作用域">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="3-1-函数中的作用域"><a href="#3-1-函数中的作用域" class="headerlink" title="3.1 函数中的作用域"></a>3.1 函数中的作用域</h4><p>属于这个函数的全部变量都可以在整个函数的范围内使用及复用（事实上在嵌套的作用域中也可以使用）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 一些代码</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 更多的代码</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> c = <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>foo(..)</code>作用域中包含了标识符（变量、函数）a、b、c和bar。无论标识符声明出现在作用域中的何处，这个标识符所代表的变量或函数都将附属于所处的作用域。</p>
+<p>全局作用域只包含一个标识符：<code>foo</code>。</p>
+<h4 id="3-2-隐藏内部实现"><a href="#3-2-隐藏内部实现" class="headerlink" title="3.2 隐藏内部实现"></a>3.2 隐藏内部实现</h4><p>最小特权原则（最小授权或最小暴露原则）：在软件设计中，应该最小限度地暴露必要内容，而将其他内容都”隐藏“起来，比如某个模块或对象的API设计。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">doSomethingElse</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> b;</span><br><span class="line">    </span><br><span class="line">    b = a + doSomethingElse( a * <span class="number">2</span> );</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">console</span>.log( b * <span class="number">3</span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">doSomething( <span class="number">2</span> ); <span class="comment">// 15</span></span><br></pre></td></tr></table></figure>
+<p><code>b</code>和<code>doSomethingElse(..)</code>都无法从外部被访问，而只能被<code>doSomething(..)</code>所控制，设计上将具体内容私有化了。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/06/15/You Don't Know JS上卷Part1 Chapter3.函数作用域和块作用域/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/" itemprop="url">
+                  You Don't Know JS上卷Part1 Chapter2.词法作用域
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-06-09T11:31:12+08:00" content="2018-06-09">
+              2018-06-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/" class="leancloud_visitors" data-flag-title="You Don't Know JS上卷Part1 Chapter2.词法作用域">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="2-1-词法阶段"><a href="#2-1-词法阶段" class="headerlink" title="2.1 词法阶段"></a>2.1 词法阶段</h4><p>词法作用域是定义在词法阶段的作用域，是由写代码时将变量和块作用域写在哪里来决定的，所以在词法分析器处理代码时会保持作用域不变。（不考虑欺骗词法作用域情况下）</p>
+<h5 id="2-1-1-查找"><a href="#2-1-1-查找" class="headerlink" title="2.1.1 查找"></a>2.1.1 查找</h5><ul>
+<li><p>作用域查找会在找到第一个匹配的标识符时停止。</p>
+</li>
+<li><p>遮蔽效应：在多层嵌套作用域中可以定义同名的标识符，内部的标识符会“遮蔽”外部的标识符。</p>
+</li>
+<li><p>全局变量会自动变成全局对象的属性，可以间接的通过对全局对象属性的引用来访问。通过这种技术可以访问那些被同名变量所遮蔽的全局变量，但是非全局的变量如果被遮蔽了，无论如何都无法被访问到。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>词法作用域只由函数被声明时所处的位置决定。</p>
+</li>
+<li><p>词法作用域查找只会查找一级标识符，比如a、b、c。对于<code>foo.bar.baz</code>，词法作用域只会查找<code>foo</code>标识符,找到之后，<strong>对象属性访问规则</strong>会分别接管对<code>bar</code>和<code>baz</code>属性的访问。</p>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/06/09/You Don't Know JS上卷Part1 Chapter2.词法作用域/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/06/02/You Don't Know JS上卷Part1 Chapter1.作用域是什么/" itemprop="url">
+                  You Don't Know JS上卷Part1 Chapter1.作用域是什么
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-06-02T19:01:43+08:00" content="2018-06-02">
+              2018-06-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/06/02/You Don't Know JS上卷Part1 Chapter1.作用域是什么/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/02/You Don't Know JS上卷Part1 Chapter1.作用域是什么/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/06/02/You Don't Know JS上卷Part1 Chapter1.作用域是什么/" class="leancloud_visitors" data-flag-title="You Don't Know JS上卷Part1 Chapter1.作用域是什么">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="第1章-作用域是什么"><a href="#第1章-作用域是什么" class="headerlink" title="第1章 作用域是什么"></a>第1章 作用域是什么</h3><ul>
+<li>问题1：变量储存在哪里？</li>
+<li>问题2：程序需要时如何找到它们？</li>
+</ul>
+<h4 id="1-1-编译原理"><a href="#1-1-编译原理" class="headerlink" title="1.1 编译原理"></a>1.1 编译原理</h4><p>JavaScript语言是“动态”或“解释执行”语言，但事实上是一门编译语言。但它不是提前编译的，编译结果也不能在分布式系统中移植。</p>
+<p>传统编译语言流程中，程序在执行之前会经历三个步骤，统称为“编译”。</p>
+<ul>
+<li><p>分词/词法分析（Tokenizing/Lexing）</p>
+<p>将由字符组成的字符串分解成（对编程语言来说）有意义的代码块。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>上面这段程序会被分解成以下词法单元：var、a、=、2、;。</p>
+<p>空格是否会被当做词法单元，取决于空格在这门语言中是否有意义。</p>
+</li>
+</ul>
+<ul>
+<li><p>解析/语法分析（Parsing）</p>
+<p>将词法单元流（数组）转换成一个由元素逐级嵌套所组成的代表了程序语法结构的数。这个数被称作<code>抽象语法树</code>（Abstract Syntax Tree, AST）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>以上代码的抽象语法树如下所示：</p>
+<ul>
+<li>VariableDeclaration 顶级节点<ul>
+<li>Identifier 子节点，值为a</li>
+<li>AssignmentExpression 子节点<ul>
+<li>NumericLiteral 子节点，字为2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>代码生成</p>
+<p>将<code>AST</code>转换成可执行代码的过程。过程与语言、目标平台等相关。</p>
+<p>简单来说就是可以通过某种方法将<code>var a = 2;</code>的AST转化为一组机器指令。用来创建一个叫做a的变量（包括分配内存等），并将一个值存储在a中。</p>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/06/02/You Don't Know JS上卷Part1 Chapter1.作用域是什么/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/10/RecyclerView调节项目间间距大小/" itemprop="url">
+                  RecyclerView调节项目间间距大小
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-02-10T12:27:53+08:00" content="2017-02-10">
+              2017-02-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/10/RecyclerView调节项目间间距大小/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/10/RecyclerView调节项目间间距大小/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/10/RecyclerView调节项目间间距大小/" class="leancloud_visitors" data-flag-title="RecyclerView调节项目间间距大小">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>调用处直接调用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置item之间的间隔</span></span><br><span class="line">SpacesItemDecoration decoration = <span class="keyword">new</span> SpacesItemDecoration(<span class="number">8</span>);</span><br><span class="line">recyclerView.addItemDecoration(decoration);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SpacesItemDecoration</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ItemDecoration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> int space;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">StaggeredGridLayoutManager</span>.<span class="type">LayoutParams</span> lp;</span><br><span class="line"></span><br><span class="line">    public <span class="type">SpacesItemDecoration</span>(int space) &#123;</span><br><span class="line">        <span class="keyword">this</span>.space = space;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void getItemOffsets(<span class="type">Rect</span> outRect, <span class="type">View</span> view, <span class="type">RecyclerView</span> parent, <span class="type">RecyclerView</span>.<span class="type">State</span> state) &#123;</span><br><span class="line"></span><br><span class="line">        int position = parent.getChildAdapterPosition(view);</span><br><span class="line">        lp = (<span class="type">StaggeredGridLayoutManager</span>.<span class="type">LayoutParams</span>)view.getLayoutParams();</span><br><span class="line">        <span class="keyword">if</span> (position == <span class="number">0</span> || position==<span class="number">1</span>)&#123;</span><br><span class="line">            outRect.top = space * <span class="number">2</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            outRect.top = space;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (lp.getSpanIndex() == <span class="number">0</span>) &#123;</span><br><span class="line">            outRect.left = space * <span class="number">2</span>;</span><br><span class="line">            outRect.right = space;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            outRect.left = space;</span><br><span class="line">            outRect.right = space * <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        outRect.bottom = space;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//注掉的方法总有漏网之鱼，不知为啥</span></span><br><span class="line"><span class="comment">//        outRect.left = space;</span></span><br><span class="line"><span class="comment">//        outRect.right = space;</span></span><br><span class="line"><span class="comment">//        outRect.bottom = space;</span></span><br><span class="line"><span class="comment">//        if (position == 0 || position == 1) &#123;</span></span><br><span class="line"><span class="comment">//            //用于设置第一行跟顶部的距离</span></span><br><span class="line"><span class="comment">//            outRect.top = space;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        if (lp.getSpanIndex() == 0) &#123;</span></span><br><span class="line"><span class="comment">//            //用于设同行两个间隔间跟其距离左右屏幕间隔相同</span></span><br><span class="line"><span class="comment">//            outRect.right = 0;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/27/每周TODO知识点总结 第一期/" itemprop="url">
+                  每周TODO知识点总结 第一期
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-11-27T20:07:24+08:00" content="2016-11-27">
+              2016-11-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/每周TODO/" itemprop="url" rel="index">
+                    <span itemprop="name">每周TODO</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/27/每周TODO知识点总结 第一期/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/27/每周TODO知识点总结 第一期/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/11/27/每周TODO知识点总结 第一期/" class="leancloud_visitors" data-flag-title="每周TODO知识点总结 第一期">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Java基础相关"><a href="#Java基础相关" class="headerlink" title="Java基础相关"></a>Java基础相关</h2><h3 id="1、正则表达式里，字符串“-”写成“-”，“-”写成“-”，为什么？"><a href="#1、正则表达式里，字符串“-”写成“-”，“-”写成“-”，为什么？" class="headerlink" title="1、正则表达式里，字符串“*”写成“\\*”，“\”写成“\\\\”，为什么？"></a>1、正则表达式里，字符串“*”写成“\\*”，“\”写成“\\\\”，为什么？</h3><ul>
+<li><p>注意以下两点：</p>
+<ul>
+<li>1.字符串里面表示斜杠就需要两个斜杠如“\\”</li>
+<li>2.正则表达式里的斜杠需要转意，是用“\”标示。</li>
+</ul>
+</li>
+<li><p>所以对于“\\\\”，第一个斜杠是转义符，第二个斜杠是斜杠本身，第三个斜杠是转义符，第四个斜杠是斜杠本身。这样就成了4个斜杠在正则表达式里面表示一个斜杠。</p>
+</li>
+<li><p>更多知识点：</p>
+<ul>
+<li>引用说明：有正斜杠与反斜杠之分，正斜杠，一般就叫做斜杠，符号为“/”；反斜杠的符号为“\”。斜杠（/）在JAVA中没有什么特别的意义，就是代表一个字符‘/’; </li>
+<li>反斜杠（\）则不然，它和紧跟着它的那个字符构成转义字符，如“\n”（表示换行）、“\””（表示字符‘”’）等,所以在字符串中要表示字符’\’要用“\\”来表示，例：如果你这样定义一个字符串String s = “name\sex”是错误的，要这样定义String s = “name\\sex”; </li>
+</ul>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/27/每周TODO知识点总结 第一期/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/30/Android 动态绘制圆形进度条/" itemprop="url">
+                  Android 动态绘制圆形进度条
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-30T22:37:24+08:00" content="2016-10-30">
+              2016-10-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/30/Android 动态绘制圆形进度条/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/30/Android 动态绘制圆形进度条/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/30/Android 动态绘制圆形进度条/" class="leancloud_visitors" data-flag-title="Android 动态绘制圆形进度条">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="http://img.blog.csdn.net/20161029200752725" alt="此处输入图片的描述"></p>
+<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><ul>
+<li>在画布上直接绘制View，需要了解一下几点 <ul>
+<li>1.需要画一个底层小圆和上层大圆 </li>
+<li>2.圆圈上有不同进度的颜色 </li>
+<li>3.颜色的变化规律是先慢慢变多再慢慢减少</li>
+</ul>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/30/Android 动态绘制圆形进度条/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/29/React Native环境配置血泪爬坑/" itemprop="url">
+                  React Native环境配置血泪爬坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-29T12:32:24+08:00" content="2016-10-29">
+              2016-10-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React-Native</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/29/React Native环境配置血泪爬坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/29/React Native环境配置血泪爬坑/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/29/React Native环境配置血泪爬坑/" class="leancloud_visitors" data-flag-title="React Native环境配置血泪爬坑">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="1-下载gradle文件超时"><a href="#1-下载gradle文件超时" class="headerlink" title="1.下载gradle文件超时"></a>1.下载gradle文件超时</h3><p>进入AwesomeProject目录，\$ cd AwesomeProject，然后在AwesomeProject目录下运行\$ react-native run-android，就会构建工程并自动安装到你的模拟器或者设备，同时启动用于实现动态代码加载的Node服务。第一次运行的时候，会下载gradle文件，然而在我们的办公网络环境运行就会报下面的错：ConnectException</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/29/React Native环境配置血泪爬坑/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/" itemprop="url">
+                  Scala Cookbook读书笔记 Chapter 5.Methods 第一部分
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-13T22:31:21+08:00" content="2016-10-13">
+              2016-10-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 5.Methods 第一部分">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="5-0-本章概述"><a href="#5-0-本章概述" class="headerlink" title="5.0 本章概述"></a>5.0 本章概述</h2><ul>
+<li><p>Java和Scala定义简单method区别：</p>
+<pre><code>// java
+public String doSomething(int x) {
+    // code here
+}
+
+// scala
+def doSomething(x: Int): String = {
+    // code here
+}
+</code></pre></li>
+<li><p>Scala还可以使用下面方式，不指定返回值类型，不要求包裹body的大括号：</p>
+<pre><code>def plusOne(i: Int) = i + 1
+</code></pre></li>
+<li>除了上面例子的区别，Java和Scala还包括以下不同：<ul>
+<li>指定方法获取控制（显示）</li>
+<li>给方法参数设置默认值的能力</li>
+<li>调用方法时指定方法参数名字的能力</li>
+<li>如何声明一个方法可能抛出的异常</li>
+<li>方法里使用可变参数</li>
+</ul>
+</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/13/Scala Cookbook读书笔记 Chapter 5.Methods 第一部分/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/29/Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分/" itemprop="url">
                   Cookbook读书笔记 Chapter 4.Classes and Properties 第二部分
                 </a>
@@ -572,1205 +1768,11 @@ object Test extends App {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/" itemprop="url">
-                  Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-18T12:37:28+08:00" content="2016-09-18">
-              2016-09-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="3-8-使用一个case语句匹配复杂条件"><a href="#3-8-使用一个case语句匹配复杂条件" class="headerlink" title="3.8 使用一个case语句匹配复杂条件"></a>3.8 使用一个case语句匹配复杂条件</h2><ul>
-<li>几个匹配条件要求执行相同的业务逻辑，而不是使用多个case重复业务逻辑，想要使用的是匹配条件的业务逻辑的复制。<h3 id="3-8-1-解决方案"><a href="#3-8-1-解决方案" class="headerlink" title="3.8.1 解决方案"></a>3.8.1 解决方案</h3></li>
-<li><p>使用 | 分隔符将相同的业务逻辑的匹配条件放置到同一行上</p>
-<pre><code>val i = 5
-i match {
-    case 1 | 3 | 5 | 7 | 9 =&gt; println(&quot;odd&quot;)
-    case 2 | 4 | 6 | 8 | 10 =&gt; println(&quot;even&quot;)
-}
-</code></pre></li>
-<li><p>其他类型也适用：</p>
-<pre><code>val cmd = &quot;stop&quot;
-cmd match {
-    case &quot;start&quot; | &quot;go&quot; =&gt; println(&quot;starting&quot;)
-    case &quot;stop&quot; | &quot;quit&quot; | &quot;exit&quot; =&gt; println(&quot;stopping&quot;)
-    case _ =&gt; println(&quot;doing nothing&quot;)
-}
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/18/Scala Cookbook读书笔记 Chapter 3.Control Structures 第二部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/" itemprop="url">
-                  Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-14T18:34:34+08:00" content="2016-09-14">
-              2016-09-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="3-0-总体介绍"><a href="#3-0-总体介绍" class="headerlink" title="3.0 总体介绍"></a>3.0 总体介绍</h2><ul>
-<li><p>Scala中的if/then/else结构和Java中很像，但是它还可以用来返回一个值。比如Java中用的三目运算，在Scala中只需要使用正常的if语句即可。</p>
-<pre><code>val x = if (a) y else z
-</code></pre></li>
-<li>try/catch/finilly结构和Java中很像，但是Scala中的catch部分使用的是模式匹配。</li>
-<li><p>Scala中可以使用2个for循环读取文件的每行，然后在每行上操作每个字符：</p>
-<pre><code>for (line &lt;- source.getLines) {
-    for {
-        char &lt;- line
-        if char.isLetter
-    } // char algorithm here ...
-}
-</code></pre></li>
-<li><p>在Scala中，还可以更加简单点：</p>
-<pre><code>for {
-    line &lt;- source.getLines
-    char &lt;- line
-    if char.isLetter
-} // char algorithm here ...
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/14/Scala Cookbook读书笔记 Chapter 3.Control Structures 第一部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/" itemprop="url">
-                  Scala Cookbook翻译 Chapter 2.Numbers 第二部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-08T18:37:24+08:00" content="2016-09-08">
-              2016-09-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 2.Numbers 第二部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="2-4-代替-和–"><a href="#2-4-代替-和–" class="headerlink" title="2.4 代替++和–"></a>2.4 代替++和–</h2><ul>
-<li>问题：你想要在其他语言用++和–操作符增长数值或减少数值，但是在Scala中没有这些运算符。<h3 id="2-4-1-解决方案"><a href="#2-4-1-解决方案" class="headerlink" title="2.4.1 解决方案"></a>2.4.1 解决方案</h3></li>
-<li><p>因为val字段时不可改变的，他们不能增加或者减少，但是var整形字段可以通过+=和-=方法改变。</p>
-<pre><code>scala&gt; var a = 1
-a: Int = 1
-
-scala&gt; a += 1
-
-scala&gt; println(a)
-2
-
-scala&gt; a −= 1
-
-scala&gt; println(a)
-1
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/08/Scala Cookbook翻译 Chapter 2.Numbers 第二部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/" itemprop="url">
-                  Scala Cookbook翻译 Chapter 2.Numbers 第一部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-07T21:37:24+08:00" content="2016-09-07">
-              2016-09-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 2.Numbers 第一部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="总体介绍"><a href="#总体介绍" class="headerlink" title="总体介绍"></a>总体介绍</h2><ul>
-<li>Scala中所有的数值类型都是对象，包括Byte,Char,Double,Float,Int,Long和Short。这7个数值类型继承自AnyVal特质，Unit和Boolean类被认为是“非数字的值类型”。</li>
-<li><p>这七个内置的数值类型有相同的数据范围，和java中是等价的。</p>
-<pre><code>Data    type Range
-Char    16-bit unsigned Unicode character
-Byte    8-bit signed value
-Short    16-bit signed value
-Int    32-bit signed value
-Long    64-bit signed value
-Float    32-bit IEEE 754 single precision float
-Double    64-bit IEEE 754 single precision float
-</code></pre></li>
-<li><p>除了这些类型之外，Boolean有true或者false的值。</p>
-</li>
-<li><p>如果想要知道这些数据范围的精确值，可以通过Scala的REPL中查到。</p>
-<pre><code>scala&gt; Short.MinValue
-res0: Short = −32768
-
-scala&gt; Short.MaxValue
-res1: Short = 32767
-
-scala&gt; Int.MinValue
-res2: Int = −2147483648
-
-scala&gt; Float.MinValue
-res3: Float = −3.4028235E38
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/07/Scala Cookbook翻译 Chapter 2.Numbers 第一部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/" itemprop="url">
-                  Scala Cookbook翻译 Chapter 1.Strings 第三部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-06T20:59:24+08:00" content="2016-09-06">
-              2016-09-06
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 1.Strings 第三部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-8-提取一个匹配模式的字符串的部分"><a href="#1-8-提取一个匹配模式的字符串的部分" class="headerlink" title="1.8 提取一个匹配模式的字符串的部分"></a>1.8 提取一个匹配模式的字符串的部分</h2><ul>
-<li>问题：你想要提取出一个字符串中的一个或多个部分，以匹配你指定的正则表达式模式。<h3 id="1-8-1-解决方案"><a href="#1-8-1-解决方案" class="headerlink" title="1.8.1 解决方案"></a>1.8.1 解决方案</h3></li>
-<li><p>定义要提取的正则表达式模式，将圆括号放在他们周围，所以可以把它们作为“正则表达式组”，首先定义所需的模式：</p>
-<pre><code>val pattern = &quot;([0-9]+) ([A-Za-z]+)&quot;.r
-</code></pre></li>
-<li><p>然后从目标字符串中提取正则表达式组</p>
-<pre><code>val pattern(count, fruit) = &quot;100 Bananas&quot;
-</code></pre></li>
-<li><p>此代码从给定的字符串中提取出数字字段和字母字段作为两个独立的变量，count和fruit。</p>
-<pre><code>scala&gt; val pattern = &quot;([0-9]+) ([A-Za-z]+)&quot;.r
-pattern: scala.util.matching.Regex = ([0-9]+) ([A-Za-z]+)
-
-scala&gt; val pattern(count, fruit) = &quot;100 Bananas&quot;
-count: String = 100
-fruit: String = Bananas
-</code></pre></li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/06/Scala Cookbook翻译 Chapter 1.Strings 第三部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/" itemprop="url">
-                  Scala Cookbook翻译 Chapter 1.Strings 第二部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-05T21:27:24+08:00" content="2016-09-05">
-              2016-09-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 1.Strings 第二部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-5-遍历字符"><a href="#1-5-遍历字符" class="headerlink" title="1.5 遍历字符"></a>1.5 遍历字符</h2><ul>
-<li>问题：你想遍历字符串中的每个字符，在遍历字符串时对每个字符进行操作。<h4 id="1-5-1-解决方案："><a href="#1-5-1-解决方案：" class="headerlink" title="1.5.1 解决方案："></a>1.5.1 解决方案：</h4></li>
-<li><p>根据你的需求和喜好，你可以使用map或者foreach方法，一个是循环，另一个是其他方法。</p>
-</li>
-<li><p>map把输入字符转成大写的例子</p>
-<pre><code>scala&gt; val upper = &quot;hello, world&quot;.map(c =&gt; c.toUpper)
-upper: String = HELLO, WORLD
-
-//大部分使用以下缩写，使用下划线的魔法
-scala&gt; val upper = &quot;hello, world&quot;.map(_.toUpper)
-upper: String = HELLO, WORLD
-</code></pre></li>
-<li><p>任何集合中，如字符串的字符序列，你可以把集合方法链接在一起以达到预期的结果。下面的例子是在原始字符串的基础上调用filter方法将所有的小写字母“L”删除后创建一个新的字符串，然后已这个新的字符串作为ma方法的输入将剩余的字符转换成大写字符。</p>
-<pre><code>scala&gt; val upper = &quot;hello, world&quot;.filter(_ != &apos;l&apos;).map(_.toUpper)
-upper: String = HEO, WORD
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/05/Scala Cookbook翻译 Chapter 1.Strings 第二部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/" itemprop="url">
-                  Scala Cookbook翻译 Chapter 1.Strings 第一部分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-03T22:37:24+08:00" content="2016-09-03">
-              2016-09-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/" class="leancloud_visitors" data-flag-title="Scala Cookbook翻译 Chapter 1.Strings 第一部分">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-0-总体介绍"><a href="#1-0-总体介绍" class="headerlink" title="1.0 总体介绍"></a>1.0 总体介绍</h2><ul>
-<li>Scala中的String类型就是Java中的String，所以可以使用Java中String的一些方法。</li>
-<li><p>Scala提供了隐式转换，String也可以使用StringOps类的所有方法，此时可以把String当做字符序列，</p>
-<ul>
-<li>可以利用foreach迭代打印每个字符：”hello”.foreach(println)</li>
-<li>通过for循环打印每个字符：for (c &lt;- “hello”) println(c)</li>
-<li>也可以当做字节序列：”hello”.getBytes.foreach(println) //104 101 108 108 111(十进制ASCII编码)</li>
-<li>使用过滤器：val result = “hello world”.filter(_ != ‘l’) //heo word</li>
-</ul>
-</li>
-<li><p>实际上这些方法并不都是来自类StringOps，有的还来自StringLike和WrappedString等，可到api文档查看String到StringOps的隐式转换。</p>
-</li>
-</ul>
-<h2 id=""><a href="#" class="headerlink" title=""></a>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/03/Scala Cookbook翻译 Chapter 1.Strings 第一部分/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/31/各大Android开发群问题总结及解决/" itemprop="url">
-                  各大Android开发群问题总结及解决
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-05-31T20:59:44+08:00" content="2016-05-31">
-              2016-05-31
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/31/各大Android开发群问题总结及解决/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/31/各大Android开发群问题总结及解决/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/31/各大Android开发群问题总结及解决/" class="leancloud_visitors" data-flag-title="各大Android开发群问题总结及解决">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ul>
-<li>1、 android比较好用的websocket三方库<ul>
-<li>websocket老是会自动断</li>
-<li>socket.io<ul>
-<li>采用轮询的方式，会定时发心跳包检测连接状态，基于事件通信。</li>
-<li>服务端nodejs，客服端java,ios都有支持库</li>
-<li>android端可以基于这个库封装你自己的推送和即时聊天框架</li>
-<li>包含有websocket的，底层基于okhttp-ws，支持http,https,websocket</li>
-</ul>
-</li>
-<li>好像要用nio的socket，不然会有丢包现象</li>
-</ul>
-</li>
-</ul>
-<hr>
-<ul>
-<li>2 、retrofit如何设置cookiemanager<ul>
-<li>CookieManager 应该交给下面的 okhttp 做</li>
-<li>知道在OkhttpClient中设置  可是在okhttp3中  OkhttpClient没有设置cookieManager的方法</li>
-<li>那你搜搜 okhttp3 CookieManager 啊</li>
-</ul>
-</li>
-</ul>
-<h2 id=""><a href="#" class="headerlink" title=""></a>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/31/各大Android开发群问题总结及解决/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1811,7 +1813,7 @@ upper: String = HEO, WORD
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1828,7 +1830,7 @@ upper: String = HEO, WORD
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
